@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 
 const Main = () => {
     return (
         <div>
             {/* TODO Navbar */}
-            <h4>navbar</h4>
+            <Navbar></Navbar>
             <div className="">
                 <Outlet></Outlet>
             </div>
