@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png';
-import GoogleLogo from '../assets/google.png';
+import Logo from '../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png';
+import GoogleLogo from '../../assets/google.png';
 
 const Login = () => {
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email,password);
+    }
+
     return (
         <div className='flex justify-center items-center min-h-screen bg-[#F3F8FC] shadow-2xl relative z-50 overflow-hidden '>
             <div className=''>
@@ -24,12 +34,12 @@ const Login = () => {
                         </button>
                     </div>
                     <div>
-                        <form action="#" className='flex flex-col'>
+                        <form onSubmit={handleSubmit} className='flex flex-col'>
                             <label htmlFor="email" className='flex flex-col gap-1 px-14 py-5'>Email *
-                                <input type="email" name="email" id="email" className='border h-[45px] pl-2 rounded-md focus:outline-dotted' placeholder='Your_Email@gmail.com' />
+                                <input autoFocus type="email" name="email" id="email" className='border h-[45px] pl-2 rounded-md focus:outline-dotted' placeholder='Your@Emaill.com' />
                             </label>
                             <label htmlFor="password" className='flex flex-col gap-1 px-14 '>Password *
-                                <input type="password" name="password" id="password" className='border h-[45px] pl-2 rounded-md focus:outline-dashed' placeholder='********' />
+                                <input type="password" name="password" id="password" className='border h-[45px] pl-2 rounded-md focus:outline-dotted' placeholder='********' />
                             </label>
                             <div>
                                 <h6 className='px-14 underline pt-1.5 text-[#4A4A4A]'>Forgot password?</h6>
@@ -38,7 +48,7 @@ const Login = () => {
                         </form>
                     </div>
                     <div className='text-center py-5 bg-[#F3F8FC] rounded-b-xl'>
-                        <Link to='/'><span className='text-[#4A4A4A]'>Not registered?</span> Create an account</Link>
+                        <Link to='/signup'><span className='text-[#4A4A4A]'>Not registered?</span> Create an account</Link>
                     </div>
                 </div>
             </div>
