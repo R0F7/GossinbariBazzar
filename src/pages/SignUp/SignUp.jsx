@@ -5,6 +5,7 @@ import FacebookLogo from '../../assets/facebook.png';
 import Twiter from '../../assets/twiter.png';
 import SignUpBG from '../../assets/gossingbari bazzar signUp bg .jpg';
 import UnknownIMG from '../../assets/unknown Image.jpg';
+import { MdOutlineFileUpload } from 'react-icons/md';
 
 const SignUp = () => {
     return (
@@ -66,8 +67,9 @@ const SignUp = () => {
                                             hidden
                                             accept='image/*'
                                             className='text-sm cursor-pointer w-36 hidden' />
-                                        <div className='py-1.5 px-7 cursor-pointer bg-[#2E8DD8] shadow-lg shadow-[rgba(46,141,216,.25)] text-white rounded active:scale-95 scale-100 transform duration-150 hover:shadow-md'>
-                                            Upload Image
+                                        <div className='py-1.5 px-7 cursor-pointer bg-[#2E8DD8] shadow-lg shadow-[rgba(46,141,216,.25)] text-white rounded active:scale-95 scale-100 transform duration-150 hover:shadow-md flex items-center gap-1'>
+                                            <i className='text-lg font-semibold'><MdOutlineFileUpload /></i>
+                                            <h4>Upload Image</h4>
                                         </div>
                                     </label>
                                 </div>
