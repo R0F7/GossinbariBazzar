@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png';
 import GoogleLogo from '../../assets/google.png';
+import { useState } from 'react';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 const Login = () => {
+    const [toggle, setToggle] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,9 +42,17 @@ const Login = () => {
                             <label htmlFor="email" className='flex flex-col gap-1 px-14 py-5'>Email *
                                 <input autoFocus type="email" name="email" id="email" className='border h-[45px] pl-2 rounded-md focus:outline-dotted' placeholder='Your@Emaill.com' />
                             </label>
-                            <label htmlFor="password" className='flex flex-col gap-1 px-14 '>Password *
-                                <input type="password" name="password" id="password" className='border h-[45px] pl-2 rounded-md focus:outline-dotted' placeholder='********' />
-                            </label>
+                            <div className='relative'>
+                                <label htmlFor="password" className='flex flex-col gap-1 px-14 '>Password *
+                                    <input type={toggle ? "text" : "password"} name="password" id="password" className='border h-[45px] pl-2 rounded-md focus:outline-dotted ' placeholder='********' />
+                                </label>
+                                <i
+                                    className='absolute top-11 right-[70px]'
+                                    onClick={() => setToggle(!toggle)}
+                                >
+                                    {toggle ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                                </i>
+                            </div>
                             <div>
                                 <h6 className='px-14 underline pt-1.5 text-[#4A4A4A] hover:text-[#2E8DD8]'>Forgot password?</h6>
                             </div>
