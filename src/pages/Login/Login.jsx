@@ -21,12 +21,13 @@ const Login = () => {
         <div className='flex justify-center items-center min-h-screen bg-[#F3F8FC] shadow-2xl relative z-50 overflow-hidden '>
             <div className=''>
                 {/* Logo */}
-                <Link to="/" className='flex flex-col justify-center items-center gap-1 py-10'>
+                <div className='flex flex-col justify-center items-center gap-1 py-10'>
                     <div>
                         <img src={Logo} className='w-14' alt="Logo" />
                     </div>
-                    <h2 className='text-2xl font-semibold'>Goossinbari Bazzar</h2>
-                </Link>
+                    {/* <h2 className='text-2xl font-semibold'>Goossinbari Bazzar</h2> */}
+                    <h4 className='text-logo-font-family text-[#006400] text-lg mb-6'>Gossainbari<span className='text-[#4B0082]'>Bazzar</span></h4>
+                </div>
                 <div className='bg-[#FFFFFF] w-[470px] shadow-lg rounded-xl'>
                     <div className='py-5 px-14 text-xl font-semibold '>
                         <h4 className='text-[#131F2F]'>Sign in to your account</h4>

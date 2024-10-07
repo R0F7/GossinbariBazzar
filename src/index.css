@@ -7,7 +7,38 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-logo-font-family{
+.text-logo-font-family {
     font-family: "Edu AU VIC WA NT Guides", cursive;
     font-weight: 800;
 }
+
+.join-us-btn {
+    position: relative;
+    overflow: hidden;
+    color: white; 
+    background-color: #343a40; 
+    z-index: 1;  
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 6px; 
+    transition: background-color 300ms ease-in-out; 
+}
+
+.join-us-btn::before {
+    content: '';
+    width: 100%;
+    height: 0;
+    background: #0096c7; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    transform-origin: top;
+    transition: height 300ms ease-in-out;
+    z-index: -1;  
+}
+
+.join-us-btn:hover::before {
+    height: 100%; 
+}
+
