@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SignUpImage from '../../assets/Gossinbari SignUp picture 2.jpg';
 import GoogleLogo from '../../assets/google.png';
 import FacebookLogo from '../../assets/facebook.png';
@@ -9,22 +9,55 @@ import { MdOutlineFileUpload } from 'react-icons/md';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import useAuth from '../../hooks/useAuth';
+import imageUpload from '../../api/utils';
+import toast from 'react-hot-toast';
+import { CgSpinnerTwoAlt } from 'react-icons/cg';
 
 const SignUp = () => {
     const [toggle, setToggle] = useState(false);
-    const { signInWithGoogle } = useAuth();
+    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    // name and preview for choose image 
+    // const [imagePreview, setImagePreview] = useState('');
+    // const [imageText, setImageText] = useState('');
+
+    // const handleImage = (image) => {
+    //     setImagePreview(URL.createObjectURL(image))
+    //     setImageText(image.name)
+    // }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         const form = e.target;
-        const name =form.name.value;
-        const email =form.email.value;
-        const file =form.file.files[0];
-        const password =form.password.value;
-        const role =form.role.value;
+        const name = form.name.value;
+        const email = form.email.value;
+        const number = form.number.value;
+        const image = form.file.files[0];
+        const password = form.password.value;
+        const role = form.role.value;
+        
+        console.table(name, email, image, password, role)
+        
+        try {
+            setLoading(true);
 
-        console.table(name,email,file,password,role)
+            const image_url = await imageUpload(image)
+
+            await createUser(email, password)
+
+            await updateUserProfile(name, image_url, number)
+
+            toast.success("Sign Up Successfully")
+            navigate('/')
+            setLoading(false);
+
+        } catch (error) {
+            toast.error(error.message.split('/')[1].replace(").", ""))
+            setLoading(false)
+        }
+
     }
 
     const handleGoogleLogin = async () => {
@@ -85,8 +118,9 @@ const SignUp = () => {
                                     className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40" />
                             </div>
 
-                            <div className='col-span-8 flex justify-between items-center'>
-                                <div className='font-roboto w-max text-sm font-medium text-[#333333] opacity-95 border border-[#3992D9] shadow-md shadow-[rgba(0,0,0,.1)] py-2.5 px-10 rounded'>
+                            {/* <div className='col-span-4 flex justify-between items-center'> */}
+                            <div className='flex flex-col justify-center col-span-4'>
+                                <div className='font-roboto text-sm font-medium text-[#333333] opacity-95 border border-[#3992D9] shadow-md shadow-[rgba(0,0,0,.1)] py-3 mt-2 px-10 rounded'>
                                     <label htmlFor="file" >
                                         <input
                                             required
@@ -95,16 +129,31 @@ const SignUp = () => {
                                             id="file"
                                             hidden
                                             accept='image/*'
+                                            // onChange={(e) => handleImage(e.target.files[0])}
                                             className='text-sm cursor-pointer w-36 hidden' />
                                         <div className='py-1.5 px-7 cursor-pointer bg-[#2E8DD8] shadow-lg shadow-[rgba(46,141,216,.25)] text-white rounded active:scale-95 scale-100 transform duration-150 hover:shadow-md flex items-center gap-1'>
                                             <i className='text-lg font-semibold'><MdOutlineFileUpload /></i>
+                                            {/* <h4>{imageText.length > 10 ? imageText.split('.')[0].slice(0, 10) + '...' + imageText.split('.')[1] : imageText && imageText > 0 ? imageText : 'Upload Image'}</h4> */}
                                             <h4>Upload Image</h4>
                                         </div>
                                     </label>
                                 </div>
-                                <div className='w-[70px] border rounded p-2'>
-                                    <img className='w-full' src={UnknownIMG} alt="" />
-                                </div>
+
+
+                                {/* <div className='w-[70px] border rounded p-2'>
+                                    <img className='w-full' src={imagePreview ? imagePreview : UnknownIMG} alt="" />
+                                </div> */}
+                            </div>
+
+                            <div className='flex flex-col gap-1 col-span-4'>
+                                <label htmlFor="number" className='font-roboto font-semibold text-[#333333] opacity-95'>Number</label>
+                                <input
+                                    required
+                                    type="number"
+                                    name="number"
+                                    id="number"
+                                    placeholder='Enter your phone number'
+                                    className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40" />
                             </div>
 
                             <div className='flex flex-col gap-1 col-span-4'>
@@ -151,9 +200,11 @@ const SignUp = () => {
                             </div>
 
                             <div className='col-span-8 flex items-center justify-between mt-2.5'>
-                                <input
+                                <button
                                     type="submit"
-                                    className=' font-medium bg-[#2E8DD8] shadow-lg shadow-[rgba(46,141,216,.25)] text-white p-2.5 px-20 rounded-md transform duration-150 active:scale-95 scale-100 hover:shadow-md' value="Create account" />
+                                    disabled={loading}
+                                    className={`font-medium bg-[#2E8DD8] shadow-lg shadow-[rgba(46,141,216,.25)] text-white h-11 w-[200px] rounded-md transform duration-150 active:scale-95 scale-100 hover:shadow-md`}
+                                >{loading ? <CgSpinnerTwoAlt className='animate-spin m-auto' /> : "Create account"}</button>
                                 <h4 className='font-bold text-2xl text-[#4B0082]'>OR</h4>
                                 <h6 className='text-[#4B0082] font-medium pr-4'>Use the platforms below</h6>
                             </div>
