@@ -8,9 +8,32 @@ import UnknownIMG from '../../assets/unknown Image.jpg';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
     const [toggle, setToggle] = useState(false);
+    const { signInWithGoogle } = useAuth();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const name =form.name.value;
+        const email =form.email.value;
+        const file =form.file.files[0];
+        const password =form.password.value;
+        const role =form.role.value;
+
+        console.table(name,email,file,password,role)
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            await signInWithGoogle()
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div
@@ -37,7 +60,9 @@ const SignUp = () => {
                     <p className='text-end p-6 text-[#333333] font-medium italic'>Already a member? <Link to='/login' className='text-[#4B0082] font-bold underline hover:text-[#2E8DD8]'>Sign In</Link></p>
                     <div>
                         <h4 className='mb-10 mt-4 font-roboto text-2xl font-bold text-[#000080]'>Sign Up</h4>
-                        <form className='grid grid-cols-8 gap-4'>
+                        <form
+                            onSubmit={handleSubmit}
+                            className='grid grid-cols-8 gap-4'>
 
                             <div className='flex flex-col gap-1 col-span-4'>
                                 <label htmlFor="name" className='font-roboto font-semibold text-[#333333] opacity-95'>Username</label>
@@ -109,7 +134,7 @@ const SignUp = () => {
                                     id="role"
                                     defaultValue=""
                                     className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40">
-                                    <option value='' disabled  className=''>role</option>
+                                    <option value='' disabled className=''>role</option>
                                     <option value="user">user</option>
                                     <option value="seller">seller</option>
                                 </select>
@@ -139,7 +164,9 @@ const SignUp = () => {
 
                         <div>
                             <div className='flex gap-7'>
-                                <button className='flex items-center gap-2 bg-white shadow-md shadow-[rgba(0,0,0,.2)] py-2 px-6 font-semibold rounded active:scale-95 scale-100 transform duration-150 hover:shadow-md'>
+                                <button
+                                    onClick={handleGoogleLogin}
+                                    className='flex items-center gap-2 bg-white shadow-md shadow-[rgba(0,0,0,.2)] py-2 px-6 font-semibold rounded active:scale-95 scale-100 transform duration-150 hover:shadow-md'>
                                     <img className='w-5' src={GoogleLogo} alt="" />
                                     <h4>Sign Up with Google</h4>
                                 </button>
