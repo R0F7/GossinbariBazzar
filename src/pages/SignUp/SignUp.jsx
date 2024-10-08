@@ -15,7 +15,7 @@ import { CgSpinnerTwoAlt } from 'react-icons/cg';
 
 const SignUp = () => {
     const [toggle, setToggle] = useState(false);
-    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth();
+    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading,user } = useAuth();
     const navigate = useNavigate();
 
     // name and preview for choose image 
@@ -27,9 +27,13 @@ const SignUp = () => {
     //     setImageText(image.name)
     // }
 
+    if (user) {
+        navigate('/')
+     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
@@ -37,9 +41,9 @@ const SignUp = () => {
         const image = form.file.files[0];
         const password = form.password.value;
         const role = form.role.value;
-        
+
         console.table(name, email, image, password, role)
-        
+
         try {
             setLoading(true);
 
