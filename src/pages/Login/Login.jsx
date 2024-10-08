@@ -3,10 +3,12 @@ import Logo from '../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png
 import GoogleLogo from '../../assets/google.png';
 import { useState } from 'react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const [toggle, setToggle] = useState(false);
-
+    const { user, signInWithGoogle } = useAuth();
+    // console.log(user);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,6 +17,14 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+            await signInWithGoogle()
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -33,7 +43,9 @@ const Login = () => {
                         <h4 className='text-[#131F2F]'>Sign in to your account</h4>
                     </div>
                     <div className='bg-[#F3F8FC] py-6 flex justify-center'>
-                        <button className='flex items-center gap-2 bg-[#FFFFFF] py-3 px-9 rounded-lg shadow-md hover:shadow-xl'>
+                        <button
+                        onClick={handleGoogleLogin}
+                         className='flex items-center gap-2 bg-[#FFFFFF] py-3 px-9 rounded-lg shadow-md hover:shadow-xl'>
                             <i><img src={GoogleLogo} className='w-5' alt="Google Logo" /></i>
                             <h4 className='font-semibold'>Google</h4>
                         </button>

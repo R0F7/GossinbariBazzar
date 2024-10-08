@@ -94,9 +94,9 @@ const SignUp = () => {
                                         className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40 w-full" />
                                     <i
                                         className='absolute top-3 right-3'
-                                        onClick={()=> setToggle(!toggle)}
+                                        onClick={() => setToggle(!toggle)}
                                     >
-                                        { toggle ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                                        {toggle ? <IoEyeOutline /> : <IoEyeOffOutline />}
                                     </i>
                                 </div>
                             </div>
@@ -107,8 +107,9 @@ const SignUp = () => {
                                     required
                                     name="role"
                                     id="role"
+                                    defaultValue=""
                                     className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40">
-                                    <option value="" disabled selected className=''>role</option>
+                                    <option value='' disabled  className=''>role</option>
                                     <option value="user">user</option>
                                     <option value="seller">seller</option>
                                 </select>
