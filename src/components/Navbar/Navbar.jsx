@@ -6,13 +6,14 @@ import Unknown from "../../assets/unknown Image.jpg";
 import { useState } from "react";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
 
   console.log(toggle);
 
   return (
-    <nav className="bg-[#dee2e6] bg-opacity-80 py-3.5 shadow">
+    <nav className="bg-[#dee2e6] bg-opacity-80 py-3.5 shadow ">
+     {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
       <div className="container mx-auto text-white font-bold flex items-center justify-between gap-6">
         {/* name +/- logo */}
         <Link to="/">
@@ -97,6 +98,7 @@ const Navbar = () => {
                 <div className="w-12 border-2 border-[#2E8DD8] hover:border-[#4B0082] transform duration-500 p-1.5 rounded-full overflow-hidden">
                   <img
                     className="w-full h-full rounded-full"
+                    referrerPolicy='no-referrer'
                     src={user?.photoURL || Unknown}
                     alt=""
                   />
@@ -110,10 +112,10 @@ const Navbar = () => {
                 </Link>
               )}
               {toggle && (
-                <div className="bg-[#4B0082] absolute top-14 right-0 w-[200px] flex flex-col items-start justify-start rounded-md  p-2.5">
-                  <button className="w-full text-start py-1 px-2 hover:bg-slate-400"> Update Profile</button>
-                  <button className="border-y w-full text-start py-1 px-2 my-1.5 hover:bg-slate-400">Dashboard</button>
-                  <button className="w-full text-start py-1 px-2 hover:bg-slate-400">Logout</button>
+                <div className="bg-[#2E8DD8] bg-opacity absolute top-14 right-0 w-[220px] flex flex-col items-start justify-start rounded-md py-2 text-sm shadow-lg">
+                  <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"> Update Profile</button>
+                  <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">Dashboard</button>
+                  <button onClick={logOut} className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">Logout</button>
                 </div>
               )}
             </div>

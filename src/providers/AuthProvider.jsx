@@ -1,14 +1,15 @@
 import { createContext, useEffect, useState } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import {
-    GoogleAuthProvider,
-    getAuth,
-    onAuthStateChanged,
-    signInWithPopup,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile,
-} from 'firebase/auth';
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
+} from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -16,62 +17,71 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    //sign in with google
-    const signInWithGoogle = () => {
-        setLoading(true)
-        return signInWithPopup(auth, googleProvider)
-    }
+  //sign in with google
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
-    //create user with email and password
-    const createUser = (email, password) => {
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+  //create user with email and password
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    const updateUserProfile = (name, photo, number) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name,
-            photoURL: photo,
-            phoneNumber: number,
-        })
-    }
+  //update profile
+  const updateUserProfile = (name, photo, number) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+      phoneNumber: number,
+    });
+  };
 
-    //sign in with email and password
-    const signIn = (email, password) => {
-        setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+  //sign in with email and password
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    // const onAuthStateChange 
-    useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            console.log(currentUser);
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
-            setLoading(false);
-        })
+  // const onAuthStateChange
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      console.log(currentUser);
 
-        return () => unSubscribe();
-    }, [])
+      setLoading(false);
+    });
 
-    const authInfo = {
-        user,
-        loading,
-        setLoading,
-        signInWithGoogle,
-        createUser,
-        updateUserProfile,
-        signIn,
-    };
+    return () => unSubscribe();
+  }, []);
 
-    return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-}
+  const authInfo = {
+    user,
+    loading,
+    setLoading,
+    signInWithGoogle,
+    createUser,
+    updateUserProfile,
+    signIn,
+    logOut,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
+};
 
 AuthProvider.propTypes = {
-    children: PropTypes.node,
-}
+  children: PropTypes.node,
+};
 
-export default AuthProvider
+export default AuthProvider;

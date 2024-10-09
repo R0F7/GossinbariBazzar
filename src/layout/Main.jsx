@@ -6,7 +6,7 @@ const Main = () => {
         <div className="font-lato">
             {/* TODO Navbar */}
             <Navbar></Navbar>
-            <div className="">
+            <div className="min-h-[calc(100vh-76px)]">
                 <Outlet></Outlet>
             </div>
             {/* TODO Footer */}
