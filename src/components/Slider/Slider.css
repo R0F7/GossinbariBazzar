@@ -211,6 +211,7 @@
   overflow: hidden;
   animation: showThumbnail 0.5s linear 1 forwards;
 }
+
 @keyframes showThumbnail {
   to {
     width: 150px;
@@ -238,6 +239,7 @@
   left: 0;
   animation: outImage 0.5s linear 1 forwards;
 }
+
 @keyframes outImage {
   to {
     width: 150px;
@@ -251,9 +253,16 @@
 .carousel.prev .thumbnail .item:nth-child(1) {
   width: 0;
   overflow: hidden;
-  opacity: 0;
+  /* opacity: 0; */
   animation: showThumbnail 0.5s linear 1 forwards;
 }
+
+/* @keyframes showThumbnail1 {
+    to {
+      width: 150px;
+      opacity: 1;
+    }
+  } */
 
 .carousel.prev .list .item:nth-child(2) .author,
 .carousel.prev .list .item:nth-child(2) .title,
@@ -292,18 +301,19 @@
   width: 100%;
   animation: timeRunning 2s linear 1 forwards;
 }
+
 @keyframes timeRunning {
-    to{
-        width: 0;
-    }
+  to {
+    width: 0;
+  }
 }
 
 @media screen and (max-width: 678px) {
-    .carousel .list .item .content{
-        padding-right: 0;
-    }
+  .carousel .list .item .content {
+    padding-right: 0;
+  }
 
-    .carousel .list .item .content .title{
-        font-size: 30px;
-    }
+  .carousel .list .item .content .title {
+    font-size: 30px;
+  }
 }
