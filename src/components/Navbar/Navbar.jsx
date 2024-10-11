@@ -12,7 +12,7 @@ const Navbar = () => {
   console.log(toggle);
 
   return (
-    <nav className="bg-[#dee2e6] bg-opacity-80 py-3.5 shadow ">
+    <nav className="bg-[#dee2e6] bg-opacity-80 py-3.5 shadow relative z-50">
      {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
       <div className="container mx-auto text-white font-bold flex items-center justify-between gap-6">
         {/* name +/- logo */}

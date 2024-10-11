@@ -82,6 +82,7 @@
   position: absolute;
   bottom: 50px;
   left: 50%;
+  /* left: 55.65%; */
   width: max-content;
   z-index: 100;
   display: flex;
