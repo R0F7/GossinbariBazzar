@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaChevronDown } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import Unknown from "../../assets/unknown Image.jpg";
 import { useState } from "react";
+import { FcMenu } from "react-icons/fc";
+import { CgMenuGridO, CgSearch } from "react-icons/cg";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,93 +14,90 @@ const Navbar = () => {
   console.log(toggle);
 
   return (
-    <nav className="bg-[#dee2e6] bg-opacity-80 py-3.5 shadow relative z-50">
-     {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
-      <div className="container mx-auto text-white font-bold flex items-center justify-between gap-6">
-        {/* name +/- logo */}
-        <Link to="/">
-          <div className="flex items-center gap-1">
-            <img className="w-12 rop-shadow-2xl" src={Logo} alt="" />
-            <h4 className="text-logo-font-family text-[#006400] text-lg">
-              Gossainbari<span className="text-[#4B0082]">Bazzar</span>
-            </h4>
+    <nav className="g-[#dee2e6] bg-opacity-80 pt-2.5 shadow relative z-50">
+      {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
+      <div className="container mx-auto">
+        {/* nav heading */}
+        <div className=" text-[#637381] flex justify-between  text-[15px]">
+          <div>
+            <p>Free shipping on all orders over $99.</p>
           </div>
-        </Link>
-
-        {/* menu */}
-        {/* <div className='flex items-center gap-8 nav-menu header-menu'>
-                    <ul className='flex items-center gap-8'>
-                        <li>
-                            <NavLink to='/' className={({ isActive }) => isActive ? 'font-black text-[#4B0082] py-1 px-2.5 border-b-2 border-red-600 rounded-md border-0' : "font-semibold text-[rgb(46,141,216)]"}>Home</NavLink>
-                        </li>
-                        <li><NavLink to='/shop' className={({isActive}) => isActive ? console.log('active') : console.log("inactive")}>Shop</NavLink></li>
-                        <li><NavLink to='/cart'>
-                            <div className='relative'>
-                                <i> <FaCartPlus /></i>
-                                <h6 className='absolute -top-3 -right-2.5'>0</h6>
-                            </div>
-                        </NavLink></li>
-
-                        join us button
-                        <div className='ml-14'>
-                            <Link to="/login" className='bg-[#343a40] text-white py-2 px-2.5 rounded-md shadow-lg hover:shadow-xl'>
-                                <button className='join-us-btn'>Join US</button>
-                            </Link>
-                        </div>
-                    </ul>
-                </div> */}
-
-        <div className="flex items-center gap-8 nav-menu header-menu">
           <ul className="flex items-center gap-8">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-black text-transparent py-1 px-2.5 border-b-2 active"
-                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                }
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/shop"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-black text-transparent py-1 px-2.5 active"
-                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                }
-              >
-                Shop
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/cart"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-black active text-[#4B0082]"
-                    : "font-semibold text-[rgb(46,141,216)]"
-                }
-              >
-                <div className="relative flex items-center py-1 px-2.5">
-                  <i>
-                    <FaCartPlus />
-                  </i>
-                  <h6 className="absolute -top-2.5 -right-0.5">0</h6>
-                </div>
-              </NavLink>
-            </li>
+            <li>Become A Vendor </li>
+            <li>Order Tracking</li>
+            <li>My Wishlist</li>
+          </ul>
+        </div>
 
-            {/* join us button */}
-            <div onClick={() => setToggle(!toggle)} className="ml-14 relative">
+        {/* nav body */}
+        <div className=" text-white font-bold flex items-center justify-between gap-6 my-5">
+          <div className="flex items-center gap-[90px]">
+            {/* name +/- logo */}
+            <div className="flex items-center gap-4">
+              <i className="text-3xl text-[#4B0082]">
+                <FcMenu />
+                {/* <CgMenuGridO /> */}
+              </i>
+              <Link to="/">
+                <div className="flex items-center gap-1">
+                  <img className="w-12 rop-shadow-2xl" src={Logo} alt="" />
+                  <h4 className="text-logo-font-family text-[#006400] text-lg">
+                    Gossainbari<span className="text-[#4B0082]">Bazzar</span>
+                  </h4>
+                </div>
+              </Link>
+            </div>
+
+            {/* search bar */}
+            <div className="bg-[#F4F6F8] flex items-center shadow rounded-md border">
+              <select
+                defaultValue=""
+                name="categories"
+                id="categories"
+                className="bg-transparent text-[#212b36] h-[49px] w-[70px] rounded-l-md px-2 outline-none"
+              >
+                <option value="" selected>
+                  All
+                </option>
+                <option value="">lorem</option>
+                <option value="">lorem</option>
+                <option value="">lorem</option>
+                <option value="">lorem</option>
+              </select>
+              <div className="flex ">
+                <div>
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    className="bg-transparent py-2 px-3 placeholder:text-sm text-[#212b36] h-full w-[500px] outline-none"
+                    placeholder="What are you shopping for?"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="text-[#212B36] text-2xl py-3 px-3.5 border-l"
+                >
+                  <CgSearch />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/*  cart icon + profile icon  */}
+          <div className="g-red-600 flex items-center gap-5">
+            <div className="relative flex items-center py-1 px-2.5 text-[#212b36]">
+              <i className="text-2xl">
+                <FaCartPlus />
+              </i>
+              <h6 className="absolute -top-2.5 -right-0.5">0</h6>
+            </div>
+            <div onClick={() => setToggle(!toggle)} className="relative">
               {user ? (
                 <div className="w-12 border-2 border-[#2E8DD8] hover:border-[#4B0082] transform duration-500 p-1.5 rounded-full overflow-hidden">
                   <img
                     className="w-full h-full rounded-full"
-                    referrerPolicy='no-referrer'
+                    referrerPolicy="no-referrer"
                     src={user?.photoURL || Unknown}
                     alt=""
                   />
@@ -106,21 +105,120 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="bg-[#343a40] text-white py-2 px-2.5 rounded-md shadow-lg hover:shadow-xl"
+                  className="bg-[#343a40] text-white py-1.5 px-2.5 rounded-md shadow-lg hover:shadow-xl"
                 >
                   <button className="join-us-btn">Join US</button>
                 </Link>
               )}
               {toggle && (
                 <div className="bg-[#2E8DD8] bg-opacity absolute top-14 right-0 w-[220px] flex flex-col items-start justify-start rounded-md py-2 text-sm shadow-lg">
-                  <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"> Update Profile</button>
-                  <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">Dashboard</button>
-                  <button onClick={logOut} className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">Logout</button>
+                  <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                    Update Profile
+                  </button>
+                  <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                    Dashboard
+                  </button>
+                  <button
+                    onClick={logOut}
+                    className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
+                  >
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
-          </ul>
+          </div>
         </div>
+
+        {/* nav menu */}
+          <div className="flex items-center justify-between mb-[18px] nav-menu header-menu">
+            <ul className="flex items-center gap-8">
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 border-b-2 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Shop
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/pages"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Pages
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Blog
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/vendor"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Vendor
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/flash-sales"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-black text-transparent py-1 px-2.5 active"
+                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                  }
+                >
+                  Flash Sales
+                </NavLink>
+              </li>
+            </ul>
+            <div>
+              <h4 className="flex items-center gap-2 text-[#212b36]">Recent Viewed Products <i><FaChevronDown /></i></h4>
+            </div>
+          </div>
+      </div>
+      <div className="grid grid-cols-8">
+        <div className="h-1 bg-[#00AB55]"></div>
+        <div className="h-1 bg-[#FFB240]"></div>
+        <div className="h-1 bg-[#F11D1D]"></div>
+        <div className="h-1 bg-[#00AB55] col-span-2"></div>
+        <div className="h-1 bg-[#FFB240]"></div>
+        <div className="h-1 bg-[#3AA4F1]"></div>
+        <div className="h-1 bg-[#F11D1D]"></div>
       </div>
     </nav>
   );
