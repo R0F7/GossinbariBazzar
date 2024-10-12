@@ -1,15 +1,33 @@
+import toast from "react-hot-toast";
 import Logo from "../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
   IoHomeOutline,
-  IoLocationOutline,
+  //   IoLocationOutline,
   IoLogoInstagram,
 } from "react-icons/io5";
 import { LuPhone } from "react-icons/lu";
 import { TfiEmail } from "react-icons/tfi";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const emailValue = e.target.email.value;
+    setEmail(emailValue);
+    console.log(email);
+    
+    if (!email) {
+      toast.success("welcome to join our family");
+    }else{
+        toast.error('already added')
+    }
+  };
+
   return (
     <footer className="container mx-auto pt-12">
       <div className="grid grid-cols-6 gap-10">
@@ -28,18 +46,28 @@ const Footer = () => {
           </p>
           <div className="pb-8">
             <ul className="space-y-2.5 text-[#4E565F]">
-              <li className="flex items-center gap-2">
-                <i>
-                  <TfiEmail />
-                </i>
-                <h4>contact@example.com</h4>
+              <li>
+                <a
+                  href="mailto:contact@example.com"
+                  className="flex items-center gap-2"
+                >
+                  <i>
+                    <TfiEmail />
+                  </i>
+                  <h4>contact@example.com</h4>
+                </a>
               </li>
 
-              <li className="flex items-center gap-2">
-                <i>
-                  <LuPhone />
-                </i>
-                <h4 className="font-bold text-[#212B36]">016 12500106</h4>
+              <li>
+                <a
+                  href="tel:+8801612500106"
+                  className="flex items-center gap-2"
+                >
+                  <i>
+                    <LuPhone />
+                  </i>
+                  <h4 className="font-bold text-[#212B36]">016 12500106</h4>
+                </a>
               </li>
 
               <li className="flex items-center gap-2">
@@ -53,19 +81,19 @@ const Footer = () => {
           </div>
           <div>
             <ul className="flex items-center gap-6 pb-8 text-[#212B36] text-[17px]">
-              <li>
+              <Link to="https://facebook.com" target="_blank">
                 <FaFacebookF />
-              </li>
-              <li>
+              </Link>
+              <Link to="https://instagram.com" target="_blank">
                 <IoLogoInstagram />
-              </li>
-              <li>
+              </Link>
+              <Link to="https://linkedin.com" target="_blank">
                 <FaLinkedinIn />
-              </li>
-              <li>
+              </Link>
+              <Link to="https://x.com" target="_blank">
                 <FaXTwitter />
                 {/* <IoLogoInstagram /> */}
-              </li>
+              </Link>
             </ul>
           </div>
         </div>
@@ -73,21 +101,21 @@ const Footer = () => {
         {/* ABOUT */}
         <div>
           <h4 className="text-[#212B36] mb-3.5 font-bold">ABOUT</h4>
-          <ul className="space-y-3 text-[#4E565F] text-[15px] font-medium">
-            <li>About Us</li>
-            <li>Contact Us</li>
-            <li>Help Center</li>
-            <li>FAQ</li>
+          <ul className="flex flex-col space-y-3 text-[#4E565F] text-[15px] font-medium">
+            <Link to="#">About Us</Link>
+            <Link to="#">Contact Us</Link>
+            <Link to="#">Help Center</Link>
+            <Link to="#">FAQ</Link>
           </ul>
         </div>
 
         {/* HELP & GUIDE */}
         <div>
           <h4 className="text-[#212B36] mb-3.5 font-bold">HELP & GUIDE</h4>
-          <ul className="space-y-3 text-[#4E565F] text-[15px] font-medium">
-            <li>Term Of Use</li>
-            <li>Privacy Policy</li>
-            <li>Shipping & Delivery</li>
+          <ul className="flex flex-col space-y-3 text-[#4E565F] text-[15px] font-medium">
+            <Link to="#">Term Of Use</Link>
+            <Link to="#">Privacy Policy</Link>
+            <Link to="#">Shipping & Delivery</Link>
           </ul>
         </div>
 
@@ -99,13 +127,14 @@ const Footer = () => {
               Don’t miss out <strong>thousands of great deals</strong> &
               promotions.
             </p>
-            <form className="flex flex-col">
+            <form className="flex flex-col" onSubmit={handleSubmit}>
               <input
                 type="email"
-                name=""
+                name="email"
                 id=""
                 className="bg-[#F4F6F8] border outline-none p-2 w-[60%] rounded-md shadow-sm my-4"
                 placeholder="Email address..."
+                required
               />
               <button
                 type="submit"

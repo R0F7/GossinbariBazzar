@@ -77,3 +77,12 @@
     height: 100%; 
 }
 
+footer a:hover,
+footer a h4:hover{
+    color: #2E8DD8;
+    text-decoration: underline;
+}
+
+/* footer a h4:hover{
+    color: #0096c7; 
+} */
