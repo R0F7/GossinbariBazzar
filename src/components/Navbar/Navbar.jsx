@@ -6,12 +6,16 @@ import Unknown from "../../assets/unknown Image.jpg";
 import { useState } from "react";
 import { FcMenu } from "react-icons/fc";
 import { CgMenuGridO, CgSearch } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
+import { GiFruitBowl } from "react-icons/gi";
+// import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  console.log(toggle);
+  console.log(isOpen);
 
   return (
     <nav className="g-[#dee2e6] bg-opacity-80 pt-2.5 shadow relative z-50">
@@ -33,10 +37,10 @@ const Navbar = () => {
         <div className=" text-white font-bold flex items-center justify-between gap-6 my-5">
           <div className="flex items-center gap-[90px]">
             {/* name +/- logo */}
-            <div className="flex items-center gap-4">
-              <i className="text-3xl text-[#4B0082]">
-                <FcMenu />
-                {/* <CgMenuGridO /> */}
+            <div className="flex items-center gap-3">
+              <i className="text-3xl ext-[#4B0082] cursor-pointer hover:bg-[#cccccc] hover:text-white p-2 rounded-full" onClick={()=> setIsOpen(!isOpen)}>
+                {!isOpen ? <FcMenu /> :
+                <CgMenuGridO />}
               </i>
               <Link to="/">
                 <div className="flex items-center gap-1">
@@ -56,7 +60,7 @@ const Navbar = () => {
                 id="categories"
                 className="bg-transparent text-[#212b36] h-[49px] w-[70px] rounded-l-md px-2 outline-none"
               >
-                <option value="" selected>
+                <option value="" disabled>
                   All
                 </option>
                 <option value="">lorem</option>
@@ -131,85 +135,90 @@ const Navbar = () => {
         </div>
 
         {/* nav menu */}
-          <div className="flex items-center justify-between mb-[18px] nav-menu header-menu">
-            <ul className="flex items-center gap-8">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 border-b-2 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/shop"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Shop
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/pages"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Pages
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/blog"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Blog
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/vendor"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Vendor
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/flash-sales"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "font-black text-transparent py-1 px-2.5 active"
-                      : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
-                  }
-                >
-                  Flash Sales
-                </NavLink>
-              </li>
-            </ul>
-            <div>
-              <h4 className="flex items-center gap-2 text-[#212b36]">Recent Viewed Products <i><FaChevronDown /></i></h4>
-            </div>
+        <div className="flex items-center justify-between mb-[18px] nav-menu header-menu">
+          <ul className="flex items-center gap-8">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 border-b-2 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/shop"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Shop
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/pages"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Pages
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/vendor"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Vendor
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/flash-sales"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-black text-transparent py-1 px-2.5 active"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                }
+              >
+                Flash Sales
+              </NavLink>
+            </li>
+          </ul>
+          <div>
+            <h4 className="flex items-center gap-2 text-[#212b36]">
+              Recent Viewed Products{" "}
+              <i>
+                <FaChevronDown />
+              </i>
+            </h4>
           </div>
+        </div>
       </div>
       <div className="grid grid-cols-8">
         <div className="h-1 bg-[#00AB55]"></div>
@@ -220,6 +229,41 @@ const Navbar = () => {
         <div className="h-1 bg-[#3AA4F1]"></div>
         <div className="h-1 bg-[#F11D1D]"></div>
       </div>
+      {/* side menu */}
+      <aside className={`w-[14%] bg-[#eeeeeecc] fixed top-0 left-0 h-screen z-50 side-menu ${isOpen ? '-translate-x-0' :'-translate-x-72'} transform transition-all duration-300 ease-in-out`}>
+        <h4 className="flex items-center justify-between px-4 py-2 text-lg font-bold my-4 b-5 text-[#333333]">
+          All categories{" "}
+          <i onClick={()=>setIsOpen(false)} className="cursor-pointer order hover:bg-[#cccccc] hover:text-white shadow p-2 rounded-full">
+            <RxCross2 />
+          </i>
+        </h4>
+        <ul className="space-y- text-[#333333] font-bold">
+          <li className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
+            <i>
+              <GiFruitBowl />
+            </i>
+            <h4>Fruit</h4>
+          </li>
+          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
+            <i>
+              <GiFruitBowl />
+            </i>
+            <h4>Fruit</h4>
+          </li>
+          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
+            <i>
+              <GiFruitBowl />
+            </i>
+            <h4>Fruit</h4>
+          </li>
+          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
+            <i>
+              <GiFruitBowl />
+            </i>
+            <h4>Fruit</h4>
+          </li>
+        </ul>
+      </aside>
     </nav>
   );
 };

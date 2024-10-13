@@ -85,6 +85,19 @@ footer a h4:hover{
     text-decoration: underline;
 }
 
-/* footer a h4:hover{
-    color: #0096c7; 
+/* .side-menu{
+    border: 5px solid black;
+    filter: blur(0px);
+}
+
+.side-menu::after{
+    content: '';
+    width: 1000%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
 } */
