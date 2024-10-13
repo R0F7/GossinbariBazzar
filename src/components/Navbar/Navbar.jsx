@@ -15,14 +15,14 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(isOpen);
+  // console.log(isOpen);
 
   return (
-    <nav className="g-[#dee2e6] bg-opacity-80 pt-2.5 shadow relative z-50">
+    <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
       {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
       <div className="container mx-auto">
         {/* nav heading */}
-        <div className=" text-[#637381] flex justify-between  text-[15px]">
+        <div className=" text-[#637381] flex justify-between  text-[15px] static top-0 left-0">
           <div>
             <p>Free shipping on all orders over $99.</p>
           </div>
@@ -34,7 +34,8 @@ const Navbar = () => {
         </div>
 
         {/* nav body */}
-        <div className=" text-white font-bold flex items-center justify-between gap-6 my-5">
+        {/* <div className="fixed bg-red-600 w-full top- left- right-0"> */}
+        <div className=" text-white font-bold flex items-center justify-between gap-6 my-5 ">
           <div className="flex items-center gap-[90px]">
             {/* name +/- logo */}
             <div className="flex items-center gap-3">
@@ -219,6 +220,7 @@ const Navbar = () => {
             </h4>
           </div>
         </div>
+        {/* </div> */}
       </div>
       <div className="grid grid-cols-8">
         <div className="h-1 bg-[#00AB55]"></div>

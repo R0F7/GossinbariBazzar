@@ -1,0 +1,42 @@
+[
+    {
+      "categoryName": "Electronics",
+      "categoryImage": "https://i.ibb.co.com/dJLpF4J/Electronics.jpg"
+    },
+    {
+      "categoryName": "Clothing",
+      "categoryImage": "https://i.ibb.co.com/6JbMGdG/Clothing.jpg"
+    },
+    {
+      "categoryName": "Jewelry",
+      "categoryImage": "https://i.ibb.co.com/wrbM15z/Jewelry.webp"
+    },
+    {
+      "categoryName": "Furniture & Home Decor",
+      "categoryImage": "https://i.ibb.co.com/sV42HJ2/Furniture.webp"
+    },
+    {
+      "categoryName": "Vegetables",
+      "categoryImage": "https://i.ibb.co.com/M6SkmJg/vegetables.webp"
+    },
+    {
+      "categoryName": "Meat",
+      "categoryImage": "https://i.ibb.co.com/Yb5h120/Meat.png"
+    },
+    {
+      "categoryName": "Footwear",
+      "categoryImage": "https://i.ibb.co.com/dPXYTDC/Footwear.png"
+    },
+    {
+      "categoryName": "Beauty & Personal Care",
+      "categoryImage": "https://i.ibb.co.com/BzHzgm5/Beauty-Personal-Care.jpg"
+    },
+    {
+      "categoryName": "Sports",
+      "categoryImage": "https://i.ibb.co.com/Y3w9Rt1/sport.jpg"
+    },
+    {
+      "categoryName": "Fruits",
+      "categoryImage": "https://i.ibb.co.com/GtHZnt0/Fruits.webp"
+    }
+  ]

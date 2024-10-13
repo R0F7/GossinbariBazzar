@@ -1,0 +1,37 @@
+.category-box .image {
+  position: relative;
+}
+
+.category-box .image::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transition: all;
+  transition-duration: 700ms;
+}
+
+.icon {
+    transform: translateY(30px);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease, visibility 0s 1s; 
+}
+
+.category-box:hover.category-box .image::before,
+.category-box:hover.category-box .image img {
+  /* width: 100%; */
+  opacity: 1;
+  border-radius: 10px;
+}
+
+.category-box:hover .icon{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.5s ease, opacity 1s ease, visibility 0s 0s;
+}
