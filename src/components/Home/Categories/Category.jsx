@@ -18,7 +18,7 @@ const Category = ({ category, idx }) => {
         <h4 className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold ${hover.isHovered && hover.idx === idx ? 'scale-100':'scale-0'} duration-500`}>{category.categoryName}</h4>
       </div>
       <div className="flex items-center justify-between">
-        <h4 className="font-semibold text-[#212B36]">
+        <h4 className="font-semibold text-[#212B36] category-name">
           {category.categoryName}
         </h4>
         <i className="text-xl icon">

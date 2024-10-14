@@ -16,6 +16,7 @@
 }
 
 .icon {
+    /* transform: translateX(-265px); */
     transform: translateY(30px);
     visibility: hidden;
     opacity: 0;
@@ -32,6 +33,14 @@
 .category-box:hover .icon{
     visibility: visible;
     opacity: 1;
+    /* transform: translateX(0); */
     transform: translateY(0);
     transition: transform 0.5s ease, opacity 1s ease, visibility 0s 0s;
+}
+
+.category-box:hover .category-name,
+.category-box:hover .icon{
+    color: #2E8DD8;
+    transition: all;
+    transition-duration: 1000ms;
 }
