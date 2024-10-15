@@ -27,7 +27,7 @@ const DailyFlashSales = () => {
           Sales—limited-time offers across all products!
         </p>
       </div>
-      <div>
+      <div className="grid grid-cols-5 bg-white">
         {flashSales.map((flashSale) => (
           <DailyFlashSale
             key={flashSale._id}
