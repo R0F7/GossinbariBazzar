@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { FaCartPlus, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaCartPlus, FaRegHeart, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FiEye } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
 
 const DailyFlashSale = ({ flashSale }) => {
@@ -23,21 +24,33 @@ const DailyFlashSale = ({ flashSale }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   return (
-    <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow">
-      <div className="h-[200px]">
+    <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
+      <div className="h-[200px] relative">
         <img className="h-full w-full" src={image} alt="" />
-        <div></div>
+        <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">
+          <h4>-{discount_percent}%</h4>
+        </div>
+        <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 py-2.5 icon-menu">
+            <div className="flex flex-col items-center">
+                <i><FaRegHeart /></i>
+                <h4>Wishlist</h4>
+            </div>
+            <div className="flex flex-col items-center">
+                <i><FiEye /></i>
+                <h4>Quickview</h4>
+            </div>
+        </div>
       </div>
       <div>
-        <h4 className="text-[#637381] text-sm mt-1.5 mb-3">
-          <span className="text-[#919EAB]">Sold by:</span> {sold_by}
+        <h4 className="text-[#637381] mt-1.5 mb-3">
+          <span className="text-[#919EAB] text-sm">Sold by:</span> {sold_by}
         </h4>
         <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
           <div className="w-[70%] bg-red-700 h-2 absolute top-0 left-0"></div>
         </div>
-        <div className="flex items-center gap-4 my-2">
-          <h4 className="text-[#212B36] font-semibold text-[15px] ">
-            <span className="">Sold:</span> 24/47
+        <div className="flex items-center justify-between ap-4 my-2">
+          <h4 className="text-[#212B36] ont-semibold text-[15px] ">
+            <span className="text-[#919EAB] text-sm">Sold:</span> 24/47
           </h4>
           <h6 className="border inline-block py-0.5 px-6 rounded-full text-sm font-normal hover:bg-yellow-300 over:text-white transition-all duration-500 y-2.5">
             {sub_category}

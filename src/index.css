@@ -85,20 +85,17 @@ footer a h4:hover{
     text-decoration: underline;
 }
 
-/* .side-menu{
-    border: 5px solid black;
-    filter: blur(0px);
+.icon-menu{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition-duration: 500ms;
 }
 
-.side-menu::after{
-    content: '';
-    width: 1000%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px); 
-} */
+.cart:hover .icon-menu{
+    transform: translateY(-60px);
+    opacity: 1;
+    visibility: visible;
+    transition-duration: 500ms;
+}
  
