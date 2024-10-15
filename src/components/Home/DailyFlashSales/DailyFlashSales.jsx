@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import DailyFlashSale from "./DailyFlashSale";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import PropTypes from "prop-types";
 
 const DailyFlashSales = () => {
   const { data: flashSales = [] } = useQuery({
@@ -11,9 +16,52 @@ const DailyFlashSales = () => {
   });
   //   console.log(data);
 
+  // Custom Next Arrow
+  const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+        onClick={onClick}
+      >
+        <FaAngleRight />
+      </div>
+    );
+  };
+
+  NextArrow.propTypes = {
+    onClick: PropTypes.func,
+  };
+
+  // Custom Previous Arrow
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <div
+        className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+        onClick={onClick}
+      >
+        <FaAngleLeft />
+      </div>
+    );
+  };
+
+  PrevArrow.propTypes = {
+    onClick: PropTypes.func,
+  };
+
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
+
   return (
-    <section className="container mx-auto py-12">
-      <div className="flex justify-between">
+    <section className="container mx-auto pt-12">
+      <div className="flex justify-between mb-6">
         <div>
           <div className="flex items-center gap-5 mb-1.5">
             <h4 className="text-2xl font-semibold text-[#202A35]">
@@ -50,14 +98,16 @@ const DailyFlashSales = () => {
           </ul>
         </div>
       </div>
-      <div className="grid grid-cols-5 mt-6 bg-white">
+      <Slider {...settings}>
+        {/* <div className="grid grid-cols-5 mt-6 bg-white"> */}
         {flashSales.map((flashSale) => (
           <DailyFlashSale
             key={flashSale._id}
             flashSale={flashSale}
           ></DailyFlashSale>
         ))}
-      </div>
+        {/* </div> */}
+      </Slider>
     </section>
   );
 };

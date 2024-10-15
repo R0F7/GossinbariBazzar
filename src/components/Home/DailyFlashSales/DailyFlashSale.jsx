@@ -48,7 +48,7 @@ const DailyFlashSale = ({ flashSale }) => {
         <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
           <div className="w-[70%] bg-red-700 h-2 absolute top-0 left-0"></div>
         </div>
-        <div className="flex items-center justify-between ap-4 my-2">
+        <div className="flex flex-row-reverse items-center justify-between ap-4 mt-2 mb-2">
           <h4 className="text-[#212B36] ont-semibold text-[15px] ">
             <span className="text-[#919EAB] text-sm">Sold:</span> 24/47
           </h4>
@@ -56,7 +56,7 @@ const DailyFlashSale = ({ flashSale }) => {
             {sub_category}
           </h6>
         </div>
-        <h4 className="text-[#212B36] font-semibold text-l mb-1.5">{title}</h4>
+        <h4 className="text-[#637381] font-semibold text-l mb-1.5">{title}</h4>
         <h6 className="text-[15px] -mb-0.5">{unit}</h6>
         <div>
           <ReactStars
@@ -74,9 +74,9 @@ const DailyFlashSale = ({ flashSale }) => {
         </div>
         <div className="flex items-center gap-5 mb-3.5">
           <del className="text-[#919EAB] font-bold text-lg">
-            ${discounted_price}.00
+            ${price}
           </del>
-          <h6 className="text-[#C30B0B] font-bold text-lg">${price}.00</h6>
+          <h6 className="text-[#C30B0B] font-bold text-lg">${discounted_price}</h6>
         </div>
         <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold ">
           <i>
