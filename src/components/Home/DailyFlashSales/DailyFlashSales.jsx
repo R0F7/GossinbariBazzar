@@ -4,16 +4,20 @@ import DailyFlashSale from "./DailyFlashSale";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaShippingFast } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { MdVerified } from "react-icons/md";
+// import { RiCheckDoubleLine } from "react-icons/ri";
+import { VscWorkspaceTrusted } from "react-icons/vsc";
+import { RiCheckDoubleLine } from "react-icons/ri";
 
 // Custom Next Arrow
 const NextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white transition duration-500"
       onClick={onClick}
     >
       <FaAngleRight />
@@ -30,7 +34,7 @@ const PrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white transition duration-500 "
       onClick={onClick}
     >
       <FaAngleLeft />
@@ -146,16 +150,32 @@ const DailyFlashSales = () => {
           </ul>
         </div>
       </div>
-      <Slider {...settings}>
-        {/* <div className="grid grid-cols-5 mt-6 bg-white"> */}
-        {flashSales.map((flashSale) => (
-          <DailyFlashSale
-            key={flashSale._id}
-            flashSale={flashSale}
-          ></DailyFlashSale>
-        ))}
-        {/* </div> */}
-      </Slider>
+      <div className="bg-white">
+        <Slider {...settings}>
+          {/* <div className="grid grid-cols-5 mt-6 bg-white"> */}
+          {flashSales.map((flashSale) => (
+            <DailyFlashSale
+              key={flashSale._id}
+              flashSale={flashSale}
+            ></DailyFlashSale>
+          ))}
+          {/* </div> */}
+        </Slider>
+        <div className="grid grid-cols-3 py-6">
+          <div className="flex items-center gap-1.5 justify-center text-[#212B36] font-semibold">
+            <i className="text-[#2E8DD8]"><MdVerified /></i>
+            <h4>Organic Certificated</h4>
+          </div>
+          <div className="flex items-center gap-1.5 justify-center text-[#212B36] font-semibold border-x ">
+            <i className="text-[#2E8DD8]"><FaShippingFast /></i>
+            <h4>Fast & Free Delivery</h4>
+          </div>
+          <div className="flex items-center gap-1.5 justify-center text-[#212B36] font-semibold">
+            <i className="text-[#2E8DD8]"><VscWorkspaceTrusted /></i>
+            <h4>Trusted Products</h4>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

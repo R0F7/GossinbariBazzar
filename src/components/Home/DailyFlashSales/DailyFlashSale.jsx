@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { FaCartPlus, FaRegHeart, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
 
@@ -23,20 +23,6 @@ const DailyFlashSale = ({ flashSale }) => {
   } = flashSale;
   //   const check= Math.round(rating * 2) / 2;
 
-  function StarRating({ rating }) {
-    return (
-      <ReactStars
-        count={5}            // Explicitly pass the default count value
-        value={rating}        // Pass the rating
-        size={22}             // Explicitly pass the size
-        isHalf={true}         // Pass isHalf explicitly
-        activeColor="#FFC107" // Explicitly pass the active color
-        edit={false}          // Disable editing
-        color="#D3CED2"       // Explicitly pass the color for empty stars
-      />
-    );
-  }
-
   return (
     <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
       <div className="h-[200px] relative">
@@ -45,14 +31,18 @@ const DailyFlashSale = ({ flashSale }) => {
           <h4>-{discount_percent}%</h4>
         </div>
         <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 py-2.5 icon-menu">
-            <div className="flex flex-col items-center">
-                <i><FaRegHeart /></i>
-                <h4>Wishlist</h4>
-            </div>
-            <div className="flex flex-col items-center">
-                <i><FiEye /></i>
-                <h4>Quickview</h4>
-            </div>
+          <div className="flex flex-col items-center">
+            <i>
+              <FaRegHeart />
+            </i>
+            <h4>Wishlist</h4>
+          </div>
+          <div className="flex flex-col items-center">
+            <i>
+              <FiEye />
+            </i>
+            <h4>Quickview</h4>
+          </div>
         </div>
       </div>
       <div>
@@ -70,8 +60,10 @@ const DailyFlashSale = ({ flashSale }) => {
             {sub_category}
           </h6>
         </div>
-        <h4 className="text-[#637381] font-semibold text-l mb-1.5">{title}</h4>
-        <h6 className="text-[15px] -mb-0.5">{unit}</h6>
+        <h4 className="text-[#637381] font-semibold text-l mb-1">{title}</h4>
+        <h6 className="text-[15px] text-sm font text-[#637381] -mb-1">
+          {unit}
+        </h6>
         <div>
           <ReactStars
             count={5}
@@ -88,11 +80,16 @@ const DailyFlashSale = ({ flashSale }) => {
         </div>
         <div className="flex items-center gap-5 mb-3.5">
           <del className="text-[#919EAB] font-bold text-lg">
-            ${price}
+            ${Number.isInteger(price) ? `${price + ".00"}` : price}
           </del>
-          <h6 className="text-[#C30B0B] font-bold text-lg">${discounted_price}</h6>
+          <h6 className="text-[#C30B0B] font-bold text-lg">
+            $
+            {Number.isInteger(discounted_price)
+              ? `${discounted_price + ".00"}`
+              : discounted_price}
+          </h6>
         </div>
-        <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold ">
+        <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200">
           <i>
             <FaCartPlus />
           </i>
