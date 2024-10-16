@@ -1,3 +1,4 @@
+import Banner from "../../components/Home/Banner/Banner";
 import Categories from "../../components/Home/Categories/Categories";
 import DailyFlashSales from "../../components/Home/DailyFlashSales/DailyFlashSales";
 import Suppliers from "../../components/Home/Suppliers/Suppliers";
@@ -13,6 +14,7 @@ const Home = () => {
         <DailyFlashSales></DailyFlashSales>
         <Suppliers></Suppliers>
         <TrendingTags></TrendingTags>
+        <Banner></Banner>
       </div>
     </div>
   );

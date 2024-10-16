@@ -31,7 +31,7 @@ const TrendingTags = () => {
                 alt={item.tag_name}
               />
             </div>
-            <h4 className="mt-2 mb-1 text-[#212B36] font-semibold text-sm">#{item.tag_name}</h4>
+            <h4 className="mt-2 mb-1 text-[#637381] font-semibold text-sm">#{item.tag_name}</h4>
           </div>
         ))}
       </div>
