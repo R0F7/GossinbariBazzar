@@ -23,6 +23,20 @@ const DailyFlashSale = ({ flashSale }) => {
   } = flashSale;
   //   const check= Math.round(rating * 2) / 2;
 
+  function StarRating({ rating }) {
+    return (
+      <ReactStars
+        count={5}            // Explicitly pass the default count value
+        value={rating}        // Pass the rating
+        size={22}             // Explicitly pass the size
+        isHalf={true}         // Pass isHalf explicitly
+        activeColor="#FFC107" // Explicitly pass the active color
+        edit={false}          // Disable editing
+        color="#D3CED2"       // Explicitly pass the color for empty stars
+      />
+    );
+  }
+
   return (
     <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
       <div className="h-[200px] relative">

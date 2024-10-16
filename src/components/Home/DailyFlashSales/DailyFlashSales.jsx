@@ -6,8 +6,49 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+
+// Custom Next Arrow
+const NextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+      onClick={onClick}
+    >
+      <FaAngleRight />
+    </div>
+  );
+};
+
+NextArrow.propTypes = {
+  onClick: PropTypes.func,
+};
+
+// Custom Previous Arrow
+const PrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <div
+      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
+      onClick={onClick}
+    >
+      <FaAngleLeft />
+    </div>
+  );
+};
+
+PrevArrow.propTypes = {
+  onClick: PropTypes.func,
+};
 
 const DailyFlashSales = () => {
+  const [time, setTime] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   const { data: flashSales = [] } = useQuery({
     queryKey: ["flashSales"],
     queryFn: () => {
@@ -16,39 +57,46 @@ const DailyFlashSales = () => {
   });
   //   console.log(data);
 
-  // Custom Next Arrow
-  const NextArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
-        onClick={onClick}
-      >
-        <FaAngleRight />
-      </div>
-    );
-  };
+  // console.log('rerender check');
 
-  NextArrow.propTypes = {
-    onClick: PropTypes.func,
-  };
+  useEffect(() => {
+    const countdownDate = new Date("Dec 31, 2024 23:59:59").getTime();
 
-  // Custom Previous Arrow
-  const PrevArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <div
-        className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white"
-        onClick={onClick}
-      >
-        <FaAngleLeft />
-      </div>
-    );
-  };
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const timeDifference = countdownDate - now;
 
-  PrevArrow.propTypes = {
-    onClick: PropTypes.func,
-  };
+      if (timeDifference < 0) {
+        clearInterval(countdownInterval);
+        return;
+      }
+
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      setTime((prevState) => {
+        if (
+          prevState.days !== days ||
+          prevState.hours !== hours ||
+          prevState.minutes !== minutes ||
+          prevState.seconds !== seconds
+        ) {
+          return { days, hours, minutes, seconds };
+        }
+        return prevState;
+      });
+    };
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, []);
 
   const settings = {
     infinite: false,
@@ -80,19 +128,19 @@ const DailyFlashSales = () => {
           <h4 className="text-l font-semibold text-[#212B36]">Ends in:</h4>
           <ul className="flex gap-2 text-red-700">
             <li className="text-center px-3 py-1.5 border border-red-700 rounded-xl">
-              <h6>15</h6>
+              <h6>{time?.days}</h6>
               <p>days</p>
             </li>
             <li className="text-center px-3 py-1.5 border border-red-700 rounded-xl">
-              <h6>15</h6>
+              <h6>{time?.hours}</h6>
               <p>hours</p>
             </li>
             <li className="text-center px-3 py-1.5 border border-red-700 rounded-xl">
-              <h6>15</h6>
+              <h6>{time?.minutes}</h6>
               <p>mins</p>
             </li>
             <li className="text-center px-3 py-1.5 border border-red-700 rounded-xl">
-              <h6>15</h6>
+              <h6>{time?.seconds}</h6>
               <p>secs</p>
             </li>
           </ul>
