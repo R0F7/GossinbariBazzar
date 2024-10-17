@@ -3,7 +3,7 @@ import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
 
-const DailyFlashSale = ({ flashSale }) => {
+const Card = ({ item, progress_sold }) => {
   const {
     _id,
     image,
@@ -20,16 +20,18 @@ const DailyFlashSale = ({ flashSale }) => {
     sub_category,
     tags,
     discount_percent,
-  } = flashSale;
+  } = item;
   //   const check= Math.round(rating * 2) / 2;
 
   return (
-    <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
+    <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow pb-6 cart">
       <div className="h-[200px] relative">
         <img className="h-full w-full" src={image} alt="" />
-        <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">
-          <h4>-{discount_percent}%</h4>
-        </div>
+        {discounted_price && (
+          <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">
+            <h4>-{discount_percent}%</h4>
+          </div>
+        )}
         <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 py-2.5 icon-menu">
           <div className="flex flex-col items-center">
             <i>
@@ -49,16 +51,20 @@ const DailyFlashSale = ({ flashSale }) => {
         <h4 className="text-[#637381] mt-1.5 mb-3">
           <span className="text-[#919EAB] text-sm">Sold by:</span> {sold_by}
         </h4>
-        <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
-          <div className="w-[70%] bg-red-700 h-2 absolute top-0 left-0"></div>
-        </div>
-        <div className="flex flex-row-reverse items-center justify-between ap-4 mt-2 mb-2">
-          <h4 className="text-[#212B36] ont-semibold text-[15px] ">
-            <span className="text-[#919EAB] text-sm">Sold:</span> 24/47
-          </h4>
-          <h6 className="border inline-block py-0.5 px-6 rounded-full text-sm font-normal hover:bg-yellow-300 over:text-white transition-all duration-500 y-2.5">
+        {progress_sold && (
+          <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
+            <div className="w-[70%] bg-red-700 h-2 absolute top-0 left-0"></div>
+          </div>
+        )}
+        <div className="flex items-center justify-between ap-4 mt-2 mb-2">
+        <h6 className="border inline-block py-0.5 px-6 rounded-full text-sm font-normal hover:bg-yellow-300 over:text-white transition-all duration-500 y-2.5">
             {sub_category}
           </h6>
+          {progress_sold && (
+            <h4 className="text-[#212B36] ont-semibold text-[15px] ">
+              <span className="text-[#919EAB] text-sm">Sold:</span> 24/47
+            </h4>
+          )}
         </div>
         <h4 className="text-[#637381] font-semibold text-l mb-1">{title}</h4>
         <h6 className="text-[15px] text-sm font text-[#637381] -mb-1">
@@ -100,8 +106,9 @@ const DailyFlashSale = ({ flashSale }) => {
   );
 };
 
-DailyFlashSale.propTypes = {
-  flashSale: PropTypes.object,
+Card.propTypes = {
+  item: PropTypes.object,
+  progress_sold: PropTypes.bool,
 };
 
-export default DailyFlashSale;
+export default Card;

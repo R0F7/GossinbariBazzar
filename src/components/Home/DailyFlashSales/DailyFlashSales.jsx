@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import DailyFlashSale from "./DailyFlashSale";
+import Card from "../../Card/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { MdVerified } from "react-icons/md";
 // import { RiCheckDoubleLine } from "react-icons/ri";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
-import { RiCheckDoubleLine } from "react-icons/ri";
+// import { RiCheckDoubleLine } from "react-icons/ri";
 
 // Custom Next Arrow
 const NextArrow = (props) => {
@@ -154,10 +154,11 @@ const DailyFlashSales = () => {
         <Slider {...settings}>
           {/* <div className="grid grid-cols-5 mt-6 bg-white"> */}
           {flashSales.map((flashSale) => (
-            <DailyFlashSale
+            <Card
               key={flashSale._id}
-              flashSale={flashSale}
-            ></DailyFlashSale>
+              item={flashSale}
+              progress_sold={true}
+            ></Card>
           ))}
           {/* </div> */}
         </Slider>
