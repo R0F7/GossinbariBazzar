@@ -24,7 +24,7 @@ const Card = ({ item, progress_sold }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   return (
-    <div className="p-4 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow pb-6 cart">
+    <div className="p-4 pb-6 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
       <div className="h-[200px] relative">
         <img className="h-full w-full" src={image} alt="" />
         {discounted_price && (
