@@ -4,7 +4,7 @@ import suppliers from "./suppliersData";
 const Suppliers = () => {
 
   return (
-    <section className="container mx-auto pt-12">
+    <section className="container mx-auto py-12">
       <div className="flex items-center gap-5 mb-6">
         <h4 className="text-2xl font-semibold text-[#202A35]">
           Featured Suppliers

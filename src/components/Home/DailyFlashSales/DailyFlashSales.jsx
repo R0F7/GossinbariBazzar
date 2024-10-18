@@ -4,47 +4,14 @@ import Card from "../../Card/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaAngleLeft, FaAngleRight, FaShippingFast } from "react-icons/fa";
-import PropTypes from "prop-types";
+import { FaShippingFast } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { MdVerified } from "react-icons/md";
 // import { RiCheckDoubleLine } from "react-icons/ri";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
+import NextArrow from "../../Arrow/NextArrow";
+import PrevArrow from "../../Arrow/PrevArrow";
 // import { RiCheckDoubleLine } from "react-icons/ri";
-
-// Custom Next Arrow
-const NextArrow = (props) => {
-  const { onClick } = props;
-  return (
-    <div
-      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -right-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white transition duration-500"
-      onClick={onClick}
-    >
-      <FaAngleRight />
-    </div>
-  );
-};
-
-NextArrow.propTypes = {
-  onClick: PropTypes.func,
-};
-
-// Custom Previous Arrow
-const PrevArrow = (props) => {
-  const { onClick } = props;
-  return (
-    <div
-      className="bg-[#FFFFFF] h-14 w-14 absolute top-1/2 -left-20 transform -translate-y-1/2 rounded-full text-[#212B36] flex items-center justify-center shadow-md text-xl hover:bg-[#2E8DD8] hover:text-white transition duration-500 "
-      onClick={onClick}
-    >
-      <FaAngleLeft />
-    </div>
-  );
-};
-
-PrevArrow.propTypes = {
-  onClick: PropTypes.func,
-};
 
 const DailyFlashSales = () => {
   const [time, setTime] = useState({
@@ -53,6 +20,7 @@ const DailyFlashSales = () => {
     minutes: 0,
     seconds: 0,
   });
+
   const { data: flashSales = [] } = useQuery({
     queryKey: ["flashSales"],
     queryFn: () => {

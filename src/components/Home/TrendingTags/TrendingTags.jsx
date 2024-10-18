@@ -11,10 +11,10 @@ const TrendingTags = () => {
       return data;
     },
   });
-  console.log(data);
+  // console.log(data);
 
   return (
-    <section className="container mx-auto py-12">
+    <section className="container mx-auto pb-12">
       <div className="flex items-center gap-5 mb-6">
         <h4 className="text-2xl font-semibold text-[#202A35]">Trending Tags</h4>
         <Link to="/shop" className="text-[#2E8DD8] font-semibold">

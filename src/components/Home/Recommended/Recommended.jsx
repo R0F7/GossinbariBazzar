@@ -18,7 +18,7 @@ const Recommended = () => {
           Shop all
         </Link>
       </div>
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-5 bg-white">
         {
             recommended.map((item)=> <Card key={item._id} item={item}></Card>)
         }
