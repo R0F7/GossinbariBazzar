@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
 const Card = ({ item, progress_sold }) => {
   const {
@@ -24,6 +25,7 @@ const Card = ({ item, progress_sold }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   return (
+   <Link to={`/product/${_id}`}>
     <div className="p-4 pb-6 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
       <div className="h-[200px] relative">
         <img className="h-full w-full" src={image} alt="" />
@@ -70,7 +72,7 @@ const Card = ({ item, progress_sold }) => {
         <h6 className="text-[15px] text-sm font text-[#637381] -mb-1">
           {unit}
         </h6>
-        <div>
+        <div className="flex items-center gap-4 T= text-gray-500">
           <ReactStars
             count={5}
             value={rating}
@@ -83,6 +85,7 @@ const Card = ({ item, progress_sold }) => {
             // halfIcon={<FaStarHalfAlt size={40} />}
             // fullIcon={<FaStar size={40} />}
           />
+          <h6>0</h6>
         </div>
         <div className="flex items-center gap-5 mb-3.5">
           <del className="text-[#919EAB] font-bold text-lg">
@@ -103,6 +106,7 @@ const Card = ({ item, progress_sold }) => {
         </button>
       </div>
     </div>
+   </Link>
   );
 };
 
