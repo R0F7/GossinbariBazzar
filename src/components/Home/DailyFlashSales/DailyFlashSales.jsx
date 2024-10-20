@@ -11,6 +11,7 @@ import { MdVerified } from "react-icons/md";
 import { VscWorkspaceTrusted } from "react-icons/vsc";
 import NextArrow from "../../Arrow/NextArrow";
 import PrevArrow from "../../Arrow/PrevArrow";
+import Card2 from "../../Card/Card2";
 // import { RiCheckDoubleLine } from "react-icons/ri";
 
 const DailyFlashSales = () => {
@@ -122,11 +123,16 @@ const DailyFlashSales = () => {
         <Slider {...settings}>
           {/* <div className="grid grid-cols-5 mt-6 bg-white"> */}
           {flashSales.map((flashSale) => (
-            <Card
+            // <Card
+            //   key={flashSale._id}
+            //   item={flashSale}
+            //   progress_sold={true}
+            // ></Card>
+            <Card2
               key={flashSale._id}
               item={flashSale}
               progress_sold={true}
-            ></Card>
+            ></Card2>
           ))}
           {/* </div> */}
         </Slider>

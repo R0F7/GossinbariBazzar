@@ -12,7 +12,7 @@ const TopBestSelling = () => {
       return fetch("./flashSales.json").then((data) => data.json());
     },
   });
-  console.log(products);
+  // console.log(products);
 
   const settings = {
     infinite: false,

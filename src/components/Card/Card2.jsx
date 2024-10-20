@@ -4,9 +4,8 @@ import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-// import QuickView from "../Modal/QuickView";
 
-const Card = ({ item, progress_sold }) => {
+const Card2 = ({ item, progress_sold }) => {
   const {
     _id,
     image,
@@ -26,18 +25,16 @@ const Card = ({ item, progress_sold }) => {
   } = item;
   //   const check= Math.round(rating * 2) / 2;
 
-  const [isModalOpen, setIsModalOpen] = useState(0);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
 
+//   const handleQuickView = (e) => {
+//       // Prevent the click from bubbling up to the parent Link
+//       e.stopPropagation();
+//       setIsModalOpen(true);
+//   };
+//   console.log(isModalOpen);
+// console.log('ppp');
 
-
-  const handleQuickView = (e) => {
-      // Prevent the click from bubbling up to the parent Link
-      // e.stopPropagation();
-      e.preventDefault();
-      setIsModalOpen(isModalOpen + 1);
-
-  };
-  console.log(isModalOpen);
   
 
   return (
@@ -56,10 +53,8 @@ const Card = ({ item, progress_sold }) => {
               <FaRegHeart />
             </i>
             <h4>Wishlist</h4>
-
-            {/* <QuickView open={true} close={false}></QuickView> */}
           </div>
-          <div className="flex flex-col items-center" onClick={handleQuickView}>
+          <div className="flex flex-col items-center">
             <i>
               <FiEye />
             </i>
@@ -128,9 +123,9 @@ const Card = ({ item, progress_sold }) => {
   );
 };
 
-Card.propTypes = {
+Card2.propTypes = {
   item: PropTypes.object,
   progress_sold: PropTypes.bool,
 };
 
-export default Card;
+export default Card2;
