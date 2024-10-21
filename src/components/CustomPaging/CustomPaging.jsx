@@ -107,7 +107,7 @@ const CustomPaging = () => {
       return (
         <a>
           <img
-            className="custom-dot-img mt-6"
+            className="custom-dot-img mt-10"
             src={imageList[i].src}
             alt={imageList[i].alt}
           />

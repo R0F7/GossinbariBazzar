@@ -7,6 +7,8 @@ import {
   IoIosArrowDropleft,
   IoIosArrowForward,
 } from "react-icons/io";
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -49,55 +51,65 @@ const ProductDetails = () => {
       </div>
       <div className="grid grid-cols-3 mt-8">
         {/* product image */}
-        <div className="border">
-          <div className="flex items-center justify-between">
-            <button>Featured</button>
-            <i>
+        <div className="">
+          <div className="flex items-center justify-end relative right-10 top- ">
+            {/* <button>Featured</button> */}
+            <i className="text-2xl">
               <IoSearch />
             </i>
           </div>
           <div className="">
-            {/* <img src="https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp" alt="" /> */}
             <CustomPaging></CustomPaging>
           </div>
         </div>
         {/* product details */}
         <div>
-          <div>
-            <h4>$120.00</h4>
+          <div className="flex items-center justify-between text-xl font-bold ">
+            <h4 className="text-red-600">$120.00</h4>
             <i>
               <FaRegHeart />
             </i>
           </div>
-          <p>
+          <p className="text-[#666D74] my-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl
             tortor, lobortis non tortor sit amet, iaculis rhoncus ipsum. Fusce
             ornare nunc maximus dui molestie.
           </p>
-          <div>
-            <span>-</span>
+          <h4 className="">
+            Availability:{" "}
+            <span className="font-semibold text-green-500">6 in stock</span>
+          </h4>
+          <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
+            <button className="text- active:scale-75 scale-100 duration-200">
+              <FiMinus />
+            </button>
             <span>1</span>
-            <span>+</span>
+            <button className="active:scale-75 scale-100 duration-200">
+              <FiPlus />
+            </button>
           </div>
-          <button>Add to cart</button>
-          <button>Buy Now </button>
-          <hr />
-          <div>
+          <div className="flex flex-col space-y-2 mb-6">
+            <button className="g-[#76c893] bg-[#0077b6] text-white py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200">
+              Add to cart
+            </button>
+            <button className="bg-[#FFB240] py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200">
+              Buy Now{" "}
+            </button>
+          </div>
+          <hr className="py-2.5"/>
+          <div className="text-[#666D74] space-y-2">
             <h6>
-              SKU: <span>MEGA-OGN-111-01</span>
+              <span className="font-semibold">SKU:</span> <span>MEGA-OGN-111-01</span>
             </h6>
             <h6>
-              Category:: <Link>Dairy & Eggs</Link>
+              <span className="font-semibold">Category:</span> <Link>Dairy & Eggs</Link>
             </h6>
             <h6>
-              Tags: : <Link>Home Food</Link>,<Link> Lettuce</Link>,{" "}
+              <span className="font-semibold">Tags:</span> <Link>Home Food</Link>,<Link> Lettuce</Link>,{" "}
               <Link>Onion</Link>,<Link>Vegetable </Link>
             </h6>
             <h6>
-              SKU: <span>MEGA-OGN-111-01</span>
-            </h6>
-            <h6>
-              Brand <Link>Betterfoods</Link>
+              <span className="font-semibold">Brand:</span> <Link>Betterfoods</Link>
             </h6>
           </div>
         </div>
