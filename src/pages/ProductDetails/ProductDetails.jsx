@@ -9,12 +9,36 @@ import {
 } from "react-icons/io";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import Slider from "react-slick";
+import NextArrow from "../../components/Arrow/NextArrow";
+import PrevArrow from "../../components/Arrow/PrevArrow";
+import SliderComponent from "./SliderComponent";
+import { useEffect, useState } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams();
   console.log(id);
 
   // TODO: add dynamic category
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3, 
+    slidesToScroll: 3, 
+    vertical: true, 
+    verticalSwiping: true,
+    nextArrow: <NextArrow isTrue={true}/>,
+    prevArrow: <PrevArrow isTrue={true}/>,
+  };
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("/flashSales.json")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+  console.log(data);
+  console.log("ijol;");
 
   return (
     <div className="container mx-auto">
@@ -63,7 +87,7 @@ const ProductDetails = () => {
           </div>
         </div>
         {/* product details */}
-        <div>
+        <div className="x-4">
           <div className="flex items-center justify-between text-xl font-bold ">
             <h4 className="text-red-600">$120.00</h4>
             <i>
@@ -96,50 +120,64 @@ const ProductDetails = () => {
               Buy Now{" "}
             </button>
           </div>
-          <hr className="py-2.5"/>
+          <hr className="py-2.5" />
           <div className="text-[#666D74] space-y-2">
             <h6>
-              <span className="font-semibold">SKU:</span> <span>MEGA-OGN-111-01</span>
+              <span className="font-semibold">SKU:</span>{" "}
+              <span>MEGA-OGN-111-01</span>
             </h6>
             <h6>
-              <span className="font-semibold">Category:</span> <Link>Dairy & Eggs</Link>
+              <span className="font-semibold">Category:</span>{" "}
+              <Link>Dairy & Eggs</Link>
             </h6>
             <h6>
-              <span className="font-semibold">Tags:</span> <Link>Home Food</Link>,<Link> Lettuce</Link>,{" "}
-              <Link>Onion</Link>,<Link>Vegetable </Link>
+              <span className="font-semibold">Tags:</span>{" "}
+              <Link>Home Food</Link>,<Link> Lettuce</Link>, <Link>Onion</Link>,
+              <Link>Vegetable </Link>
             </h6>
             <h6>
-              <span className="font-semibold">Brand:</span> <Link>Betterfoods</Link>
+              <span className="font-semibold">Brand:</span>{" "}
+              <Link>Betterfoods</Link>
             </h6>
           </div>
         </div>
         {/* relational product */}
-        <div>
-          <div>
-            <h4>Related products</h4>
-            <div>
-              <i>
-                <IoIosArrowForward />
-              </i>
-              <i>
-                <IoIosArrowBack />
-              </i>
-            </div>
+        <div className="pl-14">
+          <div className="flex items-center gap-8 mb-3.5">
+            <h4 className="text-[#212B36] font-semibold text-lg">
+              Related products
+            </h4>
           </div>
-          <hr />
-          {/* product  */}
           <div>
-            <div>
-              <img src="" alt="" />
-            </div>
-            <div>
-              <h4>Wholegood Organic</h4>
-              <h5>Fennel</h5>
-              <h6>450g</h6>
-              <div>
-                <del>$47.00</del>
-                <h4>$32.00</h4>
-              </div>
+            <div className="slider-container">
+            {/* <SliderComponent></SliderComponent> */}
+              <Slider {...settings}>
+                {data.map((item, idx) => (
+                  <div key={idx}>
+                  <div
+                    className="flex items-center gap-3 mt-2.5 border-t pt-2"
+                  >
+                    <div className="h-20 w-20">
+                      <img
+                        className="w-full h-full object-cover"
+                        src="https://i.ibb.co/4MP2YDc/Fresh-Organic-Tomatoes.webp" // Updated the image URL
+                        alt="Product Image"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4>Wholegood Organic</h4>
+                      <h6 className="text-sm text-[#666D74] font-semibold mb-1">
+                        450g
+                      </h6>
+                      <div className="flex items-center gap-3 font-bold">
+                        <del className="text-gray-500">$47.00</del>
+                        <h4 className="text-red-500">$32.00</h4>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </div>
