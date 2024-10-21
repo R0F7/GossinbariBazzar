@@ -1,5 +1,12 @@
 import { IoSearch } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import CustomPaging from "../../components/CustomPaging/CustomPaging";
+import { FaRegHeart } from "react-icons/fa";
+import {
+  IoIosArrowBack,
+  IoIosArrowDropleft,
+  IoIosArrowForward,
+} from "react-icons/io";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,6 +21,7 @@ const ProductDetails = () => {
         <span>/</span>
         <h4>Dairy & Eggs</h4>
       </div>
+      {/* title */}
       <div>
         <div>
           <div className="flex items-end gap-2  mb-3">
@@ -39,17 +47,88 @@ const ProductDetails = () => {
           </ul>
         </div>
       </div>
-      <div>
+      <div className="grid grid-cols-3 mt-8">
+        {/* product image */}
+        <div className="border">
+          <div className="flex items-center justify-between">
+            <button>Featured</button>
+            <i>
+              <IoSearch />
+            </i>
+          </div>
+          <div className="">
+            {/* <img src="https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp" alt="" /> */}
+            <CustomPaging></CustomPaging>
+          </div>
+        </div>
+        {/* product details */}
         <div>
           <div>
-            <img src="https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp" alt="" />
+            <h4>$120.00</h4>
+            <i>
+              <FaRegHeart />
+            </i>
           </div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl
+            tortor, lobortis non tortor sit amet, iaculis rhoncus ipsum. Fusce
+            ornare nunc maximus dui molestie.
+          </p>
           <div>
-            
+            <span>-</span>
+            <span>1</span>
+            <span>+</span>
           </div>
+          <button>Add to cart</button>
+          <button>Buy Now </button>
+          <hr />
           <div>
-            <button>Featured</button>
-            <i><IoSearch /></i>
+            <h6>
+              SKU: <span>MEGA-OGN-111-01</span>
+            </h6>
+            <h6>
+              Category:: <Link>Dairy & Eggs</Link>
+            </h6>
+            <h6>
+              Tags: : <Link>Home Food</Link>,<Link> Lettuce</Link>,{" "}
+              <Link>Onion</Link>,<Link>Vegetable </Link>
+            </h6>
+            <h6>
+              SKU: <span>MEGA-OGN-111-01</span>
+            </h6>
+            <h6>
+              Brand <Link>Betterfoods</Link>
+            </h6>
+          </div>
+        </div>
+        {/* relational product */}
+        <div>
+          <div>
+            <h4>Related products</h4>
+            <div>
+              <i>
+                <IoIosArrowForward />
+              </i>
+              <i>
+                <IoIosArrowBack />
+              </i>
+            </div>
+          </div>
+          <hr />
+          {/* product  */}
+          <div>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <div>
+              <h4>Wholegood Organic</h4>
+              <h5>Fennel</h5>
+              <h6>450g</h6>
+              <div>
+                <del>$47.00</del>
+                <h4>$32.00</h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
