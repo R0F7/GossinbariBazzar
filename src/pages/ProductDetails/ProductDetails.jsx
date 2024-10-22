@@ -180,10 +180,13 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="flex mt-20">
+      <hr className="my-10" />
+      <div className="flex ">
         <div className="w-1/2">
-          <h4 className="font-semibold">Frequently Bought Together</h4>
-          <div className="flex items-center gap-2 text-2xl w-28 h-28 mt-1 mb-2.5">
+          <h4 className="font-semibold text-lg text-[#666D74]">
+            Frequently Bought Together
+          </h4>
+          <div className="flex items-center gap-2 text-2xl w-28 h-28 mt-1 mb-6">
             <img
               src="https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg"
               className="w-full h-full"
@@ -202,28 +205,38 @@ const ProductDetails = () => {
               alt=""
             />
           </div>
-          <ul className="list-disc">
+          <ul className="list-disc text-[#666D74] space-y-2.5">
             <li>
-              <strong>Tescot durian :</strong>
+              <strong>Tescot durian : </strong>
               {/* <span>-</span> */}
-              <span>$60.00</span>
+              <span className="font-bold text-red-500">$60.00</span>
             </li>
             <li>
-              <strong>Tescot durian :</strong>
-              {/* <span>-</span> */}
-              <span>$60.00</span>
+              <strong>Tescot durian : </strong>
+              {/* <span className="text-xl font-bold"> - </span> */}
+              <span className="font-bold text-red-500">$60.00</span>
             </li>
             <li>
-              <strong>Tescot durian :</strong>
+              <strong>Tescot durian : </strong>
               {/* <span>-</span> */}
-              <span>$60.00</span>
+              <span className="font-bold text-red-500">$60.00</span>
             </li>
           </ul>
         </div>
         <div className="w-1/2">
-          <h6><strong>Price for all:</strong><span>$260.00</span></h6>
-          <button>Add all to Cart</button>
+          <h6 className="text-[#666D74] font-bold mb-2">
+            <strong>Price for all : </strong>
+            <span className="text-red-500">$260.00</span>
+          </h6>
+          <button className="bg-[#0077B6] text-white py-2.5 px-4 font-semibold text-sm rounded-md border-none shadow active:scale-95 scale-100 duration-200">
+            Add all to Cart
+          </button>
         </div>
+      </div>
+      <hr className="my-10" />
+      <div>
+        <h4 className="text-[#666D74] text-lg font-bold mb-2">Product Description</h4>
+        <p className="w-[65%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.</p>
       </div>
     </div>
   );
