@@ -1,7 +1,7 @@
-import { IoSearch } from "react-icons/io5";
+import { IoCameraSharp, IoSearch } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import CustomPaging from "../../components/CustomPaging/CustomPaging";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import {
   IoIosArrowBack,
   IoIosArrowDropleft,
@@ -14,6 +14,7 @@ import NextArrow from "../../components/Arrow/NextArrow";
 import PrevArrow from "../../components/Arrow/PrevArrow";
 import SliderComponent from "./SliderComponent";
 import { useEffect, useState } from "react";
+import { MdVerifiedUser } from "react-icons/md";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -181,6 +182,7 @@ const ProductDetails = () => {
         </div>
       </div>
       <hr className="my-10" />
+      {/* Frequently Bought Together */}
       <div className="flex ">
         <div className="w-1/2">
           <h4 className="font-semibold text-lg text-[#666D74]">
@@ -234,9 +236,297 @@ const ProductDetails = () => {
         </div>
       </div>
       <hr className="my-10" />
+      {/* product description  */}
       <div>
-        <h4 className="text-[#666D74] text-lg font-bold mb-2">Product Description</h4>
-        <p className="w-[65%]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.</p>
+        <h4 className="text-[#666D74] text-lg font-bold mb-2">
+          Product Description
+        </h4>
+        <p className="w-[65%] text-[#666D74] mb-2.5">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
+          pellentesque diam, at efficitur sem. Aliquam tempor euismod neque.
+          Vestibulum sed augue sed neque ultrices varius. Mauris sodales
+          fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi
+          volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit
+          amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque.
+          Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet
+          sed odio eget, tempus dignissim felis.
+        </p>
+        <p className="w-[65%] text-[#666D74]">
+          Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam
+          vel lacus at est vestibulum dictum. Pellentesque fringilla urna id
+          tellus aliquet ullamcorper.
+        </p>
+      </div>
+      {/* review for Tescot durian */}
+      <div className="my-10">
+        <div>
+          <h4 className="text-2xl font-bold text-[#666D74] mb-0.5">
+            1 review for Tescot durian{" "}
+          </h4>
+          <span className="flex items-center mb-4">
+            <strong className="text-yellow-500 font-black mr-2">4.00</strong>
+            <p className="text-[#666D74]">( Based on 1 review )</p>
+          </span>
+        </div>
+        <div>
+          <ul>
+            <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
+              <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+              </span>
+              <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
+                <div className="w-[100%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
+              </div>
+              <span className="col-span-1 font-bold">2</span>
+            </li>
+            <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
+              <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+              </span>
+              <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
+                <div className="w-[80%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
+              </div>
+              <span className="col-span-1 font-bold">2</span>
+            </li>
+            <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
+              <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+              </span>
+              <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
+                <div className="w-[60%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
+              </div>
+              <span className="col-span-1 font-bold">2</span>
+            </li>
+            <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
+              <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+              </span>
+              <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
+                <div className="w-[40%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
+              </div>
+              <span className="col-span-1 font-bold">2</span>
+            </li>
+            <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
+              <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
+                <i>
+                  <FaStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+                <i>
+                  <FaRegStar />
+                </i>
+              </span>
+              <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
+                <div className="w-[20%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
+              </div>
+              {/* reviewer count */}
+              <span className="col-span-1 font-bold">2</span>
+            </li>
+          </ul>
+        </div>
+        {/* buttons */}
+        <div className="my-10 flex gap-4">
+          <button className="bg-[#EEEEEE] text-[#666D74] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
+            <i>
+              <IoCameraSharp />
+            </i>
+            <h4> With images</h4>
+            <span>(0)</span>
+          </button>
+          <button className="bg-[#EEEEEE] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
+            <i>
+              <MdVerifiedUser />
+            </i>
+            <h4>Verified</h4>
+            <span>(0)</span>
+          </button>
+          <button className="bg-[#EEEEEE] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
+            <i>
+              <FaStar />
+            </i>
+            <h4> All stars</h4>
+            <span>(3)</span>
+          </button>
+        </div>
+        <hr className="" />
+        {/* reviews */}
+        <div>
+          <div className="border-b flex justify-between w-[55%] gap-4 py-6">
+            <div className="w-[90px]">
+              <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">
+                <img
+                  className="w-full h-full rounded-full p-"
+                  src="https://i.ibb.co.com/MZqW3Th/trend-01.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold -mb-1">admin</h4>
+              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <p className="mt-2 text-sm text-[#666D74]">
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using ‘Content
+                here, content here’, making it look like readable English
+              </p>
+            </div>
+            <div className="flex gap-1 text-[#FFB600]">
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+            </div>
+          </div>
+          <div className="border-b flex justify-between w-[55%] gap-4 py-6">
+            <div className="w-[90px]">
+              <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">
+                <img
+                  className="w-full h-full rounded-full p-"
+                  src="https://i.ibb.co.com/MZqW3Th/trend-01.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold -mb-1">admin</h4>
+              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <p className="mt-2 text-sm text-[#666D74]">
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using ‘Content
+                here, content here’, making it look like readable English
+              </p>
+            </div>
+            <div className="flex gap-1 text-[#FFB600]">
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+            </div>
+          </div>
+          <div className="border-b flex justify-between w-[55%] gap-4 py-6">
+            <div className="w-[90px]">
+              <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">
+                <img
+                  className="w-full h-full rounded-full p-"
+                  src="https://i.ibb.co.com/MZqW3Th/trend-01.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold -mb-1">admin</h4>
+              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <p className="mt-2 text-sm text-[#666D74]">
+                The point of using Lorem Ipsum is that it has a more-or-less
+                normal distribution of letters, as opposed to using ‘Content
+                here, content here’, making it look like readable English
+              </p>
+            </div>
+            <div className="flex gap-1 text-[#FFB600]">
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+              <i>
+                <FaStar></FaStar>
+              </i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
