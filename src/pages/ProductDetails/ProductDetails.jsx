@@ -23,12 +23,12 @@ const ProductDetails = () => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3, 
-    slidesToScroll: 3, 
-    vertical: true, 
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    vertical: true,
     verticalSwiping: true,
-    nextArrow: <NextArrow isTrue={true}/>,
-    prevArrow: <PrevArrow isTrue={true}/>,
+    nextArrow: <NextArrow isTrue={true} />,
+    prevArrow: <PrevArrow isTrue={true} />,
   };
 
   const [data, setData] = useState([]);
@@ -150,36 +150,79 @@ const ProductDetails = () => {
           </div>
           <div>
             <div className="slider-container">
-            {/* <SliderComponent></SliderComponent> */}
+              {/* <SliderComponent></SliderComponent> */}
               <Slider {...settings}>
                 {data.map((item, idx) => (
                   <div key={idx}>
-                  <div
-                    className="flex items-center gap-3 mt-2.5 border-t pt-2"
-                  >
-                    <div className="h-20 w-20">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="https://i.ibb.co/4MP2YDc/Fresh-Organic-Tomatoes.webp" // Updated the image URL
-                        alt="Product Image"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <h4>Wholegood Organic</h4>
-                      <h6 className="text-sm text-[#666D74] font-semibold mb-1">
-                        450g
-                      </h6>
-                      <div className="flex items-center gap-3 font-bold">
-                        <del className="text-gray-500">$47.00</del>
-                        <h4 className="text-red-500">$32.00</h4>
+                    <div className="flex items-center gap-3 mt-2.5 border-t pt-2">
+                      <div className="h-20 w-20">
+                        <img
+                          className="w-full h-full object-cover"
+                          src="https://i.ibb.co/4MP2YDc/Fresh-Organic-Tomatoes.webp" // Updated the image URL
+                          alt="Product Image"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <h4>Wholegood Organic</h4>
+                        <h6 className="text-sm text-[#666D74] font-semibold mb-1">
+                          450g
+                        </h6>
+                        <div className="flex items-center gap-3 font-bold">
+                          <del className="text-gray-500">$47.00</del>
+                          <h4 className="text-red-500">$32.00</h4>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   </div>
                 ))}
               </Slider>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex mt-20">
+        <div className="w-1/2">
+          <h4 className="font-semibold">Frequently Bought Together</h4>
+          <div className="flex items-center gap-2 text-2xl w-28 h-28 mt-1 mb-2.5">
+            <img
+              src="https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg"
+              className="w-full h-full"
+              alt=""
+            />
+            <span>+</span>
+            <img
+              src="https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg"
+              className="w-full h-full"
+              alt=""
+            />
+            <span>+</span>
+            <img
+              src="https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg"
+              className="w-full h-full"
+              alt=""
+            />
+          </div>
+          <ul className="list-disc">
+            <li>
+              <strong>Tescot durian :</strong>
+              {/* <span>-</span> */}
+              <span>$60.00</span>
+            </li>
+            <li>
+              <strong>Tescot durian :</strong>
+              {/* <span>-</span> */}
+              <span>$60.00</span>
+            </li>
+            <li>
+              <strong>Tescot durian :</strong>
+              {/* <span>-</span> */}
+              <span>$60.00</span>
+            </li>
+          </ul>
+        </div>
+        <div className="w-1/2">
+          <h6><strong>Price for all:</strong><span>$260.00</span></h6>
+          <button>Add all to Cart</button>
         </div>
       </div>
     </div>
