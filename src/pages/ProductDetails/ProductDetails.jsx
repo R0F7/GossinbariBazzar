@@ -12,12 +12,14 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import Slider from "react-slick";
 import NextArrow from "../../components/Arrow/NextArrow";
 import PrevArrow from "../../components/Arrow/PrevArrow";
-import SliderComponent from "./SliderComponent";
+// import SliderComponent from "./SliderComponent";
 import { useEffect, useState } from "react";
 import { MdVerifiedUser } from "react-icons/md";
+import Rating from "react-rating";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const [rating, setRating] = useState(0);
   console.log(id);
 
   // TODO: add dynamic category
@@ -268,6 +270,7 @@ const ProductDetails = () => {
             <p className="text-[#666D74]">( Based on 1 review )</p>
           </span>
         </div>
+        {/* rating */}
         <div>
           <ul>
             <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
@@ -427,7 +430,9 @@ const ProductDetails = () => {
             </div>
             <div>
               <h4 className="font-semibold -mb-1">admin</h4>
-              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <span className="text-xs text-[#B0B9C2] font-semibold">
+                August 26, 2021
+              </span>
               <p className="mt-2 text-sm text-[#666D74]">
                 The point of using Lorem Ipsum is that it has a more-or-less
                 normal distribution of letters, as opposed to using ‘Content
@@ -464,7 +469,9 @@ const ProductDetails = () => {
             </div>
             <div>
               <h4 className="font-semibold -mb-1">admin</h4>
-              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <span className="text-xs text-[#B0B9C2] font-semibold">
+                August 26, 2021
+              </span>
               <p className="mt-2 text-sm text-[#666D74]">
                 The point of using Lorem Ipsum is that it has a more-or-less
                 normal distribution of letters, as opposed to using ‘Content
@@ -501,7 +508,9 @@ const ProductDetails = () => {
             </div>
             <div>
               <h4 className="font-semibold -mb-1">admin</h4>
-              <span className="text-xs text-[#B0B9C2] font-semibold">August 26, 2021</span>
+              <span className="text-xs text-[#B0B9C2] font-semibold">
+                August 26, 2021
+              </span>
               <p className="mt-2 text-sm text-[#666D74]">
                 The point of using Lorem Ipsum is that it has a more-or-less
                 normal distribution of letters, as opposed to using ‘Content
@@ -527,6 +536,65 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="bg-[#F4F6F8] w-[55%]">
+        <form>
+          <div>
+            <h4>Add a review</h4>
+            <p>Review now to get coupon!</p>
+            <p>
+              Your email address will not be published. Required fields are
+              marked *
+            </p>
+          </div>
+          <div>
+            <h4>Your rating *</h4>
+            <div>
+              <Rating
+                style={{ maxWidth: 180 }}
+                value={rating}
+                onChange={setRating}
+                fullSymbol={<FaStar></FaStar>}
+                emptySymbol={<FaRegStar></FaRegStar>}
+                // fractions={2} // Allows half-star ratings
+                isRequired
+              />
+            </div>
+          </div>
+          <label htmlFor="review">
+            <h4>
+              Your review <span className="text-red-500">*</span>
+            </h4>
+            <textarea name="review" id="review"></textarea>
+          </label>
+          <label htmlFor="file">
+            <h4>
+              Choose pictures <span className="text-red-500">*</span>{" "}
+              <span>(maxsize: 2000kB, max files: 2)</span>
+            </h4>
+            <input type="file" name="file" id="file" />
+          </label>
+          <label htmlFor="name">
+            <h4>
+              Name <span className="text-red-500">*</span>
+            </h4>
+            <input type="text" name="name" id="name" />
+          </label>
+          <label htmlFor="email">
+            <h4>
+              Email <span className="text-red-500">*</span>
+            </h4>
+            <input type="email" name="email" id="email" />
+          </label>
+          <label htmlFor="checkbox">
+            <h4>
+              Save my name, email, and website in this browser for the next time
+              I comment.
+            </h4>
+            <input type="checkbox" name="checkbox" id="checkbox" />
+          </label>
+          <button type="">Submit</button>
+        </form>
       </div>
     </div>
   );
