@@ -537,63 +537,101 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#F4F6F8] w-[55%]">
-        <form>
-          <div>
-            <h4>Add a review</h4>
-            <p>Review now to get coupon!</p>
-            <p>
+      {/* review field */}
+      <div className="bg-[#F4F6F8] w-[55%] p-6 rounded-md shadow">
+        <form className="">
+          <div className="mb-4">
+            <h4 className="font-bold text-[17px] mb-0.5">Add a review</h4>
+            <p className="text-sm text-[#666D74] font-medium mb-0.5">
+              Review now to get coupon!
+            </p>
+            <p className="text-sm text-[#666D74]">
               Your email address will not be published. Required fields are
               marked *
             </p>
           </div>
-          <div>
-            <h4>Your rating *</h4>
+
+          <div className="mb-3">
+            <h4 className="font-bold mb-0.5">
+              Your rating <span className="text-red-500">*</span>
+            </h4>
             <div>
               <Rating
                 style={{ maxWidth: 180 }}
                 value={rating}
                 onChange={setRating}
-                fullSymbol={<FaStar></FaStar>}
-                emptySymbol={<FaRegStar></FaRegStar>}
+                fullSymbol={<FaStar className="mr-1"></FaStar>}
+                emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
                 // fractions={2} // Allows half-star ratings
                 isRequired
               />
             </div>
           </div>
-          <label htmlFor="review">
-            <h4>
-              Your review <span className="text-red-500">*</span>
-            </h4>
-            <textarea name="review" id="review"></textarea>
-          </label>
-          <label htmlFor="file">
-            <h4>
-              Choose pictures <span className="text-red-500">*</span>{" "}
-              <span>(maxsize: 2000kB, max files: 2)</span>
-            </h4>
-            <input type="file" name="file" id="file" />
-          </label>
-          <label htmlFor="name">
-            <h4>
-              Name <span className="text-red-500">*</span>
-            </h4>
-            <input type="text" name="name" id="name" />
-          </label>
-          <label htmlFor="email">
-            <h4>
-              Email <span className="text-red-500">*</span>
-            </h4>
-            <input type="email" name="email" id="email" />
-          </label>
-          <label htmlFor="checkbox">
-            <h4>
-              Save my name, email, and website in this browser for the next time
-              I comment.
-            </h4>
-            <input type="checkbox" name="checkbox" id="checkbox" />
-          </label>
-          <button type="">Submit</button>
+
+          <div className="">
+            <div className="grid grid-cols-2 gap-6 mb-3">
+              <label htmlFor="name">
+                <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
+                  Name <span className="text-red-500">*</span>
+                </h4>
+                <input
+                  className="w-full rounded-md py-2 px-2.5 text-sm font-semibold text-[#666D74] outline-none placeholder:text-xs"
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter Your Name"
+                />
+              </label>
+              <label htmlFor="email">
+                <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
+                  Email <span className="text-red-500">*</span>
+                </h4>
+                <input
+                  className="w-full rounded-md py-2 px-2.5 text-sm font-semibold text-[#666D74] outline-none placeholder:text-xs"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter Your Email"
+                />
+              </label>
+            </div>
+
+            <label htmlFor="file">
+              <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
+                Choose pictures <span className="text-red-500">*</span>{" "}
+                <span className="text-xs">(maxsize: 2000kB, max files: 2)</span>
+              </h4>
+              <input
+                className="mb-3 text-sm"
+                type="file"
+                name="file"
+                id="file"
+              />
+            </label>
+
+            <label htmlFor="review" className="">
+              <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
+                Your review <span className="text-red-500">*</span>
+              </h4>
+              <textarea
+                className="w-full h-[120px] rounded-md mb-2 outline-none py-1 px-2 text-[#666D74]"
+                name="review"
+                id="review"
+              ></textarea>
+            </label>
+          
+            <label
+              htmlFor="checkbox"
+              className="flex items-center gap-1.5 text-[#666D74] text-xs font-bold mb-3"
+            >
+              <input className="" type="checkbox" name="checkbox" id="checkbox" />
+              <h4>
+                Save my name, email, and website in this browser for the next
+                time I comment.
+              </h4>
+            </label>
+          </div>
+          <button type="submit" className="bg-[#2E8DD8] text-white px-10 py-2 ext-sm font-bold rounded-md active:scale-95 scale-100 duration-200">Submit</button>
         </form>
       </div>
     </div>
