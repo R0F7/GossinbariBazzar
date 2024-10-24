@@ -4,7 +4,7 @@ import { IoIosArrowUp } from "react-icons/io";
 
 const NextArrow = ({onClick, isTrue}) => {
   // const { onClick } = props;
-  console.log(isTrue);
+  // console.log(isTrue);
   
   return (
     <div
