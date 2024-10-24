@@ -77,7 +77,7 @@ const DailyFlashSales = () => {
     slidesToShow: 5,
     slidesToScroll: 5,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    prevArrow: <PrevArrow isTrue={false}/>,
   };
 
   return (
