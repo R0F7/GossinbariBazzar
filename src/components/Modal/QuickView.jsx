@@ -99,16 +99,16 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                 >
                   <div>
                     <div>
-                      <div className="flex items-end gap-2">
-                        <h1>{title}</h1>
-                        <h6>{unit}</h6>
+                      <div className="flex items-end gap-1.5 mb-2">
+                        <h1 className="text-2xl font-semibold">{title}</h1>
+                        <h6 className="text-[13px] font-semibold">{'( '}{unit}{' )'}</h6>
                       </div>
-                      <div>
+                      <div className="flex items-center mb-6 text-sm font-semibold space-x-2">
                         <Rating
                           style={{ maxWidth: 180 }}
                           initialRating={rating}
-                          fullSymbol={<FaStar className="mr-1"></FaStar>}
-                          emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
+                          fullSymbol={<FaStar className="mr-0.5 text-xs"></FaStar>}
+                          emptySymbol={<FaRegStar className="mr-0.5 text-xs"></FaRegStar>}
                           readonly
                         />
                         <h6>3 customer reviews</h6>
@@ -120,7 +120,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                     </div>
                     <div className="flex gap-8">
                       {/* image */}
-                      <div className="w-1/2 h-full">
+                      <div className="w-1/2 h-full border p-8">
                         <Slider {...settings}>
                           <div className="h-[250px] w-[600px] bg-slate-500">
                             <h3>1</h3>
