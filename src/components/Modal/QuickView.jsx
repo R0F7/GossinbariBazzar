@@ -60,7 +60,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <NextArrow isTrue={true}/>,
+    nextArrow: <NextArrow isQuickView={true} isTrue={false}/>,
     prevArrow: <PrevArrow isTrue={true} />,
   };
 
@@ -95,7 +95,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
               >
                 <DialogPanel
                   onClick={(e) => e.stopPropagation()} // Prevent closeDialog on inner content clicks
-                  className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
                 >
                   <div>
                     <div>
@@ -118,20 +118,20 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         </h6>
                       </div>
                     </div>
-                    <div>
+                    <div className="flex gap-8">
                       {/* image */}
-                      <div>
+                      <div className="w-1/2 h-full">
                         <Slider {...settings}>
-                          <div>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
                             <h3>1</h3>
                           </div>
-                          <div>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
                             <h3>2</h3>
                           </div>
-                          <div>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
                             <h3>3</h3>
                           </div>
-                          <div>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
                             <h3>4</h3>
                           </div>
                           <div>
@@ -152,7 +152,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         </Slider>
                       </div>
                       {/* details */}
-                      <div>
+                      <div className="w-1/2 h-full border pb-10">
                         <div>
                           <del>${discounted_price}</del>
                           <h3>${price}</h3>
