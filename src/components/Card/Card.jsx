@@ -24,21 +24,39 @@ const Card = ({ item, progress_sold }) => {
     tags,
     discount_percent,
   } = item;
-  //   const check= Math.round(rating * 2) / 2;  
+  //   const check= Math.round(rating * 2) / 2;
 
-  const [isModalOpen, setIsModalOpen] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const closeDialog = () => setIsDialogOpen(false);
-  
-  const handleQuickView = (e) => {
+  const openDialog = (e) => {
     // Prevent the click from bubbling up to the parent Link
     // e.stopPropagation();
-     setIsDialogOpen(true);
     e.preventDefault();
-    setIsModalOpen(isModalOpen + 1);
+    setIsDialogOpen(true);
+    console.log('openDialog are clicked');
   };
-  console.log(isModalOpen);
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+    console.log("closeDialog clicked");
+  };
+
+  console.log(isDialogOpen);
+
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // const openDialog = (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   setIsDialogOpen(true); 
+  //   console.log("openDialog clicked");
+  // };
+
+  // const closeDialog = () => {
+  //   setIsDialogOpen(false);
+  //   console.log("closeDialog clicked");
+  // };
+
 
   return (
     <Link to={`/product/${_id}`}>
@@ -59,18 +77,25 @@ const Card = ({ item, progress_sold }) => {
             </div>
             <div
               className="flex flex-col items-center border-l w-1/2 h-full py-2.5"
-              onClick={handleQuickView}
+              onClick={openDialog}
+              // onClick={(e) => openDialog(e,'R0F7')}
             >
               <i>
                 <FiEye />
               </i>
               <h4>Quickview</h4>
-              <QuickView
+              {/* <QuickView
                 isOpen={isDialogOpen}
                 onClose={closeDialog}
                 title="Deactivate account"
                 description="This will permanently deactivate your account"
                 message="Are you sure you want to deactivate your account? All of your data will be permanently removed."
+              /> */}
+              
+              <QuickView
+                isDialogOpen={isDialogOpen}
+                closeDialog={closeDialog}
+                item={item}
               />
             </div>
           </div>
@@ -99,13 +124,13 @@ const Card = ({ item, progress_sold }) => {
             {unit}
           </h6>
           <div className="flex items-center gap-4 T= text-gray-500">
-             <Rating
-                style={{ maxWidth: 180 }}
-                initialRating={rating}
-                fullSymbol={<FaStar className="mr-1"></FaStar>}
-                emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
-                readonly
-              />
+            <Rating
+              style={{ maxWidth: 180 }}
+              initialRating={rating}
+              fullSymbol={<FaStar className="mr-1"></FaStar>}
+              emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
+              readonly
+            />
             <h6>0</h6>
           </div>
           <div className="flex items-center gap-5 mb-3.5">

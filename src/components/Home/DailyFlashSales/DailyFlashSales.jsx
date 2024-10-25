@@ -32,44 +32,44 @@ const DailyFlashSales = () => {
 
   // console.log('rerender check');
 
-  useEffect(() => {
-    const countdownDate = new Date("Dec 31, 2024 23:59:59").getTime();
+  // useEffect(() => {
+  //   const countdownDate = new Date("Dec 31, 2024 23:59:59").getTime();
 
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const timeDifference = countdownDate - now;
+  //   const updateCountdown = () => {
+  //     const now = new Date().getTime();
+  //     const timeDifference = countdownDate - now;
 
-      if (timeDifference < 0) {
-        clearInterval(countdownInterval);
-        return;
-      }
+  //     if (timeDifference < 0) {
+  //       clearInterval(countdownInterval);
+  //       return;
+  //     }
 
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+  //     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  //     const hours = Math.floor(
+  //       (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //     );
+  //     const minutes = Math.floor(
+  //       (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+  //     );
+  //     const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      setTime((prevState) => {
-        if (
-          prevState.days !== days ||
-          prevState.hours !== hours ||
-          prevState.minutes !== minutes ||
-          prevState.seconds !== seconds
-        ) {
-          return { days, hours, minutes, seconds };
-        }
-        return prevState;
-      });
-    };
+  //     setTime((prevState) => {
+  //       if (
+  //         prevState.days !== days ||
+  //         prevState.hours !== hours ||
+  //         prevState.minutes !== minutes ||
+  //         prevState.seconds !== seconds
+  //       ) {
+  //         return { days, hours, minutes, seconds };
+  //       }
+  //       return prevState;
+  //     });
+  //   };
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
+  //   const countdownInterval = setInterval(updateCountdown, 1000);
 
-    return () => clearInterval(countdownInterval);
-  }, []);
+  //   return () => clearInterval(countdownInterval);
+  // }, []);
 
   const settings = {
     infinite: false,
