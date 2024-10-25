@@ -13,6 +13,7 @@ import Rating from "react-rating";
 import Slider from "react-slick";
 import NextArrow from "../Arrow/NextArrow";
 import PrevArrow from "../Arrow/PrevArrow";
+import { RxCross2 } from "react-icons/rx";
 
 // const QuickView = ({ isOpen, onClose, title, description, message }) => {
 //   return (
@@ -39,6 +40,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
   const {
     _id,
     image,
+    additionalImages,
     sold_by,
     total_product,
     sold_product,
@@ -55,12 +57,12 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
   } = item;
 
   const settings = {
-    dots: true,
+    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <NextArrow isQuickView={true} isTrue={false}/>,
+    nextArrow: <NextArrow isQuickView={true} isTrue={false} />,
     prevArrow: <PrevArrow isTrue={true} />,
   };
 
@@ -78,7 +80,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-35" />
           </TransitionChild>
 
           {/* Centered Modal Content */}
@@ -95,20 +97,28 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
               >
                 <DialogPanel
                   onClick={(e) => e.stopPropagation()} // Prevent closeDialog on inner content clicks
-                  className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                  className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all"
                 >
                   <div>
                     <div>
                       <div className="flex items-end gap-1.5 mb-2">
                         <h1 className="text-2xl font-semibold">{title}</h1>
-                        <h6 className="text-[13px] font-semibold">{'( '}{unit}{' )'}</h6>
+                        <h6 className="text-[13px] font-semibold">
+                          {"( "}
+                          {unit}
+                          {" )"}
+                        </h6>
                       </div>
                       <div className="flex items-center mb-6 text-sm font-semibold space-x-2">
                         <Rating
                           style={{ maxWidth: 180 }}
                           initialRating={rating}
-                          fullSymbol={<FaStar className="mr-0.5 text-xs"></FaStar>}
-                          emptySymbol={<FaRegStar className="mr-0.5 text-xs"></FaRegStar>}
+                          fullSymbol={
+                            <FaStar className="mr-0.5 text-xs"></FaStar>
+                          }
+                          emptySymbol={
+                            <FaRegStar className="mr-0.5 text-xs"></FaRegStar>
+                          }
                           readonly
                         />
                         <h6>3 customer reviews</h6>
@@ -121,54 +131,60 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                     <div className="flex gap-8">
                       {/* image */}
                       <div className="w-1/2 h-full border p-8">
-                        <Slider {...settings}>
+                        <Slider {...settings} className=" p-">
                           <div className="h-[250px] w-[600px] bg-slate-500">
-                            <h3>1</h3>
-                          </div>
-                          <div className="h-[250px] w-[600px] bg-slate-500">
-                            <h3>2</h3>
-                          </div>
-                          <div className="h-[250px] w-[600px] bg-slate-500">
-                            <h3>3</h3>
+                            <img
+                              className="w-full h-full"
+                              src={additionalImages[0]}
+                              alt=""
+                            />
                           </div>
                           <div className="h-[250px] w-[600px] bg-slate-500">
-                            <h3>4</h3>
+                            <img
+                              className="w-full h-full"
+                              src={additionalImages[1]}
+                              alt=""
+                            />
                           </div>
-                          <div>
-                            <h3>5</h3>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
+                            <img
+                              className="w-full h-full"
+                              src={additionalImages[2]}
+                              alt=""
+                            />
                           </div>
-                          <div>
-                            <h3>6</h3>
-                          </div>
-                          <div>
-                            <h3>7</h3>
-                          </div>
-                          <div>
-                            <h3>8</h3>
-                          </div>
-                          <div>
-                            <h3>9</h3>
+                          <div className="h-[250px] w-[600px] bg-slate-500">
+                            <img
+                              className="w-full h-full"
+                              src={additionalImages[3]}
+                              alt=""
+                            />
                           </div>
                         </Slider>
                       </div>
                       {/* details */}
-                      <div className="w-1/2 h-full border pb-10">
-                        <div>
-                          <del>${discounted_price}</del>
-                          <h3>${price}</h3>
+                      <div className="w-1/2 h-full pb-10">
+                        <div className="flex items-center gap-2.5 font-semibold text-xl ">
+                          <del className="text-gray-500">
+                            ${discounted_price}
+                          </del>
+                          <h3 className="text-red-500">${price}</h3>
                         </div>
-                        {/* TODO:add dynamic details */}
-                        <p>
+                        {/* TODO:add dynamic short description */}
+                        <p className="my-2.5 font-light text-gray-700">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. In nisl tortor, lobortis non tortor sit amet,
                           iaculis rhoncus ipsum. Fusce ornare nunc maximus dui
                           molestie.
                         </p>
-                        <h6>
-                          Availability: <span>10 in stock</span>
+                        <h6 className="text-sm font-semibold text-gray-500">
+                          Availability :{" "}
+                          <span className="text-base text-green-500">
+                            10 in stock
+                          </span>
                         </h6>
 
-                        <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
+                        <div className="border w-[110px] flex items-center justify-around py-1.5 text-sm font-bold rounded-md shadow my-3">
                           <button className="text- active:scale-75 scale-100 duration-200">
                             <FiMinus />
                           </button>
@@ -178,20 +194,31 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                           </button>
                         </div>
 
-                        <button>Add To Cart</button>
-                        <button>Buy Now</button>
+                        <div className="flex flex-col gap-2.5">
+                          <button className="g-[#76c893] bg-[#0077b6] text-white py-2 rounded-lg text-sm font-semibold -[65%] shadow active:scale-95 scale-100 duration-200 ">
+                            Add to cart
+                          </button>
+                          <button className="bg-[#FFB240] py-2 rounded-lg text-sm font-semibold -[65%] shadow active:scale-95 scale-100 duration-200 ">
+                            Buy Now
+                          </button>
+                        </div>
                       </div>
+                    </div>
+                    <div className="absolute top-4 right-4 border p-0.5 rounded-full shadow text-red-500 cursor-pointer hover:scale-[1.18] hover:shadow-red-200 hover:shadow-md hover:border-transparent transition duration-200"
+                    onClick={closeDialog}
+                    >
+                        <i><RxCross2 /></i>
                     </div>
                   </div>
 
-                  <div className="mt-4 flex justify-end space-x-2">
+                  {/* <div className="mt-4 flex justify-end space-x-2">
                     <button onClick={closeDialog} className="btn-secondary">
                       Cancel
                     </button>
                     <button onClick={closeDialog} className="btn-primary">
                       Confirm
                     </button>
-                  </div>
+                  </div> */}
                 </DialogPanel>
               </TransitionChild>
             </div>

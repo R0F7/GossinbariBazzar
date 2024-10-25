@@ -2,6 +2,12 @@
     {
       "_id": 1,
       "image": "https://i.ibb.co.com/C26gzPN/Dell-Inspiron-Laptop.jpg",
+        "additionalImages": [
+        "https://i.ibb.co.com/C26gzPN/Dell-Inspiron-Laptop.jpg",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "TechWorld",
       "total_product": 100,
       "sold_product": 45,
@@ -19,6 +25,12 @@
     {
       "_id": 2,
       "image": "https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg",
+        "additionalImages": [
+        "https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "FashionHub",
       "total_product": 200,
       "sold_product": 150,
@@ -36,6 +48,12 @@
     {
       "_id": 3,
       "image": "https://i.ibb.co.com/5R7qsYT/Diamond-Engagement-Ring.webp",
+        "additionalImages": [
+        "https://i.ibb.co.com/5R7qsYT/Diamond-Engagement-Ring.webp",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "JewelsZone",
       "total_product": 50,
       "sold_product": 20,
@@ -53,6 +71,12 @@
     {
       "_id": 4,
       "image": "https://i.ibb.co.com/JsPN8BL/Modern-Sofa-Set.jpg",
+        "additionalImages": [
+        "https://i.ibb.co.com/JsPN8BL/Modern-Sofa-Set.jpg",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "HomeEssentials",
       "total_product": 30,
       "sold_product": 10,
@@ -70,6 +94,12 @@
     {
       "_id": 5,
       "image": "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp",
+        "additionalImages": [
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "FreshMarket",
       "total_product": 500,
       "sold_product": 350,
@@ -87,6 +117,12 @@
     {
       "_id": 6,
       "image": "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "additionalImages": [
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "MeatMasters",
       "total_product": 100,
       "sold_product": 75,
@@ -104,6 +140,12 @@
     {
       "_id": 7,
       "image": "https://i.ibb.co.com/thwRJ0P/Running-Sneakers.jpg",
+        "additionalImages": [
+        "https://i.ibb.co.com/thwRJ0P/Running-Sneakers.jpg",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "FootwearWorld",
       "total_product": 150,
       "sold_product": 95,
@@ -121,6 +163,12 @@
     {
       "_id": 8,
       "image": "https://i.ibb.co.com/QQSZKPb/Hydrating-Moisturizer.png",
+        "additionalImages": [
+        "https://i.ibb.co.com/QQSZKPb/Hydrating-Moisturizer.png",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "GlowCare",
       "total_product": 300,
       "sold_product": 250,
@@ -138,6 +186,12 @@
     {
       "_id": 9,
       "image": "https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp",
+      "additionalImages": [
+        "https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "SportsCenter",
       "total_product": 120,
       "sold_product": 90,
@@ -155,6 +209,12 @@
     {
       "_id": 10,
       "image": "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+      "additionalImages": [
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
+        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
+        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+      ],
       "sold_by": "FreshFruits",
       "total_product": 600,
       "sold_product": 500,

@@ -128,7 +128,7 @@ const CustomPaging = () => {
         {imageList.map((image, index) => (
           <div key={index}>
             <img
-              className="w-[300px]" // Adjust the main slider image size as necessary
+              className="w-[300px]"
               src={image.src}
               alt={image.alt}
             />
