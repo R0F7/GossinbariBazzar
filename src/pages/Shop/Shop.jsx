@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card";
 import { useEffect, useState } from "react";
 
 const Shop = () => {
+  const [subCategories, setSubCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
   const { data: products = [] } = useQuery({
@@ -18,35 +19,29 @@ const Shop = () => {
   });
   //   console.log(categories);
 
-  //old way
-  //   useEffect(() => {
-  //     const allTags = [];
+  // old way
+  useEffect(() => {
+    const allSubCategories = [];
 
-  //     for (const product of products) {
-  //       for (const tag of product.tags) {
-  //         allTags.push(tag);
-  //         // remove duplicate
-  //         //   if (!tags.includes(tag)) {
-  //         //     tags.push(tag);
-  //         //   }
-  //       }
-  //     }
+    for (const subCategory of products) {
+      // remove duplicate
+      if (!allSubCategories.includes(subCategory.sub_category)) {
+        allSubCategories.push(subCategory.sub_category);
+      }
+    }
 
-  //     //remove duplicate (2)
-  //     const uniqueTags = [...new Set(allTags)];
-  //     // console.log(uniqueTags);
-  //     setTags(uniqueTags);
+    setSubCategories(allSubCategories);
+  }, [products]);
+//   console.log(subCategories);
 
-  //     // console.log(allTags);
-  //   }, [products]);
-
-  //   new way
+  //  new way
   useEffect(() => {
     const allTags = products.flatMap((product) => product.tags);
+    // remove duplicate
     const uniqueTags = [...new Set(allTags)];
     setTags(uniqueTags);
   }, [products]);
-  console.log(tags);
+  //   console.log(tags);
 
   return (
     <div className="container mx-auto">
@@ -107,14 +102,34 @@ const Shop = () => {
 
           <hr className="my-6" />
 
+        <div>
+            <h4 className="font-semibold mb-2 text-lg">Sub Categories</h4>
+           <div className="space-y-2 space-x-2 mr-2">
+           {subCategories.map((sCat, idx) => (
+                <h4
+                  key={idx}
+                  className="border inline-block rounded-full text-sm py-0.5 px-3"
+                >
+                  {sCat}
+                </h4>
+              ))}
+           </div>
+        </div>
+
+          <hr className="my-6" />
+
+          {/* tags */}
           <div>
             <h4 className="font-semibold mb-2 text-lg">Tags</h4>
             <div className="space-y-2 space-x-2 mr-2">
-                {
-                    tags.map((tag,idx) => (
-                        <h4 key={idx} className="border inline-block rounded-full text-sm py-0.5 px-3">{tag}</h4>
-                    ))
-                }
+              {tags.map((tag, idx) => (
+                <h4
+                  key={idx}
+                  className="border inline-block rounded-full text-sm py-0.5 px-3"
+                >
+                  {tag}
+                </h4>
+              ))}
             </div>
           </div>
         </div>
