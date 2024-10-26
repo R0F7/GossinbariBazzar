@@ -41,7 +41,7 @@ const Card = ({ item, progress_sold }) => {
     console.log("closeDialog clicked");
   };
 
-  console.log(isDialogOpen);
+  // console.log(isDialogOpen);
 
   // const [isDialogOpen, setIsDialogOpen] = useState(false);
 

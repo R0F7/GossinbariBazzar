@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { IoIosArrowBack } from "react-icons/io";
 import Card from "../../components/Card/Card";
+import { useEffect, useState } from "react";
 
 const Shop = () => {
+  const [tags, setTags] = useState([]);
+
   const { data: products = [] } = useQuery({
     queryKey: ["shopProducts"],
     queryFn: () => fetch("./flashSales.json").then((res) => res.json()),
@@ -14,6 +17,36 @@ const Shop = () => {
     queryFn: () => fetch("./categories.json").then((res) => res.json()),
   });
   //   console.log(categories);
+
+  //old way
+  //   useEffect(() => {
+  //     const allTags = [];
+
+  //     for (const product of products) {
+  //       for (const tag of product.tags) {
+  //         allTags.push(tag);
+  //         // remove duplicate
+  //         //   if (!tags.includes(tag)) {
+  //         //     tags.push(tag);
+  //         //   }
+  //       }
+  //     }
+
+  //     //remove duplicate (2)
+  //     const uniqueTags = [...new Set(allTags)];
+  //     // console.log(uniqueTags);
+  //     setTags(uniqueTags);
+
+  //     // console.log(allTags);
+  //   }, [products]);
+
+  //   new way
+  useEffect(() => {
+    const allTags = products.flatMap((product) => product.tags);
+    const uniqueTags = [...new Set(allTags)];
+    setTags(uniqueTags);
+  }, [products]);
+  console.log(tags);
 
   return (
     <div className="container mx-auto">
@@ -55,7 +88,7 @@ const Shop = () => {
 
           {/* price */}
           <div>
-            <h4 className="font-semibold mb-2">Price</h4>
+            <h4 className="font-semibold mb-2 text-lg">Price</h4>
             <input
               type="range"
               name="range"
@@ -64,8 +97,25 @@ const Shop = () => {
               max="120"
               step="10"
             />
-            <h4>Price : <span className="font-semibold"> $20 - $120</span></h4>
-            <button className="mt-3 py-1.5 px-6 bg-[#2E8DD8] text-sm font-bold text-white rounded-md active:scale-90 scale-100 transform duration-200 ">Filter</button>
+            <h4>
+              Price : <span className="font-semibold"> $20 - $120</span>
+            </h4>
+            <button className="mt-3 py-1.5 px-6 bg-[#2E8DD8] text-sm font-bold text-white rounded-md active:scale-90 scale-100 transform duration-200 ">
+              Filter
+            </button>
+          </div>
+
+          <hr className="my-6" />
+
+          <div>
+            <h4 className="font-semibold mb-2 text-lg">Tags</h4>
+            <div className="space-y-2 space-x-2 mr-2">
+                {
+                    tags.map((tag,idx) => (
+                        <h4 key={idx} className="border inline-block rounded-full text-sm py-0.5 px-3">{tag}</h4>
+                    ))
+                }
+            </div>
           </div>
         </div>
 
