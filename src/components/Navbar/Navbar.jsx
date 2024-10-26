@@ -8,6 +8,7 @@ import { FcMenu } from "react-icons/fc";
 import { CgMenuGridO, CgSearch } from "react-icons/cg";
 import { RxCross2 } from "react-icons/rx";
 import { GiFruitBowl } from "react-icons/gi";
+import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
@@ -16,6 +17,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // console.log(isOpen);
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => fetch("./categories.json").then((res) => res.json()),
+  });
+  // console.log(categories);
 
   return (
     <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
@@ -39,9 +45,11 @@ const Navbar = () => {
           <div className="flex items-center gap-[90px]">
             {/* name +/- logo */}
             <div className="flex items-center gap-3">
-              <i className="text-3xl ext-[#4B0082] cursor-pointer hover:bg-[#cccccc] hover:text-white p-2 rounded-full" onClick={()=> setIsOpen(!isOpen)}>
-                {!isOpen ? <FcMenu /> :
-                <CgMenuGridO />}
+              <i
+                className="text-3xl ext-[#4B0082] cursor-pointer hover:bg-[#cccccc] hover:text-white p-2 rounded-full"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {!isOpen ? <FcMenu /> : <CgMenuGridO />}
               </i>
               <Link to="/">
                 <div className="flex items-center gap-1">
@@ -115,22 +123,26 @@ const Navbar = () => {
                   <button className="join-us-btn">Join US</button>
                 </Link>
               )}
-              {toggle && (
-                <div className="bg-[#2E8DD8] bg-opacity absolute top-14 right-0 w-[220px] flex flex-col items-start justify-start rounded-md py-2 text-sm shadow-lg">
-                  <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
-                    Update Profile
-                  </button>
-                  <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
-                    Dashboard
-                  </button>
-                  <button
-                    onClick={logOut}
-                    className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
+              {/* {toggle && ( */}
+              <div
+                className={`bg-[#2E8DD8] bg-opacity absolute top-14 right-0 w-[220px] flex flex-col items-start justify-start rounded-md py-2 text-sm shadow-lg duration-500 ${
+                  toggle ? "scale-x-100 origin-right" : "scale-x-0 origin-right"
+                }`}
+              >
+                <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                  Update Profile
+                </button>
+                <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                  Dashboard
+                </button>
+                <button
+                  onClick={logOut}
+                  className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
+                >
+                  Logout
+                </button>
+              </div>
+              {/* // )} */}
             </div>
           </div>
         </div>
@@ -222,6 +234,7 @@ const Navbar = () => {
         </div>
         {/* </div> */}
       </div>
+      {/* nav bottom color div */}
       <div className="grid grid-cols-8">
         <div className="h-1 bg-[#00AB55]"></div>
         <div className="h-1 bg-[#FFB240]"></div>
@@ -232,38 +245,32 @@ const Navbar = () => {
         <div className="h-1 bg-[#F11D1D]"></div>
       </div>
       {/* side menu */}
-      <aside className={`w-[14%] bg-[#eeeeeecc] fixed top-0 left-0 h-screen z-50 side-menu ${isOpen ? '-translate-x-0' :'-translate-x-72'} transform transition-all duration-300 ease-in-out`}>
+      <aside
+        className={`w-[14%] bg-[#eeeeeecc] fixed top-0 left-0 h-screen z-50 side-menu ${
+          isOpen ? "-translate-x-0" : "-translate-x-72"
+        } transform transition-all duration-300 ease-in-out`}
+      >
         <h4 className="flex items-center justify-between px-4 py-2 text-lg font-bold my-4 b-5 text-[#333333]">
           All categories{" "}
-          <i onClick={()=>setIsOpen(false)} className="cursor-pointer order hover:bg-[#cccccc] hover:text-white shadow p-2 rounded-full">
+          <i
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer order hover:bg-[#cccccc] hover:text-white shadow p-2 rounded-full"
+          >
             <RxCross2 />
           </i>
         </h4>
         <ul className="space-y- text-[#333333] font-bold">
-          <li className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
-            <i>
-              <GiFruitBowl />
-            </i>
-            <h4>Fruit</h4>
-          </li>
-          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
-            <i>
-              <GiFruitBowl />
-            </i>
-            <h4>Fruit</h4>
-          </li>
-          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
-            <i>
-              <GiFruitBowl />
-            </i>
-            <h4>Fruit</h4>
-          </li>
-          <li className="flex items-center gap-3 border-b border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]">
-            <i>
-              <GiFruitBowl />
-            </i>
-            <h4>Fruit</h4>
-          </li>
+          {categories.map((category, idx) => (
+            <li
+              key={idx}
+              className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]"
+            >
+             <div className="w-7 h-7">
+              <img className="w-full h-full" src={category?.icon} alt="" />
+             </div>
+              <h4>{category?.categoryName}</h4>
+            </li>
+          ))}
         </ul>
       </aside>
     </nav>

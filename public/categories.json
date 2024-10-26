@@ -1,42 +1,52 @@
 [
     {
       "categoryName": "Electronics",
-      "categoryImage": "https://i.ibb.co.com/dJLpF4J/Electronics.jpg"
+      "categoryImage": "https://i.ibb.co.com/dJLpF4J/Electronics.jpg",
+      "icon":"https://i.ibb.co.com/wRF13L3/settings.png"
     },
     {
       "categoryName": "Clothing",
-      "categoryImage": "https://i.ibb.co.com/6JbMGdG/Clothing.jpg"
+      "categoryImage": "https://i.ibb.co.com/6JbMGdG/Clothing.jpg",
+      "icon":"https://i.ibb.co.com/0mpJt2Q/Clothing-icon.png"
     },
     {
       "categoryName": "Jewelry",
-      "categoryImage": "https://i.ibb.co.com/wrbM15z/Jewelry.webp"
+      "categoryImage": "https://i.ibb.co.com/wrbM15z/Jewelry.webp",
+      "icon":"https://i.ibb.co.com/zfCFwkg/Jewelry-icon.png"
     },
     {
       "categoryName": "Furniture & Home Decor",
-      "categoryImage": "https://i.ibb.co.com/sV42HJ2/Furniture.webp"
+      "categoryImage": "https://i.ibb.co.com/sV42HJ2/Furniture.webp",
+      "icon":"https://i.ibb.co.com/RQQtDPC/Furniture-Home-Decor-icon.png"
     },
     {
       "categoryName": "Vegetables",
-      "categoryImage": "https://i.ibb.co.com/M6SkmJg/vegetables.webp"
+      "categoryImage": "https://i.ibb.co.com/M6SkmJg/vegetables.webp",
+      "icon":"https://i.ibb.co.com/WG4WNmb/vegetable.png"
     },
     {
       "categoryName": "Meat",
-      "categoryImage": "https://i.ibb.co.com/Yb5h120/Meat.png"
+      "categoryImage": "https://i.ibb.co.com/Yb5h120/Meat.png",
+      "icon":"https://i.ibb.co.com/94Cf1N5/butchering.png"
     },
     {
       "categoryName": "Footwear",
-      "categoryImage": "https://i.ibb.co.com/dPXYTDC/Footwear.png"
+      "categoryImage": "https://i.ibb.co.com/dPXYTDC/Footwear.png",
+      "icon":"https://i.ibb.co.com/cF9zH3F/footwear.png"
     },
     {
       "categoryName": "Beauty & Personal Care",
-      "categoryImage": "https://i.ibb.co.com/BzHzgm5/Beauty-Personal-Care.jpg"
+      "categoryImage": "https://i.ibb.co.com/BzHzgm5/Beauty-Personal-Care.jpg",
+      "icon":"https://i.ibb.co.com/nsBZG1d/makeup-pouch.png"
     },
     {
       "categoryName": "Sports",
-      "categoryImage": "https://i.ibb.co.com/Y3w9Rt1/sport.jpg"
+      "categoryImage": "https://i.ibb.co.com/Y3w9Rt1/sport.jpg",
+      "icon":"https://i.ibb.co.com/37j4v2p/physical.png"
     },
     {
       "categoryName": "Fruits",
-      "categoryImage": "https://i.ibb.co.com/GtHZnt0/Fruits.webp"
+      "categoryImage": "https://i.ibb.co.com/GtHZnt0/Fruits.webp",
+      "icon":"https://i.ibb.co.com/4gLsnHb/fruits.png"
     }
   ]

@@ -69,14 +69,14 @@ const Card = ({ item, progress_sold }) => {
             </div>
           )}
           <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu">
-            <div className="flex flex-col items-center w-1/2 py-2.5">
+            <div className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30">
               <i>
                 <FaRegHeart />
               </i>
               <h4>Wishlist</h4>
             </div>
             <div
-              className="flex flex-col items-center border-l w-1/2 h-full py-2.5"
+              className="flex flex-col items-center border-l w-1/2 h-full py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
               onClick={openDialog}
               // onClick={(e) => openDialog(e,'R0F7')}
             >
@@ -91,7 +91,7 @@ const Card = ({ item, progress_sold }) => {
                 description="This will permanently deactivate your account"
                 message="Are you sure you want to deactivate your account? All of your data will be permanently removed."
               /> */}
-              
+
               <QuickView
                 isDialogOpen={isDialogOpen}
                 closeDialog={closeDialog}
@@ -120,10 +120,11 @@ const Card = ({ item, progress_sold }) => {
             )}
           </div>
           <h4 className="text-[#637381] font-semibold text-l mb-1">{title}</h4>
-          <h6 className="text-[15px] text-sm font text-[#637381] -mb-1">
+          <h6 className="text-[15px] text-sm font text-[#637381] mb-1">
             {unit}
           </h6>
-          <div className="flex items-center gap-4 T= text-gray-500">
+          <div className="flex items-center gap-2.5 text-gray-500
+          -mb-1.5">
             <Rating
               style={{ maxWidth: 180 }}
               initialRating={rating}
@@ -131,9 +132,9 @@ const Card = ({ item, progress_sold }) => {
               emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
               readonly
             />
-            <h6>0</h6>
+            <h6 className="text-">0</h6>
           </div>
-          <div className="flex items-center gap-5 mb-3.5">
+          <div className="flex items-center gap-5 my-2.5">
             <del className="text-[#919EAB] font-bold text-lg">
               ${Number.isInteger(price) ? `${price + ".00"}` : price}
             </del>
