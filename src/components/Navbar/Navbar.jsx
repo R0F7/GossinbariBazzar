@@ -72,10 +72,9 @@ const Navbar = () => {
                 <option value="" disabled>
                   All
                 </option>
-                <option value="">lorem</option>
-                <option value="">lorem</option>
-                <option value="">lorem</option>
-                <option value="">lorem</option>
+                {categories.map((category, idx) => (
+                  <option key={idx}>{category?.categoryName}</option>
+                ))}
               </select>
               <div className="flex ">
                 <div>
@@ -263,11 +262,11 @@ const Navbar = () => {
           {categories.map((category, idx) => (
             <li
               key={idx}
-              className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0]"
+              className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0] rayscale hover:grayscale-0 transform duration-200"
             >
-             <div className="w-7 h-7">
-              <img className="w-full h-full" src={category?.icon} alt="" />
-             </div>
+              <div className="w-7 h-7">
+                <img className="w-full h-full" src={category?.icon} alt="" />
+              </div>
               <h4>{category?.categoryName}</h4>
             </li>
           ))}
