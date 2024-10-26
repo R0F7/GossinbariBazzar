@@ -63,7 +63,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <NextArrow isQuickView={true} isTrue={false} />,
-    prevArrow: <PrevArrow isTrue={true} />,
+    prevArrow: <PrevArrow isQuickView={true}  isTrue={false} />,
   };
 
   return (
@@ -97,7 +97,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
               >
                 <DialogPanel
                   onClick={(e) => e.stopPropagation()} // Prevent closeDialog on inner content clicks
-                  className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all"
+                  className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-8 pb-14 text-left align-middle shadow-xl transition-all"
                 >
                   <div>
                     <div>
@@ -130,7 +130,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                     </div>
                     <div className="flex gap-8">
                       {/* image */}
-                      <div className="w-1/2 h-full border p-8">
+                      <div className="w-1/2 h-full border p-8 relative z-50">
                         <Slider {...settings} className=" p-">
                           <div className="h-[250px] w-[600px] bg-slate-500">
                             <img
@@ -161,6 +161,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                             />
                           </div>
                         </Slider>
+                        <div className="h-2 w-[5%] bg-white absolute -top-1 left-1/2 -translate-x-2.5 -z-50"></div>
                       </div>
                       {/* details */}
                       <div className="w-1/2 h-full pb-10">
@@ -210,15 +211,6 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         <i><RxCross2 /></i>
                     </div>
                   </div>
-
-                  {/* <div className="mt-4 flex justify-end space-x-2">
-                    <button onClick={closeDialog} className="btn-secondary">
-                      Cancel
-                    </button>
-                    <button onClick={closeDialog} className="btn-primary">
-                      Confirm
-                    </button>
-                  </div> */}
                 </DialogPanel>
               </TransitionChild>
             </div>
