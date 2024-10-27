@@ -2,10 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { IoIosArrowBack } from "react-icons/io";
 import Card from "../../components/Card/Card";
 import { useEffect, useState } from "react";
+// import CustomDropdown from "../../components/CustomDropdown/CustomDropdown";
+import { CgMenuGridR } from "react-icons/cg";
+import { ImMenu } from "react-icons/im";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [tags, setTags] = useState([]);
+  const [grid, setGrid] = useState(true);
 
   const { data: products = [] } = useQuery({
     queryKey: ["shopProducts"],
@@ -32,7 +36,7 @@ const Shop = () => {
 
     setSubCategories(allSubCategories);
   }, [products]);
-//   console.log(subCategories);
+  //   console.log(subCategories);
 
   //  new way
   useEffect(() => {
@@ -102,10 +106,10 @@ const Shop = () => {
 
           <hr className="my-6" />
 
-        <div>
+          <div>
             <h4 className="font-semibold mb-2 text-lg">Sub Categories</h4>
-           <div className="space-y-2 space-x-2 mr-2">
-           {subCategories.map((sCat, idx) => (
+            <div className="space-y-2 space-x-2 mr-2">
+              {subCategories.map((sCat, idx) => (
                 <h4
                   key={idx}
                   className="border inline-block rounded-full text-sm py-0.5 px-3"
@@ -113,8 +117,8 @@ const Shop = () => {
                   {sCat}
                 </h4>
               ))}
-           </div>
-        </div>
+            </div>
+          </div>
 
           <hr className="my-6" />
 
@@ -141,44 +145,67 @@ const Shop = () => {
             <h4>Showing 1-12 of 50 results</h4>
             <div className="flex items-center gap-4">
               {/* sort div */}
-              <div className="flex border  py-2 px-2 rounded-md ">
-                <h4>Sort by:</h4>
+              <div className="flex border  py-2 px-2 rounded-md shadow">
+                <label htmlFor="sort">Sort by:</label>
                 <select
-                  name=""
-                  id=""
-                  className="outline-none text-[#333]"
+                  name="sort"
+                  id="sort"
+                  className="outline-none text-[#333] px-2 "
                   defaultValue=""
                 >
                   <option value="" disabled selected hidden>
                     Default sorting
                   </option>
-                  <option value="">Sort by popularity</option>
+                  <option value="" className="hover:bg-red-500">
+                    Sort by popularity
+                  </option>
                   <option value="">Sort by average rating</option>
                   <option value="">Sort by latest</option>
                   <option value="">Sort by price: low to high</option>
                   <option value="">Sort by price: high to low</option>
                 </select>
+                {/* <CustomDropdown></CustomDropdown> */}
               </div>
 
               {/* grid icon */}
-              <div className="flex gap-2">
-                <div className="grid grid-cols-3 gap-0.5 w-6">
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                  <div className="w-1.5 h-1.5 bg-black"></div>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <div className="w-6 h-1.5 bg-black"></div>
-                  <div className="w-6 h-1.5 bg-black"></div>
+              <div className="flex items-center gap-2.5">
+                <h4 className="font-semibold text-sm">View As: </h4>
+                <div className="flex gap-2 border p-2 shadow">
+                  {/* <div className="grid grid-cols-3 gap-1 w-6 border-r multiple-col">
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
+                  </div> */}
+                  {/* <div className="flex flex-col gap-1 single-col">
+                    <div className="w-6 h-1.5 bg-black single-col-div"></div>
+                    <div className="w-6 h-1.5 bg-black single-col-div"></div>
+                  </div> */}
+
+                  <div
+                    className={`text-2xl ${
+                      grid ? "text-[#2E8DD8]" : "text-gray-400" 
+                    } border-r pr-1.5`}
+                    onClick={() => setGrid(true)}
+                  >
+                    <CgMenuGridR />
+                  </div>
+                  <div
+                    className={`text-2xl ${
+                      grid ? "text-gray-400" : "text-[#2E8DD8]"
+                    }`}
+                    onClick={() => setGrid(false)}
+                  >
+                    <ImMenu />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           {/* product */}
-          <div className="grid grid-cols-5 my-8">
+          <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
             {products.map((product) => (
               <Card key={product?._id} item={product}></Card>
             ))}

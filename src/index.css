@@ -164,54 +164,65 @@ footer a h4:hover {
     z-index: -1;
 } */
 
-  /* Style the range input container */
-  input[type="range"] {
-    -webkit-appearance: none; /* Removes default styling on WebKit browsers */
-    width: 100%;              
-    margin: 10px 0;
-    padding-right: 10px;
-  }
+/* Style the range input container */
+input[type="range"] {
+  -webkit-appearance: none; /* Removes default styling on WebKit browsers */
+  width: 100%;
+  margin: 10px 0;
+  padding-right: 10px;
+}
 
-  /* Style the slider track */
-  input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;             /* Track thickness */
-    background: #ddd;        /* Track background color */
-    border-radius: 5px;      /* Rounded corners */
-  }
+/* Style the slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px; /* Track thickness */
+  background: #ddd; /* Track background color */
+  border-radius: 5px; /* Rounded corners */
+}
 
-  input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-  }
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+}
 
-  /* Style the thumb (draggable part) */
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Removes default styling */
-    width: 20px;              /* Thumb width */
-    height: 20px;             /* Thumb height */
-    background-color: #2E8DD8; /* Thumb color */
-    border-radius: 50%;       /* Round thumb */
-    cursor: pointer;          /* Pointer cursor */
-    margin-top: -6px;         /* Align with track */
-  }
+/* Style the thumb (draggable part) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Removes default styling */
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background-color: #2e8dd8; /* Thumb color */
+  border-radius: 50%; /* Round thumb */
+  cursor: pointer; /* Pointer cursor */
+  margin-top: -6px; /* Align with track */
+}
 
-  input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
-  /* Active and hover states */
-  input[type="range"]:hover::-webkit-slider-thumb {
-    background-color: #065591be;
-  }
+/* Active and hover states */
+input[type="range"]:hover::-webkit-slider-thumb {
+  background-color: #065591be;
+}
 
-  input[type="range"]:active::-webkit-slider-thumb {
-    background-color: #2E8DD8;
-  }
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: #2e8dd8;
+}
 
+.multiple-col:hover .multiple-col-div {
+  transition: all;
+  transition-duration: 200ms;
+  background: #2E8DD8;
+}
+
+.single-col:hover .single-col-div {
+  background: #2e8dd8;
+  transition: all;
+  transition-duration: 200ms;
+}
