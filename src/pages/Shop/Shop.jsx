@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // import CustomDropdown from "../../components/CustomDropdown/CustomDropdown";
 import { CgMenuGridR } from "react-icons/cg";
 import { ImMenu } from "react-icons/im";
+import CardX from "../../components/Card/CardX";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -205,9 +206,14 @@ const Shop = () => {
             </div>
           </div>
           {/* product */}
-          <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
+          {/* <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
             {products.map((product) => (
               <Card key={product?._id} item={product}></Card>
+            ))}
+          </div> */}
+          <div className={`grid grid-cols-1'} my-8`}>
+            {products.map((product) => (
+              <CardX key={product?._id} item={product}></CardX>
             ))}
           </div>
         </div>

@@ -19,6 +19,8 @@
       "price": 799,
       "category": "Electronics",
       "sub_category": "Laptops",
+      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["laptop", "technology", "electronics"],
       "discount_percent": 12
     },
@@ -42,6 +44,8 @@
       "price": 30,
       "category": "Clothing",
       "sub_category": "T-shirts",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["clothing", "men", "fashion"],
       "discount_percent": 17
     },
@@ -65,6 +69,8 @@
       "price": 500,
       "category": "Jewelry",
       "sub_category": "Rings",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["jewelry", "diamond", "engagement"],
       "discount_percent": 10
     },
@@ -88,6 +94,8 @@
       "price": 950,
       "category": "Furniture",
       "sub_category": "Living Room",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["furniture", "sofa", "home"],
       "discount_percent": 11
     },
@@ -111,6 +119,8 @@
       "price": 3,
       "category": "Vegetables",
       "sub_category": "Fresh Vegetables",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["vegetables", "organic", "fresh"],
       "discount_percent": 17
     },
@@ -134,6 +144,8 @@
       "price": 7.99,
       "category": "Meat",
       "sub_category": "Poultry",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["meat", "chicken", "organic"],
       "discount_percent": 13
     },
@@ -157,6 +169,8 @@
       "price": 100,
       "category": "Footwear",
       "sub_category": "Sneakers",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["footwear", "sneakers", "running"],
       "discount_percent": 20
     },
@@ -180,6 +194,8 @@
       "price": 20,
       "category": "Beauty & Personal Care",
       "sub_category": "Skincare",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["skincare", "beauty", "moisturizer"],
       "discount_percent": 25
     },
@@ -203,6 +219,8 @@
       "price": 60,
       "category": "Sports",
       "sub_category": "Soccer",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["sports", "soccer", "ball"],
       "discount_percent": 17
     },
@@ -226,6 +244,8 @@
       "price": 3.5,
       "category": "Fruits",
       "sub_category": "Apples",
+       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
+      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
       "tags": ["fruits", "apple", "organic"],
       "discount_percent": 14
     }
