@@ -206,16 +206,17 @@ const Shop = () => {
             </div>
           </div>
           {/* product */}
-          {/* <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
+         { grid ? <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
             {products.map((product) => (
               <Card key={product?._id} item={product}></Card>
             ))}
-          </div> */}
-          <div className={`grid grid-cols-1'} my-8`}>
+          </div>
+          :
+          <div className={`grid grid-cols-1'} my-8 `}>
             {products.map((product) => (
               <CardX key={product?._id} item={product}></CardX>
             ))}
-          </div>
+          </div>}
         </div>
       </div>
     </div>

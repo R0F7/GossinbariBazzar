@@ -98,6 +98,10 @@ footer a h4:hover {
   transition-duration: 500ms;
 }
 
+.cart:hover .cardX-image{
+  border-top-left-radius: 10px;
+}
+
 /* CustomPaging.css */
 
 /* Ensure custom styles override slick-carousel defaults */
