@@ -44,8 +44,8 @@ const CardX = ({ item }) => {
 
   return (
     <Link to={`/product/${_id}`} className="grid grid-cols-4 gap-4 border hover:rounded-xl hover:shadow-md hover:scale-[0.97] scale-[0.96] duration-500 shadow cart">
-      <div className="col-span-1 w-[300px] h-[250px]">
-        <img className="w-full h-full cardX-image" src={image} alt="" />
+      <div className="col-span-1 w-[300px] h-[250px] overflow-hidden">
+        <img className="w-full h-full hover:scale-110 transition duration-500 cardX-image" src={image} alt="" />
         <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu">
             <div className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30">
               <i>
@@ -56,6 +56,7 @@ const CardX = ({ item }) => {
             <div
               className="flex flex-col items-center border-l w-1/2 h-full py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
               onClick={openDialog}
+              title="Quick View"
               // onClick={(e) => openDialog(e,'R0F7')}
             >
               <i>
@@ -82,8 +83,8 @@ const CardX = ({ item }) => {
         <div>
           <h4
             title={sub_category}
-             className="border border-gray-100 shadow-md shadow-gray-300 inline-block py-0.5 px-4 rounded-full text-sm mb-1 
-             text-gray-500 font-bold transition-all duration-1500 
+             className="border order-gray-100 shadow shadow-[#2e8ed87a] border-[#2E8DD8] inline-block py-0.5 px-4 rounded-full text-sm mb-1 
+             text-[#2E8DD8] font-bold transition-all duration-1500 
              hover:text-yellow-500 hover:border-yellow-500 hover:bg-[#f8f9fa34] hover:font-bold hover:shadow-md hover:shadow-yellow-200" 
              >
 
@@ -115,14 +116,14 @@ const CardX = ({ item }) => {
           </div>
           <h4 className="text-sm font-bold text-[#023e8a]">
             Sold:{" "}
-            <span className="text-base text-yellow-500 font-bold">20</span>
+            <span className="text-base text-green-500 font-bold">20</span>
           </h4>
         </div>
         <h4 className="text-sm font-bold text-[#023e8a] mb-4">
           Sold by :{" "}
           <span className="text-[#4E148C] text-base font-bold">{sold_by}</span>
         </h4>
-        <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-[65%] py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200">
+        <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-[65%] py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200 hover:bg-yellow-500 hover:text-[#1a1a2e] hover:shadow-md hover:shadow-yellow-300 transition-all">
           <i>
             <FaCartPlus />
           </i>

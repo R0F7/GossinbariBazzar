@@ -33,7 +33,7 @@ const Card = ({ item, progress_sold }) => {
     // e.stopPropagation();
     e.preventDefault();
     setIsDialogOpen(true);
-    console.log('openDialog are clicked');
+    console.log("openDialog are clicked");
   };
 
   const closeDialog = () => {
@@ -48,7 +48,7 @@ const Card = ({ item, progress_sold }) => {
   // const openDialog = (e) => {
   //   e.preventDefault();
   //   e.stopPropagation();
-  //   setIsDialogOpen(true); 
+  //   setIsDialogOpen(true);
   //   console.log("openDialog clicked");
   // };
 
@@ -57,12 +57,15 @@ const Card = ({ item, progress_sold }) => {
   //   console.log("closeDialog clicked");
   // };
 
-
   return (
     <Link to={`/product/${_id}`}>
       <div className="p-4 pb-6 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
-        <div className="h-[200px] relative">
-          <img className="h-full w-full" src={image} alt="" />
+        <div className="h-[200px] relative overflow-hidden">
+          <img
+            className="h-full w-full hover:scale-110 transition duration-500 cardX-image"
+            src={image}
+            alt=""
+          />
           {discounted_price && (
             <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">
               <h4>-{discount_percent}%</h4>
@@ -102,7 +105,7 @@ const Card = ({ item, progress_sold }) => {
         </div>
         <div>
           <h4 className="text-[#637381] mt-1.5 mb-3">
-            <span className="text-[#919EAB] text-sm">Sold by:</span> {sold_by}
+            <span className="text-[#023e8a] font-semibold text-sm ">Sold by:</span> <span className="text-[#4E148C] font-semibold">{sold_by}</span>
           </h4>
           {progress_sold && (
             <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
@@ -110,7 +113,11 @@ const Card = ({ item, progress_sold }) => {
             </div>
           )}
           <div className="flex items-center justify-between ap-4 mt-2 mb-2">
-            <h6 className="border inline-block py-0.5 px-6 rounded-full text-sm font-normal hover:bg-yellow-300 over:text-white transition-all duration-500 y-2.5">
+            <h6
+              className="border order-gray-100 shadow shadow-[#2e8ed87a] border-[#2E8DD8] inline-block py-0.5 px-4 rounded-full text-sm mb-1 
+             text-[#2E8DD8] font-bold transition-all duration-1500 
+             hover:text-yellow-500 hover:border-yellow-500 hover:bg-[#f8f9fa34] hover:font-bold hover:shadow-md hover:shadow-yellow-200"
+            >
               {sub_category}
             </h6>
             {progress_sold && (
@@ -119,26 +126,30 @@ const Card = ({ item, progress_sold }) => {
               </h4>
             )}
           </div>
-          <h4 className="text-[#637381] font-semibold text-l mb-1">{title}</h4>
-          <h6 className="text-[15px] text-sm font text-[#637381] mb-1">
+          <h4 className="text-[#023e8a] font-semibold text-l mb-1">{title}</h4>
+          <h6 className="text-[15px] text-sm font-bold text-[#023e8a] mb-1">
             {unit}
           </h6>
-          <div className="flex items-center gap-2.5 text-gray-500
-          -mb-1.5">
+          <div
+            className="flex items-center gap-1.5 text-gray-500
+          -mb-1.5"
+          >
             <Rating
               style={{ maxWidth: 180 }}
               initialRating={rating}
-              fullSymbol={<FaStar className="mr-1"></FaStar>}
-              emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
+              fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
+              emptySymbol={
+                <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
+              }
               readonly
             />
-            <h6 className="text-">0</h6>
+            <h6 className="text-xs font-bold">{"(" + 0 + ")"}</h6>
           </div>
           <div className="flex items-center gap-5 my-2.5">
-            <del className="text-[#919EAB] font-bold text-lg">
+            <del className="ext-[#919EAB] text-red-600 font-bold text-lg">
               ${Number.isInteger(price) ? `${price + ".00"}` : price}
             </del>
-            <h6 className="text-[#C30B0B] font-bold text-lg">
+            <h6 className="ext-[#C30B0B] text-[#2E8DD8] font-bold text-lg">
               $
               {Number.isInteger(discounted_price)
                 ? `${discounted_price + ".00"}`
