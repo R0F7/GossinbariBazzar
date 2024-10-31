@@ -8,6 +8,7 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import FlashSales from "../pages/FlashSales/FlashSales";
+import Blogs from "../pages/Blogs/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetails></ProductDetails>,
+      },
+      {
+        path:"/blogs",
+        element:<Blogs></Blogs>
       },
       {
         path: "/flash-sales",

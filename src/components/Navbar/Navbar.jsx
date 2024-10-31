@@ -187,7 +187,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/blog"
+                to="/blogs"
                 className={({ isActive }) =>
                   isActive
                     ? "font-black text-transparent py-1 px-2.5 active"
