@@ -41,21 +41,68 @@ const Blogs = () => {
 
           {/* blogs categories */}
           <div className="">
-            <h4 className="text-lg font-semibold text-gray-700 mb-1.5">
-              Blog Categories{" "}
+            <h4 className="text-lg font-semibold text-[#535A63] mb-3">
+              Blog Categories
             </h4>
-            <ul>
+            <ul className="flex flex-col space-y-3 ">
               <NavLink
                 to="/blogs"
                 className={({ isActive }) =>
                   isActive
                     ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm"}
+                    : "text-sm text-[#535A63]"
+                }
               >
                 Eco Technology <span className="ml-1 text-sm">(3)</span>
               </NavLink>
-
+              <NavLink
+                to="/environments"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
+                    : "text-sm text-[#535A63]"
+                }
+              >
+                Environments <span className="ml-1 text-sm">(7)</span>
+              </NavLink>
+              <NavLink
+                to="/family"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
+                    : "text-sm text-[#535A63]"
+                }
+              >
+                Family <span className="ml-1 text-sm">(5)</span>
+              </NavLink>
+              <NavLink
+                to="/home"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
+                    : "text-sm text-[#535A63]"
+                }
+              >
+                Home <span className="ml-1 text-sm">(5)</span>
+              </NavLink>
+              <NavLink
+                to="/widelife"
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
+                    : "text-sm text-[#535A63]"
+                }
+              >
+                widlelife <span className="ml-1 text-sm">(8)</span>
+              </NavLink>
             </ul>
+
+            <div>
+              <h4 className="text-lg font-semibold text-[#535A63] mb-3">Recent Posts</h4>
+                {/* <div>
+
+                </div> */}
+            </div>
           </div>
         </div>
 
