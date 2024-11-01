@@ -103,7 +103,7 @@ const Footer = () => {
           <h4 className="text-[#212B36] mb-3.5 font-bold">ABOUT</h4>
           <ul className="flex flex-col space-y-3 text-[#4E565F] text-[15px] font-medium">
             <Link to="#">About Us</Link>
-            <Link to="#">Contact Us</Link>
+            <Link to="/contact-us">Contact Us</Link>
             <Link to="#">Help Center</Link>
             <Link to="#">FAQ</Link>
           </ul>

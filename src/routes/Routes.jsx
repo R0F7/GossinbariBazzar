@@ -9,6 +9,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import FlashSales from "../pages/FlashSales/FlashSales";
 import Blogs from "../pages/Blogs/Blogs";
+import Pages from "../pages/Pages/Pages";
+import ContactUs from "../components/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +31,16 @@ export const router = createBrowserRouter([
         element: <ProductDetails></ProductDetails>,
       },
       {
-        path:"/blogs",
-        element:<Blogs></Blogs>
+        path: "/pages",
+        element: <Pages></Pages>,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
       },
       {
         path: "/flash-sales",

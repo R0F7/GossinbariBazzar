@@ -179,7 +179,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "font-black text-transparent py-1 px-2.5 active"
-                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5"
+                    : "font-semibold text-[rgb(46,141,216)] py-1 px-2.5 pages"
                 }
               >
                 Pages

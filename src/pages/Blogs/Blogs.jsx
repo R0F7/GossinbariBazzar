@@ -17,7 +17,7 @@ const Blogs = () => {
   console.log(recent_blogs);
 
   return (
-    <div className="container mx-auto">
+    <section className="container mx-auto">
       {/* page location  */}
       <div className="flex items-center justify-between my-3">
         <div className="flex items-center gap-1.5">
@@ -188,7 +188,7 @@ const Blogs = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
