@@ -1,6 +1,7 @@
 import { FaRegClock } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
+// import Map from "../Map/Map";
 
 const ContactUs = () => {
   return (
@@ -83,7 +84,7 @@ const ContactUs = () => {
           </div>
         </div>
 
-        <div className="my-10">
+        <div className="my-10 flex gap-6">
           <div className="bg-[#F4F6F8] w-1/2 p-14 rounded-md">
             <h4 className="font-semibold mb-0.5">Have A Question?</h4>
             <p className="mb-6">
@@ -119,15 +120,27 @@ const ContactUs = () => {
                 placeholder="Message*"
               ></textarea>
               <span></span>
-             <div className="flex justify-end mt-2">
-             <button type="button" className="bg-[#4D9DDC] py-2.5 text-white font-bold text-sm rounded-md w-[80%] scale-100 active:scale-90 transition duration-200">
-                Submit Question
-              </button>
-             </div>
+              <div className="flex justify-end mt-2">
+                <button
+                  type="button"
+                  className="bg-[#4D9DDC] py-2.5 text-white font-bold text-sm rounded-md w-[80%] scale-100 active:scale-90 transition duration-200"
+                >
+                  Submit Question
+                </button>
+              </div>
             </form>
           </div>
 
-          <div></div>
+          {/* <Map></Map> */}
+          <div className="w-1/2 rounded-md">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4336.100517541013!2d89.60214797594958!3d24.73923520009665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fda4ea95803269%3A0xd6fbb665ab04c7bf!2sGossainbari!5e1!3m2!1sen!2sus!4v1730484611269!5m2!1sen!2sus"
+              className="w-full h-full rounded-md"
+              allowfullscreen="true"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
