@@ -1,8 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowBack } from "react-icons/io";
+import { LiaCommentsSolid } from "react-icons/lia";
 import { NavLink } from "react-router-dom";
 
 const Blogs = () => {
+  const { data: blogs = [] } = useQuery({
+    queryKey: ["blogs"],
+    queryFn: () => fetch("./blogs.json").then((res) => res.json()),
+  });
+  console.log(blogs);
+
+  const recent_blogs = [...blogs]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 4);
+  console.log(recent_blogs);
+
   return (
     <div className="container mx-auto">
       {/* page location  */}
@@ -44,7 +57,7 @@ const Blogs = () => {
             <h4 className="text-lg font-semibold text-[#535A63] mb-3">
               Blog Categories
             </h4>
-            <ul className="flex flex-col space-y-3 ">
+            <ul className="flex flex-col space-y-3 mb-7">
               <NavLink
                 to="/blogs"
                 className={({ isActive }) =>
@@ -98,16 +111,82 @@ const Blogs = () => {
             </ul>
 
             <div>
-              <h4 className="text-lg font-semibold text-[#535A63] mb-3">Recent Posts</h4>
-                {/* <div>
-
-                </div> */}
+              <h4 className="text-lg font-semibold text-[#535A63] mb-3">
+                Recent Posts
+              </h4>
+              <div>
+                {recent_blogs.map((recent_blog) => (
+                  <div key={recent_blog._id} className="flex gap-2 mb-4">
+                    <div className="w-14 h-10 mt-1.5">
+                      <img
+                        className="w-full h-full"
+                        src={recent_blog.image}
+                        alt=""
+                      />
+                    </div>
+                    <div className="">
+                      <h4 className="mb-1 text-[#3A434D]">
+                        {recent_blog.title.length > 40
+                          ? `${recent_blog.title.slice(0, 40) + "..."}`
+                          : recent_blog.title}
+                      </h4>
+                      <div className="flex text-sm">
+                        <h6 className="border-r pr-1.5 text-[#758390] font-mono">
+                          {recent_blog.date}
+                        </h6>
+                        <h6 className="pl-1.5 text-[#515961]">
+                          <span>By </span>
+                          {recent_blog.posted_by.name}
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* right part */}
-        <div className="w-3/4 pl-4 border-gray-300 border-l h-screen"></div>
+        <div className="w-3/4 pl-4 border-gray-300 border-l ">
+          {blogs.map((blog) => (
+            <div key={blog._id} className="mb-6">
+              <div className="w-[75%] h-[400px]">
+                <img className="w-full h-full" src={blog.image} alt="" />
+              </div>
+              <div className="flex items-center gap-1 mt-5 mb-3.5">
+                {blog.categories.map((category, idx) => (
+                  <h4
+                    key={idx}
+                    className="border rounded-full py-0.5 px-2.5 text-sm"
+                  >
+                    {category}
+                  </h4>
+                ))}
+              </div>
+              <h1 className="text-2xl font-semibold mb-1">{blog.title}</h1>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full border">
+                    <img
+                      className="w-full h-full rounded-full"
+                      src={blog.posted_by.image}
+                      alt=""
+                    />
+                  </div>
+                  <h4>{blog.posted_by.name}</h4>
+                </div>
+                <h4 className="border-x px-2">{blog.date}</h4>
+                <div className="flex items-center gap-1.5">
+                  <LiaCommentsSolid />
+                  <span>1 comment</span>
+                </div>
+              </div>
+              <p className="w-[75%] mb-1">{blog.long_description}</p>
+              <button className="font-bold text-[#3691D9] text-sm">Continue Reading</button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
