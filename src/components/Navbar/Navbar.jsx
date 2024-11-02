@@ -7,7 +7,7 @@ import { useState } from "react";
 import { FcMenu } from "react-icons/fc";
 import { CgMenuGridO, CgSearch } from "react-icons/cg";
 import { RxCross2 } from "react-icons/rx";
-import { GiFruitBowl } from "react-icons/gi";
+// import { GiFruitBowl } from "react-icons/gi";
 import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 

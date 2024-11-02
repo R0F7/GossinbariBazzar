@@ -21,7 +21,7 @@ const ContactUs = () => {
         </div>
       </div>
       <div>
-        <h1>Contact Us</h1>
+        <h1 className="text-2xl font-bold">Contact Us</h1>
         {/* <div className="flex gap-4">
           <div className="border w-[20%] flex flex-col items-end">
             <i className="-ranslate-x-7 text-[#3691d9] text-2xl mb-1">
@@ -60,7 +60,7 @@ const ContactUs = () => {
                 <h4 className="text-lg font-semibold text-[#3691d9]">
                   Gossainbari
                 </h4>
-                <h6>Bogura Bangladesh</h6>
+                <h6 className="text-[#676F77]">Bogura Bangladesh</h6>
               </div>
             </div>
           </div>
@@ -75,9 +75,9 @@ const ContactUs = () => {
                 <h4 className="text-lg font-semibold text-[#3691d9]">
                   Opening Hours
                 </h4>
-                <h6 className="-[70%]">
+                <h6 className="text-[#676F77]">
                   The store’s opening hours are <strong>9 a.m.</strong> to{" "}
-                  <strong>6 p.m.</strong>{" "}
+                  <strong>6 p.m.</strong>
                 </h6>
               </div>
             </div>
@@ -87,7 +87,7 @@ const ContactUs = () => {
         <div className="my-10 flex gap-6">
           <div className="bg-[#F4F6F8] w-1/2 p-14 rounded-md">
             <h4 className="font-semibold mb-0.5">Have A Question?</h4>
-            <p className="mb-6">
+            <p className="mb-6 text-[#676F77]">
               Your email address will not be published. Required fileds are
               marked*
             </p>
@@ -98,6 +98,7 @@ const ContactUs = () => {
                 id="name"
                 className=" py-2.5 px-2 rounded-md shadow outline-none"
                 placeholder="Name*"
+                required
               />
               <input
                 type="email"
@@ -105,6 +106,7 @@ const ContactUs = () => {
                 id="email"
                 className=" py-2 px-2.5 rounded-md shadow outline-none"
                 placeholder="Email*"
+                required
               />
               <input
                 type="text"
@@ -112,17 +114,19 @@ const ContactUs = () => {
                 id="subject"
                 className="col-span-2 py-2.5 px-2 rounded-md shadow outline-none"
                 placeholder="Subject*"
+                required
               />
               <textarea
                 name="message"
                 id="message"
                 className="col-span-2 py-2 px-2 h-[150px] rounded-md shadow outline-none"
                 placeholder="Message*"
+                required
               ></textarea>
               <span></span>
               <div className="flex justify-end mt-2">
                 <button
-                  type="button"
+                  type="submit"
                   className="bg-[#4D9DDC] py-2.5 text-white font-bold text-sm rounded-md w-[80%] scale-100 active:scale-90 transition duration-200"
                 >
                   Submit Question
