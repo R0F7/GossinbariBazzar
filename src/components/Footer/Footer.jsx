@@ -113,7 +113,7 @@ const Footer = () => {
         <div>
           <h4 className="text-[#212B36] mb-3.5 font-bold">HELP & GUIDE</h4>
           <ul className="flex flex-col space-y-3 text-[#4E565F] text-[15px] font-medium">
-            <Link to="#">Term Of Use</Link>
+            <Link to="/term-of-use">Term Of Use</Link>
             <Link to="#">Privacy Policy</Link>
             <Link to="#">Shipping & Delivery</Link>
           </ul>

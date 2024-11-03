@@ -11,6 +11,7 @@ import FlashSales from "../pages/FlashSales/FlashSales";
 import Blogs from "../pages/Blogs/Blogs";
 import Pages from "../pages/Pages/Pages";
 import ContactUs from "../components/ContactUs/ContactUs";
+import TermOfUse from "../components/TermOfuse/TermOfuse";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/term-of-use",
+        element: <TermOfUse></TermOfUse>,
       },
       {
         path: "/blogs",
