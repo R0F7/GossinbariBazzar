@@ -172,19 +172,6 @@ const Shop = () => {
               <div className="flex items-center gap-2.5">
                 <h4 className="font-semibold text-sm">View As: </h4>
                 <div className="flex gap-2 border p-2 shadow">
-                  {/* <div className="grid grid-cols-3 gap-1 w-6 border-r multiple-col">
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                    <div className="w-1.5 h-1.5 bg-black multiple-col-div"></div>
-                  </div> */}
-                  {/* <div className="flex flex-col gap-1 single-col">
-                    <div className="w-6 h-1.5 bg-black single-col-div"></div>
-                    <div className="w-6 h-1.5 bg-black single-col-div"></div>
-                  </div> */}
-
                   <div
                     className={`text-2xl ${
                       grid ? "text-[#2E8DD8]" : "text-gray-400" 
@@ -203,6 +190,7 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
           {/* product */}
