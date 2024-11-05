@@ -104,7 +104,7 @@ const Footer = () => {
           <ul className="flex flex-col space-y-3 text-[#4E565F] text-[15px] font-medium">
             <Link to="#">About Us</Link>
             <Link to="/contact-us">Contact Us</Link>
-            <Link to="#">Help Center</Link>
+            <Link to="/help-center">Help Center</Link>
             <Link to="#">FAQ</Link>
           </ul>
         </div>

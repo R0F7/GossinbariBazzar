@@ -10,8 +10,9 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import FlashSales from "../pages/FlashSales/FlashSales";
 import Blogs from "../pages/Blogs/Blogs";
 import Pages from "../pages/Pages/Pages";
-import ContactUs from "../components/ContactUs/ContactUs";
-import TermOfUse from "../components/TermOfuse/TermOfuse";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import TermOfUse from "../pages/TermOfUse/TermOfuse";
+import HelpCenter from "../pages/HelpCenter/HelpCenter";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
         element: <Pages></Pages>,
       },
       {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
+      },
+      {
+        path: "/flash-sales",
+        element: <FlashSales></FlashSales>,
+      },      
+      {
         path: "/contact-us",
         element: <ContactUs></ContactUs>,
       },
@@ -44,13 +53,9 @@ export const router = createBrowserRouter([
         element: <TermOfUse></TermOfUse>,
       },
       {
-        path: "/blogs",
-        element: <Blogs></Blogs>,
-      },
-      {
-        path: "/flash-sales",
-        element: <FlashSales></FlashSales>,
-      },
+        path:'/help-center',
+        element:<HelpCenter></HelpCenter>
+      }
     ],
   },
   {
