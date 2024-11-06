@@ -13,6 +13,7 @@ import Pages from "../pages/Pages/Pages";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import TermOfUse from "../pages/TermOfUse/TermOfuse";
 import HelpCenter from "../pages/HelpCenter/HelpCenter";
+import Articles from "../components/Articles/Articles";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path:'/help-center',
         element:<HelpCenter></HelpCenter>
+      },
+      {
+        path:"/articles/:id",
+        element:<Articles></Articles>
       }
     ],
   },

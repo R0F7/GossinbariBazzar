@@ -1,54 +1,561 @@
 [
     {
         "_id":"1",
-        "title":"Online Order"
+        "title":"Online Order",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"2",
-        "title":"Brand"
+        "title":"Brand",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"3",
-        "title":"Where to Buy"
+        "title":"Where to Buy",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"4",
-        "title":"Subscription"
+        "title":"Subscription",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"5",
-        "title":"Promos + Rewards"
+        "title":"Promos + Rewards",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"6",
-        "title":"Products"
+        "title":"Products",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"7",
-        "title":"Bundle Builder"
+        "title":"Bundle Builder",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"8",
-        "title":"Ingredients"
+        "title":"Ingredients",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"9",
-        "title":"Shipping + Delivery"
+        "title":"Shipping + Delivery",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"10",
-        "title":"International Shipping"
+        "title":"International Shipping",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"11",
-        "title":"Returns + Exchanges"
+        "title":"Returns + Exchanges",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"12",
-        "title":"Partnerships + Wholesale Inquiries"
+        "title":"Partnerships + Wholesale Inquiries",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     },
     {
         "_id":"13",
-        "title":"Buy With Prime"
+        "title":"Buy With Prime",
+        "articles":[
+            {
+                "_id": "1",
+                "title": "What should I do if I've forgotten the password to my Briogeohair.com account?",
+                "updated": "Updated 3 months ago",
+                "description": "You can click on the <b>\"Password Reminder\"</b> link, and a password reminder e-mail will be generated. If you need further assistance, please email our support team at <a href=\"mailto:support@briogeohair.com\" style=\"color:red; font-weight:bold;\">support@briogeohair.com</a>, and one of our agents can assist you!"
+            },
+            {
+                "_id":"2",
+                "title":"What payment methods are accepted on your site?",
+                "updated":"Updated 7 months ago",
+                "description":"For your convenience, we currently accept all major Credit Cards, Shop Pay, Paypal, and Apple Pay. We also offer AfterPay, which allows you to split the cost of your order into four interest-free payments; pay the first installment when you order and get your items immediately, then pay the rest over time in two-week increments."
+            },
+            {
+                "_id":"3",
+                "title":"How do I know if my order has been received?",
+                "updated":"Updated 7 months ago",
+                "description":"You’ll receive a confirmation email from us shortly after placing an order on our website. If you don't see the email in your inbox, check your spam folder first; otherwise, please reach out to us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\">support@gossainbaribzzer.com</a> and we'll be happy to help!"
+            },
+            {
+                "_id":"4",
+                "title":"How do I change or cancel an order?",
+                "updated":"Updated 6 months ago",
+                "description":"You can cancel your order within 1 hour of it being placed. You will see the pink \"cancel my order\" button below on your checkout confirmation screen and order confirmation email.</p><button style=\"padding:7px 12px;font-size:14px color:white;\">cancel my order</button><p style=\"margin-bottom:14px\">For Subscription orders, those must be canceled before the auto-renew date via your Briogeo account log-in or by contacting <a href=\"mailto:support@gossainbaribzzer.com\" style=\" font-weight:bold;\">support@gossainbaribzzer.com</a> within 3 business days before your renewal date.</p><p><strong>Policy:</strong>Orders can be canceled within 1 hour via your order confirmation page and email. Please note that orders placed before 4 pm EST during business hours will ship the same day. If you do not make the 1-hour cancellation window and would like to cancel your order because you changed your mind, we urge you to <a style=\"text-decoration: underline;\">process a return here</a>"
+            },
+            {
+                "_id":"5",
+                "title":"Who can I contact if I have questions about credit charges, my order or returns and refunds?",
+                "updated":"Updated 7 months ago",
+                "description":"We are always here to help! You can e-mail us at <a href=\"mailto:support@gossainbaribzzer.com\" style=\"color:red; font-weight:bold;\"> Where applicable, please mention your order number. If not available, be sure to include your full name and address, as it was listed at time of order placement."
+            },
+            {
+                "_id":"6",
+                "title":"Terms & Conditions",
+                "updated":"Updated 7 months ago",
+                "description":"Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.</p><p style=\"margin:20px 0px;>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>The products and services available on the Site, and any samples we may provide to you, are for your personal and/or professional use only. You may not sell or resell any of the products or services, or any samples, that you purchase or otherwise receive from us or otherwise use the Offerings for any commercial purposes. Please note that we will track the purchases you make through your Account on Briogeohair.com. We reserve the right, with or without notice, to cancel or reduce the quantity of any order to be filled or products or services to be provided to you that we believe, in our sole discretion, may result in the violation of our Terms.</p><p style=\"margin:30px 0px;>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected."
+            }         
+                       
+        ]
     }
 ]

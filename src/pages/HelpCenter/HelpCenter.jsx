@@ -5,6 +5,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import { ImMenu } from "react-icons/im";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const HelpCenter = () => {
   const [grid, setGrid] = useState(true);
@@ -13,7 +14,7 @@ const HelpCenter = () => {
     queryKey: ["HelpCenterCategories"],
     queryFn: () => fetch("./helpCenter.json").then((res) => res.json()),
   });
-//   console.log(categories);
+  console.log(categories);
   
 
   return (
@@ -245,10 +246,10 @@ const HelpCenter = () => {
           <div className="grid grid-cols-4 gap-10">
           {
             categories.map(category => (
-                <div key={category._id} className="border py-6 pl-6 rounded-md hover:shadow">
+                <Link to={`/articles/${category._id}`} key={category._id} className="border py-6 pl-6 rounded-md hover:shadow">
                     <h4 className="font-bold mb-5">{category.title}</h4>
                     <p className="text-[#959595] text-sm"><span>6</span> articles</p>
-                </div>
+                </Link>
             ))
           }
           </div>
