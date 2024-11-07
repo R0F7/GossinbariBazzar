@@ -14,6 +14,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import TermOfUse from "../pages/TermOfUse/TermOfuse";
 import HelpCenter from "../pages/HelpCenter/HelpCenter";
 import Articles from "../components/Articles/Articles";
+import Article from "../components/Article/Article";
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
       {
         path: "/flash-sales",
         element: <FlashSales></FlashSales>,
-      },      
+      },
       {
         path: "/contact-us",
         element: <ContactUs></ContactUs>,
@@ -54,13 +55,38 @@ export const router = createBrowserRouter([
         element: <TermOfUse></TermOfUse>,
       },
       {
-        path:'/help-center',
-        element:<HelpCenter></HelpCenter>
+        path: "/help-center",
+        element: <HelpCenter></HelpCenter>,
       },
       {
-        path:"/articles/:id",
-        element:<Articles></Articles>
-      }
+        path: "/articles/:id",
+        element: <Articles></Articles>,
+        // loader: async () => await fetch("./helpCenter.json").then((res) => res.json()),
+        loader: async () => {
+          try {
+            const response = await fetch("/helpCenter.json");
+            if (!response.ok) throw new Error("Failed to fetch articles data");
+            return response.json();
+          } catch (error) {
+            console.error("Error loading articles:", error);
+            return [];
+          }
+        },
+      },
+      {
+        path: "/article/:id/:articleId",
+        element: <Article />,
+        loader: async () => {
+          try {
+            const response = await fetch("/helpCenter.json");
+            if (!response.ok) throw new Error("Failed to fetch articles data");
+            return response.json();
+          } catch (error) {
+            console.error("Error loading articles:", error);
+            return [];
+          }
+        },
+      },
     ],
   },
   {
