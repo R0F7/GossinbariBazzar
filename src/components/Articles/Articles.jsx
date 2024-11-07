@@ -21,12 +21,17 @@ const Articles = () => {
         <div className="grid grid-cols-3 gap-6 ">
           {article.map((item, idx) => (
             <Link
-            to={`/article/${id}/${item._id}`}
+              to={`/article/${id}/${item._id}`}
               key={idx}
               className="border p-4 shadow-sm hover:shadow"
             >
               <h4 className="font-semibold mb-2">{item.title}</h4>
-              <p className="">{item.description.slice(0, 150)}</p>
+              <p
+                className=""
+                dangerouslySetInnerHTML={{
+                  __html: item.description.slice(0, 150)+ "...",
+                }}
+              />
             </Link>
           ))}
         </div>
