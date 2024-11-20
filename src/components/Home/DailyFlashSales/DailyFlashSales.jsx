@@ -128,11 +128,11 @@ const DailyFlashSales = () => {
             //   item={flashSale}
             //   progress_sold={true}
             // ></Card>
-            <Card2
+            <Card
               key={flashSale._id}
               item={flashSale}
               progress_sold={true}
-            ></Card2>
+            ></Card>
           ))}
           {/* </div> */}
         </Slider>

@@ -94,9 +94,6 @@ const Card2 = ({ item, progress_sold }) => {
             activeColor="#FFC107"
             edit={false}
             color="#D3CED2"
-            // emptyIcon={<FaRegStar size={40} />}
-            // halfIcon={<FaStarHalfAlt size={40} />}
-            // fullIcon={<FaStar size={40} />}
           />
           <h6>0</h6>
         </div>

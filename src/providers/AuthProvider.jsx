@@ -11,6 +11,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -47,16 +48,51 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = () => {
+  const logOut = async () => {
     setLoading(true);
+
+    //remove cookies token
+    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
+
     return signOut(auth);
+  };
+
+  //get token form server
+  const getToken = async (email) => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/jwt`,
+      { email },
+      { withCredentials: true }
+    );
+    return data;
+  };
+
+  //save user
+  const saveUser = async (user) => {
+    const userInfo = {
+      email: user?.email,
+      role: "user",
+      status: "Verified",
+    };
+    const { data } = await axios.put(
+      `${import.meta.env.VITE_API_URL}/user`,
+      userInfo
+    );
+    return data;
   };
 
   // const onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+
+      if (currentUser) {
+        getToken(currentUser.email);
+        saveUser(currentUser)
+        console.log("--------->", currentUser);
+      }
 
       setLoading(false);
     });
