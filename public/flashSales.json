@@ -4,11 +4,15 @@
       "image": "https://i.ibb.co.com/C26gzPN/Dell-Inspiron-Laptop.jpg",
         "additionalImages": [
         "https://i.ibb.co.com/C26gzPN/Dell-Inspiron-Laptop.jpg",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/Rh9TKTB/inspiron-3530-01-500x500.webp",
+        "https://i.ibb.co.com/XspTDBY/notebook-inspiron-14-7440-t-ice-blue-gallery-17.jpg",
+        "https://i.ibb.co.com/ZKJymSv/images.jpg"
       ],
       "sold_by": "TechWorld",
+      "vendor_info":{
+        "name":"TechWorld",
+        "email":"techWorld@gmail.com"
+      },
       "total_product": 100,
       "sold_product": 45,
       "brand_name": "Dell",
@@ -19,8 +23,8 @@
       "price": 799,
       "category": "Electronics",
       "sub_category": "Laptops",
-      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+      "description":"The Dell Inspiron Laptop combines performance, style, and versatility, making it perfect for both work and entertainment. Powered by the latest Intel or AMD processors, it delivers seamless multitasking and efficient performance. Its Full HD display offers vibrant visuals, while the lightweight design ensures portability. With advanced connectivity options, long battery life, and integrated graphics, this laptop is a reliable companion for students, professionals, and casual users. Features like a backlit keyboard, fast SSD storage, and enhanced audio make it user-friendly and enjoyable. Whether you're streaming, working, or gaming, the Dell Inspiron adapts to your needs with ease and sophistication.",
+      "short_description":"The Dell Inspiron Laptop offers powerful performance, a sleek design, and vivid visuals. Ideal for work and play, it features the latest processors, Full HD display, long battery life, and fast SSD storage for a seamless user experience.",
       "tags": ["laptop", "technology", "electronics"],
       "discount_percent": 12
     },
@@ -29,11 +33,15 @@
       "image": "https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg",
         "additionalImages": [
         "https://i.ibb.co.com/b6Xrj6X/Men-s-Casual-T-shirt.jpg",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/VSw3bQq/images.jpg",
+        "https://i.ibb.co.com/dPh9bf1/men-s-squad-t-shirt-grey-s-31473599971428-500x550-crop-center.webp",
+        "https://i.ibb.co.com/NZ1WLtG/images-1.jpg"
       ],
       "sold_by": "FashionHub",
+      "vendor_info":{
+        "name":"FashionHub",
+        "email":"fashionHub@gmail.com"
+      },
       "total_product": 200,
       "sold_product": 150,
       "brand_name": "Nike",
@@ -44,21 +52,25 @@
       "price": 30,
       "category": "Clothing",
       "sub_category": "T-shirts",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+      "description":"This Men's Casual T-shirt is designed for comfort and style, making it a versatile addition to any wardrobe. Made from soft, breathable cotton or a cotton-blend fabric, it ensures all-day comfort. Its classic crewneck design and relaxed fit suit a variety of occasions, from casual outings to lounging at home. Available in a wide range of colors and sizes, this T-shirt complements jeans, shorts, or joggers effortlessly. Durable stitching and high-quality material make it easy to maintain, ensuring lasting wear. Whether you're dressing down for the weekend or layering it under a jacket, this casual T-shirt is a timeless choice.",
+      "short_description":"Stay comfortable and stylish with this Men's Casual T-shirt. Made from soft, breathable fabric, it features a relaxed fit, durable design, and versatile style perfect for any casual occasion.",
       "tags": ["clothing", "men", "fashion"],
       "discount_percent": 17
     },
     {
       "_id": 3,
-      "image": "https://i.ibb.co.com/5R7qsYT/Diamond-Engagement-Ring.webp",
+      "image": "https://i.ibb.co.com/p2h5y6S/download.jpg",
         "additionalImages": [
-        "https://i.ibb.co.com/5R7qsYT/Diamond-Engagement-Ring.webp",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/p2h5y6S/download.jpg",
+        "https://i.ibb.co.com/4TydsSH/download-1.jpg",
+        "https://i.ibb.co.com/MsHrbMn/download-2.jpg",
+        "https://i.ibb.co.com/HY4QG8c/download-3.jpg"
       ],
       "sold_by": "JewelsZone",
+      "vendor_info":{
+        "name":"TechWorld",
+        "email":"techWorld@gmail.com"
+      },
       "total_product": 50,
       "sold_product": 20,
       "brand_name": "Swarovski",
@@ -69,8 +81,8 @@
       "price": 500,
       "category": "Jewelry",
       "sub_category": "Rings",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+      "description":"A diamond engagement ring is the ultimate symbol of love and commitment, designed to capture life's most special moments. Crafted with precision, this ring features a dazzling center diamond, hand-selected for its brilliance and quality. The band, available in premium materials such as gold, platinum, or white gold, complements the diamond with elegance and durability. Whether set in a classic solitaire, a halo of smaller stones, or a modern design, each ring is a timeless masterpiece. Perfect for proposing or celebrating a lifetime of love, this diamond engagement ring embodies sophistication, romance, and enduring beauty.",
+      "short_description":"A diamond engagement ring symbolizes love and commitment. With a brilliant center diamond and a stunning band, it offers timeless elegance, perfect for marking life's most precious moments.",
       "tags": ["jewelry", "diamond", "engagement"],
       "discount_percent": 10
     },
@@ -79,11 +91,15 @@
       "image": "https://i.ibb.co.com/JsPN8BL/Modern-Sofa-Set.jpg",
         "additionalImages": [
         "https://i.ibb.co.com/JsPN8BL/Modern-Sofa-Set.jpg",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/yNdNdZc/images-1.jpg",
+        "https://i.ibb.co.com/kg6qH1Y/images.jpg",
+        "https://i.ibb.co.com/TcngfmD/images-2.jpg"
       ],
       "sold_by": "HomeEssentials",
+      "vendor_info":{
+        "name":"TechWorld",
+        "email":"techWorld@gmail.com"
+      },
       "total_product": 30,
       "sold_product": 10,
       "brand_name": "Ikea",
@@ -94,8 +110,8 @@
       "price": 950,
       "category": "Furniture",
       "sub_category": "Living Room",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+      "description":"A modern sofa set is the perfect centerpiece for contemporary living spaces, offering both comfort and style. Designed with sleek lines, premium upholstery, and sturdy construction, it effortlessly enhances any home decor. The set typically includes a sofa, loveseat, and armchair, providing ample seating for family and guests. Available in various colors, textures, and configurations, it suits diverse interior themes. Features such as plush cushioning, ergonomic support, and durable frames ensure lasting comfort and reliability. Whether you're entertaining guests or relaxing with family, this modern sofa set creates a sophisticated yet inviting atmosphere in your home.",
+      "short_description":"Upgrade your living room with a modern sofa set featuring sleek design, premium upholstery, and exceptional comfort. Perfect for contemporary spaces, it blends style and functionality to create an inviting ambiance.",
       "tags": ["furniture", "sofa", "home"],
       "discount_percent": 11
     },
@@ -104,11 +120,15 @@
       "image": "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp",
         "additionalImages": [
         "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/WtG1WfH/download-1.jpg",
+        "https://i.ibb.co.com/0GsrpZT/download.jpg",
+        "https://i.ibb.co.com/XLng1bv/download-2.jpg"
       ],
       "sold_by": "FreshMarket",
+         "vendor_info":{
+        "name":"FreshMarket",
+        "email":"freshMarket@gmail.com"
+      },
       "total_product": 500,
       "sold_product": 350,
       "brand_name": "OrganicFarms",
@@ -119,8 +139,8 @@
       "price": 3,
       "category": "Vegetables",
       "sub_category": "Fresh Vegetables",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+       "description":"Fresh organic tomatoes are a delicious and healthy addition to any meal, grown without synthetic chemicals or pesticides. These vibrant, juicy tomatoes are packed with essential nutrients like vitamins C and K, potassium, and antioxidants such as lycopene. Perfect for salads, sauces, sandwiches, or snacking, their rich flavor and natural sweetness elevate every dish. Harvested at peak ripeness, they deliver freshness and quality you can taste. Available in various varieties, including cherry, heirloom, and Roma, these tomatoes are a versatile kitchen staple, ideal for health-conscious individuals who value sustainable, eco-friendly farming practices.",
+      "short_description":"Fresh organic tomatoes are nutrient-rich, pesticide-free, and bursting with flavor. Perfect for salads, sauces, or snacking, they bring natural sweetness and quality to your table, supporting a healthy and eco-friendly lifestyle.",
       "tags": ["vegetables", "organic", "fresh"],
       "discount_percent": 17
     },
@@ -129,11 +149,15 @@
       "image": "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
         "additionalImages": [
         "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/txgG9Nn/images-1.jpg",
+        "https://i.ibb.co.com/JxDJbhh/images.jpg",
+        "https://i.ibb.co.com/3dKPk4L/images-2.jpg"
       ],
       "sold_by": "MeatMasters",
+         "vendor_info":{
+        "name":"MeatMasters",
+        "email":"meatMasters@gmail.com"
+      },
       "total_product": 100,
       "sold_product": 75,
       "brand_name": "PremiumCuts",
@@ -144,8 +168,8 @@
       "price": 7.99,
       "category": "Meat",
       "sub_category": "Poultry",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+      "description":"Organic chicken breasts are a healthy and high-quality protein choice, raised without antibiotics, hormones, or synthetic additives. These tender and juicy cuts come from chickens fed an organic, all-natural diet and raised in humane, free-range conditions. Perfect for grilling, baking, or stir-frying, they are versatile and suitable for various dishes, from hearty meals to light, low-fat options. Rich in essential nutrients like protein, vitamins, and minerals, organic chicken breasts provide a wholesome addition to your diet while supporting ethical and sustainable farming practices. Enjoy their natural flavor and superior quality in every bite.",
+      "short_description":"Organic chicken breasts are tender, hormone-free, and nutrient-rich. Sourced from free-range chickens, they offer natural flavor and versatility, perfect for healthy and sustainable meal options.",
       "tags": ["meat", "chicken", "organic"],
       "discount_percent": 13
     },
@@ -154,11 +178,15 @@
       "image": "https://i.ibb.co.com/thwRJ0P/Running-Sneakers.jpg",
         "additionalImages": [
         "https://i.ibb.co.com/thwRJ0P/Running-Sneakers.jpg",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/gjS6dYR/images-4.jpg",
+        "https://i.ibb.co.com/KWMfS0b/images-3.jpg",
+        "https://i.ibb.co.com/km3bJjK/images-5.jpg"
       ],
       "sold_by": "FootwearWorld",
+         "vendor_info":{
+        "name":"FootwearWorld",
+        "email":"footwearWorld@gmail.com"
+      },
       "total_product": 150,
       "sold_product": 95,
       "brand_name": "Adidas",
@@ -169,8 +197,8 @@
       "price": 100,
       "category": "Footwear",
       "sub_category": "Sneakers",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+       "description":"Running sneakers are expertly designed for comfort, performance, and durability, making them essential for athletes and fitness enthusiasts. Featuring lightweight materials, cushioned soles, and breathable uppers, they reduce fatigue and enhance mobility during runs. Advanced shock-absorption technology minimizes impact, protecting your feet and joints. The snug fit and traction-enhancing outsoles ensure stability on various terrains, from pavement to trails. Available in a range of styles, sizes, and vibrant designs, these sneakers cater to diverse preferences and needs. Whether you're training for a marathon or enjoying a casual jog, running sneakers deliver the support and style to keep you moving confidently.",
+      "short_description":"Running sneakers combine comfort, durability, and style. With cushioned soles, breathable materials, and superior traction, they offer optimal performance for athletes and casual runners alike.",
       "tags": ["footwear", "sneakers", "running"],
       "discount_percent": 20
     },
@@ -179,11 +207,15 @@
       "image": "https://i.ibb.co.com/QQSZKPb/Hydrating-Moisturizer.png",
         "additionalImages": [
         "https://i.ibb.co.com/QQSZKPb/Hydrating-Moisturizer.png",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/2W1SPR6/images-1.jpg",
+        "https://i.ibb.co.com/sVXgbHW/images.jpg",
+        "https://i.ibb.co.com/zV6N1kG/images-2.jpg"
       ],
       "sold_by": "GlowCare",
+         "vendor_info":{
+        "name":"GlowCare",
+        "email":"glowCare@gmail.com"
+      },
       "total_product": 300,
       "sold_product": 250,
       "brand_name": "Neutrogena",
@@ -194,8 +226,8 @@
       "price": 20,
       "category": "Beauty & Personal Care",
       "sub_category": "Skincare",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+       "description":"A hydrating moisturizer is essential for maintaining soft, smooth, and healthy skin. Formulated with nourishing ingredients like hyaluronic acid, glycerin, and natural oils, it deeply penetrates the skin to lock in moisture and prevent dryness. This lightweight, fast-absorbing moisturizer helps restore the skin’s natural balance, providing all-day hydration without a greasy feel. Ideal for all skin types, including sensitive skin, it soothes and protects against environmental stressors, leaving the skin feeling fresh and rejuvenated. Whether used in the morning or as part of your nighttime routine, a hydrating moisturizer ensures your skin remains nourished, plump, and radiant.",
+      "short_description":"A hydrating moisturizer provides deep hydration, leaving skin soft, smooth, and refreshed. Formulated with nourishing ingredients, it suits all skin types, offering long-lasting moisture and protection without a greasy finish.",
       "tags": ["skincare", "beauty", "moisturizer"],
       "discount_percent": 25
     },
@@ -204,11 +236,15 @@
       "image": "https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp",
       "additionalImages": [
         "https://i.ibb.co.com/LZLcY9T/Professional-Soccer-Ball.webp",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/M1SrtTQ/images.jpg",
+        "https://i.ibb.co.com/fXHGLhM/download-1.jpg",
+        "https://i.ibb.co.com/vxsWLj3/download.jpg"
       ],
       "sold_by": "SportsCenter",
+         "vendor_info":{
+        "name":"SportsCenter",
+        "email":"sportsCenter@gmail.com"
+      },
       "total_product": 120,
       "sold_product": 90,
       "brand_name": "Nike",
@@ -219,8 +255,8 @@
       "price": 60,
       "category": "Sports",
       "sub_category": "Soccer",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+       "description":"A professional soccer ball is designed for precision, performance, and durability, making it ideal for athletes and serious players. Constructed with high-quality materials like synthetic leather and reinforced with advanced stitching, it offers excellent control, accuracy, and flight consistency. The ball is designed to withstand the wear and tear of intense play on various surfaces, from grass fields to turf. Its optimal weight and grip ensure a superior feel for passing, shooting, and dribbling. Available in various sizes, a professional soccer ball meets official regulations, making it perfect for both practice sessions and competitive matches.",
+      "short_description":"A professional soccer ball offers precision, durability, and performance, crafted with high-quality materials for excellent control, accuracy, and consistency. Perfect for training or competitive play, it’s designed for serious athletes.",
       "tags": ["sports", "soccer", "ball"],
       "discount_percent": 17
     },
@@ -229,11 +265,15 @@
       "image": "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
       "additionalImages": [
         "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/dcSM3yF/Fresh-Red-Apples.png",
-        "https://i.ibb.co.com/XtrBRrb/Organic-Chicken-Breasts.jpg",
-        "https://i.ibb.co.com/4MP2YDc/Fresh-Organic-Tomatoes.webp"
+        "https://i.ibb.co.com/9YC9K40/images-1.jpg",
+        "https://i.ibb.co.com/GC3Y2Mc/images.jpg",
+        "https://i.ibb.co.com/N9NFQFK/download.jpg"
       ],
       "sold_by": "FreshFruits",
+         "vendor_info":{
+        "name":"FreshFruits",
+        "email":"freshFruits@gmail.com"
+      },
       "total_product": 600,
       "sold_product": 500,
       "brand_name": "OrganicFarms",
@@ -244,8 +284,8 @@
       "price": 3.5,
       "category": "Fruits",
       "sub_category": "Apples",
-       "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at pellentesque diam, at efficitur sem. Aliquam tempor euismod neque. Vestibulum sed augue sed neque ultrices varius. Mauris sodales fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque. Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet sed odio eget, tempus dignissim felis.",
-      "short_description":"Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam vel lacus at est vestibulum dictum. Pellentesque fringilla urna id tellus aliquet ullamcorper.",
+       "description":"Fresh red apples are a delicious and nutritious fruit, known for their crisp texture and naturally sweet flavor. Packed with vitamins, fiber, and antioxidants, they offer numerous health benefits, such as boosting immune health and aiding digestion. These vibrant apples are grown using sustainable farming practices, ensuring they are free from harmful chemicals. Ideal for snacking, adding to salads, or baking into pies and desserts, their versatility makes them a favorite in many kitchens. With their bright color and refreshing taste, fresh red apples bring a burst of natural goodness to any meal or snack.",
+      "short_description":"Fresh red apples are sweet, crisp, and packed with vitamins and fiber. Perfect for snacking or baking, they offer a healthy, delicious addition to any diet.",
       "tags": ["fruits", "apple", "organic"],
       "discount_percent": 14
     }

@@ -11,6 +11,7 @@ const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [grid, setGrid] = useState(true);
+  const [sortOption, setSortOption] = useState("");
 
   const { data: products = [] } = useQuery({
     queryKey: ["shopProducts"],
@@ -47,6 +48,12 @@ const Shop = () => {
     setTags(uniqueTags);
   }, [products]);
   //   console.log(tags);
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
+  // console.log(sortOption);
+  
 
   return (
     <div className="container mx-auto">
@@ -151,20 +158,24 @@ const Shop = () => {
                 <select
                   name="sort"
                   id="sort"
-                  className="outline-none text-[#333] px-2 "
-                  defaultValue=""
+                  className="outline-none text-[#333] px-2"
+                  value={sortOption}
+                  onChange={handleSortChange}
                 >
-                  <option value="" disabled selected hidden>
-                    Default sorting
-                  </option>
-                  <option value="" className="hover:bg-red-500">
+                  <option value="default">Default sorting</option>
+                  <option value="popularity" className="hover:bg-red-500">
                     Sort by popularity
                   </option>
-                  <option value="">Sort by average rating</option>
-                  <option value="">Sort by latest</option>
-                  <option value="">Sort by price: low to high</option>
-                  <option value="">Sort by price: high to low</option>
+                  <option value="rating">Sort by average rating</option>
+                  <option value="latest">Sort by latest</option>
+                  <option value="low-to-high">
+                    Sort by price: low to high
+                  </option>
+                  <option value="high-to-low">
+                    Sort by price: high to low
+                  </option>
                 </select>
+
                 {/* <CustomDropdown></CustomDropdown> */}
               </div>
 
@@ -174,7 +185,7 @@ const Shop = () => {
                 <div className="flex gap-2 border p-2 shadow">
                   <div
                     className={`text-2xl ${
-                      grid ? "text-[#2E8DD8]" : "text-gray-400" 
+                      grid ? "text-[#2E8DD8]" : "text-gray-400"
                     } border-r pr-1.5`}
                     onClick={() => setGrid(true)}
                   >
@@ -190,21 +201,24 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
           {/* product */}
-         { grid ? <div className={`grid ${grid ? 'grid-cols-5' : 'grid-cols-1'}  my-8`}>
-            {products.map((product) => (
-              <Card key={product?._id} item={product}></Card>
-            ))}
-          </div>
-          :
-          <div className={`grid grid-cols-1'} my-8 `}>
-            {products.map((product) => (
-              <CardX key={product?._id} item={product}></CardX>
-            ))}
-          </div>}
+          {grid ? (
+            <div
+              className={`grid ${grid ? "grid-cols-5" : "grid-cols-1"}  my-8`}
+            >
+              {products.map((product) => (
+                <Card key={product?._id} item={product}></Card>
+              ))}
+            </div>
+          ) : (
+            <div className={`grid grid-cols-1'} my-8 `}>
+              {products.map((product) => (
+                <CardX key={product?._id} item={product}></CardX>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

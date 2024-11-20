@@ -167,6 +167,7 @@ const ProductDetails = () => {
                       </div>
                       <div className="flex flex-col">
                         <h4>Wholegood Organic</h4>
+                        {/* <h4>{item.title}</h4> */}
                         <h6 className="text-sm text-[#666D74] font-semibold mb-1">
                           450g
                         </h6>

@@ -54,6 +54,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     sub_category,
     tags,
     discount_percent,
+    short_description
   } = item;
 
   const settings = {
@@ -173,10 +174,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         </div>
                         {/* TODO:add dynamic short description */}
                         <p className="my-2.5 font-light text-[#828E9A]">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. In nisl tortor, lobortis non tortor sit amet,
-                          iaculis rhoncus ipsum. Fusce ornare nunc maximus dui
-                          molestie.
+                         {short_description}
                         </p>
                         <h6 className="text-sm font-semibold text-gray-500">
                           Availability :{" "}
