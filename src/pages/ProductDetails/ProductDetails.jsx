@@ -2,12 +2,6 @@ import { IoCameraSharp, IoSearch } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import CustomPaging from "../../components/CustomPaging/CustomPaging";
 import { FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
-import {
-  IoIosArrowBack,
-  IoIosArrowDropleft,
-  IoIosArrowForward,
-} from "react-icons/io";
-import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Slider from "react-slick";
 import NextArrow from "../../components/Arrow/NextArrow";
@@ -16,11 +10,14 @@ import PrevArrow from "../../components/Arrow/PrevArrow";
 import { useEffect, useState } from "react";
 import { MdVerifiedUser } from "react-icons/md";
 import Rating from "react-rating";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [rating, setRating] = useState(0);
-  console.log(id);
+  const axiosCommon = useAxiosCommon();
+  const [count, setCount] = useState(1);
 
   // TODO: add dynamic category
   const settings = {
@@ -34,14 +31,27 @@ const ProductDetails = () => {
     prevArrow: <PrevArrow isTrue={true} />,
   };
 
+  const { data: product = {}, isLoading } = useQuery({
+    queryKey: ["productDetails"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/product/${id}`);
+      return data;
+    },
+  });
+  console.log(product);
+
+  //for relational product
   const [data, setData] = useState([]);
   useEffect(() => {
     fetch("/flashSales.json")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  console.log(data);
-  console.log("ijol;");
+  // console.log(data);
+
+  if (isLoading) {
+    return <h4>loading...</h4>;
+  }
 
   return (
     <div className="container mx-auto">
@@ -54,15 +64,26 @@ const ProductDetails = () => {
       <div>
         <div>
           <div className="flex items-end gap-2  mb-3">
-            <h2 className="text-2xl font-bold">Zesco Ripe Bananas</h2>
-            <h6 className="text-[#637381] font-semibold">350G</h6>
+            <h2 className="text-2xl font-bold">{product.title}</h2>
+            <h6 className="text-[#637381] font-semibold">{product.unit}</h6>
           </div>
           <div className="space-x-3">
-            <i>rating</i>
+            <Rating
+              style={{ maxWidth: 180 }}
+              initialRating={product.rating}
+              fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
+              emptySymbol={
+                <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
+              }
+              readonly
+            />
+            {/* TODO: dynamic customer review & sold count */}
             <span className="text-[#637381]">1 customer review </span>
             <span className="text-[#637381] border-x px-3">Sold: 0 </span>
+
             <span className="text-[#637381]">
-              <span className="text-[#919eab]">Sold by:</span> Gia Marquez
+              <span className="text-[#919eab]">Sold by:</span>{" "}
+              {product.vendor_info?.name}
             </span>
           </div>
         </div>
@@ -86,33 +107,37 @@ const ProductDetails = () => {
             </i>
           </div>
           <div className="">
-            <CustomPaging></CustomPaging>
+            <CustomPaging images={product?.additionalImages}></CustomPaging>
           </div>
         </div>
         {/* product details */}
         <div className="x-4">
           <div className="flex items-center justify-between text-xl font-bold ">
-            <h4 className="text-red-600">$120.00</h4>
+            {product?.discounted_price ? (
+              <div className="flex items-center gap-4">
+                <del className="text-gray-600">${product?.price}</del>
+                <h4 className="text-red-600">${product?.discounted_price}</h4>
+              </div>
+            ) : (
+              <h4 className="text-red-600">${product?.price}</h4>
+            )}
             <i>
               <FaRegHeart />
             </i>
           </div>
-          <p className="text-[#666D74] my-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nisl
-            tortor, lobortis non tortor sit amet, iaculis rhoncus ipsum. Fusce
-            ornare nunc maximus dui molestie.
-          </p>
+          <p className="text-[#666D74] my-4">{product.short_description}</p>
+          {/* TODO:replace dynamic */}
           <h4 className="">
             Availability:{" "}
             <span className="font-semibold text-green-500">6 in stock</span>
           </h4>
           <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
-            <button className="text- active:scale-75 scale-100 duration-200">
-              <FiMinus />
+            <button className={`text- active:scale-75 scale-100 duration-200 ${count === 1 ? "disabled" : ''}`}>
+              <FiMinus onClick={() => setCount(count - 1)} />
             </button>
-            <span>1</span>
+            <span>{count}</span>
             <button className="active:scale-75 scale-100 duration-200">
-              <FiPlus />
+              <FiPlus onClick={() => setCount(count + 1)} />
             </button>
           </div>
           <div className="flex flex-col space-y-2 mb-6">
@@ -131,17 +156,22 @@ const ProductDetails = () => {
             </h6>
             <h6>
               <span className="font-semibold">Category:</span>{" "}
-              <Link>Dairy & Eggs</Link>
+              <Link>{product?.category}</Link>
             </h6>
             <h6>
               <span className="font-semibold">Tags:</span>{" "}
-              <Link>Home Food</Link>,<Link> Lettuce</Link>, <Link>Onion</Link>,
-              <Link>Vegetable </Link>
+              {product?.tags.map((tag, idx) => (
+                <span key={idx} className="capitalize mr-1">
+                  {tag},
+                </span>
+              ))}
             </h6>
-            <h6>
-              <span className="font-semibold">Brand:</span>{" "}
-              <Link>Betterfoods</Link>
-            </h6>
+            {product?.brand_name && (
+              <h6>
+                <span className="font-semibold">Brand:</span>{" "}
+                <Link>{product?.brand_name}</Link>
+              </h6>
+            )}
           </div>
         </div>
         {/* relational product */}
@@ -620,19 +650,29 @@ const ProductDetails = () => {
                 id="review"
               ></textarea>
             </label>
-          
+
             <label
               htmlFor="checkbox"
               className="flex items-center gap-1.5 text-[#666D74] text-xs font-bold mb-3"
             >
-              <input className="" type="checkbox" name="checkbox" id="checkbox" />
+              <input
+                className=""
+                type="checkbox"
+                name="checkbox"
+                id="checkbox"
+              />
               <h4>
                 Save my name, email, and website in this browser for the next
                 time I comment.
               </h4>
             </label>
           </div>
-          <button type="submit" className="bg-[#2E8DD8] text-white px-10 py-2 ext-sm font-bold rounded-md active:scale-95 scale-100 duration-200">Submit</button>
+          <button
+            type="submit"
+            className="bg-[#2E8DD8] text-white px-10 py-2 ext-sm font-bold rounded-md active:scale-95 scale-100 duration-200"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>

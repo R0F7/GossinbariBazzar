@@ -6,18 +6,23 @@ import { useEffect, useState } from "react";
 import { CgMenuGridR } from "react-icons/cg";
 import { ImMenu } from "react-icons/im";
 import CardX from "../../components/Card/CardX";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [grid, setGrid] = useState(true);
   const [sortOption, setSortOption] = useState("");
+  const axiosCommon = useAxiosCommon();
 
   const { data: products = [] } = useQuery({
     queryKey: ["shopProducts"],
-    queryFn: () => fetch("./flashSales.json").then((res) => res.json()),
+    queryFn: async () => {
+      const { data } = await axiosCommon.get("/products");
+      return data;
+    },
   });
-  //   console.log(products);
+  // console.log(products);
 
   const { data: categories = [] } = useQuery({
     queryKey: ["shopCategories"],
@@ -53,7 +58,6 @@ const Shop = () => {
     setSortOption(event.target.value);
   };
   // console.log(sortOption);
-  
 
   return (
     <div className="container mx-auto">
