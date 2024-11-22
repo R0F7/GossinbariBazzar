@@ -15,6 +15,9 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import imageUpload from "../../api/utils";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
+import { GridLoader } from "react-spinners";
+import { format } from "date-fns";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -22,9 +25,8 @@ const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
-  const {user} = useAuth();
+  const { user } = useAuth();
   console.log(user);
-  
 
   // TODO: add dynamic category
   const settings = {
@@ -50,14 +52,37 @@ const ProductDetails = () => {
   const { mutateAsync } = useMutation({
     mutationFn: async (review_info) => {
       const { data } = await axiosCommon.post("/review", review_info);
-      return data
+      return data;
     },
-    onSuccess:()=>{
+    onSuccess: () => {
       console.log("review save successfully");
       toast.success("review added successfully");
       setLoading(false);
-    }
+    },
   });
+
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews", product?._id],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/reviews/${product?._id}`);
+      return data;
+    },
+  });
+  // console.log(reviews);
+
+  const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
+  const averageRating = totalRatings / reviews.length;
+  // const averageRating =Math.round(totalRatings / reviews.length);
+  // console.log(averageRating);
+
+  const ratingCount = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  reviews.forEach((review)=>{
+    const rating = review.rating;
+    if (ratingCount[rating] !== undefined) {
+      ratingCount[rating]++;
+    }
+  })
+  // console.log(ratingCount);  
 
   //for relational product
   const [data, setData] = useState([]);
@@ -66,23 +91,26 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  // console.log(data);  
+  // console.log(data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
+    // const name = form.name.value;
+    // const email = form.email.value;
     const image = form.file.files[0];
     const review = form.review.value;
-    const user_image = user?.photoURL
+    const name = user?.displayName;
+    const email = user?.email;
+    const user_image = user?.photoURL;
 
     // console.table(name,email,image,review)
 
     if (rating === 0) {
-      return toast.error("rating is required")
+      setLoading(false);
+      return toast.error("rating is required");
     }
 
     try {
@@ -95,20 +123,27 @@ const ProductDetails = () => {
         image_url,
         rating,
         review,
-        date:new Date(),
+        date: new Date(),
       };
-      console.log(review_info);
+      // console.log(review_info);
 
       //save review in db
-      // await mutateAsync(review_info)
+      await mutateAsync(review_info);
 
+      //clear old data
+      form.reset();
+      setRating(0);
     } catch (error) {
       console.error(error);
     }
   };
 
   if (isLoading) {
-    return <h4>loading...</h4>;
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-176px)]">
+        <GridLoader color="#2E8DD8" />
+      </div>
+    );
   }
 
   return (
@@ -128,7 +163,7 @@ const ProductDetails = () => {
           <div className="space-x-3">
             <Rating
               style={{ maxWidth: 180 }}
-              initialRating={product.rating}
+              initialRating={averageRating}
               fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
               emptySymbol={
                 <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
@@ -136,7 +171,10 @@ const ProductDetails = () => {
               readonly
             />
             {/* TODO: dynamic customer review & sold count */}
-            <span className="text-[#637381]">1 customer review </span>
+            <span className="text-[#637381]">
+              {reviews && reviews.length > 0 ? reviews.length : 0} customer
+              review{" "}
+            </span>
             <span className="text-[#637381] border-x px-3">Sold: 0 </span>
 
             <span className="text-[#637381]">
@@ -335,31 +373,23 @@ const ProductDetails = () => {
         <h4 className="text-[#666D74] text-lg font-bold mb-2">
           Product Description
         </h4>
-        <p className="w-[65%] text-[#666D74] mb-2.5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
-          pellentesque diam, at efficitur sem. Aliquam tempor euismod neque.
-          Vestibulum sed augue sed neque ultrices varius. Mauris sodales
-          fringilla dolor, sed varius dui lobortis vitae. Duis vitae arcu in mi
-          volutpat ornare interdum eget purus. Sed eget fringilla mauris, sit
-          amet dapibus metus. Maecenas rhoncus urna in mi viverra scelerisque.
-          Sed accumsan hendrerit tellus vel viverra. Mauris sem urna, laoreet
-          sed odio eget, tempus dignissim felis.
-        </p>
-        <p className="w-[65%] text-[#666D74]">
-          Aliquam ac tellus efficitur, luctus leo et, condimentum felis. Aliquam
-          vel lacus at est vestibulum dictum. Pellentesque fringilla urna id
-          tellus aliquet ullamcorper.
-        </p>
+        <p className="w-[65%] text-[#666D74] mb-2.5">{product?.description}</p>
       </div>
       {/* review for Tescot durian */}
       <div className="my-10">
         <div>
           <h4 className="text-2xl font-bold text-[#666D74] mb-0.5">
-            1 review for Tescot durian{" "}
+            {reviews && reviews.length > 0 ? reviews.length : 0} review for{" "}
+            {product?.title}
           </h4>
           <span className="flex items-center mb-4">
-            <strong className="text-yellow-500 font-black mr-2">4.00</strong>
-            <p className="text-[#666D74]">( Based on 1 review )</p>
+            <strong className="text-yellow-500 font-black mr-2">
+              {averageRating}
+            </strong>
+            <p className="text-[#666D74]">
+              ( Based on {reviews && reviews.length > 0 ? reviews.length : 0}{" "}
+              review )
+            </p>
           </span>
         </div>
         {/* rating */}
@@ -386,7 +416,7 @@ const ProductDetails = () => {
               <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
                 <div className="w-[100%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
               </div>
-              <span className="col-span-1 font-bold">2</span>
+              <span className="col-span-1 font-bold">{ratingCount[5]}</span>
             </li>
             <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
               <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
@@ -409,7 +439,7 @@ const ProductDetails = () => {
               <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
                 <div className="w-[80%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
               </div>
-              <span className="col-span-1 font-bold">2</span>
+              <span className="col-span-1 font-bold">{ratingCount[4]}</span>
             </li>
             <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
               <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
@@ -432,7 +462,7 @@ const ProductDetails = () => {
               <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
                 <div className="w-[60%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
               </div>
-              <span className="col-span-1 font-bold">2</span>
+              <span className="col-span-1 font-bold">{ratingCount[3]}</span>
             </li>
             <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
               <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
@@ -455,7 +485,7 @@ const ProductDetails = () => {
               <div className="border w-full h-3 bg-gray-100 col-span-7 progressbar rounded-full relative">
                 <div className="w-[40%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
               </div>
-              <span className="col-span-1 font-bold">2</span>
+              <span className="col-span-1 font-bold">{ratingCount[2]}</span>
             </li>
             <li className="grid grid-cols-12 items-center gap-6 w-[70%]">
               <span className="flex items-center gap-1.5 text-[#FFB600] col-span-2">
@@ -479,18 +509,18 @@ const ProductDetails = () => {
                 <div className="w-[20%] h-full absolute top-0 left-0 bg-[#FFB600] rounded-full"></div>
               </div>
               {/* reviewer count */}
-              <span className="col-span-1 font-bold">2</span>
+              <span className="col-span-1 font-bold">{ratingCount[1]}</span>
             </li>
           </ul>
         </div>
         {/* buttons */}
         <div className="my-10 flex gap-4">
-          <button className="bg-[#EEEEEE] text-[#666D74] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
+          <button className="bg-[#EEEEEE] ext-[#666D74] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
             <i>
               <IoCameraSharp />
             </i>
             <h4> With images</h4>
-            <span>(0)</span>
+            <span>({reviews && reviews.length > 0 ? reviews.length : 0})</span>
           </button>
           <button className="bg-[#EEEEEE] flex items-center py-2 px-2.5 gap-1 text-sm font-bold rounded-md active:scale-95 scale-100 duration-200 shadow hover:bg-[#FFFFFF] border hover:border-[#2E8DD8] hover:text-[#2E8DD8] transition ">
             <i>
@@ -504,13 +534,48 @@ const ProductDetails = () => {
               <FaStar />
             </i>
             <h4> All stars</h4>
-            <span>(3)</span>
+            <span>({ratingCount[5]})</span>
           </button>
         </div>
         <hr className="" />
         {/* reviews */}
         <div>
-          <div className="border-b flex justify-between w-[55%] gap-4 py-6">
+          {reviews && reviews.map(review => (
+            <div key={review._id} className="border-b flex justify-between w-[65%] gap-4 py-6">
+           <div className="flex gap-4">
+           <div className="-[90px]">
+              <div className="w-[50px] h-[50px] border border-[#FFB600] rounded-full">
+                <img
+                  className="w-full h-full rounded-full p-"
+                  src={review?.user_image}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="">
+              <h4 className="font-semibold -mb-1">{review?.name}</h4>
+              <span className="text-xs text-[#B0B9C2] font-semibold">
+                {format(review?.date, 'MMMM dd, yyyy')}
+              </span>
+              <p className="mt-2 text-sm text-[#666D74]">
+                {review?.review}
+              </p>
+            </div>
+           </div>
+            <div className=" w-[130px] text-end">
+            <Rating
+              style={{ maxWidth: 180 }}
+              initialRating={review?.rating}
+              fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
+              emptySymbol={
+                <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
+              }
+              readonly
+            />
+            </div>
+          </div>
+          ))}
+          {/* <div className="border-b flex justify-between w-[55%] gap-4 py-6">
             <div className="w-[90px]">
               <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">
                 <img
@@ -587,46 +652,7 @@ const ProductDetails = () => {
                 <FaStar></FaStar>
               </i>
             </div>
-          </div>
-          <div className="border-b flex justify-between w-[55%] gap-4 py-6">
-            <div className="w-[90px]">
-              <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">
-                <img
-                  className="w-full h-full rounded-full p-"
-                  src="https://i.ibb.co.com/MZqW3Th/trend-01.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold -mb-1">admin</h4>
-              <span className="text-xs text-[#B0B9C2] font-semibold">
-                August 26, 2021
-              </span>
-              <p className="mt-2 text-sm text-[#666D74]">
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using ‘Content
-                here, content here’, making it look like readable English
-              </p>
-            </div>
-            <div className="flex gap-1 text-[#FFB600]">
-              <i>
-                <FaStar></FaStar>
-              </i>
-              <i>
-                <FaStar></FaStar>
-              </i>
-              <i>
-                <FaStar></FaStar>
-              </i>
-              <i>
-                <FaStar></FaStar>
-              </i>
-              <i>
-                <FaStar></FaStar>
-              </i>
-            </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* review field */}
@@ -653,7 +679,9 @@ const ProductDetails = () => {
                 value={rating}
                 onChange={setRating}
                 fullSymbol={<FaStar className="mr-1 text-[#FFB600]"></FaStar>}
-                emptySymbol={<FaRegStar className="mr-1 text-[#FFB600]"></FaRegStar>}
+                emptySymbol={
+                  <FaRegStar className="mr-1 text-[#FFB600]"></FaRegStar>
+                }
                 // fractions={2} // Allows half-star ratings
                 isRequired={true}
               />
@@ -661,7 +689,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="">
-            <div className="grid grid-cols-2 gap-6 mb-3">
+            {/* <div className="grid grid-cols-2 gap-6 mb-3">
               <label htmlFor="name">
                 <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
                   Name <span className="text-red-500">*</span>
@@ -690,7 +718,7 @@ const ProductDetails = () => {
                   required
                 />
               </label>
-            </div>
+            </div> */}
 
             <label htmlFor="file">
               <h4 className="text-[#666D74] text-sm font-bold mb-1.5">
@@ -738,9 +766,14 @@ const ProductDetails = () => {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="bg-[#2E8DD8] text-white px-10 py-2 ext-sm font-bold rounded-md active:scale-95 scale-100 duration-200"
           >
-            Submit
+            {loading ? (
+              <CgSpinnerTwoAlt className="animate-spin m-auto" />
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>
