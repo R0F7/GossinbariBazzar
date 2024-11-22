@@ -10,14 +10,21 @@ import PrevArrow from "../../components/Arrow/PrevArrow";
 import { useEffect, useState } from "react";
 import { MdVerifiedUser } from "react-icons/md";
 import Rating from "react-rating";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import imageUpload from "../../api/utils";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [rating, setRating] = useState(0);
   const axiosCommon = useAxiosCommon();
   const [count, setCount] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const {user} = useAuth();
+  console.log(user);
+  
 
   // TODO: add dynamic category
   const settings = {
@@ -38,7 +45,19 @@ const ProductDetails = () => {
       return data;
     },
   });
-  console.log(product);
+  // console.log(product);
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (review_info) => {
+      const { data } = await axiosCommon.post("/review", review_info);
+      return data
+    },
+    onSuccess:()=>{
+      console.log("review save successfully");
+      toast.success("review added successfully");
+      setLoading(false);
+    }
+  });
 
   //for relational product
   const [data, setData] = useState([]);
@@ -47,7 +66,46 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
-  // console.log(data);
+  // console.log(data);  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const image = form.file.files[0];
+    const review = form.review.value;
+    const user_image = user?.photoURL
+
+    // console.table(name,email,image,review)
+
+    if (rating === 0) {
+      return toast.error("rating is required")
+    }
+
+    try {
+      const image_url = await imageUpload(image);
+      const review_info = {
+        product_id: id,
+        name,
+        email,
+        user_image,
+        image_url,
+        rating,
+        review,
+        date:new Date(),
+      };
+      console.log(review_info);
+
+      //save review in db
+      // await mutateAsync(review_info)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (isLoading) {
     return <h4>loading...</h4>;
@@ -132,7 +190,10 @@ const ProductDetails = () => {
             <span className="font-semibold text-green-500">6 in stock</span>
           </h4>
           <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
-            <button className={`text- active:scale-75 scale-100 duration-200 ${count === 1 ? "disabled" : ''}`}>
+            <button
+              disabled={count === 1}
+              className="text- active:scale-75 scale-100 duration-200"
+            >
               <FiMinus onClick={() => setCount(count - 1)} />
             </button>
             <span>{count}</span>
@@ -570,7 +631,7 @@ const ProductDetails = () => {
       </div>
       {/* review field */}
       <div className="bg-[#F4F6F8] w-[55%] p-6 rounded-md shadow">
-        <form className="">
+        <form className="" onSubmit={handleSubmit}>
           <div className="mb-4">
             <h4 className="font-bold text-[17px] mb-0.5">Add a review</h4>
             <p className="text-sm text-[#666D74] font-medium mb-0.5">
@@ -591,10 +652,10 @@ const ProductDetails = () => {
                 style={{ maxWidth: 180 }}
                 value={rating}
                 onChange={setRating}
-                fullSymbol={<FaStar className="mr-1"></FaStar>}
-                emptySymbol={<FaRegStar className="mr-1"></FaRegStar>}
+                fullSymbol={<FaStar className="mr-1 text-[#FFB600]"></FaStar>}
+                emptySymbol={<FaRegStar className="mr-1 text-[#FFB600]"></FaRegStar>}
                 // fractions={2} // Allows half-star ratings
-                isRequired
+                isRequired={true}
               />
             </div>
           </div>
@@ -611,6 +672,8 @@ const ProductDetails = () => {
                   name="name"
                   id="name"
                   placeholder="Enter Your Name"
+                  defaultValue={user?.displayName}
+                  required
                 />
               </label>
               <label htmlFor="email">
@@ -623,6 +686,8 @@ const ProductDetails = () => {
                   name="email"
                   id="email"
                   placeholder="Enter Your Email"
+                  defaultValue={user?.email}
+                  required
                 />
               </label>
             </div>
@@ -637,6 +702,8 @@ const ProductDetails = () => {
                 type="file"
                 name="file"
                 id="file"
+                accept="image/*"
+                required
               />
             </label>
 
@@ -645,9 +712,11 @@ const ProductDetails = () => {
                 Your review <span className="text-red-500">*</span>
               </h4>
               <textarea
-                className="w-full h-[120px] rounded-md mb-2 outline-none py-1 px-2 text-[#666D74]"
+                className="w-full h-[120px] rounded-md mb-2 outline-none py-1 px-2 text-[#666D74] placeholder:text-sm"
                 name="review"
                 id="review"
+                placeholder="Write review message"
+                required
               ></textarea>
             </label>
 
