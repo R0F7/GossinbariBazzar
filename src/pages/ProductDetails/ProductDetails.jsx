@@ -23,10 +23,10 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [rating, setRating] = useState(0);
   const axiosCommon = useAxiosCommon();
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   // TODO: add dynamic category
   const settings = {
@@ -40,6 +40,7 @@ const ProductDetails = () => {
     prevArrow: <PrevArrow isTrue={true} />,
   };
 
+  //get single product data
   const { data: product = {}, isLoading } = useQuery({
     queryKey: ["productDetails"],
     queryFn: async () => {
@@ -49,19 +50,22 @@ const ProductDetails = () => {
   });
   // console.log(product);
 
+  //post review info
   const { mutateAsync } = useMutation({
     mutationFn: async (review_info) => {
       const { data } = await axiosCommon.post("/review", review_info);
       return data;
     },
     onSuccess: () => {
-      console.log("review save successfully");
+      // console.log("review save successfully");
       toast.success("review added successfully");
       setLoading(false);
+      // refetch();
     },
   });
 
-  const { data: reviews = [] } = useQuery({
+  //get specific reviews
+  const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", product?._id],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/reviews/${product?._id}`);
@@ -70,19 +74,76 @@ const ProductDetails = () => {
   });
   // console.log(reviews);
 
+  //add product in card
+  const { mutateAsync: addProductInCard } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosCommon.put(
+        "/add-product-in-card",
+        product_info
+      );
+      return data;
+    },
+    onSuccess: () => {
+      // console.log("product added successfully");
+      toast.success("product added successfully");
+      cardAddedProductsRefetch();
+    },
+  });
+
+  const { data: cardAddedProducts = [], refetch: cardAddedProductsRefetch } =
+    useQuery({
+      queryKey: ["cardAddedProducts", user?.email],
+      queryFn: async () => {
+        const { data } = await axiosCommon.get(
+          `/products-in-card/${user?.email}`
+        );
+        return data;
+      },
+    });
+  console.log(cardAddedProducts);
+
+  const find_product = cardAddedProducts.find((product) => product.id === id);
+  // const quantity = find_product?.quantity;
+  // console.log(quantity);
+  // console.log(count);
+
+  useEffect(()=>{
+    if (find_product) {
+      setCount(find_product?.quantity)
+    }
+  },[find_product])
+
+  const handleAddToCard = async (id) => {
+    const updateCount = count + 1;
+    setCount(updateCount);
+
+    const product_info = {
+      id,
+      order_owner_info: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      quantity: updateCount,
+    };
+
+    await addProductInCard(product_info);
+
+    // console.log(product_info);
+  };
+
   const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
   const averageRating = totalRatings / reviews.length;
   // const averageRating =Math.round(totalRatings / reviews.length);
   // console.log(averageRating);
 
   const ratingCount = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-  reviews.forEach((review)=>{
+  reviews.forEach((review) => {
     const rating = review.rating;
     if (ratingCount[rating] !== undefined) {
       ratingCount[rating]++;
     }
-  })
-  // console.log(ratingCount);  
+  });
+  // console.log(ratingCount);
 
   //for relational product
   const [data, setData] = useState([]);
@@ -151,7 +212,7 @@ const ProductDetails = () => {
       <div className="flex items-center gap-2 text-[#212B36] mb-10 mt-5">
         <h4>Home</h4>
         <span>/</span>
-        <h4>Dairy & Eggs</h4>
+        <h4>{product?.category}</h4>
       </div>
       {/* title */}
       <div>
@@ -225,22 +286,31 @@ const ProductDetails = () => {
           {/* TODO:replace dynamic */}
           <h4 className="">
             Availability:{" "}
-            <span className="font-semibold text-green-500">6 in stock</span>
+            <span className="font-semibold text-green-500">
+              {product?.total_product}
+            </span>
           </h4>
           <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
             <button
-              disabled={count === 1}
+              disabled={count === 0}
               className="text- active:scale-75 scale-100 duration-200"
             >
               <FiMinus onClick={() => setCount(count - 1)} />
             </button>
             <span>{count}</span>
-            <button className="active:scale-75 scale-100 duration-200">
+            <button
+              className="active:scale-75 scale-100 duration-200"
+              disabled={count === product?.total_product}
+            >
               <FiPlus onClick={() => setCount(count + 1)} />
             </button>
           </div>
           <div className="flex flex-col space-y-2 mb-6">
-            <button className="g-[#76c893] bg-[#0077b6] text-white py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200">
+            <button
+              onClick={() => handleAddToCard(product?._id)}
+              className="g-[#76c893] bg-[#0077b6] text-white py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200"
+              disabled={count === product?.total_product}
+            >
               Add to cart
             </button>
             <button className="bg-[#FFB240] py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200">
@@ -375,7 +445,7 @@ const ProductDetails = () => {
         </h4>
         <p className="w-[65%] text-[#666D74] mb-2.5">{product?.description}</p>
       </div>
-      {/* review for Tescot durian */}
+      {/* review for product */}
       <div className="my-10">
         <div>
           <h4 className="text-2xl font-bold text-[#666D74] mb-0.5">
@@ -384,7 +454,7 @@ const ProductDetails = () => {
           </h4>
           <span className="flex items-center mb-4">
             <strong className="text-yellow-500 font-black mr-2">
-              {averageRating}
+              {averageRating ? averageRating : 0}
             </strong>
             <p className="text-[#666D74]">
               ( Based on {reviews && reviews.length > 0 ? reviews.length : 0}{" "}
@@ -540,41 +610,47 @@ const ProductDetails = () => {
         <hr className="" />
         {/* reviews */}
         <div>
-          {reviews && reviews.map(review => (
-            <div key={review._id} className="border-b flex justify-between w-[65%] gap-4 py-6">
-           <div className="flex gap-4">
-           <div className="-[90px]">
-              <div className="w-[50px] h-[50px] border border-[#FFB600] rounded-full">
-                <img
-                  className="w-full h-full rounded-full p-"
-                  src={review?.user_image}
-                  alt=""
-                />
+          {reviews &&
+            reviews.map((review) => (
+              <div
+                key={review._id}
+                className="border-b flex justify-between w-[65%] gap-4 py-6"
+              >
+                <div className="flex gap-4">
+                  <div className="-[90px]">
+                    <div className="w-[50px] h-[50px] border border-[#FFB600] rounded-full">
+                      <img
+                        className="w-full h-full rounded-full p-"
+                        src={review?.user_image}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className="">
+                    <h4 className="font-semibold -mb-1">{review?.name}</h4>
+                    <span className="text-xs text-[#B0B9C2] font-semibold">
+                      {format(review?.date, "MMMM dd, yyyy")}
+                    </span>
+                    <p className="mt-2 text-sm text-[#666D74]">
+                      {review?.review}
+                    </p>
+                  </div>
+                </div>
+                <div className=" w-[130px] text-end">
+                  <Rating
+                    style={{ maxWidth: 180 }}
+                    initialRating={review?.rating}
+                    fullSymbol={
+                      <FaStar className="mr-1 text-yellow-500"></FaStar>
+                    }
+                    emptySymbol={
+                      <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
+                    }
+                    readonly
+                  />
+                </div>
               </div>
-            </div>
-            <div className="">
-              <h4 className="font-semibold -mb-1">{review?.name}</h4>
-              <span className="text-xs text-[#B0B9C2] font-semibold">
-                {format(review?.date, 'MMMM dd, yyyy')}
-              </span>
-              <p className="mt-2 text-sm text-[#666D74]">
-                {review?.review}
-              </p>
-            </div>
-           </div>
-            <div className=" w-[130px] text-end">
-            <Rating
-              style={{ maxWidth: 180 }}
-              initialRating={review?.rating}
-              fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
-              emptySymbol={
-                <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
-              }
-              readonly
-            />
-            </div>
-          </div>
-          ))}
+            ))}
           {/* <div className="border-b flex justify-between w-[55%] gap-4 py-6">
             <div className="w-[90px]">
               <div className="w-[55px] h-[55px] border border-[#FFB600] rounded-full">

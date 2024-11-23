@@ -149,7 +149,7 @@ const Footer = () => {
       {/* footer - footer */}
       <div className="py-6 border-t text-center">
         <h6 className="text-[#4E565F]">
-          © 2024 <strong>GossainbaiBazzar.</strong> All rights reserved by R0F7.
+          © 2024 <strong>GossainbariBazzar.</strong> All rights reserved by R0F7.
         </h6>
         {/* payment method logo */}
         {/* <div></div> */}
