@@ -1,7 +1,8 @@
 import { IoCameraSharp, IoSearch } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import CustomPaging from "../../components/CustomPaging/CustomPaging";
-import { FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
+import { FaCheckCircle, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Slider from "react-slick";
 import NextArrow from "../../components/Arrow/NextArrow";
@@ -18,14 +19,17 @@ import useAuth from "../../hooks/useAuth";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { GridLoader } from "react-spinners";
 import { format } from "date-fns";
+import { HiMiniExclamationTriangle } from "react-icons/hi2";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [rating, setRating] = useState(0);
   const axiosCommon = useAxiosCommon();
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const [cartToast, setCartToast] = useState(false);
   // console.log(user);
 
   // TODO: add dynamic category
@@ -60,7 +64,7 @@ const ProductDetails = () => {
       // console.log("review save successfully");
       toast.success("review added successfully");
       setLoading(false);
-      // refetch();
+      refetch();
     },
   });
 
@@ -74,11 +78,11 @@ const ProductDetails = () => {
   });
   // console.log(reviews);
 
-  //add product in card
+  //add product in cart
   const { mutateAsync: addProductInCard } = useMutation({
     mutationFn: async (product_info) => {
       const { data } = await axiosCommon.put(
-        "/add-product-in-card",
+        "/add-product-in-cart",
         product_info
       );
       return data;
@@ -86,36 +90,47 @@ const ProductDetails = () => {
     onSuccess: () => {
       // console.log("product added successfully");
       toast.success("product added successfully");
-      cardAddedProductsRefetch();
+      cartAddedProductsRefetch();
+      setIsOpen(true);
     },
   });
 
-  const { data: cardAddedProducts = [], refetch: cardAddedProductsRefetch } =
+  const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
     useQuery({
-      queryKey: ["cardAddedProducts", user?.email],
+      queryKey: ["cartAddedProducts", user?.email],
       queryFn: async () => {
         const { data } = await axiosCommon.get(
-          `/products-in-card/${user?.email}`
+          `/products-in-cart/${user?.email}`
         );
         return data;
       },
     });
-  console.log(cardAddedProducts);
+  console.log(cartAddedProducts);
 
-  const find_product = cardAddedProducts.find((product) => product.id === id);
-  // const quantity = find_product?.quantity;
+  const find_product = cartAddedProducts.find((product) => product.id === id);
+  const quantity = find_product?.quantity;
   // console.log(quantity);
   // console.log(count);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (find_product) {
-      setCount(find_product?.quantity)
+      setCount(quantity);
+      setIsOpen(true);
     }
-  },[find_product])
+  }, [find_product, quantity]);
 
   const handleAddToCard = async (id) => {
-    const updateCount = count + 1;
-    setCount(updateCount);
+    // const updateCount = count + 1;
+    // setCount(updateCount);
+
+    if (quantity === count) {
+      setCartToast(true);
+      return toast.error(
+        "if you want more! update quantity"
+      );
+    } else {
+      setCartToast(false);
+    }
 
     const product_info = {
       id,
@@ -123,7 +138,7 @@ const ProductDetails = () => {
         name: user?.displayName,
         email: user?.email,
       },
-      quantity: updateCount,
+      quantity: count,
     };
 
     await addProductInCard(product_info);
@@ -209,11 +224,68 @@ const ProductDetails = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="flex items-center gap-2 text-[#212B36] mb-10 mt-5">
-        <h4>Home</h4>
+      <div className="flex items-center gap-2 text-[#212B36] mb-6 mt-5">
+        <h4>Shop</h4>
         <span>/</span>
         <h4>{product?.category}</h4>
       </div>
+      {/* add product to cart toast*/}
+      {/* {isOpen && ( */}
+      <div
+        className={`bg-[#F6F5F8] border-t-[3px] border-[#2E8DD8]  px-4 mb-4 ${
+          isOpen
+            ? "scale-y-100 origin-top py-5"
+            : "scale-y-0 origin-top py-0 h-0 overflow-hidden mb-0 border-none"
+        }  transition-all duration-500`}
+      >
+        {cartToast ? (
+          <div className="flex items-center justify-between text-red-600">
+            <div className="flex items-center gap-1">
+              <i>
+                <HiMiniExclamationTriangle className="text-xl"/>
+              </i>
+              <h4 className="">
+                <span>{quantity > 1 && quantity + "x "}</span>
+                <span className="font-semibold">
+                  &quot;{product?.title}&quot;
+                </span>
+                <span>
+                  {" "}
+                  already has been added to your cart.If you want more update
+                  quantity
+                </span>
+              </h4>
+            </div>
+            <button className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+              view cart
+              <i>
+                <FaArrowRight />
+              </i>
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-between">
+            <h4 className="flex items-center gap-1.5 text-[#6C6C6D]">
+              <i>
+                <FaCheckCircle className="text-[#00AB55]" />
+              </i>
+              <span>{quantity > 1 && quantity + "x"}</span>
+              <span className="font-semibold">
+                &quot;{product?.title}&quot;
+              </span>
+              has been added to your cart
+            </h4>
+            <button className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+              view cart
+              <i>
+                <FaArrowRight />
+              </i>
+            </button>
+          </div>
+        )}
+      </div>
+      {/* )} */}
+
       {/* title */}
       <div>
         <div>
