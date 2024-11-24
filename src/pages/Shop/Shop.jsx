@@ -34,10 +34,10 @@ const Shop = () => {
   useEffect(() => {
     const allSubCategories = [];
 
-    for (const subCategory of products) {
+    for (const product of products) {
       // remove duplicate
-      if (!allSubCategories.includes(subCategory.sub_category)) {
-        allSubCategories.push(subCategory.sub_category);
+      if (!allSubCategories.includes(product.sub_category)) {
+        allSubCategories.push(product.sub_category);
       }
     }
 

@@ -26,8 +26,8 @@ const Navbar = () => {
     (sum, product) => sum + product.quantity,
     0
   );
-  console.log(cartAddedProducts);
-  console.log(total_quantity);
+  // console.log(cartAddedProducts);
+  // console.log(total_quantity);
 
   return (
     <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
