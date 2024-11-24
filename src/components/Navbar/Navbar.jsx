@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, cartAddedProducts } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,6 +22,12 @@ const Navbar = () => {
     queryFn: () => fetch("./categories.json").then((res) => res.json()),
   });
   // console.log(categories);
+  const total_quantity = cartAddedProducts.reduce(
+    (sum, product) => sum + product.quantity,
+    0
+  );
+  console.log(cartAddedProducts);
+  console.log(total_quantity);
 
   return (
     <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
@@ -98,11 +104,20 @@ const Navbar = () => {
 
           {/*  cart icon + profile icon  */}
           <div className="g-red-600 flex items-center gap-5">
-            <Link to="/cart" className="relative flex items-center py-1 px-2.5 text-[#212b36]">
+            <Link
+              to="/cart"
+              className="relative flex items-center py-1 px-2.5 text-[#212b36]"
+            >
               <i className="text-2xl">
                 <FaCartPlus />
               </i>
-              <h6 className="absolute -top-2.5 -right-0.5">0</h6>
+              <h6
+                className={`absolute -top-2.5 ${
+                  total_quantity > 9 ? "-right-2.5" : "-right-0.5"
+                }`}
+              >
+                {total_quantity}
+              </h6>
             </Link>
             <div onClick={() => setToggle(!toggle)} className="relative">
               {user ? (

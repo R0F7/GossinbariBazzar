@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, cartAddedProducts, cartAddedProductsRefetch } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [cartToast, setCartToast] = useState(false);
   // console.log(user);
@@ -95,17 +95,17 @@ const ProductDetails = () => {
     },
   });
 
-  const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
-    useQuery({
-      queryKey: ["cartAddedProducts", user?.email],
-      queryFn: async () => {
-        const { data } = await axiosCommon.get(
-          `/products-in-cart/${user?.email}`
-        );
-        return data;
-      },
-    });
-  console.log(cartAddedProducts);
+  // const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
+  //   useQuery({
+  //     queryKey: ["cartAddedProducts", user?.email],
+  //     queryFn: async () => {
+  //       const { data } = await axiosCommon.get(
+  //         `/products-in-cart/${user?.email}`
+  //       );
+  //       return data;
+  //     },
+  //   });
+  // console.log(cartAddedProducts);
 
   const find_product = cartAddedProducts.find((product) => product.id === id);
   const quantity = find_product?.quantity;
@@ -125,9 +125,7 @@ const ProductDetails = () => {
 
     if (quantity === count) {
       setCartToast(true);
-      return toast.error(
-        "if you want more! update quantity"
-      );
+      return toast.error("if you want more! update quantity");
     } else {
       setCartToast(false);
     }
@@ -242,7 +240,7 @@ const ProductDetails = () => {
           <div className="flex items-center justify-between text-red-600">
             <div className="flex items-center gap-1">
               <i>
-                <HiMiniExclamationTriangle className="text-xl"/>
+                <HiMiniExclamationTriangle className="text-xl" />
               </i>
               <h4 className="">
                 <span>{quantity > 1 && quantity + "x "}</span>

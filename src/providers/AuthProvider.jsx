@@ -12,6 +12,8 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../hooks/useAxiosCommon";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -20,6 +22,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosCommon = useAxiosCommon();
 
   //sign in with google
   const signInWithGoogle = () => {
@@ -83,6 +86,19 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
+  //get cartAddedProducts
+  const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
+  useQuery({
+    queryKey: ["cartAddedProducts", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(
+        `/products-in-cart/${user?.email}`
+      );
+      return data;
+    },
+  });
+// console.log(cartAddedProducts);
+
   // const onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -109,6 +125,8 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     signIn,
     logOut,
+    cartAddedProducts,
+    cartAddedProductsRefetch
   };
 
   return (
