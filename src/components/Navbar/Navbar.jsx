@@ -98,12 +98,12 @@ const Navbar = () => {
 
           {/*  cart icon + profile icon  */}
           <div className="g-red-600 flex items-center gap-5">
-            <div className="relative flex items-center py-1 px-2.5 text-[#212b36]">
+            <Link to="/cart" className="relative flex items-center py-1 px-2.5 text-[#212b36]">
               <i className="text-2xl">
                 <FaCartPlus />
               </i>
               <h6 className="absolute -top-2.5 -right-0.5">0</h6>
-            </div>
+            </Link>
             <div onClick={() => setToggle(!toggle)} className="relative">
               {user ? (
                 <div className="w-12 border-2 border-[#2E8DD8] hover:border-[#4B0082] transform duration-500 p-1.5 rounded-full overflow-hidden">

@@ -15,6 +15,7 @@ import TermOfUse from "../pages/TermOfUse/TermOfuse";
 import HelpCenter from "../pages/HelpCenter/HelpCenter";
 import Articles from "../components/Articles/Articles";
 import Article from "../components/Article/Article";
+import Cart from "../pages/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetails></ProductDetails>,
+      },
+      {
+        path:"/cart",
+        element:<Cart></Cart>
       },
       {
         path: "/pages",
