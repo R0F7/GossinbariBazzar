@@ -254,12 +254,12 @@ const ProductDetails = () => {
                 </span>
               </h4>
             </div>
-            <button className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+            <Link to="/cart" className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
               view cart
               <i>
                 <FaArrowRight />
               </i>
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="flex justify-between">
@@ -273,12 +273,12 @@ const ProductDetails = () => {
               </span>
               has been added to your cart
             </h4>
-            <button className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+            <Link to="/cart" className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
               view cart
               <i>
                 <FaArrowRight />
               </i>
-            </button>
+            </Link>
           </div>
         )}
       </div>
