@@ -87,8 +87,11 @@ const AuthProvider = ({ children }) => {
   };
 
   //get cartAddedProducts
-  const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
-  useQuery({
+  const {
+    data: cartAddedProducts = [],
+    refetch: cartAddedProductsRefetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["cartAddedProducts", user?.email],
     queryFn: async () => {
       const { data } = await axiosCommon.get(
@@ -97,7 +100,7 @@ const AuthProvider = ({ children }) => {
       return data;
     },
   });
-// console.log(cartAddedProducts);
+  // console.log(cartAddedProducts);
 
   // const onAuthStateChange
   useEffect(() => {
@@ -106,7 +109,7 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         getToken(currentUser.email);
-        saveUser(currentUser)
+        saveUser(currentUser);
         console.log("--------->", currentUser);
       }
 
@@ -126,7 +129,8 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     cartAddedProducts,
-    cartAddedProductsRefetch
+    cartAddedProductsRefetch,
+    isLoading
   };
 
   return (

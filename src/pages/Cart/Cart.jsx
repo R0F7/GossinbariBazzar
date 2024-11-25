@@ -4,12 +4,12 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { GridLoader } from "react-spinners";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const Cart = () => {
-  const { cartAddedProducts, cartAddedProductsRefetch } = useAuth();
+  const { cartAddedProducts, cartAddedProductsRefetch, isLoading } = useAuth();
   const axiosCommon = useAxiosCommon();
-  const [count, setCount] = useState(1);
-
   //   console.log(cartAddedProducts);
 
   const { data: products = [] } = useQuery({
@@ -33,7 +33,7 @@ const Cart = () => {
   }
   //   console.log(cart_products);
 
-  const { mutateAsync: addProductInCard,isPending } = useMutation({
+  const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
       const { data } = await axiosCommon.put(
         "/add-product-in-cart",
@@ -46,6 +46,23 @@ const Cart = () => {
       toast.success("quantity updated successfully");
       cartAddedProductsRefetch();
     },
+  });
+
+  const { mutateAsync: deleteProduct } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosCommon.delete(
+        "/delete-product-in-cart",
+        {data:product_info}
+      );
+      return data;
+    },
+    onSuccess: () => {
+      cartAddedProductsRefetch();
+      toast.success("deleted product successfully");
+    },
+    onError:(error)=>{
+        console.error("Error deleting the resource:",error);
+    }
   });
 
   const handleCountMinus = async (product) => {
@@ -63,6 +80,18 @@ const Cart = () => {
   };
 
   //   useEffect(())
+  const handleDelete = async (product) => {
+    console.log(product.cartProduct);
+    await deleteProduct(product.cartProduct);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-176px)]">
+        <GridLoader color="#2E8DD8" />
+      </div>
+    );
+  }
 
   return (
     <section className="container mx-auto">
@@ -78,9 +107,9 @@ const Cart = () => {
           {cart_products.map((product) => (
             <div
               key={product._id}
-              className="border-b py-4 flex justify-betwee gap-6"
+              className="border-b py-4 flex items-center gap-6"
             >
-              <div className="flex gap-3.5 w-[33%]">
+              <div className="flex gap-3.5 w-[40%]">
                 <div className="w-[75px] h-[50px]">
                   <img className="w-full h-full" src={product?.image} alt="" />
                 </div>
@@ -92,7 +121,7 @@ const Cart = () => {
                   </h6>
                 </div>
               </div>
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-6 w-[45%]">
                 <h4 className="text-red-500 font-bold">
                   $
                   {product?.discounted_price
@@ -111,7 +140,10 @@ const Cart = () => {
                   <span>{product?.cartProduct?.quantity}</span>
                   <button
                     className="active:scale-75 scale-100 duration-200"
-                    disabled={product?.cartProduct?.quantity === product?.total_product || isPending}
+                    disabled={
+                      product?.cartProduct?.quantity ===
+                        product?.total_product || isPending
+                    }
                   >
                     <FiPlus
                       onClick={() => handleCountPlus(product?.cartProduct)}
@@ -125,6 +157,14 @@ const Cart = () => {
                     : product?.price * product?.cartProduct?.quantity}
                 </h4>
               </div>
+              <button
+                onClick={() => handleDelete(product)}
+                className="border p-2 text-gray-700 hover:bg-red-100 hover:text-red-500 hover:border-red-100 rounded-full transition-all duration-300 active:scale-75 scale-100"
+              >
+                <i>
+                  <RiDeleteBin5Fill className="text-xl" />
+                </i>
+              </button>
             </div>
           ))}
         </div>
