@@ -100,7 +100,7 @@ const Cart = () => {
         : product.price * product.cartProduct.quantity;
     return total + price;
   }, 0);
-  console.log(total_price);
+//   console.log(total_price);
 
   const percentage = ((total_price / 1000) * 100).toFixed(2);
   // console.log(percentage);
@@ -243,7 +243,33 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          <div className="border w-1/3 -1/4 border-red-700"></div>
+          <div className=" w-1/3 -1/4 border-red-700 ">
+            <div className="bg-[#F4F6F8] p-6 rounded-md space-y-4">
+              <h4 className="text-[#586068] font-bold text-lg">Cart totals</h4>
+              <div className="flex items-center justify-between">
+                <h6 className="font-bold">Subtotal</h6>
+                <span className="text-red-500 font-bold">${total_price}.00</span>
+              </div>
+              <div className="flex justify-between">
+                <h6 className="w-1/2"><span className="font-bold">Shipping:</span> <span className="text-[#586068] font-semibold">John Doe</span></h6>
+                <p className="w-1/2 text-end ">Enter your address to view  shipping options.</p>
+              </div>
+              <div className="text-end">
+                <details>
+                  <summary>Calculate shipping</summary>
+                  <form>
+                    <input type="text" name="" id="" />
+                  </form>
+                </details>
+              </div>
+              <div className="bg-gray-300 h-px"></div>
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold">Total</h4>
+                <span className="text-red-500 font-bold">${total_price}.00</span>
+              </div>
+            </div>
+            <button className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200">Proceed To Checkout</button>
+          </div>
         </div>
       ) : (
         <div>
