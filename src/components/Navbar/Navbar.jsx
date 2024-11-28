@@ -103,20 +103,22 @@ const Navbar = () => {
           </div>
 
           {/*  cart icon + profile icon  */}
-          <div className="g-red-600 flex items-center gap-5">
+          <div className="g-red-600 flex items-center gap-6">
             <Link
               to="/cart"
               className="relative flex items-center py-1 px-2.5 text-[#212b36]"
             >
-              <i className="text-2xl">
+              <i className="text-2xl text-[#4B0082]">
                 <FaCartPlus />
               </i>
               <h6
-                className={`absolute -top-2.5 ${
-                  total_quantity > 9 ? "-right-2.5" : "-right-0.5"
-                }`}
+                className={`absolute -top-3 
+                ${
+                  total_quantity > 9 ? "-right-3.5" : "-right-2.5"
+                } 
+                border px-2 py-1 bg-[#2E8DD8] text-white text-xs rounded-full`}
               >
-                {total_quantity}
+                {total_quantity || 0}
               </h6>
             </Link>
             <div onClick={() => setToggle(!toggle)} className="relative">

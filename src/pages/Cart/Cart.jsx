@@ -9,10 +9,12 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { BiCalendarExclamation } from "react-icons/bi";
 import { TiArrowBackOutline } from "react-icons/ti";
+import { FaCheckCircle } from "react-icons/fa";
 
 const Cart = () => {
   const { cartAddedProducts, cartAddedProductsRefetch, isLoading } = useAuth();
   const axiosCommon = useAxiosCommon();
+  const [isOpen, setIsOpen] = useState(false);
   //   const [percentage,setPercentage]=useState(0);
   //   console.log(cartAddedProducts);
 
@@ -35,7 +37,7 @@ const Cart = () => {
       }
     }
   }
-  console.log(cart_products);
+  // console.log(cart_products);
 
   const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
@@ -71,6 +73,7 @@ const Cart = () => {
   const handleCountMinus = async (product) => {
     const updatedQuantity = product?.quantity - 1;
     // console.log(updatedQuantity);
+    setIsOpen(true);
 
     // console.log({ ...product, quantity: updatedQuantity });
     await addProductInCard({ ...product, quantity: updatedQuantity });
@@ -78,6 +81,8 @@ const Cart = () => {
 
   const handleCountPlus = async (product) => {
     const updatedQuantity = product?.quantity + 1;
+    setIsOpen(true);
+
     // console.log(product);
     await addProductInCard({ ...product, quantity: updatedQuantity });
   };
@@ -100,7 +105,7 @@ const Cart = () => {
         : product.price * product.cartProduct.quantity;
     return total + price;
   }, 0);
-//   console.log(total_price);
+  //   console.log(total_price);
 
   const percentage = ((total_price / 1000) * 100).toFixed(2);
   // console.log(percentage);
@@ -109,6 +114,22 @@ const Cart = () => {
   //     const percentage = (total_price / 1000) * 100;
   //     setPercentage(percentage)
   // },[total_price])
+
+  useEffect(() => {
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+  }, [isOpen]);
+
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     const timer = setTimeout(() => {
+  //       setIsOpen(false);
+  //     }, 5000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isOpen]);
 
   if (isLoading) {
     return (
@@ -126,6 +147,22 @@ const Cart = () => {
         <h4>Cart</h4>
       </div>
       <h2 className="text-2xl font-bold mb-6">Cart</h2>
+
+      <div>
+        <div
+          className={`bg-[#F6F5F8] flex items-center gap-2 border-t-[3px] border-[#2E8DD8] px-4 ${
+            isOpen
+              ? "scale-y-100 origin-top py-5 mb-6"
+              : "scale-y-0 origin-top py-0 h-0 overflow-hidden mb-0 border-none"
+          }  transition-all duration-500`}
+        >
+          {/* <div className="flex items-center gap-2 border-t-[3px] mb-7 border-[#2e8dd8] bg-[#F6F5F8] p-5"> */}
+          <i>
+            <FaCheckCircle className="text-[#00AB55]" />
+          </i>
+          <h6>Cart updated.</h6>
+        </div>
+      </div>
 
       {cart_products.length > 0 ? (
         <div className="flex gap-10">
@@ -248,11 +285,18 @@ const Cart = () => {
               <h4 className="text-[#586068] font-bold text-lg">Cart totals</h4>
               <div className="flex items-center justify-between">
                 <h6 className="font-bold">Subtotal</h6>
-                <span className="text-red-500 font-bold">${total_price}.00</span>
+                <span className="text-red-500 font-bold">
+                  ${total_price}.00
+                </span>
               </div>
               <div className="flex justify-between">
-                <h6 className="w-1/2"><span className="font-bold">Shipping:</span> <span className="text-[#586068] font-semibold">John Doe</span></h6>
-                <p className="w-1/2 text-end ">Enter your address to view  shipping options.</p>
+                <h6 className="w-1/2">
+                  <span className="font-bold">Shipping:</span>{" "}
+                  <span className="text-[#586068] font-semibold">John Doe</span>
+                </h6>
+                <p className="w-1/2 text-end ">
+                  Enter your address to view shipping options.
+                </p>
               </div>
               <div className="text-end">
                 <details>
@@ -265,10 +309,14 @@ const Cart = () => {
               <div className="bg-gray-300 h-px"></div>
               <div className="flex items-center justify-between">
                 <h4 className="font-bold">Total</h4>
-                <span className="text-red-500 font-bold">${total_price}.00</span>
+                <span className="text-red-500 font-bold">
+                  ${total_price}.00
+                </span>
               </div>
             </div>
-            <button className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200">Proceed To Checkout</button>
+            <button className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200">
+              Proceed To Checkout
+            </button>
           </div>
         </div>
       ) : (
