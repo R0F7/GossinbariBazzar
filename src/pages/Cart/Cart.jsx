@@ -10,11 +10,19 @@ import { Link } from "react-router-dom";
 import { BiCalendarExclamation } from "react-icons/bi";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { FaCheckCircle } from "react-icons/fa";
+import { GoIssueReopened } from "react-icons/go";
+import places from "./places";
 
 const Cart = () => {
-  const { cartAddedProducts, cartAddedProductsRefetch, isLoading } = useAuth();
+  const { cartAddedProducts, cartAddedProductsRefetch, isLoading, user } =
+    useAuth();
   const axiosCommon = useAxiosCommon();
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedUnion, setSelectedUnion] = useState("");
+  const [selectedVillages, setSelectedVillages] = useState([]);
+  const [village, setVillage] = useState("");
+  const [addressToggle, setAddressToggle] = useState(false);
+  const [shippingDetails, setShippingDetails] = useState({});
   //   const [percentage,setPercentage]=useState(0);
   //   console.log(cartAddedProducts);
 
@@ -116,10 +124,10 @@ const Cart = () => {
   // },[total_price])
 
   useEffect(() => {
-      const timer = setTimeout(() => {
-        setIsOpen(false);
-      }, 5000);
-      return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      setIsOpen(false);
+    }, 5000);
+    return () => clearTimeout(timer);
   }, [isOpen]);
 
   // useEffect(() => {
@@ -130,6 +138,36 @@ const Cart = () => {
   //     return () => clearTimeout(timer);
   //   }
   // }, [isOpen]);
+
+  const handleUnionChange = (event) => {
+    const union = event.target.value;
+    setSelectedUnion(union);
+    setSelectedVillages(places[union]);
+  };
+
+  // console.log(selectedUnion);
+  // console.log(selectedVillages);
+  // console.log(village);
+
+  const handleForm = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const union = form.union.value;
+    const village = form.village.value;
+    const locationDetails = form.locationDetails.value;
+    const shippingInfo = {
+      union,
+      village,
+      locationDetails,
+      order_owner_email: user?.email,
+      order_owner_name: user?.displayName,
+      timestamp: new Date(),
+    };
+    setShippingDetails(shippingInfo);
+  };
+  // console.log(addressToggle);
+  // console.log(shippingDetails);
 
   if (isLoading) {
     return (
@@ -294,17 +332,91 @@ const Cart = () => {
                   <span className="font-bold">Shipping:</span>{" "}
                   <span className="text-[#586068] font-semibold">John Doe</span>
                 </h6>
-                <p className="w-1/2 text-end ">
-                  Enter your address to view shipping options.
-                </p>
+                <div className="w-1/2 text-end ">
+                  <p className="text-[15px]">
+                    Enter your address to view shipping options.
+                  </p>
+                  <span className="text-[#969797] text-xs font-semibold">
+                    Beef Club & T-Bone Per kg ×2
+                  </span>
+                </div>
               </div>
-              <div className="text-end">
-                <details>
-                  <summary>Calculate shipping</summary>
-                  <form>
-                    <input type="text" name="" id="" />
+              <div className="flex justify-end">
+                <div className="text-end">
+                  <button
+                    className="text-end mb-2.5 font-bold text-[#4B0082] flex items-center w-full justify-end gap-1"
+                    onClick={() => setAddressToggle(!addressToggle)}
+                  >
+                    <i
+                      className={`${
+                        addressToggle ? "rotate-0" : "rotate-180"
+                      } transition-all duration-1000`}
+                    >
+                      <GoIssueReopened />
+                    </i>
+                    <span>Calculate shipping</span>
+                  </button>
+                  <form
+                    className={`flex flex-col w-[200px] space-y-2.5 ${
+                      addressToggle
+                        ? "scale-y-100 h-[245px] origin-top "
+                        : "scale-y-0 h-0 origin-top"
+                    } transition-all duration-1000`}
+                    onSubmit={handleForm}
+                  >
+                    <select
+                      id="union"
+                      name="union"
+                      value={selectedUnion}
+                      onChange={handleUnionChange}
+                      className="w-full border border-gray-300 rounded-lg bg-white px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      required
+                    >
+                      <option value="" disabled>
+                        Select a Union
+                      </option>
+                      {Object.keys(places).map((union, idx) => (
+                        <option key={idx} value={union}>
+                          {union}
+                        </option>
+                      ))}
+                    </select>
+
+                    <select
+                      id="village"
+                      name="village"
+                      value={village}
+                      onChange={(e) => setVillage(e.target.value)}
+                      disabled={!selectedUnion}
+                      className="w-full border border-gray-300 rounded-lg bg-white px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      required
+                    >
+                      <option value="" disabled>
+                        Select a village
+                      </option>
+                      {selectedVillages.map((village, idx) => (
+                        <option key={idx} value={village}>
+                          {village}
+                        </option>
+                      ))}
+                    </select>
+
+                    <textarea
+                      name="locationDetails"
+                      id="locationDetails"
+                      placeholder="Enter detailed address or directions"
+                      rows="3"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder:text-sm"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="bg-[#4B0082] text-white py-2 rounded-lg font-bold text-sm active:scale-95 scale-100 transition-all duration-200"
+                    >
+                      Submit
+                    </button>
                   </form>
-                </details>
+                </div>
               </div>
               <div className="bg-gray-300 h-px"></div>
               <div className="flex items-center justify-between">
@@ -314,7 +426,14 @@ const Cart = () => {
                 </span>
               </div>
             </div>
-            <button className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200">
+            <button
+              className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200"
+              onClick={() => {
+                if (Object.keys(shippingDetails).length === 0) {
+                  setAddressToggle(true);
+                }
+              }}
+            >
               Proceed To Checkout
             </button>
           </div>

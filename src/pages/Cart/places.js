@@ -1,0 +1,38 @@
+const places = {
+    Bhandarbari: [
+      "Uttar Sohorabari",
+      "Dokkhin Sohorabari",
+      "Shimulbari",
+      "Baniajhan",
+      "Koiagari",
+      "New Sariakandi",
+      "Pukhuria",
+      "Bhutbari",
+      "Bhandarbari",
+      "Raghunathpur",
+      "Gopalnagar",
+      "Morichtola",
+      "Narayanpur",
+      "Ramkrishnapur",
+      "Madhabdanga",
+    ],
+    Gossainbari: [
+      "Chithuliya",
+      "Gossainbari-purbo-para",
+      "Chuniyapara",
+      "Mastarpara",
+      "Fokir-Para",
+      "Shathmatha",
+      "Kutir-ghat",
+      "Guyedohori",
+      "Mobuyakhali",
+      "Jorkhali",
+      "Chototdiyar",
+      "Borobila",
+      "Natabari",
+      "Parnatabari",
+      "Baluvanga",
+    ],
+  };
+
+  export default places
