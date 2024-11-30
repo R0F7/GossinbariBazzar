@@ -45,7 +45,7 @@ const Cart = () => {
       }
     }
   }
-  // console.log(cart_products);
+  console.log(cart_products.map((product)=> product.cartProduct));
 
   const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
@@ -163,11 +163,12 @@ const Cart = () => {
       order_owner_email: user?.email,
       order_owner_name: user?.displayName,
       timestamp: new Date(),
+      products:cart_products.map((product)=>product.cartProduct),
     };
     setShippingDetails(shippingInfo);
   };
   // console.log(addressToggle);
-  // console.log(shippingDetails);
+  console.log(shippingDetails);
 
   if (isLoading) {
     return (

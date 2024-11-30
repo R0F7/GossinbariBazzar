@@ -35,4 +35,4 @@ const places = {
     ],
   };
 
-  export default places
+  export default places 
