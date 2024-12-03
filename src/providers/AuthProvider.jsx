@@ -77,7 +77,8 @@ const AuthProvider = ({ children }) => {
     const userInfo = {
       email: user?.email,
       role: "customer",
-      status: "Verified",
+      status: "active",
+      vendor_request: false,
     };
     const { data } = await axios.put(
       `${import.meta.env.VITE_API_URL}/user`,
@@ -130,7 +131,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     cartAddedProducts,
     cartAddedProductsRefetch,
-    isLoading
+    isLoading,
   };
 
   return (

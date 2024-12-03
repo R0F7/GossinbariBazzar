@@ -64,7 +64,7 @@ const Card = ({ item, progress_sold }) => {
           <img
             className="h-full w-full hover:scale-110 transition duration-500 cardX-image"
             src={image}
-            alt=""
+            alt={title}
           />
           {discounted_price && (
             <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">

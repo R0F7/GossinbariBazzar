@@ -18,11 +18,13 @@ const Cart = () => {
     useAuth();
   const axiosCommon = useAxiosCommon();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedUnion, setSelectedUnion] = useState("");
-  const [selectedVillages, setSelectedVillages] = useState([]);
-  const [village, setVillage] = useState("");
-  const [addressToggle, setAddressToggle] = useState(false);
   const [shippingDetails, setShippingDetails] = useState({});
+  const [selectedUnion, setSelectedUnion] = useState(
+    shippingDetails.union || ""
+  );
+  const [selectedVillages, setSelectedVillages] = useState([]);
+  const [village, setVillage] = useState(shippingDetails.village || "");
+  const [addressToggle, setAddressToggle] = useState(false);
   //   const [percentage,setPercentage]=useState(0);
   //   console.log(cartAddedProducts);
 
@@ -45,7 +47,7 @@ const Cart = () => {
       }
     }
   }
-  console.log(cart_products.map((product)=> product.cartProduct));
+  console.log(cart_products);
 
   const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
@@ -134,7 +136,7 @@ const Cart = () => {
   //   if (isOpen) {
   //     const timer = setTimeout(() => {
   //       setIsOpen(false);
-  //     }, 5000);
+  //     }, 5000);00
   //     return () => clearTimeout(timer);
   //   }
   // }, [isOpen]);
@@ -149,7 +151,7 @@ const Cart = () => {
   // console.log(selectedVillages);
   // console.log(village);
 
-  const handleForm = (event) => {
+  const handleShippingForm = (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -163,12 +165,13 @@ const Cart = () => {
       order_owner_email: user?.email,
       order_owner_name: user?.displayName,
       timestamp: new Date(),
-      products:cart_products.map((product)=>product.cartProduct),
+      // products:cart_products.map((product)=>product.cartProduct),
     };
     setShippingDetails(shippingInfo);
   };
   // console.log(addressToggle);
   console.log(shippingDetails);
+  // console.log(cart_products.map((product)=>product.cartProduct));
 
   if (isLoading) {
     return (
@@ -211,7 +214,7 @@ const Cart = () => {
                 key={product._id}
                 className="border-b py-4 flex items-center gap-6"
               >
-                <div className="flex gap-3.5 w-[40%]">
+                <div className="flex gap-3.5 w-[45%]">
                   <div className="w-[75px] h-[50px]">
                     <img
                       className="w-full h-full"
@@ -227,7 +230,7 @@ const Cart = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="flex items-center gap-6 w-[45%]">
+                <div className="flex items-center gap-6 w-[40%]">
                   <h4 className="text-red-500 font-bold">
                     $
                     {product?.discounted_price
@@ -319,7 +322,7 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          <div className=" w-1/3 -1/4 border-red-700 ">
+          <div className="w-1/3 -1/4 border-red-700 ">
             <div className="bg-[#F4F6F8] p-6 rounded-md space-y-4">
               <h4 className="text-[#586068] font-bold text-lg">Cart totals</h4>
               <div className="flex items-center justify-between">
@@ -328,20 +331,27 @@ const Cart = () => {
                   ${total_price}.00
                 </span>
               </div>
-              <div className="flex justify-between">
-                <h6 className="w-1/2">
-                  <span className="font-bold">Shipping:</span>{" "}
-                  <span className="text-[#586068] font-semibold">John Doe</span>
-                </h6>
-                <div className="w-1/2 text-end ">
-                  <p className="text-[15px]">
-                    Enter your address to view shipping options.
-                  </p>
-                  <span className="text-[#969797] text-xs font-semibold">
-                    Beef Club & T-Bone Per kg ×2
-                  </span>
+              {cart_products.map((product) => (
+                <div key={product._id} className="flex justify-between">
+                  <h6 className="w-1/2">
+                    <span className="font-bold">Shipping:</span>{" "}
+                    <span className="text-[#586068] font-semibold">
+                      {product.sold_by}
+                    </span>
+                  </h6>
+                  <div className="w-1/2 text-end ">
+                    <p className="text-[15px]">
+                      Enter your address to view shipping options.
+                    </p>
+                    <span className="text-[#969797] text-xs font-semibold">
+                      {product?.cartProduct?.quantity > 1
+                        ? product.title +" "+ product?.cartProduct?.quantity + "x"
+                        : product.title}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              ))}
+
               <div className="flex justify-end">
                 <div className="text-end">
                   <button
@@ -363,7 +373,7 @@ const Cart = () => {
                         ? "scale-y-100 h-[245px] origin-top "
                         : "scale-y-0 h-0 origin-top"
                     } transition-all duration-1000`}
-                    onSubmit={handleForm}
+                    onSubmit={handleShippingForm}
                   >
                     <select
                       id="union"

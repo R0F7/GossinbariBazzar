@@ -16,6 +16,7 @@ import HelpCenter from "../pages/HelpCenter/HelpCenter";
 import Articles from "../components/Articles/Articles";
 import Article from "../components/Article/Article";
 import Cart from "../pages/Cart/Cart";
+import UPdateProfile from "../pages/UPdateProfile/UPdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
             return [];
           }
         },
+      },
+      {
+        path:"/update-profile",
+        element:<UPdateProfile></UPdateProfile>
       },
     ],
   },
