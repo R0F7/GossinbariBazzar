@@ -47,7 +47,7 @@ const Cart = () => {
       }
     }
   }
-  console.log(cart_products);
+  // console.log(cart_products);
 
   const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
@@ -125,12 +125,16 @@ const Cart = () => {
   //     setPercentage(percentage)
   // },[total_price])
 
+  const quantity = cart_products.map(
+    (product) => product?.cartProduct?.quantity
+  );
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsOpen(false);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [isOpen]);
+  }, [isOpen, quantity]);
 
   // useEffect(() => {
   //   if (isOpen) {
@@ -214,7 +218,7 @@ const Cart = () => {
                 key={product._id}
                 className="border-b py-4 flex items-center gap-6"
               >
-                <div className="flex gap-3.5 w-[45%]">
+                <div className="flex gap-3.5 w-[45%] border">
                   <div className="w-[75px] h-[50px]">
                     <img
                       className="w-full h-full"
@@ -230,7 +234,7 @@ const Cart = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="flex items-center gap-6 w-[40%]">
+                <div className="flex items-center justify-center gap-6 w-[45%]">
                   <h4 className="text-red-500 font-bold">
                     $
                     {product?.discounted_price
@@ -271,18 +275,20 @@ const Cart = () => {
                     .00
                   </h4>
                 </div>
-                <button
-                  onClick={() => handleDelete(product)}
-                  className="border p-2 text-gray-700 hover:bg-red-100 hover:text-red-500 hover:border-red-100 rounded-full transition-all duration-300 active:scale-75 scale-100"
-                  disabled={deletePending}
-                >
-                  <i>
-                    <RiDeleteBin5Fill className="text-xl" />
-                  </i>
-                </button>
+                <div className="w-[10%] flex justify-center border">
+                  <button
+                    onClick={() => handleDelete(product)}
+                    className="border p-2 text-gray-700 hover:bg-red-100 hover:text-red-500 hover:border-red-100 rounded-full transition-all duration-300 active:scale-75 scale-100"
+                    disabled={deletePending}
+                  >
+                    <i>
+                      <RiDeleteBin5Fill className="text-xl" />
+                    </i>
+                  </button>
+                </div>
               </div>
             ))}
-            <button className="mt-3 mb-10 py-1.5 hover:px-3.5 rounded-md hover:bg-[#2e8ed81f] hover:shadow-md hover:shadow-[#2e8ed81f] transition-all duration-200 active:scale-95 scale-100 font-semibold underline hover:no-underline">
+            <button className=" mt-3 mb-10 py-1.5 hover:px-3.5 rounded-md hover:bg-[#2e8ed81f] hover:shadow-md hover:shadow-[#2e8ed81f] transition-all duration-200 active:scale-95 scale-100 font-semibold underline hover:no-underline">
               <Link to="/shop" className="text-[#2E8DD8]">
                 Continue Shopping
               </Link>
@@ -333,20 +339,34 @@ const Cart = () => {
               </div>
               {cart_products.map((product) => (
                 <div key={product._id} className="flex justify-between">
-                  <h6 className="w-1/2">
+                  <h6 className="w-[55%] border-r">
                     <span className="font-bold">Shipping:</span>{" "}
                     <span className="text-[#586068] font-semibold">
                       {product.sold_by}
                     </span>
                   </h6>
-                  <div className="w-1/2 text-end ">
-                    <p className="text-[15px]">
-                      Enter your address to view shipping options.
-                    </p>
+                  <div className="w-[45%] text-end border-l flex flex-col items-end">
+                    <div className="flex flex-row my-1">
+                      {Object.keys(shippingDetails).length > 1 ? (
+                        <div>
+                          {" "}
+                          <p className="text-[#2d2e30b9]">
+                            found for
+                          </p>
+                          <p className="text-sm font-bold text-[#000000c4]">{`${shippingDetails?.union}, ${shippingDetails?.village}`}</p>
+                          <p className="text-sm text-[#000000d0]">{shippingDetails?.locationDetails}</p>
+                        </div>
+                      ) : (
+                        <p className="text-[15px] text-sm text-[#3b3d3f]">
+                          Enter your address to view shipping options.
+                        </p>
+                      )}
+                    </div>
                     <span className="text-[#969797] text-xs font-semibold">
+                      {" "}
                       {product?.cartProduct?.quantity > 1
-                        ? product.title +" "+ product?.cartProduct?.quantity + "x"
-                        : product.title}
+                        ? `${product.title} ${product.cartProduct.quantity}x`
+                        : product.title}{" "}
                     </span>
                   </div>
                 </div>
