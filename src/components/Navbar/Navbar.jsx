@@ -145,9 +145,9 @@ const Navbar = () => {
                   toggle ? "scale-x-100 origin-right" : "scale-x-0 origin-right"
                 }`}
               >
-                <button className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                <Link to="/update-profile" className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
                   Update Profile
-                </button>
+                </Link>
                 <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
                   Dashboard
                 </button>

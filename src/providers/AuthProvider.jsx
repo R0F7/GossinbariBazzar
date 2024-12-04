@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
 
 export const AuthContext = createContext(null);
@@ -72,20 +72,50 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
+  //ger all users
+  const { data: allUsers = [], refetch: allUserRefetch } = useQuery({
+    queryKey: ["all_users"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/users`);
+      return data;
+    },
+  });
+  // console.log(allUsers);
+
   //save user
-  const saveUser = async (user) => {
-    const userInfo = {
-      email: user?.email,
-      role: "customer",
-      status: "active",
-      vendor_request: false,
-    };
-    const { data } = await axios.put(
-      `${import.meta.env.VITE_API_URL}/user`,
-      userInfo
-    );
-    return data;
-  };
+  // const saveUser = async (user) => {
+  //   const userInfo = {
+  //     email: user?.email,
+  //     role: "customer",
+  //     status: "active",
+  //     vendor_request: false,
+  //   };
+  //   const { data } = await axios.put(
+  //     `${import.meta.env.VITE_API_URL}/user`,
+  //     userInfo
+  //   );
+  //   return data;
+  // };
+
+  //save user
+  const { mutateAsync: saveUser } = useMutation({
+    mutationFn: async (user) => {
+      const userInfo = {
+        email: user?.email,
+        role: "customer",
+        status: "active",
+        vendor_request: false,
+      };
+      const { data } = await axiosCommon.put(
+        `${import.meta.env.VITE_API_URL}/user`,
+        userInfo
+      );
+      return data;
+    },
+    onSuccess: () => {
+      allUserRefetch();
+    },
+  });
 
   //get cartAddedProducts
   const {
@@ -132,6 +162,7 @@ const AuthProvider = ({ children }) => {
     cartAddedProducts,
     cartAddedProductsRefetch,
     isLoading,
+    allUsers,
   };
 
   return (

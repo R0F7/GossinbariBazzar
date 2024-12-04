@@ -329,7 +329,7 @@ const Cart = () => {
             </div>
           </div>
           <div className="w-1/3 -1/4 border-red-700 ">
-            <div className="bg-[#F4F6F8] p-6 rounded-md space-y-4">
+            <div className="bg-[#F4F6F8] p-6 rounded-md space-y-6">
               <h4 className="text-[#586068] font-bold text-lg">Cart totals</h4>
               <div className="flex items-center justify-between">
                 <h6 className="font-bold">Subtotal</h6>
@@ -339,13 +339,13 @@ const Cart = () => {
               </div>
               {cart_products.map((product) => (
                 <div key={product._id} className="flex justify-between">
-                  <h6 className="w-[55%] border-r">
+                  <h6 className="w-[55%]">
                     <span className="font-bold">Shipping:</span>{" "}
                     <span className="text-[#586068] font-semibold">
                       {product.sold_by}
                     </span>
                   </h6>
-                  <div className="w-[45%] text-end border-l flex flex-col items-end">
+                  <div className="w-[45%] text-end flex flex-col items-end">
                     <div className="flex flex-row my-1">
                       {Object.keys(shippingDetails).length > 1 ? (
                         <div>
@@ -353,7 +353,7 @@ const Cart = () => {
                           <p className="text-[#2d2e30b9]">
                             found for
                           </p>
-                          <p className="text-sm font-bold text-[#000000c4]">{`${shippingDetails?.union}, ${shippingDetails?.village}`}</p>
+                          <p className="text-sm font-bold text-[#000000c4] -scroll-mb-0.5">{`${shippingDetails?.union}, ${shippingDetails?.village}`}</p>
                           <p className="text-sm text-[#000000d0]">{shippingDetails?.locationDetails}</p>
                         </div>
                       ) : (
