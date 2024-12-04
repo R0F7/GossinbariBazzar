@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
     return data;
   };
 
-  //ger all users
+  //get all users
   const { data: allUsers = [], refetch: allUserRefetch } = useQuery({
     queryKey: ["all_users"],
     queryFn: async () => {
@@ -81,6 +81,16 @@ const AuthProvider = ({ children }) => {
     },
   });
   // console.log(allUsers);
+
+  //specific user get
+  const { data: user_info_DB } = useQuery({
+    queryKey: ["single_user", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/user/${user?.email}`);
+      return data;
+    },
+  });
+  // console.log(data);
 
   //save user
   // const saveUser = async (user) => {
@@ -148,7 +158,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unSubscribe();
-  }, []);
+  }, [saveUser]);
 
   const authInfo = {
     user,
@@ -163,6 +173,7 @@ const AuthProvider = ({ children }) => {
     cartAddedProductsRefetch,
     isLoading,
     allUsers,
+    user_info_DB,
   };
 
   return (

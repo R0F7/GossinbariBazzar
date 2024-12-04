@@ -16,7 +16,7 @@ import HelpCenter from "../pages/HelpCenter/HelpCenter";
 import Articles from "../components/Articles/Articles";
 import Article from "../components/Article/Article";
 import Cart from "../pages/Cart/Cart";
-import UPdateProfile from "../pages/UPdateProfile/UPdateProfile";
+import UPdateProfile from "../pages/UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
