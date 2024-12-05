@@ -18,19 +18,22 @@ const UPdateProfile = () => {
   const formattedLocalDate = gmtTime.toLocaleString("en-US", options);
   // console.log(formattedLocalDate);
 
+  const name = user?.displayName.split(" ") || [];
+  // console.log(name);
+
   return (
     <section className="bg-[#F9F9FB] h-screen">
       <div className="container mx-auto">
-        <div className="flex items-center gap-2 text-[#212B36] mb-6 mt-5">
+        <div className="flex items-center gap-2 text-[#212B36] mb-6 pt-5">
           <h4>Home</h4>
           <span>/</span>
           <h4>Update Profile</h4>
         </div>
-        <div className="flex justify-center items-center h-[calc(100vh-500px)]">
+        <div className="flex justify-center items-center h-[calc(100vh-400px)]">
           <div className="w-[70%]">
             <section className="flex bg-white">
               {/* left part */}
-              <div className="border w-1/3 flex flex-col items-center py-10">
+              <div className="border order-r-0 w-1/4 flex flex-col items-center py-10">
                 <div className="h-20 w-20 rounded-full border p-1">
                   <img
                     className="w-full h-full rounded-full"
@@ -45,53 +48,101 @@ const UPdateProfile = () => {
                     {user_info_DB?.role}
                   </h4>
                   <h4 className="">{user?.email}</h4>
-                  <hr className="my-2.5" />
+                  <hr className="m-2.5" />
                   <h6>
                     <span className="font-bold">Last logged in: </span>
                     <br />
-                    <h6 className="w-[70%] mx-auto text-sm text-gray-600">
+                    <span className="w-[70%] mx-auto text-sm text-gray-600 flex flex-wrap">
                       {formattedLocalDate}
-                    </h6>
+                    </span>
                   </h6>
                 </div>
               </div>
 
               {/* right part */}
-              <div className="w-2/3 border p-4">
+              <div className="w-3/4 border p-4">
                 <h3 className="text-lg font-bold">Profile</h3>
-
                 <div>
-                  {/* Personal Info */}
-                  <div>
-                    {/* <h4>Personal Info</h4> */}
+                  <div className="flex mt-3 gap-4 ">
+                    <img
+                      className="w-[75px] rounded-md"
+                      src={user?.photoURL}
+                      alt=""
+                    />
                     <div>
-                      <div className="flex mt-3 gap-4 ">
-                        <img className="w-[75px] rounded-md" src={user?.photoURL} alt="" />
-                        <div>
-                          <input type="file" name="image" id="image" />
-                          <button className="bg-[#4B0082] text-white py-1.5 px-3 rounded-md text-sm scale-100 active:scale-95 transition-all duration-200">Update Image</button>
-                        </div>
-                      </div>
-                      <hr className="my-4"/>
-                      <div className="grid grid-cols-2">
-                        <label htmlFor="first_name" className="border">First Name
-                          <input type="text" name="first_name" id="first_name" />
-                        </label>
-                        <label htmlFor="last_name">Last Name
-                          <input type="text" name="last_name" id="last_name" />
-                        </label>                        
-                        <label htmlFor="phone_number">Phone Number
-                          <input type="text" name="phone_number" id="phone_number" />
-                        </label>
-                        <label htmlFor="password">Change Password
-                          <input type="text" name="password" id="password" />
-                        </label>
-                      </div>
+                      <input type="file" name="image" id="image" />
+                      <button className="bg-[#4B0082] text-white py-1.5 px-3 rounded-md text-sm scale-100 active:scale-95 transition-all duration-200">
+                        Update Image
+                      </button>
                     </div>
                   </div>
-
-                  {/* contact info */}
-                  <div></div>
+                  <hr className="my-4" />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex justify-end">
+                      <label
+                        htmlFor="first_name"
+                        className="flex items-center gap-2 ext-[#4B0082]"
+                      >
+                        First Name:
+                        <input
+                          type="text"
+                          name="first_name"
+                          id="first_name"
+                          // defaultValue={name && name[0]}
+                          defaultValue={name.length > 1 ? name[0] : name}
+                          placeholder="Enter your first name"
+                          className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex justify-end">
+                      <label
+                        htmlFor="last_name"
+                        className="flex items-center gap-2 ext-[#4B0082]"
+                      >
+                        Last Name:
+                        <input
+                          type="text"
+                          name="last_name"
+                          id="last_name"
+                          defaultValue={name.length > 1 ? name[1] : ""}
+                          placeholder="Enter your last name"
+                          className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex justify-end">
+                      <label
+                        htmlFor="phone_number"
+                        className="flex items-center gap-2 ext-[#4B0082]"
+                      >
+                        Phone Number:
+                        <input
+                          type="text"
+                          name="phone_number"
+                          id="phone_number"
+                          defaultValue={user?.phoneNumber && user?.phoneNumber}
+                          placeholder="Enter your phone number"
+                          className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex justify-end">
+                      <label
+                        htmlFor="password"
+                        className="flex items-center gap-2 ext-[#4B0082]"
+                      >
+                        Change Password:
+                        <input
+                          type="text"
+                          name="password"
+                          id="password"
+                          placeholder="Enter your New Password"
+                          className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                        />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>

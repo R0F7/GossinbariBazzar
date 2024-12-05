@@ -118,15 +118,15 @@ const AuthProvider = ({ children }) => {
   //save user
   const { mutateAsync: saveUser } = useMutation({
     mutationFn: async (user) => {
-      const userInfo = {
-        email: user?.email,
-        role: "customer",
-        status: "active",
-        vendor_request: false,
-      };
+      // const userInfo = {
+      //   email: user?.email,
+      //   role: "customer",
+      //   status: "active",
+      //   vendor_request: false,
+      // };
       const { data } = await axiosCommon.put(
         `${import.meta.env.VITE_API_URL}/user`,
-        userInfo
+        user
       );
       return data;
     },
@@ -158,7 +158,7 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser) {
         getToken(currentUser.email);
-        saveUser(currentUser);
+        // saveUser(currentUser);
         console.log("--------->", currentUser);
       }
 
@@ -183,6 +183,7 @@ const AuthProvider = ({ children }) => {
     isLoading,
     allUsers,
     user_info_DB,
+    saveUser
   };
 
   return (

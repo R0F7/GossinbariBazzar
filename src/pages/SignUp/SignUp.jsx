@@ -15,7 +15,7 @@ import { CgSpinnerTwoAlt } from 'react-icons/cg';
 
 const SignUp = () => {
     const [toggle, setToggle] = useState(false);
-    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading,user } = useAuth();
+    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading,user, saveUser } = useAuth();
     const navigate = useNavigate();
 
     // name and preview for choose image 
@@ -42,7 +42,9 @@ const SignUp = () => {
         const password = form.password.value;
         const role = form.role.value;
 
-        console.table(name, email, image, password, role)
+        const userInfo = {name, email,number, password, role};
+
+        console.table(userInfo)
 
         try {
             setLoading(true);
@@ -52,6 +54,8 @@ const SignUp = () => {
             await createUser(email, password)
 
             await updateUserProfile(name, image_url, number)
+
+            await saveUser(userInfo)
 
             toast.success("Sign Up Successfully")
             navigate('/')
@@ -188,7 +192,7 @@ const SignUp = () => {
                                     defaultValue=""
                                     className="p-2 shadow rounded-md placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-2 bg-white bg-opacity-40">
                                     <option value='' disabled className=''>role</option>
-                                    <option value="user">user</option>
+                                    <option value="customer">customer</option>
                                     <option value="seller">seller</option>
                                 </select>
                             </div>
