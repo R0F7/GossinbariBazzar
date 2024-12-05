@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
@@ -43,6 +44,13 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
       phoneNumber: number,
     });
+  };
+
+  //update password
+  const updateUserPassword = (password) => {
+    const user = auth.currentUser;
+    const newPassword = password;
+    return updatePassword(user, newPassword);
   };
 
   //sign in with email and password
@@ -167,6 +175,7 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     createUser,
     updateUserProfile,
+    updateUserPassword,
     signIn,
     logOut,
     cartAddedProducts,

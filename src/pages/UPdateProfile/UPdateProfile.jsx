@@ -57,20 +57,35 @@ const UPdateProfile = () => {
               </div>
 
               {/* right part */}
-              <div className="w-2/3 border">
-                <h3>Profile</h3>
+              <div className="w-2/3 border p-4">
+                <h3 className="text-lg font-bold">Profile</h3>
 
                 <div>
                   {/* Personal Info */}
                   <div>
-                    <h4>Personal Info</h4>
+                    {/* <h4>Personal Info</h4> */}
                     <div>
-                      <div>
-                        <img src={user?.photoURL} alt="" />
+                      <div className="flex mt-3 gap-4 ">
+                        <img className="w-[75px] rounded-md" src={user?.photoURL} alt="" />
                         <div>
                           <input type="file" name="image" id="image" />
-                          <button>Update Image</button>
+                          <button className="bg-[#4B0082] text-white py-1.5 px-3 rounded-md text-sm scale-100 active:scale-95 transition-all duration-200">Update Image</button>
                         </div>
+                      </div>
+                      <hr className="my-4"/>
+                      <div className="grid grid-cols-2">
+                        <label htmlFor="first_name" className="border">First Name
+                          <input type="text" name="first_name" id="first_name" />
+                        </label>
+                        <label htmlFor="last_name">Last Name
+                          <input type="text" name="last_name" id="last_name" />
+                        </label>                        
+                        <label htmlFor="phone_number">Phone Number
+                          <input type="text" name="phone_number" id="phone_number" />
+                        </label>
+                        <label htmlFor="password">Change Password
+                          <input type="text" name="password" id="password" />
+                        </label>
                       </div>
                     </div>
                   </div>
