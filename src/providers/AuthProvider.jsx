@@ -91,14 +91,15 @@ const AuthProvider = ({ children }) => {
   // console.log(allUsers);
 
   //specific user get
-  const { data: user_info_DB } = useQuery({
+  const { data: user_info_DB = {} } = useQuery({
     queryKey: ["single_user", user?.email],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/user/${user?.email}`);
       return data;
     },
   });
-  // console.log(data);
+  console.log(user_info_DB);
+  const isEmpty = Object.keys(user_info_DB).length === 0;  
 
   //save user
   // const saveUser = async (user) => {
@@ -124,6 +125,8 @@ const AuthProvider = ({ children }) => {
       //   status: "active",
       //   vendor_request: false,
       // };
+      // console.log(user);
+      
       const { data } = await axiosCommon.put(
         `${import.meta.env.VITE_API_URL}/user`,
         user
@@ -153,12 +156,26 @@ const AuthProvider = ({ children }) => {
 
   // const onAuthStateChange
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
 
       if (currentUser) {
         getToken(currentUser.email);
-        // saveUser(currentUser);
+        // saveUser(user_info_DB[status]);
+
+        // Retrieve active user data from user_info_DB
+        console.log(Object.keys(user_info_DB));
+
+        // if (user_info_DB && !isEmpty) {
+        //   const updateActivity = { ...user_info_DB, isActive: true };
+        //   await saveUser(updateActivity);
+        //   console.log("hooo");
+        // }else {
+        //   const updateActivity = { ...user_info_DB, isActive: false };
+        //   await saveUser(updateActivity);
+        //   console.log("Naa");
+        // }
+         
         console.log("--------->", currentUser);
       }
 
@@ -166,7 +183,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unSubscribe();
-  }, [saveUser]);
+  }, [saveUser, user_info_DB]);
 
   const authInfo = {
     user,
@@ -183,7 +200,7 @@ const AuthProvider = ({ children }) => {
     isLoading,
     allUsers,
     user_info_DB,
-    saveUser
+    saveUser,
   };
 
   return (

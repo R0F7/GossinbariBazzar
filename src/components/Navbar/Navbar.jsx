@@ -123,7 +123,7 @@ const Navbar = () => {
             </Link>
             <div onClick={() => setToggle(!toggle)} className="relative">
               {user ? (
-                <div className="w-12 border-2 border-[#2E8DD8] hover:border-[#4B0082] transform duration-500 p-1.5 rounded-full overflow-hidden">
+                <div className="w-12 h-12 border-2 border-[#2E8DD8] hover:border-[#4B0082] transform duration-500 p-1.5 rounded-full overflow-hidden">
                   <img
                     className="w-full h-full rounded-full"
                     referrerPolicy="no-referrer"

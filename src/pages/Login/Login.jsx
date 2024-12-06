@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [toggle, setToggle] = useState(false);
-  const { user, signInWithGoogle, signIn } = useAuth();
+  const { user, signInWithGoogle, signIn , setLoading , saveUser} = useAuth();
   const navigate = useNavigate();
   // console.log(user);
 
@@ -33,11 +33,51 @@ const Login = () => {
     }
   };
 
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     await signInWithGoogle();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const handleGoogleLogin = async () => {
+    setLoading(true);
+
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      const user = result.user;
+
+      // Set default values
+      const name = user.displayName || "";
+      const email = user.email || "";
+      const number = user.phoneNumber || "N/A"; // Placeholder if not available
+      const role = "customer"; // Default role
+      const status = "Verified"; // Default status
+      const isActive = true;
+      const vendor_request = false;
+
+      const userInfo = {
+        name,
+        email,
+        number,
+        role,
+        status,
+        isActive,
+        vendor_request,
+      };
+      console.table(userInfo);
+
+      // Save user information
+      await saveUser(userInfo);
+
+      toast.success("Google Login Successful");
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error("Error during Google login:", error);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 

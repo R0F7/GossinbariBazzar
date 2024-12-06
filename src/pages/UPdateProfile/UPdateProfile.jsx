@@ -105,7 +105,7 @@ const UPdateProfile = () => {
                           type="text"
                           name="last_name"
                           id="last_name"
-                          defaultValue={name.length > 1 ? name[1] : ""}
+                          defaultValue={name.length > 1 ? name[name.length] : ""}
                           placeholder="Enter your last name"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
