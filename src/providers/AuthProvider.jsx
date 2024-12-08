@@ -98,8 +98,6 @@ const AuthProvider = ({ children }) => {
       return data;
     },
   });
-  console.log(user_info_DB);
-  const isEmpty = Object.keys(user_info_DB).length === 0;  
 
   //save user
   // const saveUser = async (user) => {
@@ -126,7 +124,7 @@ const AuthProvider = ({ children }) => {
       //   vendor_request: false,
       // };
       // console.log(user);
-      
+
       const { data } = await axiosCommon.put(
         `${import.meta.env.VITE_API_URL}/user`,
         user
@@ -137,6 +135,25 @@ const AuthProvider = ({ children }) => {
       allUserRefetch();
     },
   });
+
+  //isActive update false
+  // const { mutateAsync: updateIsActive } = useMutation({
+  //   mutationFn: async (email) => {
+  //     const isActive = true;
+  //     console.log(email);
+
+  //     const { data } = await axiosCommon.put(
+  //       `${
+  //         import.meta.env.VITE_API_URL
+  //       }/user?email=${email}&isActive=${isActive}`
+  //       // user
+  //     );
+  //     return data;
+  //   },
+  //   onSuccess: () => {
+  //     allUserRefetch();
+  //   },
+  // });
 
   //get cartAddedProducts
   const {
@@ -164,7 +181,7 @@ const AuthProvider = ({ children }) => {
         // saveUser(user_info_DB[status]);
 
         // Retrieve active user data from user_info_DB
-        console.log(Object.keys(user_info_DB));
+        // console.log(Object.keys(user_info_DB));
 
         // if (user_info_DB && !isEmpty) {
         //   const updateActivity = { ...user_info_DB, isActive: true };
@@ -183,7 +200,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unSubscribe();
-  }, [saveUser, user_info_DB]);
+  }, []);
 
   const authInfo = {
     user,

@@ -19,7 +19,6 @@ const UPdateProfile = () => {
   // console.log(formattedLocalDate);
 
   const name = user?.displayName.split(" ") || [];
-  // console.log(name);
 
   return (
     <section className="bg-[#F9F9FB] h-screen">
@@ -88,8 +87,7 @@ const UPdateProfile = () => {
                           type="text"
                           name="first_name"
                           id="first_name"
-                          // defaultValue={name && name[0]}
-                          defaultValue={name.length > 1 ? name[0] : name}
+                          defaultValue={name && name[0]}
                           placeholder="Enter your first name"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
@@ -105,7 +103,7 @@ const UPdateProfile = () => {
                           type="text"
                           name="last_name"
                           id="last_name"
-                          defaultValue={name.length > 1 ? name[name.length] : ""}
+                          defaultValue={name[name?.length - 1]}
                           placeholder="Enter your last name"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
@@ -118,10 +116,12 @@ const UPdateProfile = () => {
                       >
                         Phone Number:
                         <input
-                          type="text"
+                          type="number"
                           name="phone_number"
                           id="phone_number"
-                          defaultValue={user?.phoneNumber && user?.phoneNumber}
+                          defaultValue={
+                            user_info_DB?.number === "N/A" ? '' : user_info_DB?.number
+                          }
                           placeholder="Enter your phone number"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
