@@ -1,4 +1,6 @@
+import { MdOutlineFileUpload, MdUpdate } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const UPdateProfile = () => {
   const { user, user_info_DB } = useAuth();
@@ -14,6 +16,17 @@ const UPdateProfile = () => {
     second: "2-digit",
     timeZone: "Asia/Dhaka",
   };
+
+  // name and preview for choose image
+  const [imagePreview, setImagePreview] = useState("");
+  const [imageText, setImageText] = useState("");
+
+  const handleImage = (image) => {
+    setImagePreview(URL.createObjectURL(image));
+    setImageText(image.name);
+  };
+
+  console.log(imagePreview);
 
   const formattedLocalDate = gmtTime.toLocaleString("en-US", options);
   // console.log(formattedLocalDate);
@@ -64,16 +77,35 @@ const UPdateProfile = () => {
                 <div>
                   <div className="flex mt-3 gap-4 ">
                     <img
-                      className="w-[75px] rounded-md"
-                      src={user?.photoURL}
+                      className="w-[75px] h-[75px] rounded-md"
+                      src={imagePreview ? imagePreview : user?.photoURL}
                       alt=""
                     />
-                    <div>
-                      <input type="file" name="image" id="image" />
-                      <button className="bg-[#4B0082] text-white py-1.5 px-3 rounded-md text-sm scale-100 active:scale-95 transition-all duration-200">
-                        Update Image
-                      </button>
-                    </div>
+                    <label htmlFor="file">
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        hidden
+                        accept="image/*"
+                        onChange={(e) => handleImage(e.target.files[0])}
+                      />
+                      <div className="py-1.5 px-4 text-sm font-bold cursor-pointer bg-[#2E8DD8] shadow-md hover:shadow-lg hover:shadow-[rgba(46,141,216,.25)] text-white rounded active:scale-95 scale-100 transform duration-150 flex items-center gap-1">
+                        <i className="text-lg font-semibold">
+                          <MdOutlineFileUpload />
+                        </i>
+                        <h4>
+                          {imageText.length > 10
+                            ? imageText.split(".")[0].slice(0, 10) +
+                              "..." +
+                              imageText.split(".")[1]
+                            : imageText && imageText > 0
+                            ? imageText
+                            : "Update Image"}
+                        </h4>
+                        {/* <h4>Upload Image</h4> */}
+                      </div>
+                    </label>
                   </div>
                   <hr className="my-4" />
                   <div className="grid grid-cols-2 gap-4">
@@ -120,7 +152,9 @@ const UPdateProfile = () => {
                           name="phone_number"
                           id="phone_number"
                           defaultValue={
-                            user_info_DB?.number === "N/A" ? '' : user_info_DB?.number
+                            user_info_DB?.number === "N/A"
+                              ? ""
+                              : user_info_DB?.number
                           }
                           placeholder="Enter your phone number"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
@@ -141,6 +175,18 @@ const UPdateProfile = () => {
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
                       </label>
+                    </div>
+
+                    <span></span>
+
+                    <div className="flex justify-center col-span-2 pb-3">
+                      <button
+                        type="submit"
+                        className="bg-[#4B0082] flex justify-center items-center gap-1 text-white py-2.5 px-7 hover:px-14 rounded-md text-sm font-bold scale-100 active:scale-95 transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg hover:shadow-[#4c00823f]"
+                      >
+                        <MdUpdate className="text-lg"/>
+                        Update Info
+                      </button>
                     </div>
                   </div>
                 </div>

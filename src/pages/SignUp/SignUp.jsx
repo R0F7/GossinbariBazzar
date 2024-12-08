@@ -31,10 +31,10 @@ const SignUp = () => {
   // const [imagePreview, setImagePreview] = useState('');
   // const [imageText, setImageText] = useState('');
 
-  // const handleImage = (image) => {
-  //     setImagePreview(URL.createObjectURL(image))
-  //     setImageText(image.name)
-  // }
+//   const handleImage = (image) => {
+//       setImagePreview(URL.createObjectURL(image))
+//       setImageText(image.name)
+//   }
 
   if (user) {
     navigate("/");
