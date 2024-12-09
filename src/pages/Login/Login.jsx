@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [toggle, setToggle] = useState(false);
-  const { user, signInWithGoogle, signIn , setLoading , saveUser} = useAuth();
+  const { user, signInWithGoogle, signIn , setLoading , saveUser,address} = useAuth();
   const navigate = useNavigate();
   // console.log(user);
 
@@ -56,7 +56,6 @@ const Login = () => {
       const status = "Verified"; // Default status
       const isActive = true;
       const vendor_request = false;
-      const address = "Address Not Available";
 
       const userInfo = {
         name,

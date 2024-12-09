@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const UPdateProfile = () => {
-  const { user, user_info_DB,address } = useAuth();
+  const { user, user_info_DB, address , initialAddress} = useAuth();
   const gmtTime = new Date(user?.metadata?.lastSignInTime);
 
   const options = {
@@ -32,6 +32,8 @@ const UPdateProfile = () => {
 
   const formattedLocalDate = gmtTime.toLocaleString("en-US", options);
   // console.log(formattedLocalDate);
+
+  console.log(user_info_DB?.address);
 
   const name = user?.displayName.split(" ") || [];
 
@@ -167,7 +169,7 @@ const UPdateProfile = () => {
                       </label>
                     </div>
                     <div className="flex justify-end">
-                      <label
+                      {/* <label
                         htmlFor="password"
                         className="flex items-center gap-2 ext-[#4B0082]"
                       >
@@ -177,6 +179,22 @@ const UPdateProfile = () => {
                           name="password"
                           id="password"
                           placeholder="Enter your New Password"
+                          className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                        />
+                      </label> */}
+
+                      <label
+                        htmlFor="address"
+                        className="flex items-center gap-2 ext-[#4B0082]"
+                      >
+                        Address:
+                        <input
+                          type="text"
+                          name="address"
+                          id="address"
+                          defaultValue={initialAddress}
+                          // placeholder="Enter your address"
+                          placeholder={address}
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
                       </label>

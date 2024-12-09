@@ -85,7 +85,8 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             if (data && data.address) {
               const placeName = data.display_name.split(",");
-              setAddress(`${placeName[0]},${placeName[placeName.length - 1]}`);
+              const newAddress = `${placeName[0]},${placeName[placeName.length - 1]}`;
+              setAddress(newAddress);
             } else {
               console.error("No results found.");
             }
