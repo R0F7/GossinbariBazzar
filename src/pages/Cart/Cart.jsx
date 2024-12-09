@@ -218,7 +218,7 @@ const Cart = () => {
                 key={product._id}
                 className="border-b py-4 flex items-center gap-6"
               >
-                <div className="flex gap-3.5 w-[45%] border">
+                <div className="flex gap-3.5 w-[42%]">
                   <div className="w-[75px] h-[50px]">
                     <img
                       className="w-full h-full"
@@ -234,13 +234,13 @@ const Cart = () => {
                     </h6>
                   </div>
                 </div>
-                <div className="flex items-center justify-center gap-6 w-[45%]">
+                <div className="flex items-center justify-center gap-6 w-[48%]">
                   <h4 className="text-red-500 font-bold">
                     $
                     {product?.discounted_price
                       ? product?.discounted_price
                       : product?.price}
-                    .00
+                    {Number.isInteger(product?.discounted_price) ? ".00" : ""}
                   </h4>
                   <div className="border w-[120px] flex items-center justify-around py-1.5 font-bold rounded-md shadow">
                     <button
@@ -272,10 +272,10 @@ const Cart = () => {
                       ? product?.discounted_price *
                         product?.cartProduct?.quantity
                       : product?.price * product?.cartProduct?.quantity}
-                    .00
+                    {Number.isInteger(product?.discounted_price) ? ".00" : ""}
                   </h4>
                 </div>
-                <div className="w-[10%] flex justify-center border">
+                <div className="w-[10%] flex justify-center ">
                   <button
                     onClick={() => handleDelete(product)}
                     className="border p-2 text-gray-700 hover:bg-red-100 hover:text-red-500 hover:border-red-100 rounded-full transition-all duration-300 active:scale-75 scale-100"
@@ -317,7 +317,8 @@ const Cart = () => {
                   <p>
                     Spend{" "}
                     <strong className="text-[#2E8DD8]">
-                      ${1000 - total_price}.00
+                      ${1000 - total_price}
+                      {Number.isInteger(total_price) ? ".00" : ""}
                     </strong>{" "}
                     more to reach <strong>FREE SHIPPING!</strong> <br />
                     to add more products to your cart and receive free shipping
@@ -334,7 +335,8 @@ const Cart = () => {
               <div className="flex items-center justify-between">
                 <h6 className="font-bold">Subtotal</h6>
                 <span className="text-red-500 font-bold">
-                  ${total_price}.00
+                  ${total_price}
+                  {Number.isInteger(total_price) ? ".00" : ""}
                 </span>
               </div>
               {cart_products.map((product) => (
@@ -350,11 +352,11 @@ const Cart = () => {
                       {Object.keys(shippingDetails).length > 1 ? (
                         <div>
                           {" "}
-                          <p className="text-[#2d2e30b9]">
-                            found for
-                          </p>
+                          <p className="text-[#2d2e30b9]">found for</p>
                           <p className="text-sm font-bold text-[#000000c4] -scroll-mb-0.5">{`${shippingDetails?.union}, ${shippingDetails?.village}`}</p>
-                          <p className="text-sm text-[#000000d0]">{shippingDetails?.locationDetails}</p>
+                          <p className="text-sm text-[#000000d0]">
+                            {shippingDetails?.locationDetails}
+                          </p>
                         </div>
                       ) : (
                         <p className="text-[15px] text-sm text-[#3b3d3f]">
@@ -453,7 +455,8 @@ const Cart = () => {
               <div className="flex items-center justify-between">
                 <h4 className="font-bold">Total</h4>
                 <span className="text-red-500 font-bold">
-                  ${total_price}.00
+                  ${total_price}
+                  {Number.isInteger(total_price) ? ".00" : ""}
                 </span>
               </div>
             </div>

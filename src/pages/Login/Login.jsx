@@ -56,6 +56,7 @@ const Login = () => {
       const status = "Verified"; // Default status
       const isActive = true;
       const vendor_request = false;
+      const address = "Address Not Available";
 
       const userInfo = {
         name,
@@ -65,6 +66,7 @@ const Login = () => {
         status,
         isActive,
         vendor_request,
+        address,
       };
       console.table(userInfo);
 

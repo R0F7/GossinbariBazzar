@@ -109,6 +109,7 @@ const SignUp = () => {
         const status = "Verified"; // Default status
         const isActive = true;
         const vendor_request = false;
+        const address = "Address Not Available";
 
         const userInfo = {
           name,
@@ -118,6 +119,7 @@ const SignUp = () => {
           status,
           isActive,
           vendor_request,
+          address
         };
         console.table(userInfo);
 

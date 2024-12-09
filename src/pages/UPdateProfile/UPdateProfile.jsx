@@ -51,6 +51,7 @@ const UPdateProfile = () => {
                     className="w-full h-full rounded-full"
                     src={user?.photoURL}
                     alt=""
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="text-center mt-1">
@@ -79,7 +80,8 @@ const UPdateProfile = () => {
                     <img
                       className="w-[75px] h-[75px] rounded-md"
                       src={imagePreview ? imagePreview : user?.photoURL}
-                      alt=""
+                      alt="imagePreview"
+                      referrerPolicy="no-referrer"
                     />
                     <label htmlFor="file">
                       <input
@@ -119,7 +121,8 @@ const UPdateProfile = () => {
                           type="text"
                           name="first_name"
                           id="first_name"
-                          defaultValue={name && name[0]}
+                          // defaultValue={name && name[0]}
+                          defaultValue={name[name?.length - 2]}
                           placeholder="Enter your first name"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
@@ -185,7 +188,7 @@ const UPdateProfile = () => {
                         className="bg-[#4B0082] flex justify-center items-center gap-1 text-white py-2.5 px-7 hover:px-14 rounded-md text-sm font-bold scale-100 active:scale-95 transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg hover:shadow-[#4c00823f]"
                       >
                         <MdUpdate className="text-lg"/>
-                        Update Info
+                        Update Profile
                       </button>
                     </div>
                   </div>
