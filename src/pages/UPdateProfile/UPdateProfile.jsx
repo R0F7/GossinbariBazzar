@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const UPdateProfile = () => {
-  const { user, user_info_DB } = useAuth();
+  const { user, user_info_DB,address } = useAuth();
   const gmtTime = new Date(user?.metadata?.lastSignInTime);
 
   const options = {
@@ -16,6 +16,8 @@ const UPdateProfile = () => {
     second: "2-digit",
     timeZone: "Asia/Dhaka",
   };
+
+  console.log(address);
 
   // name and preview for choose image
   const [imagePreview, setImagePreview] = useState("");
@@ -187,7 +189,7 @@ const UPdateProfile = () => {
                         type="submit"
                         className="bg-[#4B0082] flex justify-center items-center gap-1 text-white py-2.5 px-7 hover:px-14 rounded-md text-sm font-bold scale-100 active:scale-95 transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg hover:shadow-[#4c00823f]"
                       >
-                        <MdUpdate className="text-lg"/>
+                        <MdUpdate className="text-lg" />
                         Update Profile
                       </button>
                     </div>
