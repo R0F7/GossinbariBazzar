@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCartPlus, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import QuickView from "../Modal/QuickView";
 import Rating from "react-rating";
+import useAuth from "../../hooks/useAuth";
 
 const Card = ({ item, progress_sold }) => {
   const {
@@ -27,6 +28,8 @@ const Card = ({ item, progress_sold }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { user, cartAddedProducts, addProductInCard } = useAuth();
+  // const [quantity, setQuantity] = useState(0);
 
   const openDialog = (e) => {
     // Prevent the click from bubbling up to the parent Link
@@ -57,12 +60,38 @@ const Card = ({ item, progress_sold }) => {
   //   console.log("closeDialog clicked");
   // };
 
+  const handleAddToCard = async (id) => {
+    let quantity = 0;
+    const find_product = cartAddedProducts.find((product) => product.id === id);
+
+    if (find_product) {
+      const updatedQuantity = find_product.quantity + 1;
+      quantity = updatedQuantity;
+    } else {
+      quantity = quantity + 1;
+      // console.log("Product not found in the cart.");
+    }
+    // console.log(quantity);
+
+    const product_info = {
+      id,
+      order_owner_info: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      quantity,
+    };
+    // console.table(product_info);
+
+    await addProductInCard(product_info);
+  };
+
   return (
     <Link to={`/product/${_id}`}>
-      <div className="p-4 pb-6 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
+      <div className="-4 pb-6 bg-[#FFFFFF] hover:border-gray-200 border border-white hover:rounded-lg hover:shadow cart">
         <div className="h-[200px] relative overflow-hidden">
           <img
-            className="h-full w-full hover:scale-110 transition duration-500 cardX-image"
+            className="h-full w-full hover:scale-110 transition duration-500 cardX-image p-4"
             src={image}
             alt={title}
           />
@@ -86,7 +115,7 @@ const Card = ({ item, progress_sold }) => {
               <i>
                 <FiEye />
               </i>
-              <h4>Quickview</h4>
+              <h4>QuickView</h4>
               {/* <QuickView
                 isOpen={isDialogOpen}
                 onClose={closeDialog}
@@ -103,9 +132,12 @@ const Card = ({ item, progress_sold }) => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="px-4">
           <h4 className="text-[#637381] mt-1.5 mb-3">
-            <span className="text-[#023e8a] font-semibold text-sm ">Sold by:</span> <span className="text-[#4E148C] font-semibold">{sold_by}</span>
+            <span className="text-[#023e8a] font-semibold text-sm ">
+              Sold by:
+            </span>{" "}
+            <span className="text-[#4E148C] font-semibold">{sold_by}</span>
           </h4>
           {progress_sold && (
             <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
@@ -156,7 +188,14 @@ const Card = ({ item, progress_sold }) => {
                 : discounted_price}
             </h6>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation(); // Prevent the click event from propagating to the Link
+              handleAddToCard(_id);
+            }}
+            className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200"
+          >
             <i>
               <FaCartPlus />
             </i>

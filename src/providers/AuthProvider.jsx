@@ -15,6 +15,7 @@ import { app } from "../firebase/firebase.config";
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -85,7 +86,9 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             if (data && data.address) {
               const placeName = data.display_name.split(",");
-              const newAddress = `${placeName[0]},${placeName[placeName.length - 1]}`;
+              const newAddress = `${placeName[0]},${
+                placeName[placeName.length - 1]
+              }`;
               setAddress(newAddress);
             } else {
               console.error("No results found.");
@@ -200,6 +203,23 @@ const AuthProvider = ({ children }) => {
   });
   // console.log(cartAddedProducts);
 
+  //add product in cart
+  const { mutateAsync: addProductInCard } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosCommon.put(
+        "/add-product-in-cart",
+        product_info
+      );
+      return data;
+    },
+    onSuccess: () => {
+      // console.log("product added successfully");
+      toast.success("product added successfully");
+      cartAddedProductsRefetch();
+      // setIsOpen(true);
+    },
+  });
+
   // const onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -248,6 +268,7 @@ const AuthProvider = ({ children }) => {
     user_info_DB,
     saveUser,
     address,
+    addProductInCard,
   };
 
   return (

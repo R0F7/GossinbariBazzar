@@ -6,7 +6,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Rating from "react-rating";
@@ -37,6 +37,7 @@ import { RxCross2 } from "react-icons/rx";
 // };
 
 const QuickView = ({ isDialogOpen, closeDialog, item }) => {
+  const [count, setCount] = useState(1);
   const {
     _id,
     image,
@@ -54,7 +55,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     sub_category,
     tags,
     discount_percent,
-    short_description
+    short_description,
   } = item;
 
   const settings = {
@@ -64,7 +65,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <NextArrow isQuickView={true} isTrue={false} />,
-    prevArrow: <PrevArrow isQuickView={true}  isTrue={false} />,
+    prevArrow: <PrevArrow isQuickView={true} isTrue={false} />,
   };
 
   return (
@@ -167,28 +168,36 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                       {/* details */}
                       <div className="w-1/2 h-full pb-10">
                         <div className="flex items-center gap-2.5 font-semibold text-xl ">
-                          <del className="text-gray-500">
-                            ${price}
-                          </del>
-                          <h3 className="text-red-500">${discounted_price || price}</h3>
+                          <del className="text-gray-500">${price}</del>
+                          <h3 className="text-red-500">
+                            ${discounted_price || price}
+                          </h3>
                         </div>
                         {/* TODO:add dynamic short description */}
                         <p className="my-2.5 font-light text-[#828E9A]">
-                         {short_description}
+                          {short_description}
                         </p>
                         <h6 className="text-sm font-semibold text-gray-500">
                           Availability :{" "}
                           <span className="text-base text-green-500">
-                            10 in stock
+                            {total_product}
                           </span>
                         </h6>
 
                         <div className="border w-[110px] flex items-center justify-around py-1.5 text-sm font-bold rounded-md shadow my-3">
-                          <button className="text- active:scale-75 scale-100 duration-200">
+                          <button
+                            onClick={() => setCount(count - 1)}
+                            disabled={count === 1}
+                            className="text- active:scale-75 scale-100 duration-200"
+                          >
                             <FiMinus />
                           </button>
-                          <span>1</span>
-                          <button className="active:scale-75 scale-100 duration-200">
+                          <span>{count}</span>
+                          <button
+                            onClick={() => setCount(count + 1)}
+                            disabled={count === total_product}
+                            className="active:scale-75 scale-100 duration-200"
+                          >
                             <FiPlus />
                           </button>
                         </div>
@@ -203,10 +212,13 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="absolute top-4 right-4 border p-0.5 rounded-full shadow text-red-500 cursor-pointer hover:scale-[1.18] hover:shadow-red-200 hover:shadow-md hover:border-transparent transition duration-200"
-                    onClick={closeDialog}
+                    <div
+                      className="absolute top-4 right-4 border p-0.5 rounded-full shadow text-red-500 cursor-pointer hover:scale-[1.18] hover:shadow-red-200 hover:shadow-md hover:border-transparent transition duration-200"
+                      onClick={closeDialog}
                     >
-                        <i><RxCross2 /></i>
+                      <i>
+                        <RxCross2 />
+                      </i>
                     </div>
                   </div>
                 </DialogPanel>

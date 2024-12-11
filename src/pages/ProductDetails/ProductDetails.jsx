@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { user, cartAddedProducts, cartAddedProductsRefetch } = useAuth();
+  const { user, cartAddedProducts,addProductInCard } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [cartToast, setCartToast] = useState(false);
   // console.log(user);
@@ -79,21 +79,21 @@ const ProductDetails = () => {
   // console.log(reviews);
 
   //add product in cart
-  const { mutateAsync: addProductInCard } = useMutation({
-    mutationFn: async (product_info) => {
-      const { data } = await axiosCommon.put(
-        "/add-product-in-cart",
-        product_info
-      );
-      return data;
-    },
-    onSuccess: () => {
-      // console.log("product added successfully");
-      toast.success("product added successfully");
-      cartAddedProductsRefetch();
-      setIsOpen(true);
-    },
-  });
+  // const { mutateAsync: addProductInCard } = useMutation({
+  //   mutationFn: async (product_info) => {
+  //     const { data } = await axiosCommon.put(
+  //       "/add-product-in-cart",
+  //       product_info
+  //     );
+  //     return data;
+  //   },
+  //   onSuccess: () => {
+  //     // console.log("product added successfully");
+  //     toast.success("product added successfully");
+  //     cartAddedProductsRefetch();
+  //     setIsOpen(true);
+  //   },
+  // });
 
   // const { data: cartAddedProducts = [], refetch: cartAddedProductsRefetch } =
   //   useQuery({
@@ -314,16 +314,8 @@ const ProductDetails = () => {
             </span>
           </div>
         </div>
-        {/* icon  */}
-        <div>
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
       </div>
+
       <div className="grid grid-cols-3 mt-8">
         {/* product image */}
         <div className="">

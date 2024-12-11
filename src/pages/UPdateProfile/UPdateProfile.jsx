@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const UPdateProfile = () => {
-  const { user, user_info_DB, address , initialAddress} = useAuth();
+  const { user, user_info_DB, address } = useAuth();
   const gmtTime = new Date(user?.metadata?.lastSignInTime);
 
   const options = {
@@ -17,7 +17,7 @@ const UPdateProfile = () => {
     timeZone: "Asia/Dhaka",
   };
 
-  console.log(address);
+  // console.log(address);
 
   // name and preview for choose image
   const [imagePreview, setImagePreview] = useState("");
@@ -33,7 +33,7 @@ const UPdateProfile = () => {
   const formattedLocalDate = gmtTime.toLocaleString("en-US", options);
   // console.log(formattedLocalDate);
 
-  console.log(user_info_DB?.address);
+  // console.log(user_info_DB?.address);
 
   const name = user?.displayName.split(" ") || [];
 
@@ -192,9 +192,9 @@ const UPdateProfile = () => {
                           type="text"
                           name="address"
                           id="address"
-                          defaultValue={initialAddress}
+                          defaultValue={user_info_DB?.address && user_info_DB?.address}
                           // placeholder="Enter your address"
-                          placeholder={address}
+                          placeholder={address || "Enter your address"}
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
                       </label>
