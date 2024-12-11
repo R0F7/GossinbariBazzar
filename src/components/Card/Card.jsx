@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaCartPlus, FaRegHeart, FaRegStar, FaStar } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import QuickView from "../Modal/QuickView";
 import Rating from "react-rating";
 import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Card = ({ item, progress_sold }) => {
   const {
@@ -30,6 +32,7 @@ const Card = ({ item, progress_sold }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { user, cartAddedProducts, addProductInCard } = useAuth();
   // const [quantity, setQuantity] = useState(0);
+  const axiosCommon = useAxiosCommon();
 
   const openDialog = (e) => {
     // Prevent the click from bubbling up to the parent Link
@@ -60,18 +63,52 @@ const Card = ({ item, progress_sold }) => {
   //   console.log("closeDialog clicked");
   // };
 
-  const handleAddToCard = async (id) => {
-    let quantity = 0;
-    const find_product = cartAddedProducts.find((product) => product.id === id);
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["card_reviews_fetch"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/reviews`);
+      return data;
+    },
+  });
+  // console.log(reviews);
 
-    if (find_product) {
-      const updatedQuantity = find_product.quantity + 1;
-      quantity = updatedQuantity;
-    } else {
-      quantity = quantity + 1;
-      // console.log("Product not found in the cart.");
-    }
-    // console.log(quantity);
+  const productReviews = reviews.filter((review) => review.product_id === _id);
+  // console.log(productReviews);
+
+  const totalRatings = productReviews.reduce((sum, review) => sum + review.rating, 0);
+  const averageRating = totalRatings / reviews.length;
+  // console.log(averageRating);
+
+  // const handleAddToCard = async (id) => {
+  //   let quantity = 0;
+  //   const find_product = cartAddedProducts.find((product) => product.id === id);
+
+  //   if (find_product) {
+  //     const updatedQuantity = find_product.quantity + 1;
+  //     quantity = updatedQuantity;
+  //   } else {
+  //     quantity = quantity + 1;
+  //     // console.log("Product not found in the cart.");
+  //   }
+  //   // console.log(quantity);
+
+  //   const product_info = {
+  //     id,
+  //     order_owner_info: {
+  //       name: user?.displayName,
+  //       email: user?.email,
+  //     },
+  //     quantity,
+  //   };
+  //   // console.table(product_info);
+
+  //   await addProductInCard(product_info);
+  // };
+
+  const updateQuantity = (product) => (product ? product.quantity + 1 : 1);
+  const handleAddToCard = async (id) => {
+    const find_product = cartAddedProducts.find((product) => product.id === id);
+    const quantity = updateQuantity(find_product);
 
     const product_info = {
       id,
@@ -81,9 +118,12 @@ const Card = ({ item, progress_sold }) => {
       },
       quantity,
     };
-    // console.table(product_info);
 
-    await addProductInCard(product_info);
+    try {
+      await addProductInCard(product_info);
+    } catch (error) {
+      console.error("Failed to add product to the cart:", error);
+    }
   };
 
   return (
@@ -168,14 +208,14 @@ const Card = ({ item, progress_sold }) => {
           >
             <Rating
               style={{ maxWidth: 180 }}
-              initialRating={rating}
+              initialRating={averageRating}
               fullSymbol={<FaStar className="mr-1 text-yellow-500"></FaStar>}
               emptySymbol={
                 <FaRegStar className="mr-1 text-yellow-500"></FaRegStar>
               }
               readonly
             />
-            <h6 className="text-xs font-bold">{"(" + 0 + ")"}</h6>
+            <h6 className="text-xs font-bold">{`(${productReviews.length})`}</h6>
           </div>
           <div className="flex items-center gap-5 my-2.5">
             <del className="ext-[#919EAB] text-red-600 font-bold text-lg">
