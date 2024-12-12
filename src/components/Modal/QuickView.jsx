@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import {
   Description,
   Dialog,
@@ -6,7 +8,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Rating from "react-rating";
@@ -14,6 +16,8 @@ import Slider from "react-slick";
 import NextArrow from "../Arrow/NextArrow";
 import PrevArrow from "../Arrow/PrevArrow";
 import { RxCross2 } from "react-icons/rx";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 // const QuickView = ({ isOpen, onClose, title, description, message }) => {
 //   return (
@@ -36,8 +40,15 @@ import { RxCross2 } from "react-icons/rx";
 //   );
 // };
 
-const QuickView = ({ isDialogOpen, closeDialog, item }) => {
+const QuickView = ({
+  isDialogOpen,
+  closeDialog,
+  item,
+  productReviews,
+  averageRating,
+}) => {
   const [count, setCount] = useState(1);
+  const { cartAddedProducts, user, addProductInCard } = useAuth();
   const {
     _id,
     image,
@@ -66,6 +77,35 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
     slidesToScroll: 1,
     nextArrow: <NextArrow isQuickView={true} isTrue={false} />,
     prevArrow: <PrevArrow isQuickView={true} isTrue={false} />,
+  };
+
+  const find_product = cartAddedProducts.find((product) => product.id === _id);
+  const quantity = find_product?.quantity;
+
+  useEffect(() => {
+    if (find_product) {
+      setCount(quantity);
+    }
+  }, [find_product, quantity]);
+
+  const handleAddToCard = async () => {
+
+    if (quantity === count) {
+      return toast.error("if you want more! update quantity");
+    }
+
+    const product_info = {
+      id:_id,
+      order_owner_info: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      quantity: count,
+    };
+
+    await addProductInCard(product_info);
+
+    // console.log(product_info);
   };
 
   return (
@@ -114,7 +154,7 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                       <div className="flex items-center mb-8 text-sm font-semibold space-x-2 text-[#828E9A]">
                         <Rating
                           style={{ maxWidth: 180 }}
-                          initialRating={rating}
+                          initialRating={averageRating}
                           fullSymbol={
                             <FaStar className="mr-0.5 text-xs text-yellow-400"></FaStar>
                           }
@@ -123,8 +163,10 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                           }
                           readonly
                         />
-                        <h6>3 customer reviews</h6>
-                        <h6 className="border-x px-2">Sold: 33</h6>
+                        <h6>{productReviews.length} customer reviews</h6>
+
+                        {/* TODO: change sold dynamic */}
+                        <h6 className="border-x px-2">Sold: {sold_product}</h6>
                         <h6>
                           Sold by: <strong>{sold_by}</strong>
                         </h6>
@@ -168,10 +210,27 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                       {/* details */}
                       <div className="w-1/2 h-full pb-10">
                         <div className="flex items-center gap-2.5 font-semibold text-xl ">
-                          <del className="text-gray-500">${price}</del>
-                          <h3 className="text-red-500">
-                            ${discounted_price || price}
-                          </h3>
+                          {discounted_price ? (
+                            <>
+                              <del className="text-gray-500">
+                                {" "}
+                                $
+                                {Number.isInteger(price)
+                                  ? price + ".00"
+                                  : price}
+                              </del>
+                              <h3 className="text-red-500">
+                                $
+                                {Number.isInteger(discounted_price)
+                                  ? discounted_price + ".00"
+                                  : discounted_price}
+                              </h3>
+                            </>
+                          ) : (
+                            <h3 className="text-red-500">
+                              ${Number.isInteger(price) ? price + ".00" : price}
+                            </h3>
+                          )}
                         </div>
                         {/* TODO:add dynamic short description */}
                         <p className="my-2.5 font-light text-[#828E9A]">
@@ -203,7 +262,10 @@ const QuickView = ({ isDialogOpen, closeDialog, item }) => {
                         </div>
 
                         <div className="flex flex-col gap-2.5">
-                          <button className="g-[#76c893] bg-[#0077b6] text-white py-2 rounded-md text-sm font-semibold shadow-[#2e8ed886] shadow-md hover:shadow-md active:scale-95 scale-100 duration-200 ">
+                          <button
+                            onClick={handleAddToCard}
+                            className="g-[#76c893] bg-[#0077b6] text-white py-2 rounded-md text-sm font-semibold shadow-[#2e8ed886] shadow-md hover:shadow-md active:scale-95 scale-100 duration-200 "
+                          >
                             Add to cart
                           </button>
                           <button className="bg-[#FFB240] py-2 rounded-md text-sm font-semibold shadow-md shadow-[#ffb3406e] hover:shadow-md active:scale-95 scale-100 duration-200">

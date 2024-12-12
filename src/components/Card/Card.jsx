@@ -168,6 +168,9 @@ const Card = ({ item, progress_sold }) => {
                 isDialogOpen={isDialogOpen}
                 closeDialog={closeDialog}
                 item={item}
+                productReviews={productReviews}
+                averageRating={averageRating}
+                // find_product={find_product}
               />
             </div>
           </div>
