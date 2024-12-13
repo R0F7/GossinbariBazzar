@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
-const Card = ({ item, progress_sold }) => {
+const Card = ({ item, progress_sold, handleAddToCard,reviews }) => {
   const {
     _id,
     image,
@@ -30,9 +30,9 @@ const Card = ({ item, progress_sold }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { user, cartAddedProducts, addProductInCard } = useAuth();
+  // const { user, cartAddedProducts, addProductInCard } = useAuth();
   // const [quantity, setQuantity] = useState(0);
-  const axiosCommon = useAxiosCommon();
+  // const axiosCommon = useAxiosCommon();
 
   const openDialog = (e) => {
     // Prevent the click from bubbling up to the parent Link
@@ -63,19 +63,22 @@ const Card = ({ item, progress_sold }) => {
   //   console.log("closeDialog clicked");
   // };
 
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["card_reviews_fetch"],
-    queryFn: async () => {
-      const { data } = await axiosCommon.get(`/reviews`);
-      return data;
-    },
-  });
+  // const { data: reviews = [] } = useQuery({
+  //   queryKey: ["card_reviews_fetch"],
+  //   queryFn: async () => {
+  //     const { data } = await axiosCommon.get(`/reviews`);
+  //     return data;
+  //   },
+  // });
   // console.log(reviews);
 
   const productReviews = reviews.filter((review) => review.product_id === _id);
   // console.log(productReviews);
 
-  const totalRatings = productReviews.reduce((sum, review) => sum + review.rating, 0);
+  const totalRatings = productReviews.reduce(
+    (sum, review) => sum + review.rating,
+    0
+  );
   const averageRating = totalRatings / reviews.length;
   // console.log(averageRating);
 
@@ -104,27 +107,6 @@ const Card = ({ item, progress_sold }) => {
 
   //   await addProductInCard(product_info);
   // };
-
-  const updateQuantity = (product) => (product ? product.quantity + 1 : 1);
-  const handleAddToCard = async (id) => {
-    const find_product = cartAddedProducts.find((product) => product.id === id);
-    const quantity = updateQuantity(find_product);
-
-    const product_info = {
-      id,
-      order_owner_info: {
-        name: user?.displayName,
-        email: user?.email,
-      },
-      quantity,
-    };
-
-    try {
-      await addProductInCard(product_info);
-    } catch (error) {
-      console.error("Failed to add product to the cart:", error);
-    }
-  };
 
   return (
     <Link to={`/product/${_id}`}>
@@ -253,6 +235,8 @@ const Card = ({ item, progress_sold }) => {
 Card.propTypes = {
   item: PropTypes.object,
   progress_sold: PropTypes.bool,
+  handleAddToCard:PropTypes.func,
+  reviews:PropTypes.array,
 };
 
 export default Card;

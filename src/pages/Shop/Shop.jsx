@@ -7,6 +7,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import { ImMenu } from "react-icons/im";
 import CardX from "../../components/Card/CardX";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import useAuth from "../../hooks/useAuth";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -14,6 +15,7 @@ const Shop = () => {
   const [grid, setGrid] = useState(true);
   const [sortOption, setSortOption] = useState("");
   const axiosCommon = useAxiosCommon();
+  const { user, cartAddedProducts, addProductInCard } = useAuth();
 
   const { data: products = [] } = useQuery({
     queryKey: ["shopProducts"],
@@ -58,6 +60,36 @@ const Shop = () => {
     setSortOption(event.target.value);
   };
   // console.log(sortOption);
+
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["card_reviews_fetch"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/reviews`);
+      return data;
+    },
+  });
+  // console.log(reviews);
+
+  const updateQuantity = (product) => (product ? product.quantity + 1 : 1);
+  const handleAddToCard = async (id) => {
+    const find_product = cartAddedProducts.find((product) => product.id === id);
+    const quantity = updateQuantity(find_product);
+
+    const product_info = {
+      id,
+      order_owner_info: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      quantity,
+    };
+
+    try {
+      await addProductInCard(product_info);
+    } catch (error) {
+      console.error("Failed to add product to the cart:", error);
+    }
+  };
 
   return (
     <div className="container mx-auto">
@@ -213,13 +245,13 @@ const Shop = () => {
               className={`grid ${grid ? "grid-cols-5" : "grid-cols-1"}  my-8`}
             >
               {products.map((product) => (
-                <Card key={product?._id} item={product}></Card>
+                <Card key={product?._id} item={product} handleAddToCard={handleAddToCard} reviews={reviews}></Card>
               ))}
             </div>
           ) : (
             <div className={`grid grid-cols-1'} my-8 `}>
               {products.map((product) => (
-                <CardX key={product?._id} item={product}></CardX>
+                <CardX key={product?._id} item={product} handleAddToCard={handleAddToCard} reviews={reviews}></CardX>
               ))}
             </div>
           )}

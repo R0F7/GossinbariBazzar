@@ -44,7 +44,7 @@ const QuickView = ({
   isDialogOpen,
   closeDialog,
   item,
-  productReviews,
+  productReviews =[],
   averageRating,
 }) => {
   const [count, setCount] = useState(1);
