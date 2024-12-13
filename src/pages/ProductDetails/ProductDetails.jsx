@@ -354,7 +354,7 @@ const ProductDetails = () => {
           </h4>
           <div className="border w-[130px] flex items-center justify-around py-1.5 text-lg font-bold rounded-md shadow my-3.5">
             <button
-              disabled={count === 0}
+              disabled={count === 1}
               className="text- active:scale-75 scale-100 duration-200"
             >
               <FiMinus onClick={() => setCount(count - 1)} />

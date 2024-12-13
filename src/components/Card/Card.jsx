@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 
-const Card = ({ item, progress_sold, handleAddToCard,reviews }) => {
+const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
   const {
     _id,
     image,

@@ -1,9 +1,10 @@
 import { MdOutlineFileUpload, MdUpdate } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import imageUpload from "../../api/utils";
 
 const UPdateProfile = () => {
-  const { user, user_info_DB, address } = useAuth();
+  const { user, user_info_DB, address, updateUserProfile } = useAuth();
   const gmtTime = new Date(user?.metadata?.lastSignInTime);
 
   const options = {
@@ -28,7 +29,7 @@ const UPdateProfile = () => {
     setImageText(image.name);
   };
 
-  console.log(imagePreview);
+  // console.log(imagePreview);
 
   const formattedLocalDate = gmtTime.toLocaleString("en-US", options);
   // console.log(formattedLocalDate);
@@ -36,6 +37,32 @@ const UPdateProfile = () => {
   // console.log(user_info_DB?.address);
 
   const name = user?.displayName.split(" ") || [];
+
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const image = form.file.files[0];
+    const first_name = form.first_name.value;
+    const last_name = form.last_name.value;
+    const phone_number = form.phone_number.value;
+    const address = form.address.value;
+
+    const name = first_name + " " + last_name;
+    
+    if (image) {
+      const image_url = await imageUpload(image);
+      await updateUserProfile(name, image_url,phone_number);
+    }
+
+    const updateInfo = {
+      name,
+      phone_number,
+      address,
+    };
+
+    console.table(updateInfo);
+  };
 
   return (
     <section className="bg-[#F9F9FB] h-screen">
@@ -79,7 +106,7 @@ const UPdateProfile = () => {
               {/* right part */}
               <div className="w-3/4 border p-4">
                 <h3 className="text-lg font-bold">Profile</h3>
-                <div>
+                <form onSubmit={handelSubmit}>
                   <div className="flex mt-3 gap-4 ">
                     <img
                       className="w-[75px] h-[75px] rounded-md"
@@ -165,6 +192,7 @@ const UPdateProfile = () => {
                           }
                           placeholder="Enter your phone number"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                          // required
                         />
                       </label>
                     </div>
@@ -192,7 +220,9 @@ const UPdateProfile = () => {
                           type="text"
                           name="address"
                           id="address"
-                          defaultValue={user_info_DB?.address && user_info_DB?.address}
+                          defaultValue={
+                            user_info_DB?.address && user_info_DB?.address
+                          }
                           // placeholder="Enter your address"
                           placeholder={address || "Enter your address"}
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
@@ -212,7 +242,7 @@ const UPdateProfile = () => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </section>
           </div>
