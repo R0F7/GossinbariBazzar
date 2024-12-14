@@ -30,7 +30,7 @@ const Navbar = () => {
   // console.log(total_quantity);
 
   return (
-    <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
+    <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50 fixed top-0 left-0">
       {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
       <div className="container mx-auto">
         {/* nav heading */}

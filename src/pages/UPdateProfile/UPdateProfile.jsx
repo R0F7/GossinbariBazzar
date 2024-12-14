@@ -49,10 +49,12 @@ const UPdateProfile = () => {
     const address = form.address.value;
 
     const name = first_name + " " + last_name;
-    
+
     if (image) {
       const image_url = await imageUpload(image);
-      await updateUserProfile(name, image_url,phone_number);
+      await updateUserProfile(name, image_url);
+    } else {
+      await updateUserProfile(name);
     }
 
     const updateInfo = {
@@ -61,7 +63,7 @@ const UPdateProfile = () => {
       address,
     };
 
-    console.table(updateInfo);
+    // console.table(updateInfo);
   };
 
   return (
@@ -153,7 +155,7 @@ const UPdateProfile = () => {
                           name="first_name"
                           id="first_name"
                           // defaultValue={name && name[0]}
-                          defaultValue={name[name?.length - 2]}
+                          defaultValue={name.slice(0, -1).join(" ")}
                           placeholder="Enter your first name"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
                         />
@@ -192,7 +194,9 @@ const UPdateProfile = () => {
                           }
                           placeholder="Enter your phone number"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
-                          // required
+                          required={
+                            user_info_DB?.number === "N/A" ? true : false
+                          }
                         />
                       </label>
                     </div>
@@ -226,6 +230,11 @@ const UPdateProfile = () => {
                           // placeholder="Enter your address"
                           placeholder={address || "Enter your address"}
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
+                          required={
+                            user_info_DB?.address && user_info_DB?.address
+                              ? false
+                              : true
+                          }
                         />
                       </label>
                     </div>
