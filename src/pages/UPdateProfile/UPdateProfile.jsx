@@ -2,10 +2,14 @@ import { MdOutlineFileUpload, MdUpdate } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import imageUpload from "../../api/utils";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
+import toast from "react-hot-toast";
 
 const UPdateProfile = () => {
   const { user, user_info_DB, address, updateUserProfile } = useAuth();
   const gmtTime = new Date(user?.metadata?.lastSignInTime);
+  const axiosCommon = useAxiosCommon();
 
   const options = {
     weekday: "long",
@@ -38,6 +42,19 @@ const UPdateProfile = () => {
 
   const name = user?.displayName.split(" ") || [];
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async (updateInfo) => {
+      const { data } = await axiosCommon.patch(
+        `/user/${user_info_DB._id}`,
+        updateInfo
+      );
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("update successfully");
+    },
+  });
+
   const handelSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,6 +80,7 @@ const UPdateProfile = () => {
       address,
     };
 
+    await mutateAsync(updateInfo)
     // console.table(updateInfo);
   };
 
