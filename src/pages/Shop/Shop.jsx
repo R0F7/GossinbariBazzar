@@ -15,15 +15,17 @@ const Shop = () => {
   const [grid, setGrid] = useState(true);
   const [sortOption, setSortOption] = useState("");
   const axiosCommon = useAxiosCommon();
-  const { user, cartAddedProducts, addProductInCard, query, setQuery } =
+  const { user, cartAddedProducts, addProductInCard, category, setCategory } =
     useAuth();
-  // const [query, setQuery] = useState("");
-  // console.log(query);
+  const [price, setPrice] = useState(0);
+  const [displayPrice, setDisplayPrice] = useState(price);
 
   const { data: products = [], isLoading } = useQuery({
-    queryKey: ["shopProducts", query],
+    queryKey: ["shopProducts", category, price],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/products?query=${query}`);
+      const { data } = await axiosCommon.get(
+        `/products?category=${category}&price=${price}`
+      );
       return data;
     },
   });
@@ -94,6 +96,15 @@ const Shop = () => {
     }
   };
 
+  const handlePrice = (e) => {
+    e.preventDefault();
+
+    const price = e.target.range.value;
+    setPrice(price);
+    setDisplayPrice(price)
+  };
+  // console.log(price);
+
   if (isLoading) {
     return <h4>Loading...</h4>;
   }
@@ -126,7 +137,7 @@ const Shop = () => {
               {categories.map((category, idx) => (
                 <li
                   key={idx}
-                  onClick={() => setQuery(category?.categoryName)}
+                  onClick={() => setCategory(category?.categoryName)}
                   className="py-1.5 ml-1.5 order-b text-[#646B73] ext-sm font-medium hover:font-bold"
                 >
                   {category?.categoryName}
@@ -138,7 +149,7 @@ const Shop = () => {
           <hr className="my-6" />
 
           {/* price */}
-          <div>
+          <form onSubmit={handlePrice}>
             <h4 className="font-semibold mb-2 text-lg">Price</h4>
             <input
               type="range"
@@ -147,14 +158,37 @@ const Shop = () => {
               min="20"
               max="120"
               step="10"
+              defaultValue={price || 0}
+              onChange={(e) => setDisplayPrice(e.target.value)}
             />
-            <h4>
-              Price : <span className="font-semibold"> $20 - $120</span>
-            </h4>
-            <button className="mt-3 py-1.5 px-6 bg-[#2E8DD8] text-sm font-bold text-white rounded-md active:scale-90 scale-100 transform duration-200 ">
-              Filter
-            </button>
-          </div>
+            { displayPrice ? (
+              <h4>
+                Price : <span className="font-semibold"> ${displayPrice}</span>
+              </h4>
+            ) : (
+              <h4>
+                Price : <span className="font-semibold"> $20 - $120</span>
+              </h4>
+            )}
+            <div className="flex justify-around">
+              <button
+                type="submit"
+                className="mt-3 py-1.5 px-6 bg-[#2E8DD8] text-sm font-bold text-white rounded-md active:scale-90 scale-100 transform duration-200 "
+              >
+                Filter
+              </button>
+              <button
+                type="reset"
+                onClick={() => {
+                  setPrice(0);
+                  setDisplayPrice(null);
+                }}
+                className="mt-3 py-1.5 px-6 bg-[#2E8DD8] text-sm font-bold text-white rounded-md active:scale-90 scale-100 transform duration-200 "
+              >
+                Reset
+              </button>
+            </div>
+          </form>
 
           <hr className="my-6" />
 

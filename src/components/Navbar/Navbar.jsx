@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
-  const { user, logOut, cartAddedProducts, setQuery } = useAuth();
+  const { user, logOut, cartAddedProducts, setCategory } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -29,9 +29,9 @@ const Navbar = () => {
   );
   // console.log(cartAddedProducts);
   // console.log(total_quantity);
-  
+
   const handleClick = (category) => {
-    setQuery(category);
+    setCategory(category);
     navigate("/shop");
   };
 
