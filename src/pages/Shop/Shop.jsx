@@ -15,12 +15,15 @@ const Shop = () => {
   const [grid, setGrid] = useState(true);
   const [sortOption, setSortOption] = useState("");
   const axiosCommon = useAxiosCommon();
-  const { user, cartAddedProducts, addProductInCard } = useAuth();
+  const { user, cartAddedProducts, addProductInCard, query, setQuery } =
+    useAuth();
+  // const [query, setQuery] = useState("");
+  // console.log(query);
 
-  const { data: products = [] } = useQuery({
-    queryKey: ["shopProducts"],
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ["shopProducts", query],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/products");
+      const { data } = await axiosCommon.get(`/products?query=${query}`);
       return data;
     },
   });
@@ -91,6 +94,10 @@ const Shop = () => {
     }
   };
 
+  if (isLoading) {
+    return <h4>Loading...</h4>;
+  }
+
   return (
     <div className="container mx-auto">
       {/* page location  */}
@@ -119,7 +126,8 @@ const Shop = () => {
               {categories.map((category, idx) => (
                 <li
                   key={idx}
-                  className="py-1.5 ml-1.5 order-b text-[#646B73] ext-sm font-medium"
+                  onClick={() => setQuery(category?.categoryName)}
+                  className="py-1.5 ml-1.5 order-b text-[#646B73] ext-sm font-medium hover:font-bold"
                 >
                   {category?.categoryName}
                 </li>
@@ -245,13 +253,23 @@ const Shop = () => {
               className={`grid ${grid ? "grid-cols-5" : "grid-cols-1"}  my-8`}
             >
               {products.map((product) => (
-                <Card key={product?._id} item={product} handleAddToCard={handleAddToCard} reviews={reviews}></Card>
+                <Card
+                  key={product?._id}
+                  item={product}
+                  handleAddToCard={handleAddToCard}
+                  reviews={reviews}
+                ></Card>
               ))}
             </div>
           ) : (
             <div className={`grid grid-cols-1'} my-8 `}>
               {products.map((product) => (
-                <CardX key={product?._id} item={product} handleAddToCard={handleAddToCard} reviews={reviews}></CardX>
+                <CardX
+                  key={product?._id}
+                  item={product}
+                  handleAddToCard={handleAddToCard}
+                  reviews={reviews}
+                ></CardX>
               ))}
             </div>
           )}

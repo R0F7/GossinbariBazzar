@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState("Address Not Available");
+  const [query, setQuery] = useState("");
   const axiosCommon = useAxiosCommon();
 
   //sign in with google
@@ -269,6 +270,8 @@ const AuthProvider = ({ children }) => {
     saveUser,
     address,
     addProductInCard,
+    query,
+    setQuery
   };
 
   return (

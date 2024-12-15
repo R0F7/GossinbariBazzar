@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png";
 import { FaCartPlus, FaChevronDown } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
@@ -12,9 +12,10 @@ import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
-  const { user, logOut, cartAddedProducts } = useAuth();
+  const { user, logOut, cartAddedProducts, setQuery } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   // console.log(isOpen);
   const { data: categories = [] } = useQuery({
@@ -28,9 +29,14 @@ const Navbar = () => {
   );
   // console.log(cartAddedProducts);
   // console.log(total_quantity);
+  
+  const handleClick = (category) => {
+    setQuery(category);
+    navigate("/shop");
+  };
 
   return (
-    <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50 fixed top-0 left-0">
+    <nav className="bg-[#eeeeeecc] g-opacity-80 pt-2.5 shadow relative z-50">
       {/* <nav className="bg-white bg-opacity-10 backdrop-blur-md border border-white/30 rounded-lg shadow-lg p-4 relative z-50"> */}
       <div className="container mx-auto">
         {/* nav heading */}
@@ -113,9 +119,7 @@ const Navbar = () => {
               </i>
               <h6
                 className={`absolute -top-3 
-                ${
-                  total_quantity > 9 ? "-right-3.5" : "-right-2.5"
-                } 
+                ${total_quantity > 9 ? "-right-3.5" : "-right-2.5"} 
                 border px-2 py-1 bg-[#2E8DD8] text-white text-xs rounded-full`}
               >
                 {total_quantity || 0}
@@ -145,7 +149,10 @@ const Navbar = () => {
                   toggle ? "scale-x-100 origin-right" : "scale-x-0 origin-right"
                 }`}
               >
-                <Link to="/update-profile" className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                <Link
+                  to="/update-profile"
+                  className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
+                >
                   Update Profile
                 </Link>
                 <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
@@ -279,6 +286,7 @@ const Navbar = () => {
           {categories.map((category, idx) => (
             <li
               key={idx}
+              onClick={() => handleClick(category?.categoryName)}
               className="flex items-center gap-3 border-y border-[#212b3671] py-2.5 px-4 text-[#333333] ext-[rgb(46,141,216)] hover:text-[rgb(46,141,216)] over:text-[#fff] hover:bg-[#d0d0d0] rayscale hover:grayscale-0 transform duration-200"
             >
               <div className="w-7 h-7">
