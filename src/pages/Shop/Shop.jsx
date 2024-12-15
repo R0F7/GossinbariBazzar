@@ -19,12 +19,13 @@ const Shop = () => {
     useAuth();
   const [price, setPrice] = useState(0);
   const [displayPrice, setDisplayPrice] = useState(price);
+  const [subCategory, setSubCategory] = useState("");
 
   const { data: products = [], isLoading } = useQuery({
-    queryKey: ["shopProducts", category, price],
+    queryKey: ["shopProducts", category, price, subCategory],
     queryFn: async () => {
       const { data } = await axiosCommon.get(
-        `/products?category=${category}&price=${price}`
+        `/products?category=${category}&price=${price}&sub_category=${subCategory}`
       );
       return data;
     },
@@ -101,7 +102,7 @@ const Shop = () => {
 
     const price = e.target.range.value;
     setPrice(price);
-    setDisplayPrice(price)
+    setDisplayPrice(price);
   };
   // console.log(price);
 
@@ -161,7 +162,7 @@ const Shop = () => {
               defaultValue={price || 0}
               onChange={(e) => setDisplayPrice(e.target.value)}
             />
-            { displayPrice ? (
+            {displayPrice ? (
               <h4>
                 Price : <span className="font-semibold"> ${displayPrice}</span>
               </h4>
@@ -192,13 +193,15 @@ const Shop = () => {
 
           <hr className="my-6" />
 
+          {/* sub category */}
           <div>
             <h4 className="font-semibold mb-2 text-lg">Sub Categories</h4>
             <div className="space-y-2 space-x-2 mr-2">
               {subCategories.map((sCat, idx) => (
                 <h4
                   key={idx}
-                  className="border inline-block rounded-full text-sm py-0.5 px-3"
+                  onClick={() => setSubCategory(sCat)}
+                  className="border inline-block rounded-full text-sm py-0.5 px-3 hover:text-[#2E8DD8] hover:border-[#2E8DD8] hover:shadow-md hover:shadow-[rgba(46,141,216,.3)]"
                 >
                   {sCat}
                 </h4>
