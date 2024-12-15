@@ -20,12 +20,13 @@ const Shop = () => {
   const [price, setPrice] = useState(0);
   const [displayPrice, setDisplayPrice] = useState(price);
   const [subCategory, setSubCategory] = useState("");
+  const [tag, setTag] = useState("");
 
   const { data: products = [], isLoading } = useQuery({
-    queryKey: ["shopProducts", category, price, subCategory],
+    queryKey: ["shopProducts", category, price, subCategory, tag],
     queryFn: async () => {
       const { data } = await axiosCommon.get(
-        `/products?category=${category}&price=${price}&sub_category=${subCategory}`
+        `/products?category=${category}&price=${price}&sub_category=${subCategory}&tag=${tag}`
       );
       return data;
     },
@@ -201,7 +202,7 @@ const Shop = () => {
                 <h4
                   key={idx}
                   onClick={() => setSubCategory(sCat)}
-                  className="border inline-block rounded-full text-sm py-0.5 px-3 hover:text-[#2E8DD8] hover:border-[#2E8DD8] hover:shadow-md hover:shadow-[rgba(46,141,216,.3)]"
+                  className="border inline-block rounded-full text-sm py-0.5 px-3 hover:text-[#2E8DD8] hover:border-[#2E8DD8] hover:shadow-md hover:shadow-[rgba(46,141,216,.3)] hover:cursor-pointer"
                 >
                   {sCat}
                 </h4>
@@ -218,7 +219,8 @@ const Shop = () => {
               {tags.map((tag, idx) => (
                 <h4
                   key={idx}
-                  className="border inline-block rounded-full text-sm py-0.5 px-3"
+                  onClick={() => setTag(tag)}
+                  className="border inline-block rounded-full text-sm py-0.5 px-3 hover:text-[#2E8DD8] hover:border-[#2E8DD8] hover:shadow-md hover:shadow-[rgba(46,141,216,.3)] hover:cursor-pointer"
                 >
                   {tag}
                 </h4>
