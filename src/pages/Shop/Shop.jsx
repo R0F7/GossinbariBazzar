@@ -8,6 +8,7 @@ import { ImMenu } from "react-icons/im";
 import CardX from "../../components/Card/CardX";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useAuth from "../../hooks/useAuth";
+import { GiClick } from "react-icons/gi";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -140,10 +141,33 @@ const Shop = () => {
                 <li
                   key={idx}
                   onClick={() => setCategory(category?.categoryName)}
-                  className="py-1.5 ml-1.5 order-b text-[#646B73] ext-sm font-medium hover:font-bold"
+                  className="py-1.5 ml-0.5 order-b text-[#646B73] ext-sm font-semibold hover:font-bold hover:text-[#2E8DD8] cursor-pointer flex items-center hover:border-b hover:drop-shadow-lg hover:bg-gray-300 hover:bg-opacity-15 hover:shadow-md transition duration-500 group"
                 >
-                  {category?.categoryName}
+                  <span className="pl-2">{category?.categoryName} </span>
+                  <i className="opacity-0group-hover:opacity-100 scale-0 group-hover:scale-100 group-hover:pl-2 translate-x-5 group-hover:translate-x-0 transition duration-500 ">
+                    <GiClick />
+                  </i>
                 </li>
+                // <li
+                //   key={idx}
+                //   onClick={() => setCategory(category?.categoryName)}
+                //   className="py-1.5 ml-0.5 order-b text-[#646B73] ext-sm font-semibold hover:font-bold hover:text-[#2E8DD8] cursor-pointer flex items-center hover:border-b hover:drop-shadow-lg hover:bg-gray-300 hover:bg-opacity-15 hover:shadow-md transition duration-500 group"
+                // >
+                //   <span className="pl-2">{category?.categoryName} </span>
+                //   <i className="opacity-0group-hover:opacity-100 scale-0 group-hover:scale-100 group-hover:pl-2 group-hover:translate-x-5 transition duration-500 ">
+                //     <GiClick />
+                //   </i>
+                // </li>
+                // <li
+                //   key={idx}
+                //   onClick={() => setCategory(category?.categoryName)}
+                //   className="py-1.5 ml-1.5 order-b text-[#646B73] ext-sm font-medium hover:font-bold cursor-pointer flex items-center hover:border-b hover:drop-shadow-lg hover:bg-gray-400  hover:bg-opacity-15 group"
+                // >
+                //   <span className="bg">{category?.categoryName} </span>
+                //   <i className="opacity-0 group-hover:pl-2 group-hover:opacity-100 group-hover:translate-x-5 transition duration-300 ">
+                //     <GiClick />
+                //   </i>
+                // </li>
               ))}
             </ul>
           </div>

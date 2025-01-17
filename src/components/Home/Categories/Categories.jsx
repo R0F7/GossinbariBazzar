@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import Category from "./Category";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const Categories = () => {
   const [data, setData] = useState([]);
+  const { setCategory } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("./categories.json")
@@ -23,6 +26,11 @@ const Categories = () => {
   }, []);
   //   console.log(data);
 
+  const handleClick = (category) => {
+    setCategory(category);
+    navigate("/shop");
+  };
+
   return (
     <section className="container mx-auto py-12">
       <div className="flex items-center gap-5 mb-6">
@@ -35,7 +43,12 @@ const Categories = () => {
       </div>
       <div className=" grid grid-cols-5 gap-y-5">
         {data.map((category, idx) => (
-          <Category key={idx} idx={idx} category={category}></Category>
+          <Category
+            key={idx}
+            idx={idx}
+            category={category}
+            handleClick={handleClick}
+          ></Category>
         ))}
       </div>
 
