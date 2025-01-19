@@ -17,6 +17,13 @@ import Articles from "../components/Articles/Articles";
 import Article from "../components/Article/Article";
 import Cart from "../pages/Cart/Cart";
 import UPdateProfile from "../pages/UpdateProfile/UpdateProfile";
+import DashboardLayout from "../layout/DashboardLayout";
+import Profile from "../components/Dashboard/Profile/Profile";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import Support from "../pages/Dashboard/Support/Support";
+import Settings from "../pages/Dashboard/Settings/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -37,8 +44,8 @@ export const router = createBrowserRouter([
         element: <ProductDetails></ProductDetails>,
       },
       {
-        path:"/cart",
-        element:<Cart></Cart>
+        path: "/cart",
+        element: <Cart></Cart>,
       },
       {
         path: "/pages",
@@ -94,17 +101,52 @@ export const router = createBrowserRouter([
         },
       },
       {
-        path:"/update-profile",
-        element:<UPdateProfile></UPdateProfile>
+        path: "/update-profile",
+        element: <UPdateProfile></UPdateProfile>,
       },
     ],
   },
+
   {
     path: "/login",
     element: <Login></Login>,
   },
+
   {
     path: "/signup",
     element: <SignUp></SignUp>,
+  },
+
+  // dashboard route
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        // path: "my-profile",
+        index: true,
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "my-orders",
+        element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "support",
+        element: <Support></Support>,
+      },
+      {
+        path: "settings",
+        element: <Settings></Settings>,
+      },
+      {
+        path: "profile",
+        element: <Profile></Profile>,
+      },
+    ],
   },
 ]);

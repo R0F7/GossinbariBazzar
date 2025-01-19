@@ -80,6 +80,7 @@ const Navbar = () => {
                 name="categories"
                 id="categories"
                 className="bg-transparent text-[#212b36] h-[49px] w-[70px] rounded-l-md px-2 outline-none"
+                onChange={(e) => handleClick(e.target.value)}
               >
                 <option value="" disabled>
                   All
@@ -155,9 +156,9 @@ const Navbar = () => {
                 >
                   Update Profile
                 </Link>
-                <button className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                <Link to={"/dashboard"} className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
                   Dashboard
-                </button>
+                </Link>
                 <button
                   onClick={logOut}
                   className="w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
@@ -267,6 +268,7 @@ const Navbar = () => {
         <div className="h-1 bg-[#3AA4F1]"></div>
         <div className="h-1 bg-[#F11D1D]"></div>
       </div>
+
       {/* side menu */}
       <aside
         className={`w-[14%] bg-[#eeeeeecc] fixed top-0 left-0 h-screen z-50 side-menu ${
