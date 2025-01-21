@@ -24,6 +24,8 @@ import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import Support from "../pages/Dashboard/Support/Support";
 import Settings from "../pages/Dashboard/Settings/Settings";
+import OrderHistory from "../pages/Dashboard/MyOrders/OrderHistory";
+import Wishlist from "../pages/Wishlist/Wishlist";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +132,20 @@ export const router = createBrowserRouter([
       {
         path: "my-orders",
         element: <MyOrders></MyOrders>,
+        children: [
+          {
+            path:"",
+            element: <Cart></Cart>,
+          },
+          {
+            path:"order-history",
+            element:<OrderHistory></OrderHistory>
+          },
+          {
+            path:"wishlist",
+            element:<Wishlist></Wishlist>
+          }
+        ],
       },
       {
         path: "payment",

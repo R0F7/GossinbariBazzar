@@ -5,12 +5,12 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen flex">
       {/* sidebar */}
-      <div className="bg-[#2E8DD8]">
+      <div className="">
         <Sidebar></Sidebar>
       </div>
 
       {/* outlet */}
-      <div className="flex-1">
+      <div className="flex-1 ml-64">
         <Outlet></Outlet>
       </div>
     </div>

@@ -1,11 +1,10 @@
 
 const MyProfile = () => {
-    return (
-        <div>
-            MyProfile
-            MyProfile
-        </div>
-    );
+  return (
+    <div>
+      MyProfile
+    </div>
+  );
 };
 
 export default MyProfile;

@@ -9,10 +9,13 @@ import {
 } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
+import useAuth from "../../../hooks/useAuth";
 
 const Sidebar = () => {
+  const { logOut } = useAuth();
+
   return (
-    <div className="w-64 min-h-screen flex flex-col justify-between py-6">
+    <div className="fixed w-64 min-h-screen flex flex-col justify-between py-6 bg-[#2E8DD8]">
       <div className="">
         {/* logo */}
         <Link to="/">
@@ -56,14 +59,15 @@ const Sidebar = () => {
           label={"Settings"}
           icon={IoSettingsOutline}
         ></MenuItem>
-        {/* <button className="text-white order-l-4 order-transparent flex items-center gap-2 px-6 py-2.5 mr-2 mb-0.5 rounded-r-md hover:bg-[rgba(255,255,255,0.28)] hover:border-l-4 hover:border-white transition duration-300 -full">
-          <MdLogout className="w-6 h-6"></MdLogout>
-          <span>Log out</span>
-        </button> */}
-        <button className="text-white border-l-4 border-transparent flex items-center gap-2 px-6 py-2.5 pr-2 rounded-r-md hover:bg-[rgba(255,255,255,0.28)] hover:border-l-white transition duration-300 w-full">
-          <MdLogout className="w-6 h-6"></MdLogout>
-          <span>Log out</span>
-        </button>
+        <div
+          onClick={logOut}
+          className="border mr-2 text-white  border-transparent px-6 py-2.5 pr-2 rounded-r-md hover:bg-[rgba(255,255,255,0.28)] hover:border-l-4 hover:border-l-white transition duration-300"
+        >
+          <button className="flex items-center gap-2">
+            <MdLogout className="w-6 h-6"></MdLogout>
+            <span>Log out</span>
+          </button>
+        </div>
       </div>
     </div>
   );
