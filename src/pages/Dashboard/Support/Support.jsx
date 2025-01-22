@@ -1,10 +1,12 @@
+import NestedSidebarLayout from "../../../components/Dashboard/NestedSidebar/NestedSidebarLayout";
 
 const Support = () => {
-    return (
-        <div>
-            Support
-        </div>
-    );
+    const menuItems = [
+        { label: "Payment History", address: "" },
+        { label: "Notifications", address: "notifications" },
+      ];
+    
+      return <NestedSidebarLayout menuItems={menuItems} />;
 };
 
 export default Support;

@@ -29,7 +29,7 @@ const Sidebar = () => {
 
         <nav>
           <MenuItem
-            address={"/dashboard"}
+            address={"my-account"}
             label={"My Account"}
             icon={MdOutlineAccountTree}
           ></MenuItem>

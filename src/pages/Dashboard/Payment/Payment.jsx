@@ -1,10 +1,12 @@
+import NestedSidebarLayout from "../../../components/Dashboard/NestedSidebar/NestedSidebarLayout";
 
 const Payment = () => {
-    return (
-        <div>
-            Payment
-        </div>
-    );
+    const menuItems = [
+        { label: "Payment History", address: "" },
+        { label: "Invoices", address: "invoices" },
+      ];
+    
+      return <NestedSidebarLayout menuItems={menuItems} />;
 };
 
 export default Payment;

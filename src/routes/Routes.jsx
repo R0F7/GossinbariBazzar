@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Main from "../layout/Main";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
@@ -18,14 +18,19 @@ import Article from "../components/Article/Article";
 import Cart from "../pages/Cart/Cart";
 import UPdateProfile from "../pages/UpdateProfile/UpdateProfile";
 import DashboardLayout from "../layout/DashboardLayout";
-import Profile from "../components/Dashboard/Profile/Profile";
-import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import MyAccount from "../pages/Dashboard/MyAccount/MyAccount";
+import Profile from "../pages/Dashboard/MyAccount/Profile/Profile";
+import Settings from "../pages/Dashboard/MyAccount/Settings/Settings";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import Support from "../pages/Dashboard/Support/Support";
-import Settings from "../pages/Dashboard/Settings/Settings";
 import OrderHistory from "../pages/Dashboard/MyOrders/OrderHistory";
 import Wishlist from "../pages/Wishlist/Wishlist";
+import PaymentInfo from "../pages/Dashboard/MyAccount/PaymentInfo/PaymentInfo";
+import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory/PaymentHistory";
+import Invoices from "../pages/Dashboard/Payment/Invoices/Invoices";
+import Notifications from "../pages/Dashboard/Support/Notifications/Notifications";
+import HelpAndSupport from "../pages/Dashboard/Support/HelpAndSupport/HelpAndSupport";
 
 export const router = createBrowserRouter([
   {
@@ -125,35 +130,73 @@ export const router = createBrowserRouter([
     element: <DashboardLayout></DashboardLayout>,
     children: [
       {
-        // path: "my-profile",
         index: true,
-        element: <MyProfile></MyProfile>,
+        element: <Navigate to="my-account" />, // Redirect to my-account by default
+      },
+      {
+        // index: true,
+        path: "my-account",
+        element: <MyAccount></MyAccount>,
+        children: [
+          {
+            path: "",
+            element: <Profile></Profile>
+          },
+          {
+            path: "paymentInfo",
+            element: <PaymentInfo></PaymentInfo>,
+          },
+          {
+            path: "settings",
+            element: <Settings></Settings>
+          },
+        ],
       },
       {
         path: "my-orders",
         element: <MyOrders></MyOrders>,
         children: [
           {
-            path:"",
+            path: "",
             element: <Cart></Cart>,
           },
           {
-            path:"order-history",
-            element:<OrderHistory></OrderHistory>
+            path: "order-history",
+            element: <OrderHistory></OrderHistory>,
           },
           {
-            path:"wishlist",
-            element:<Wishlist></Wishlist>
-          }
+            path: "wishlist",
+            element: <Wishlist></Wishlist>,
+          },
         ],
       },
       {
         path: "payment",
         element: <Payment></Payment>,
+        children: [
+          {
+            path: "",
+            element: <PaymentHistory></PaymentHistory>,
+          },
+          {
+            path: "invoices",
+            element: <Invoices></Invoices>,
+          },
+        ],
       },
       {
         path: "support",
         element: <Support></Support>,
+        children: [
+          {
+            path: "",
+            element: <HelpAndSupport></HelpAndSupport>,
+          },
+          {
+            path: "notifications",
+            element: <Notifications></Notifications>,
+          },
+        ],
       },
       {
         path: "settings",
