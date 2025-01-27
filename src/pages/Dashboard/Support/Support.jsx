@@ -2,7 +2,7 @@ import NestedSidebarLayout from "../../../components/Dashboard/NestedSidebar/Nes
 
 const Support = () => {
     const menuItems = [
-        { label: "Payment History", address: "" },
+        { label: "Help & Support", address: "" },
         { label: "Notifications", address: "notifications" },
       ];
     

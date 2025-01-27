@@ -98,7 +98,7 @@ footer a h4:hover {
   transition-duration: 500ms;
 }
 
-.cart:hover .cardX-image{
+.cart:hover .cardX-image {
   border-top-left-radius: 10px;
 }
 
@@ -222,7 +222,7 @@ input[type="range"]:active::-webkit-slider-thumb {
 .multiple-col:hover .multiple-col-div {
   transition: all;
   transition-duration: 200ms;
-  background: #2E8DD8;
+  background: #2e8dd8;
 }
 
 .single-col:hover .single-col-div {
@@ -231,7 +231,6 @@ input[type="range"]:active::-webkit-slider-thumb {
   transition-duration: 200ms;
 }
 
- 
 /* .modal-overlay {
   position: fixed;
   top: 0;
@@ -311,4 +310,72 @@ input[type="range"]:active::-webkit-slider-thumb {
   cursor: pointer;
 }
 
+.upload-button {
+  position: relative;
+  font-weight: 600;
+  color: white; 
+  background: #2E8DD8;
+  border-radius: 6px;
+  z-index: 10;
+  overflow: hidden; 
+}
+
+.upload-button::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  background: white;
+  border: 2px solid #2E8DD8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 6px;
+  transform-origin: top;
+  transition: height 300ms ease-in-out;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.upload-button:hover::before {
+  height: 100%;
+}
+
+.upload-button:hover{
+  color: #2E8DD8;
+  transition: color 300ms ease-in-out
+}
+
+.remove-button {
+  position: relative;
+  font-weight: 600;
+  color: red; 
+  background: transparent;
+  border: 2px solid rgb(248 113 113);
+  border-radius: 6px;
+  z-index: 10;
+  overflow: hidden; 
+}
+
+.remove-button::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  background: rgb(248 113 113);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: bottom;
+  transition: height 300ms ease-in-out;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.remove-button:hover::before {
+  height: 100%;
+}
+
+.remove-button:hover{
+  color: white;
+  transition: color 300ms ease-in-out
+}
 

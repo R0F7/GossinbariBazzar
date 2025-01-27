@@ -2,7 +2,7 @@
 const HelpAndSupport = () => {
     return (
         <div>
-            HelpAndSupport
+            Help And Support
         </div>
     );
 };
