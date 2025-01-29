@@ -3,6 +3,7 @@ import NestedSidebarLayout from "../../../components/Dashboard/NestedSidebar/Nes
 const MyAccount = () => {
   const menuItems = [
     { label: "Profile", address: "" },
+    { label: "Saved Address", address: "savedAddress" },
     { label: "Payment Information", address: "paymentInfo" },
     { label: "Settings", address: "settings" },
   ];

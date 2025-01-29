@@ -31,6 +31,7 @@ import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory/PaymentHis
 import Invoices from "../pages/Dashboard/Payment/Invoices/Invoices";
 import Notifications from "../pages/Dashboard/Support/Notifications/Notifications";
 import HelpAndSupport from "../pages/Dashboard/Support/HelpAndSupport/HelpAndSupport";
+import SavedAddress from "../pages/Dashboard/MyAccount/SavedAddress/SavedAddress";
 
 export const router = createBrowserRouter([
   {
@@ -141,6 +142,10 @@ export const router = createBrowserRouter([
           {
             path: "",
             element: <Profile></Profile>
+          },
+          {
+            path:"savedAddress",
+            element:<SavedAddress></SavedAddress>
           },
           {
             path: "paymentInfo",
