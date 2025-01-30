@@ -55,7 +55,7 @@ const Profile = () => {
   }, [savePassword]);
 
   return (
-    <div className="border flex justify-center h-[97%] items-center bg-gradient-to-r from-[#2E8DD8] via-[#FFD700] to-[#4B0082]">
+    <div className="border flex justify-center h-full Xh-[97%] items-center bg-gradient-to-r from-[#2E8DD8] via-[#FFD700] to-[#4B0082]">
       <div className="border w-full g-white g-opacity-75 glass-bg py-9 m-[94px] rounded-md shadow flex justify-center">
         <div className="w-ful">
           <div className="">
