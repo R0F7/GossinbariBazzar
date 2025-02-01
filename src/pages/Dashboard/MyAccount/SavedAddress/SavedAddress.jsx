@@ -1,7 +1,10 @@
 import { FaLocationDot } from "react-icons/fa6";
 import unknownImage from "../../../../assets/unknown Image.jpg";
+import { useState } from "react";
 
 const SavedAddress = () => {
+  const [toggle, setToggle] = useState(false);
+
   return (
     <div className="min-h-screen w-full g-slate-800 g-opacity-85 bg-[} chic-bg">
       <div className="w-[54%] mx-auto pt-20 relative overflow-hidden rounded-lg">
@@ -96,6 +99,17 @@ const SavedAddress = () => {
             <div className="bg-[#2E8DD8] w-36 h-7 translate-y-[204px] -translate-x-[30px] -rotate-45"></div>
           </div>
           <div className="bg-[#2E8DD8] w-[150px] h-[150px] absolute top-0 -left-0 -translate-x-20 -translate-y-[114px] rotate-45 shadow-md border border-slate-200 border-opacity-45"></div>
+          <div className="absolute top-0 left-0 bg-[#2E8DD8] h-2 w-[150px] translate-x-[110px] translate-y-0 -rotate-45 shadow-md border border-slate-200 border-opacity-30 -z-50"></div>
+
+          {/* Switch */}
+          <div className={`w-14 h-6 border-2 rounded-full absolute top-10 right-10 shadow-lg ${ toggle ? "bg-[#2E8DD8]" : "bg-transparent"} transition duration-500`}>
+            <button
+              onClick={() => setToggle(!toggle)}
+              className={`w-[30px] h-[30px] border rounded-full -translate-y-[5px] ${
+                toggle ? "translate-x-7" : "-translate-x-0.5"
+              }  bg-white active:scale-x-125 ctive:w-[36px] transition duration-500`}
+            ></button>
+          </div>
         </div>
 
         <div className="absolute -bottom-[1px] -right-[125px] -rotate-45">
