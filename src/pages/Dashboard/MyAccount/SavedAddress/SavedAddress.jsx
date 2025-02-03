@@ -1,6 +1,13 @@
 import { FaLocationDot } from "react-icons/fa6";
 import unknownImage from "../../../../assets/unknown Image.jpg";
 import { useState } from "react";
+import { MdEmail } from "react-icons/md";
+import { IoCall } from "react-icons/io5";
+import { TbWorld } from "react-icons/tb";
+import { IoHome } from "react-icons/io5";
+import { ImOffice } from "react-icons/im";
+import { LuFileCode2 } from "react-icons/lu";
+import { MdLocationCity } from "react-icons/md";
 
 const SavedAddress = () => {
   const [toggle, setToggle] = useState(false);
@@ -32,8 +39,8 @@ const SavedAddress = () => {
               </h2>
 
               {/* info field */}
-              <div className="grid grid-cols-2  gap-y-2 gap-x-14 mr-6">
-                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl">
+              <div className="grid grid-cols-2  gap-y-2 gap-x-8 mr-6">
+                {/* <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl">
                   <i>
                     <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
@@ -42,45 +49,159 @@ const SavedAddress = () => {
                       87594545454
                     </span>
                   </h4>
-                </div>
+                </div> */}
 
-                <div className="text-slate-700 flex gap-1.5">
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6]" />
+                    <MdEmail  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
-                  <h4 className="flex flex-col">
-                    <span className="font-bold">8759 Jones Lane</span>
-                  </h4>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    defaultValue={"sample@gmail.com"}
+                    placeholder="Enter Your Name"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
                 </div>
 
-                <div className="text-slate-700 flex gap-1.5">
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6]" />
+                    <IoCall className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
-                  <h4 className="flex flex-col">
-                    <span className="font-bold">8759 Jones Lane </span>
-                  </h4>
+                  <input
+                    type="number"
+                    name="number"
+                    id="number"
+                    defaultValue={"01612500106"}
+                    placeholder="Enter Your Number"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
                 </div>
 
-                <div className="text-slate-700 flex gap-1.5">
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6]" />
+                    <TbWorld className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
-                  <h4 className="flex flex-col">
-                    <span className="font-bold">8759 Jones Lane </span>
-                  </h4>
+                  <input
+                    type="url"
+                    name="url"
+                    id="url"
+                    defaultValue={"www.example.com"}
+                    placeholder="Enter Your Url"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
                 </div>
 
-                <div className="text-slate-700 flex gap-1.5">
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6]" />
+                    <IoHome className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
-                  <h4 className="flex flex-col">
-                    <span className="font-bold">8759 Jones Lane </span>
-                  </h4>
+                  <input
+                    type="text"
+                    name="home"
+                    id="home"
+                    defaultValue={"Gossainbari"}
+                    placeholder="Enter Your Home Address"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
                 </div>
 
-                <div className="text-slate-700 flex gap-1.5">
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
+                  <i>
+                    <ImOffice  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                  </i>
+                  <input
+                    type="text"
+                    name="office"
+                    id="office"
+                    defaultValue={""}
+                    placeholder="Enter Your Office Address"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500 placeholder:text-slate-300 placeholder:text-sm`}
+                    readOnly={!toggle}
+                  />
+                </div>
+
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
+                  <i>
+                    <LuFileCode2  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                  </i>
+                  <input
+                    type="number"
+                    name="zip_code"
+                    id="zip_code"
+                    defaultValue={"87594"}
+                    placeholder="Enter Your Zip code"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
+                </div>
+
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
+                  <i>
+                    <MdLocationCity  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                  </i>
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    defaultValue={"Bogura"}
+                    placeholder="Enter Your City Name"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
+                </div>
+
+                <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
+                  <i>
+                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                  </i>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    defaultValue={`8759 Jones Lane\nKings Mountain,\nNC 28086`}
+                    placeholder="Enter Your Name"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  />
+                </div>
+
+                {/* <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
+                  <i>
+                    <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6] text-opacity-90" />
+                  </i>
+                  <textarea
+                    name="address"
+                    id="address"
+                    defaultValue={`8759 Jones Lane\nKings Mountain,\nNC 28086`}
+                    placeholder="Enter Your Address"
+                    className="bg-transparent font-bold border-b border-slate-50 outline-none pb-1 w-full resize-none"
+                    rows="3"
+                  />
+                </div> */}
+
+                {/* <div className="text-slate-700 flex gap-1.5">
                   <i>
                     <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6]" />
                   </i>
@@ -90,7 +211,7 @@ const SavedAddress = () => {
                       Kings Mountain, <br /> NC 28086
                     </span>
                   </h4>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -102,7 +223,11 @@ const SavedAddress = () => {
           <div className="absolute top-0 left-0 bg-[#2E8DD8] h-2 w-[150px] translate-x-[110px] translate-y-0 -rotate-45 shadow-md border border-slate-200 border-opacity-30 -z-50"></div>
 
           {/* Switch */}
-          <div className={`w-14 h-6 border-2 rounded-full absolute top-10 right-10 shadow-lg ${ toggle ? "bg-[#2E8DD8]" : "bg-transparent"} transition duration-500`}>
+          <div
+            className={`w-14 h-6 border-2 rounded-full absolute top-10 right-10 shadow-lg ${
+              toggle ? "bg-[#2E8DD8]" : "bg-transparent"
+            } transition duration-500`}
+          >
             <button
               onClick={() => setToggle(!toggle)}
               className={`w-[30px] h-[30px] border rounded-full -translate-y-[5px] ${
