@@ -12,6 +12,33 @@ import { MdLocationCity } from "react-icons/md";
 const SavedAddress = () => {
   const [toggle, setToggle] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const number = form.number.value;
+    const website = form.url.value;
+    const home_address = form.home.value;
+    const office_address = form.office.value;
+    const zip_code = form.zip_code.value;
+    const city_name = form.city.value;
+    const full_address = form.full_address.value;
+
+    const formInfo = {
+      email,
+      number,
+      website,
+      home_address,
+      office_address,
+      zip_code,
+      city_name,
+      full_address,
+    };
+
+    console.table(formInfo);
+  };
+
   return (
     <div className="min-h-screen w-full g-slate-800 g-opacity-85 bg-[} chic-bg">
       <div className="w-[54%] mx-auto pt-20 relative overflow-hidden rounded-lg">
@@ -34,12 +61,18 @@ const SavedAddress = () => {
             </div>
 
             <div className="mt-24">
-              <h2 className="ext-slate-900 t ext-[#FF6B6B] t ext-[#00D1FF] text-[#FFD700] font-bold text-3xl textshado underline decoration-wavy pb-6">
-                Jonathan Smith.
-              </h2>
+              <div className="flex justify-between">
+                <h2 className="ext-slate-900 t ext-[#FF6B6B] t ext-[#00D1FF] text-[#FFD700] font-bold text-3xl textshado underline decoration-wavy pb-6">
+                  Jonathan Smith.
+                </h2>
+                {/* <button className={`bg-[#4B0082] px-6 h-10 rounded-md font-semibold translate-x-[87px] translate-y-[38px] rotate-90 shadow-md cale-100 active:scale-95 hover:font-bold hover:translate-x-0 hover:translate-y-0.5 hover:rotate-0 ${ toggle ? "scale-100" : "scale-0"} transition duration-300`}>SubmitX</button> */}
+              </div>
 
               {/* info field */}
-              <div className="grid grid-cols-2  gap-y-2 gap-x-8 mr-6">
+              <form
+                className="grid grid-cols-2  gap-y-2 gap-x-8 mr-6 relative"
+                onSubmit={handleSubmit}
+              >
                 {/* <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl">
                   <i>
                     <FaLocationDot className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
@@ -53,7 +86,7 @@ const SavedAddress = () => {
 
                 <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <MdEmail  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                    <MdEmail className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
                   <input
                     type="email"
@@ -62,7 +95,7 @@ const SavedAddress = () => {
                     defaultValue={"sample@gmail.com"}
                     placeholder="Enter Your Name"
                     className={`bg-transparent font-bold border-b ${
-                      !toggle ? "border-transparent" : "border-slate-100"
+                      !toggle ? "border-transparent cu" : "border-slate-100"
                     } outline-none pb-1 w-full transition duration-500`}
                     readOnly={!toggle}
                   />
@@ -93,13 +126,26 @@ const SavedAddress = () => {
                     type="url"
                     name="url"
                     id="url"
-                    defaultValue={"www.example.com"}
+                    defaultValue={"https://www.example.com"} // TODO: hide https://
                     placeholder="Enter Your Url"
                     className={`bg-transparent font-bold border-b ${
                       !toggle ? "border-transparent" : "border-slate-100"
                     } outline-none pb-1 w-full transition duration-500`}
                     readOnly={!toggle}
                   />
+
+                  {/* <input
+                    type="url"
+                    name="url"
+                    id="url"
+                    value={url} // Use value instead of defaultValue
+                    onChange={(e) => setUrl(e.target.value)} // Update state on input change
+                    placeholder="Enter Your Url"
+                    className={`bg-transparent font-bold border-b ${
+                      !toggle ? "border-transparent" : "border-slate-100"
+                    } outline-none pb-1 w-full transition duration-500`}
+                    readOnly={!toggle}
+                  /> */}
                 </div>
 
                 <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
@@ -121,7 +167,7 @@ const SavedAddress = () => {
 
                 <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <ImOffice  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                    <ImOffice className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
                   <input
                     type="text"
@@ -138,7 +184,7 @@ const SavedAddress = () => {
 
                 <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <LuFileCode2  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                    <LuFileCode2 className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
                   <input
                     type="number"
@@ -155,7 +201,7 @@ const SavedAddress = () => {
 
                 <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
-                    <MdLocationCity  className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
+                    <MdLocationCity className="w-4 h-4 mt-[5px] text-[#0077B6] ext-opacity-90" />
                   </i>
                   <input
                     type="text"
@@ -176,7 +222,7 @@ const SavedAddress = () => {
                   </i>
                   <input
                     type="text"
-                    name="name"
+                    name="full_address"
                     id="name"
                     defaultValue={`8759 Jones Lane\nKings Mountain,\nNC 28086`}
                     placeholder="Enter Your Name"
@@ -186,6 +232,15 @@ const SavedAddress = () => {
                     readOnly={!toggle}
                   />
                 </div>
+
+                <button
+                  type="submit"
+                  className={`absolute right-0 bg-[#4c0082] px-6 h-10 rounded-md font-semibold translate-x-[110px] -translate-y-[15px] rotate-90 shadow-md cale-100 active:scale-95 hover:font-bold hover:translate-x-0 hover:-translate-y-[57px] hover:rotate-0 ${
+                    toggle ? "scale-100" : "scale-0 -translate-y-[170px]"
+                  } transition duration-300`}
+                >
+                  Submit
+                </button>
 
                 {/* <div className="text-slate-700 flex gap-1.5 order-b pb-1 shadow-2xl w-[185px]">
                   <i>
@@ -212,7 +267,7 @@ const SavedAddress = () => {
                     </span>
                   </h4>
                 </div> */}
-              </div>
+              </form>
             </div>
           </div>
           <div className="bg-[#2E8DD8] w-[85%] h-4"></div>
