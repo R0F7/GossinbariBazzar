@@ -14,7 +14,7 @@ const NestedSidebarLayout = ({ menuItems, children, outletAreaStyles }) => {
       </NestedSidebar>
 
       {/* Main Content */}
-      <div className={`flex-1 ml-[255px] t-6 r-6 ${outletAreaStyles}`}>
+      <div className={`flex-1 ml-[258px] t-6 r-6 ${outletAreaStyles}`}>
         {children || <Outlet />}
       </div>
     </div>

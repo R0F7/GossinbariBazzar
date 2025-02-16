@@ -389,7 +389,11 @@ input[type="range"]:active::-webkit-slider-thumb {
 }
 
 .chic-bg {
-  background: linear-gradient(135deg, rgba(0, 183, 255, 0.6), rgba(75, 0, 130, 0.6));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 183, 255, 0.6),
+    rgba(75, 0, 130, 0.6)
+  );
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   box-shadow: 0 0 20px rgba(0, 183, 255, 0.25);
@@ -397,9 +401,8 @@ input[type="range"]:active::-webkit-slider-thumb {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-
 .ice-bg {
-  background: rgba(255, 255, 255, 0.40);
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
@@ -407,3 +410,7 @@ input[type="range"]:active::-webkit-slider-thumb {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.setting-card-bg {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}

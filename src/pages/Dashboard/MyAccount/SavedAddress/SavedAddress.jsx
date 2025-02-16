@@ -41,7 +41,7 @@ const SavedAddress = () => {
 
   return (
     <div className="min-h-screen w-full g-slate-800 g-opacity-85 bg-[} chic-bg">
-      <div className="w-[54%] mx-auto pt-20 relative overflow-hidden rounded-lg">
+      <div className="-[54%] w-[757px] mx-auto mt-20 relative overflow-hidden rounded-lg">
         <div className="ice-bg text-slate-500  rounded-lg shadow-lg relative pb-3 overflow-hidden mt-8">
           <div className="flex gap-6 py-10 pl-10">
             {/* circle */}
