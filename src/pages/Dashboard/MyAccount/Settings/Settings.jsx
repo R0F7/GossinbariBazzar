@@ -1,13 +1,29 @@
+import container from "./settingsContent.js";
+
 const Settings = () => {
   return (
     <div className="bg-[linear-gradient(135deg,_#1C232D,_#3A4B57)] min-h-screen relative overflow-hidden">
       <div className="bg-[rgba(55,72,85,0.7) bg-[rgba(98,114,123,0.7)] w-[550px] h-[550px] rounded-full absolute -top-[250px] -right-[240px]"></div>
-      <div className="bg-[rgba(102,120,138,0.7) bg-[rgba(145,163,176,0.7)] w-[350px] h-[350px] rounded-full absolute -bottom-[175px] -left-[175px]"></div>
+      <div className="bg-[rgba(102,120,138,0.7) bg-[rgba(145,163,176,0.7)] w-[520px] h-[520px] rounded-full absolute -bottom-[250px] -left-[250px]"></div>
 
-      <div className="absolute top-0 left-0 g-red-400 min-h-screen w-full">
-        {/* card */}
-        <div className="setting-card-bg w-[400px] h-20 mt-10">
-
+      {/* cards container */}
+      <div className=" absolute top-0 left-0 flex h-full items-center">
+        <div className="mx-20 order grid grid-cols-3 gap-10 card-container">
+          {/* card */}
+          {container.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl card"
+            >
+              <h2 className="text-xl font-semibold text-white">
+                <h2>
+                  {item.Icon}
+                  {item.Title}
+                </h2>
+              </h2>
+              <p className="mt-2 text-white">{item.Description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
