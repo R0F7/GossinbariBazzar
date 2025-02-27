@@ -452,3 +452,8 @@ input[type="range"]:active::-webkit-slider-thumb {
 .card:hover {
   animation: glow 1.5s ease-in-out infinite alternate;
 }
+
+/* .triangle {
+  border-top: 31.5rem solid #fff;
+  border-left: 15rem solid red;
+} */
