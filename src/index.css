@@ -426,6 +426,11 @@ input[type="range"]:active::-webkit-slider-thumb {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.card-container .card:hover h2, 
+.card-container .card:hover p {
+  text-decoration: underline;
+}
+
 @keyframes glow {
   0% {
     box-shadow: inset 0px 2px 5px rgba(255, 255, 255, 0.5);

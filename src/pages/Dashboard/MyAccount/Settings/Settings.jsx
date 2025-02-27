@@ -13,14 +13,12 @@ const Settings = () => {
           {container.map((item, idx) => (
             <div
               key={idx}
-              className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl card"
+              className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl card hover:cursor-pointer"
             >
-              <h2 className="text-xl font-semibold text-white">
-                <h2>
-                  {item.Icon}
-                  {item.Title}
-                </h2>
-              </h2>
+              <div className="flex items-center gap-1 text-xl font-semibold text-white">
+                <span>{item.Icon}</span>
+                <h2 className="">{item.Title}</h2>
+              </div>
               <p className="mt-2 text-white">{item.Description}</p>
             </div>
           ))}
