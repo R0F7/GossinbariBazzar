@@ -47,7 +47,7 @@ const Navbar = () => {
           <ul className="flex items-center gap-8">
             <li>Become A Vendor </li>
             <li>Order Tracking</li>
-            <li>My Wishlist</li>
+            <Link to="dashboard/my-orders/wishlist" className="hover:font-semibold hover:underline">My Wishlist</Link>
           </ul>
         </div>
 
@@ -156,7 +156,10 @@ const Navbar = () => {
                 >
                   Update Profile
                 </Link>
-                <Link to={"/dashboard"} className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]">
+                <Link
+                  to={"/dashboard"}
+                  className="border-y w-full text-start py-1.5 px-2 hover:bg-[#E5E8EB] hover:text-[#2E8DD8]"
+                >
                   Dashboard
                 </Link>
                 <button

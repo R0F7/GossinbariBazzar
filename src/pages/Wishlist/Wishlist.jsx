@@ -94,7 +94,7 @@ const Wishlist = () => {
             <img src={emptyImg} alt="emptyImg" />
           </div>
           <h1 className="text-4xl font-bold text-[#E13E4F] mb-2">Your Wishlist is empty!</h1>
-          <p className="text-center text-2xl tracking-wider mb-6">seems like you don't have wishes here. <br /> Make a wish!</p>
+          <p className="text-center text-[#5F83AE] text-2xl tracking-wider mb-6">seems like you don't have wishes here. <br /> Make a wish!</p>
           <Link to="/shop" className="bg-[#3897EE] text-white py-3 w-[300px] text-center font-semibold rounded shadow-md scale-100 active:scale-95 transition duration-300">Start Shopping</Link>
         </div>
       )}

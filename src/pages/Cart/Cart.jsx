@@ -461,16 +461,20 @@ const Cart = ({ dashboard }) => {
                 </span>
               </div>
             </div>
-            <button
-              className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200"
-              onClick={() => {
-                if (Object.keys(shippingDetails).length === 0) {
-                  setAddressToggle(true);
-                }
-              }}
-            >
-              Proceed To Checkout
-            </button>
+            <Link to="/checkout">
+              <button
+                onClick={(e) => {
+                  if (Object.keys(shippingDetails).length === 0) {
+                    setAddressToggle(true);
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}
+                className="bg-[#2e8dd8] text-white text-s font-bold w-full mt-4 py-2.5 rounded-md active:scale-95 scale-100 transition-all duration-200"
+              >
+                Proceed To Checkout
+              </button>
+            </Link>
           </div>
         </div>
       ) : (

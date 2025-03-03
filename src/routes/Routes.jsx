@@ -32,6 +32,7 @@ import Invoices from "../pages/Dashboard/Payment/Invoices/Invoices";
 import Notifications from "../pages/Dashboard/Support/Notifications/Notifications";
 import HelpAndSupport from "../pages/Dashboard/Support/HelpAndSupport/HelpAndSupport";
 import SavedAddress from "../pages/Dashboard/MyAccount/SavedAddress/SavedAddress";
+import Checkout from "../pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart></Cart>,
+      },
+      {
+        path:"/checkout",
+        element: <Checkout></Checkout>
       },
       {
         path: "/pages",
