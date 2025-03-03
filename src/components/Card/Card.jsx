@@ -6,10 +6,20 @@ import { Link } from "react-router-dom";
 import QuickView from "../Modal/QuickView";
 import Rating from "react-rating";
 import useAuth from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
+import toast from "react-hot-toast";
+import { AiOutlineDelete } from "react-icons/ai";
 
-const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
+const Card = ({
+  item,
+  progress_sold,
+  handleAddToCard,
+  handleWishlist,
+  reviews = [],
+  handleRemove,
+  wishlist,
+}) => {
   const {
     _id,
     image,
@@ -30,9 +40,7 @@ const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
   //   const check= Math.round(rating * 2) / 2;
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // const { user, cartAddedProducts, addProductInCard } = useAuth();
   // const [quantity, setQuantity] = useState(0);
-  // const axiosCommon = useAxiosCommon();
 
   const openDialog = (e) => {
     // Prevent the click from bubbling up to the parent Link
@@ -123,13 +131,36 @@ const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
             </div>
           )}
           <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu">
-            <div className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30">
-              <i>
-                <FaRegHeart />
-              </i>
-              <h4>Wishlist</h4>
-            </div>
-            <div
+            {wishlist ? (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleRemove(_id);
+                }}
+                className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
+              >
+                <i>
+                  <AiOutlineDelete className="w-5 h-5" />
+                </i>
+                <h4>Remove</h4>
+              </button>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleWishlist(_id);
+                }}
+                className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
+              >
+                <i>
+                  <FaRegHeart />
+                </i>
+                <h4>Wishlist</h4>
+              </button>
+            )}
+            <button
               className="flex flex-col items-center border-l w-1/2 h-full py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
               onClick={openDialog}
               // onClick={(e) => openDialog(e,'R0F7')}
@@ -154,7 +185,7 @@ const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
                 averageRating={averageRating}
                 // find_product={find_product}
               />
-            </div>
+            </button>
           </div>
         </div>
         <div className="px-4">
@@ -235,8 +266,11 @@ const Card = ({ item, progress_sold, handleAddToCard,reviews=[] }) => {
 Card.propTypes = {
   item: PropTypes.object,
   progress_sold: PropTypes.bool,
-  handleAddToCard:PropTypes.func,
-  reviews:PropTypes.array,
+  wishlist: PropTypes.bool,
+  handleAddToCard: PropTypes.func,
+  handleWishlist: PropTypes.func,
+  handleRemove: PropTypes.func,
+  reviews: PropTypes.array,
 };
 
 export default Card;

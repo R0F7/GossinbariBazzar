@@ -141,11 +141,11 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <Profile></Profile>
+            element: <Profile></Profile>,
           },
           {
-            path:"savedAddress",
-            element:<SavedAddress></SavedAddress>
+            path: "savedAddress",
+            element: <SavedAddress></SavedAddress>,
           },
           {
             path: "paymentInfo",
@@ -153,7 +153,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "settings",
-            element: <Settings></Settings>
+            element: <Settings></Settings>,
           },
         ],
       },
@@ -163,7 +163,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <Cart></Cart>,
+            element: <Cart dashboard={true}></Cart>,
           },
           {
             path: "order-history",

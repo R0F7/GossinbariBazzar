@@ -12,8 +12,9 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { FaCheckCircle } from "react-icons/fa";
 import { GoIssueReopened } from "react-icons/go";
 import places from "./places";
+import PropTypes from "prop-types";
 
-const Cart = () => {
+const Cart = ({ dashboard }) => {
   const { cartAddedProducts, cartAddedProductsRefetch, isLoading, user } =
     useAuth();
   const axiosCommon = useAxiosCommon();
@@ -174,7 +175,7 @@ const Cart = () => {
     setShippingDetails(shippingInfo);
   };
   // console.log(addressToggle);
-  console.log(shippingDetails);
+  // console.log(shippingDetails);
   // console.log(cart_products.map((product)=>product.cartProduct));
 
   if (isLoading) {
@@ -186,7 +187,7 @@ const Cart = () => {
   }
 
   return (
-    <section className="container mx-auto">
+    <section className={`container mx-auto ${dashboard ? "px-4" : "px-0"}`}>
       <div className="flex items-center gap-2 text-[#212B36] mb-6 mt-5">
         <h4>Shop</h4>
         <span>/</span>
@@ -311,7 +312,7 @@ const Cart = () => {
                   <h4>
                     Congratulations! You get free shipping with your order
                     greater{" "}
-                    <strong className="text-[#2E8DD8]">$1,000.00.</strong>
+                    <strong className="text-[#2E8DD8]">$1,000.00</strong>
                   </h4>
                 ) : (
                   <p>
@@ -492,6 +493,10 @@ const Cart = () => {
       )}
     </section>
   );
+};
+
+Cart.propTypes = {
+  dashboard: PropTypes.bool,
 };
 
 export default Cart;

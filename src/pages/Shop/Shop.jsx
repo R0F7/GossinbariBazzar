@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { IoIosArrowBack } from "react-icons/io";
 import Card from "../../components/Card/Card";
 import { useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import CardX from "../../components/Card/CardX";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useAuth from "../../hooks/useAuth";
 import { GiClick } from "react-icons/gi";
+import toast from "react-hot-toast";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -107,6 +108,49 @@ const Shop = () => {
     setDisplayPrice(price);
   };
   // console.log(price);
+
+  const { data: wishlist = [], refetch: wishlistUpdate } = useQuery({
+    queryKey: ["wishlist_collection", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get(`/wishlist/${user?.email}`);
+      return data;
+    },
+  });
+  // console.log(wishlist);
+
+  const { mutateAsync: wishlistCollections } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosCommon.post(
+        "/add-product-wishlist",
+        product_info
+      );
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("product added successfully");
+      wishlistUpdate();
+    },
+  });
+
+  const handleWishlist = async (id) => {
+    const isExist = wishlist.find((item) => item._id === id);
+    if (isExist) {
+      return toast.error("already added this item");
+    }
+
+    const info = {
+      id,
+      email: user?.email,
+      timestamp: Date.now(),
+    };
+    // console.log(info);
+
+    try {
+      await wishlistCollections(info);
+    } catch (error) {
+      console.error("Failed to add product to the wishlist:", error);
+    }
+  };
 
   if (isLoading) {
     return <h4>Loading...</h4>;
@@ -312,25 +356,25 @@ const Shop = () => {
           </div>
           {/* product */}
           {grid ? (
-            <div
-              className={`grid ${grid ? "grid-cols-5" : "grid-cols-1"}  my-8`}
-            >
+            <div className={`grid grid-cols-5 my-8`}>
               {products.map((product) => (
                 <Card
                   key={product?._id}
                   item={product}
                   handleAddToCard={handleAddToCard}
+                  handleWishlist={handleWishlist}
                   reviews={reviews}
                 ></Card>
               ))}
             </div>
           ) : (
-            <div className={`grid grid-cols-1'} my-8 `}>
+            <div className={`grid grid-cols-1 my-8 `}>
               {products.map((product) => (
                 <CardX
                   key={product?._id}
                   item={product}
                   handleAddToCard={handleAddToCard}
+                  handleWishlist={handleWishlist}
                   reviews={reviews}
                 ></CardX>
               ))}

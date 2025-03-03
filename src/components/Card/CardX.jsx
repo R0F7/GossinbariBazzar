@@ -6,7 +6,7 @@ import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import QuickView from "../Modal/QuickView";
 
-const CardX = ({ item, handleAddToCard, reviews }) => {
+const CardX = ({ item, handleAddToCard, handleWishlist, reviews }) => {
   const {
     _id,
     image,
@@ -64,12 +64,19 @@ const CardX = ({ item, handleAddToCard, reviews }) => {
           alt=""
         />
         <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu">
-          <div className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleWishlist(_id);
+            }}
+            className="flex flex-col items-center w-1/2 py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
+          >
             <i>
               <FaRegHeart />
             </i>
             <h4>Wishlist</h4>
-          </div>
+          </button>
           <div
             className="flex flex-col items-center border-l w-1/2 h-full py-2.5 hover:bg-gray-300 hover:bg-opacity-30"
             onClick={openDialog}
@@ -92,6 +99,8 @@ const CardX = ({ item, handleAddToCard, reviews }) => {
               isDialogOpen={isDialogOpen}
               closeDialog={closeDialog}
               item={item}
+              productReviews={productReviews}
+              averageRating={averageRating}
             />
           </div>
         </div>
@@ -179,6 +188,7 @@ CardX.propTypes = {
   item: PropTypes.object,
   progress_sold: PropTypes.bool,
   handleAddToCard: PropTypes.func,
+  handleWishlist: PropTypes.func,
   reviews: PropTypes.array,
 };
 
