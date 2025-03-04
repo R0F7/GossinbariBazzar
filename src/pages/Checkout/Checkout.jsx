@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
-import { FaAngleLeft, FaMotorcycle, FaRegUser, FaShippingFast } from "react-icons/fa";
+import {
+  FaAngleLeft,
+  FaApple,
+  FaMotorcycle,
+  FaRegUser,
+  FaShippingFast,
+} from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
 import { GiSnail } from "react-icons/gi";
-import { MdAlternateEmail } from "react-icons/md";
+import { IoLogoGoogle } from "react-icons/io5";
+import { MdAlternateEmail, MdContactless } from "react-icons/md";
+import { PiStripeLogoFill } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
+import chip from "../../assets/chip (2).png";
+import { GoArrowRight } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const [focusedField, setFocusedField] = useState(null);
@@ -18,17 +29,17 @@ const Checkout = () => {
   };
 
   return (
-    <section className="container mx-auto g-black in-h-screen">
+    <section className="container mx-auto flex justify-between -[1300px] g-gradient-to-r from-[#EAEDFA] to-[#D3E0F3]">
       <div>
-        <button className="flex items-center gap-0.5 text-[#7A78F4] font-semibold py-4">
+        <Link to="/cart" className="flex items-center gap-0.5 text-[#7A78F4] font-semibold py-4">
           <FaAngleLeft /> <span>Back to cart</span>
-        </button>
+        </Link>
         <h1 className="text-4xl mb-2">Checkout</h1>
         <p className="text-gray-500 font-light mb-5">
           a checkout is a counter where you pay for things you are buying
         </p>
 
-        <div>
+        <div className="text-[#212B36]">
           <h4 className="mb-4">1. Contact information</h4>
           <form className="grid grid-cols-10 gap-x-10 gap-y-6">
             <label
@@ -40,11 +51,13 @@ const Checkout = () => {
               <div className="border-r pr-2.5">
                 <FaRegUser
                   className={`w-5 h-5 ${
-                    focusedField === "first_name" ? "text-[#7A78F4]" : ""
+                    focusedField === "first_name"
+                      ? "text-[#7A78F4]"
+                      : "text-[#212B36]"
                   } transition-all duration-300 ease-in-out`}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <span
                   className={`text-sm text-gray-500 ext-[#C8C7CA] font-medium ${
                     focusedField === "first_name" ? "text-[#7A78F4]" : ""
@@ -55,10 +68,10 @@ const Checkout = () => {
                 <input
                   type="text"
                   id="first_name"
-                  placeholder="First name"
+                  placeholder="John"
                   onFocus={() => handleFocus("first_name")}
                   onBlur={() => handleBlur()}
-                  className="outline-none text-lg active-input"
+                  className="outline-none text-lg bg-transparent"
                 />
               </div>
             </label>
@@ -71,11 +84,13 @@ const Checkout = () => {
               <div className="border-r pr-2.5">
                 <AiOutlineUser
                   className={`w-5 h-5 ${
-                    focusedField === "last_name" ? "text-[#7A78F4]" : ""
+                    focusedField === "last_name"
+                      ? "text-[#7A78F4]"
+                      : "text-[#212B36]"
                   } transition-all duration-300 ease-in-out`}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <span
                   className={`text-sm text-gray-500 ext-[#C8C7CA] font-medium ${
                     focusedField === "last_name" ? "text-[#7A78F4]" : ""
@@ -86,10 +101,10 @@ const Checkout = () => {
                 <input
                   type="text"
                   id="last_name"
-                  placeholder="Last name"
+                  placeholder="Deo"
                   onFocus={() => handleFocus("last_name")}
                   onBlur={() => handleBlur()}
-                  className="outline-none text-lg active-input"
+                  className="outline-none text-lg bg-transparent"
                 />
               </div>
             </label>
@@ -102,11 +117,13 @@ const Checkout = () => {
               <div className="border-r pr-2.5">
                 <FiPhoneCall
                   className={`w-5 h-5 ${
-                    focusedField === "phone_number" ? "text-[#7A78F4]" : ""
+                    focusedField === "phone_number"
+                      ? "text-[#7A78F4]"
+                      : "text-[#212B36]"
                   } transition-all duration-300 ease-in-out`}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <span
                   className={`text-sm text-gray-500 ext-[#C8C7CA] font-medium ${
                     focusedField === "phone_number" ? "text-[#7A78F4]" : ""
@@ -115,12 +132,12 @@ const Checkout = () => {
                   Phone Number
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   id="phone_number"
-                  placeholder="Phone number"
+                  placeholder="01600500100"
                   onFocus={() => handleFocus("phone_number")}
                   onBlur={() => handleBlur()}
-                  className="outline-none text-lg active-input"
+                  className="outline-none text-lg bg-transparent"
                 />
               </div>
             </label>
@@ -133,11 +150,13 @@ const Checkout = () => {
               <div className="border-r pr-2.5">
                 <MdAlternateEmail
                   className={`w-5 h-5 ${
-                    focusedField === "email" ? "text-[#7A78F4]" : ""
+                    focusedField === "email"
+                      ? "text-[#7A78F4]"
+                      : "text-[#212B36]"
                   } transition-all duration-300 ease-in-out`}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col w-full">
                 <span
                   className={`text-sm text-gray-500 ext-[#C8C7CA] font-medium ${
                     focusedField === "email" ? "text-[#7A78F4]" : ""
@@ -148,25 +167,40 @@ const Checkout = () => {
                 <input
                   type="text"
                   id="email"
-                  placeholder="Email"
+                  placeholder="example@gmail.com"
                   onFocus={() => handleFocus("email")}
                   onBlur={() => handleBlur()}
-                  className="outline-none text-lg active-input"
+                  className="outline-none text-lg bg-transparent"
                 />
               </div>
             </label>
           </form>
         </div>
 
-        <div className="mt-5">
-          <h4 className="mb-4">1. Delivery method</h4>
+        <div className="mt-5 text-[#212B36]">
+          <h4 className="mb-4">2. Delivery method</h4>
           <div className="flex gap-6">
-            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow"><i><FaShippingFast /></i> <span>Same-day</span></button>
-            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow"><i><FaMotorcycle /></i> <span>Express</span></button>
-            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow"><i><GiSnail /></i> <span>Normal</span></button>
+            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <FaShippingFast />
+              </i>{" "}
+              <span>Same-day</span>
+            </button>
+            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <FaMotorcycle />
+              </i>{" "}
+              <span>Express</span>
+            </button>
+            <button className="flex items-center gap-2 border py-3 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <GiSnail />
+              </i>{" "}
+              <span>Normal</span>
+            </button>
             <label
-              htmlFor="email"
-              className={`flex items-center gap-2.5 border-b pl-2.5 pb-1.5 ${
+              htmlFor="zipcode"
+              className={`flex items-center gap-2.5 border-b h-12 pl-2.5 pb-1.5 ${
                 focusedField === "zipcode" ? "border-[#7A78F4]" : ""
               } transition-all duration-300 ease-in-out col-span-5`}
             >
@@ -183,7 +217,7 @@ const Checkout = () => {
                     focusedField === "zipcode" ? "text-[#7A78F4]" : ""
                   } transition-all duration-300 ease-in-out`}
                 >
-                  Email
+                  Zip Code
                 </span>
                 <input
                   type="number"
@@ -197,9 +231,83 @@ const Checkout = () => {
             </label>
           </div>
         </div>
+
+        <div className="mt-5">
+          <h4 className="mb-4 text-[#212B36]">3. Payment method</h4>
+          <div className="flex gap-6 text-[#212B36]">
+            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <IoLogoGoogle />
+              </i>{" "}
+              <span>Pay</span>
+            </button>
+            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <FaApple />
+              </i>{" "}
+              <span>Pay</span>
+            </button>
+            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
+              <i>
+                <PiStripeLogoFill />
+              </i>{" "}
+              <span>Pay</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div></div>
+      <div className="border p-4 w-[310px] mt-[70px]">
+        {/* card */}
+        <div
+          className="border p-4 bg-[#4947FB] rounded-md text-white"
+        >
+          <div className="flex justify-between items-center mb-12">
+            <img className="w-10" src={chip} alt="chip" />
+            <MdContactless className="w-6 h-6" />
+          </div>
+          <p className="text-sm font-light mb-2">Exp 09 / 27</p>
+          <div className="flex justify-between items-center">
+            <p className="text-lg font-medium">
+              <sup className="font-black text-xl ">. . . .</sup> 5478
+            </p>
+            <h6 className="">R H Rakibul</h6>
+          </div>
+        </div>
+        <div>
+          <Link to="/cart" className="w-full flex justify-between items-center border-b py-2 px-4 my-4 hover:bg-gray-200 scale-100 active:scale-95 transition duration-300">
+            <span className="text-sm font-semibold text-[#212B36]">
+              Manage Cards
+            </span>{" "}
+            <GoArrowRight />
+          </Link>
+          <h2 className="text-center text-2xl font-medium mb-4 text-[#212B36]">
+            36 items
+          </h2>
+          <div className="space-y-2.5 border-b pb-4">
+            <div className="flex justify-between items-center ">
+              <p className="text-[#A7A7A7]">Subtotal</p>
+              <p className="text-[#212B36]">$ 581.00</p>
+            </div>
+            <div className="flex justify-between items-center">
+              <p className="text-[#A7A7A7]">Discount</p>
+              <p className="text-[#212B36]">- $ 100 (%15)</p>
+            </div>
+            <div className="flex justify-between items-center">
+              <p className="text-[#A7A7A7]">Delivery Service</p>
+              <p className="text-[#212B36]"> + $ 30</p>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-lg font-semibold text-[#212B36]">Total</p>
+            <p className="text-2xl font-semibold text-[#212B36]">$ 1,200</p>
+          </div>
+          <button className="w-full flex items-center justify-center gap-4 bg-[#4947FB] text-white py-3 px-4 rounded-md mt-5 scale-100 active:scale-95 transition duration-300">
+            Pay Now <GoArrowRight />
+          </button>
+        </div>
+      </div>
     </section>
   );
 };

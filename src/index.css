@@ -452,3 +452,9 @@ input[type="range"]:active::-webkit-slider-thumb {
     box-shadow: inset 0px 2px 5px rgba(255, 255, 255, 0.5);
   }
 }
+/* Remove default styling */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
