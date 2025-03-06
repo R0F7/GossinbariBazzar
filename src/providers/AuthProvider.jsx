@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
   const [address, setAddress] = useState("Address Not Available");
   const [category, setCategory] = useState("");
   const axiosCommon = useAxiosCommon();
+  const [shippingDetails, setShippingDetails] = useState({});
 
   //sign in with google
   const signInWithGoogle = () => {
@@ -221,6 +222,38 @@ const AuthProvider = ({ children }) => {
     },
   });
 
+  const { data: products = [] } = useQuery({
+    queryKey: ["getProductsForCart"],
+    queryFn: async () => {
+      const { data } = await axiosCommon.get("/products");
+      return data;
+    },
+  });
+
+  // Nested Loops (for inside for)
+  // let cart_products = [];
+  // for (const product of products) {
+  //   // console.log(product._id);
+  //   for (const cartProduct of cartAddedProducts) {
+  //     // console.log(cartProduct);
+  //     if (product._id === cartProduct.id) {
+  //       cart_products.push({ ...product, cartProduct });
+  //     }
+  //   }
+  // }
+
+  // Map-based lookup (filter + map)
+  // Create a map for quick lookup
+  const cartMap = new Map(cartAddedProducts.map((item) => [item.id, item]));
+
+  // Filter and merge products with cart data efficiently
+  const cart_products = products
+    .filter((product) => cartMap.has(product._id))
+    .map((product) => ({
+      ...product,
+      cartProduct: cartMap.get(product._id),
+    }));
+
   // const onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -270,8 +303,11 @@ const AuthProvider = ({ children }) => {
     saveUser,
     address,
     addProductInCard,
+    cart_products,
     category,
     setCategory,
+    shippingDetails,
+    setShippingDetails
   };
 
   return (

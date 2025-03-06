@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { FiMinus, FiPlus } from "react-icons/fi";
@@ -15,11 +15,10 @@ import places from "./places";
 import PropTypes from "prop-types";
 
 const Cart = ({ dashboard }) => {
-  const { cartAddedProducts, cartAddedProductsRefetch, isLoading, user } =
+  const { cart_products, cartAddedProductsRefetch, isLoading, user,shippingDetails,setShippingDetails } =
     useAuth();
   const axiosCommon = useAxiosCommon();
   const [isOpen, setIsOpen] = useState(false);
-  const [shippingDetails, setShippingDetails] = useState({});
   const [selectedUnion, setSelectedUnion] = useState(
     shippingDetails.union || ""
   );
@@ -28,27 +27,6 @@ const Cart = ({ dashboard }) => {
   const [addressToggle, setAddressToggle] = useState(false);
   //   const [percentage,setPercentage]=useState(0);
   //   console.log(cartAddedProducts);
-
-  const { data: products = [] } = useQuery({
-    queryKey: ["getProductsForCart"],
-    queryFn: async () => {
-      const { data } = await axiosCommon.get("/products");
-      return data;
-    },
-  });
-  //   console.log(products);
-
-  let cart_products = [];
-  for (const product of products) {
-    // console.log(product._id);
-    for (const cartProduct of cartAddedProducts) {
-      // console.log(cartProduct);
-      if (product._id === cartProduct.id) {
-        cart_products.push({ ...product, cartProduct });
-      }
-    }
-  }
-  // console.log(cart_products);
 
   const { mutateAsync: addProductInCard, isPending } = useMutation({
     mutationFn: async (product_info) => {
@@ -187,7 +165,7 @@ const Cart = ({ dashboard }) => {
   }
 
   return (
-    <section className={`container mx-auto ${dashboard ? "px-4" : "px-0"}`}>
+    <section className={`container mx-auto ${dashboard ? "p-4 pt-0" : "p-0"}`}>
       <div className="flex items-center gap-2 text-[#212B36] mb-6 mt-5">
         <h4>Shop</h4>
         <span>/</span>
