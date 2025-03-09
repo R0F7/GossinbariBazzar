@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import {
   FaAngleLeft,
@@ -28,13 +28,20 @@ import useAuth from "../../hooks/useAuth";
 const Checkout = () => {
   const [focusedField, setFocusedField] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { user_info_DB, user, cartAddedProducts, cart_products, shippingDetails } = useAuth();
+  const [contactInfo, setContactInfo] = useState({});
+  const [transactionId, setTransactionId] = useState("");
+  const btnRef = useRef(null);
+  const {
+    user_info_DB,
+    user,
+    cartAddedProducts,
+    cart_products,
+    shippingDetails,
+  } = useAuth();
   const [deliveryMethod, setDeliveryMethod] = useState({
-    name: "Normal",
+    category: "Normal",
     price: 0,
   });
-
-  console.log(shippingDetails);
 
   if (Object.keys(shippingDetails).length < 1) {
     return <Navigate to="/cart" />;
@@ -70,15 +77,34 @@ const Checkout = () => {
 
   //   console.log(total_price);
 
-//   const order_info ={
-//     products: cart_products,
-//     delivery: deliveryMethod,
-//     total_price: total_price,
-//     shippingDetails: shippingDetails,
-//   }
-//   console.table(order_info);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-console.log(cartAddedProducts);
+    const form = e.target;
+    const name = form.first_name.value + " " + form.last_name.value;
+    const phone_number = form.phone_number.value;
+    const email = form.email.value;
+
+    setContactInfo({ name, phone_number, email });
+  };
+
+  const orderInfo = {
+    products: cartAddedProducts,
+    delivery: deliveryMethod,
+    total_price,
+    total_quantity,
+    order_owner_info: { name: user?.displayName, email: user?.email },
+    contactInfo,
+    paymentInfo: {
+      paymentMethod: "Cash on Delivery", // or "Credit Card", "Bkash", etc.
+      paymentStatus: "Pending", // "Pending", "Paid", "Refunded"
+       transactionId: transactionId || null, // If online payment
+    },
+    shippingDetails,
+    status: "Order Placed",
+    createdAt: new Date(),
+  };
+  // console.log(orderInfo);
 
   const handleFocus = (field) => {
     setFocusedField(field);
@@ -91,8 +117,6 @@ console.log(cartAddedProducts);
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  console.log(deliveryMethod.price);
 
   return (
     <section className="container mx-auto flex justify-between -[1300px] g-gradient-to-r from-[#EAEDFA] to-[#D3E0F3]">
@@ -111,7 +135,10 @@ console.log(cartAddedProducts);
         {/* Contact information */}
         <div className="text-[#212B36]">
           <h4 className="mb-4">1. Contact information</h4>
-          <form className="grid grid-cols-10 gap-x-10 gap-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-10 gap-x-10 gap-y-6"
+          >
             <label
               htmlFor="first_name"
               className={`flex items-center gap-2.5 border-b pl-2.5 pb-1.5 ${
@@ -137,12 +164,14 @@ console.log(cartAddedProducts);
                 </span>
                 <input
                   type="text"
+                  name="first_name"
                   id="first_name"
                   placeholder="John"
                   defaultValue={name.slice(0, -1).join(" ")}
                   onFocus={() => handleFocus("first_name")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
+                  required
                 />
               </div>
             </label>
@@ -171,12 +200,14 @@ console.log(cartAddedProducts);
                 </span>
                 <input
                   type="text"
+                  name="last_name"
                   id="last_name"
                   placeholder="Deo"
                   defaultValue={name[name?.length - 1]}
                   onFocus={() => handleFocus("last_name")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
+                  required
                 />
               </div>
             </label>
@@ -205,6 +236,7 @@ console.log(cartAddedProducts);
                 </span>
                 <input
                   type="number"
+                  name="phone_number"
                   id="phone_number"
                   placeholder="01600500100"
                   defaultValue={
@@ -213,6 +245,7 @@ console.log(cartAddedProducts);
                   onFocus={() => handleFocus("phone_number")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
+                  required
                 />
               </div>
             </label>
@@ -241,15 +274,18 @@ console.log(cartAddedProducts);
                 </span>
                 <input
                   type="text"
+                  name="email"
                   id="email"
                   placeholder="example@gmail.com"
-                  value={user?.email}
+                  defaultValue={user?.email}
                   onFocus={() => handleFocus("email")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
+                  required
                 />
               </div>
             </label>
+            <button type="submit" ref={btnRef}></button>
           </form>
         </div>
 
@@ -260,9 +296,11 @@ console.log(cartAddedProducts);
             <button
               //   title="max time 1 hour"
               title="RapidX delivery costs $20"
-              onClick={() => setDeliveryMethod({ name: "RapidX", price: 20 })}
+              onClick={() =>
+                setDeliveryMethod({ category: "RapidX", price: 20 })
+              }
               className={`flex items-center gap-2 border py-3 px-5 rounded-xl font-medium ${
-                deliveryMethod.name === "RapidX"
+                deliveryMethod.category === "RapidX"
                   ? "bg-[#4947FB] text-white"
                   : ""
               } transition duration-300 shadow group overflow-hidden h-[52px]`}
@@ -281,9 +319,11 @@ console.log(cartAddedProducts);
             </button>
             <button
               title="Express delivery costs $10"
-              onClick={() => setDeliveryMethod({ name: "Express", price: 10 })}
+              onClick={() =>
+                setDeliveryMethod({ category: "Express", price: 10 })
+              }
               className={`flex items-center gap-2 border py-3 px-5 rounded-xl font-medium ${
-                deliveryMethod.name === "Express"
+                deliveryMethod.category === "Express"
                   ? "bg-[#4947FB] text-white"
                   : ""
               } transition duration-300 shadow group overflow-hidden h-[52px]`}
@@ -302,9 +342,11 @@ console.log(cartAddedProducts);
             </button>
             <button
               title="Normal delivery is free"
-              onClick={() => setDeliveryMethod({ name: "Normal", price: 0 })}
+              onClick={() =>
+                setDeliveryMethod({ category: "Normal", price: 0 })
+              }
               className={`flex items-center gap-2 border py-3 px-5 rounded-xl font-medium ${
-                deliveryMethod.name === "Normal"
+                deliveryMethod.category === "Normal"
                   ? "bg-[#4947FB] text-white"
                   : ""
               } transition duration-300 shadow group overflow-hidden h-[52px]`}
@@ -447,7 +489,11 @@ console.log(cartAddedProducts);
           </Elements> */}
 
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+              btnRef.current.click();
+            }}
+            // onClick={handleClickSubmit}
             className="w-full flex items-center justify-center gap-4 bg-[#4947FB] text-white py-3 px-4 rounded-md mt-5 scale-100 active:scale-95 transition duration-300"
           >
             Pay Now <GoArrowRight />
@@ -458,15 +504,8 @@ console.log(cartAddedProducts);
             isOpen={isOpen}
             // refetch={refetch}
             closeModal={closeModal}
-            // bookingInfo={{
-            //   ...room,
-            //   price: totalPrice,
-            //   guest: {
-            //     name: user?.displayName,
-            //     email: user?.email,
-            //     image: user?.photoURL,
-            //   },
-            // }}
+            orderInfo={orderInfo}
+            setTransactionId={setTransactionId}
           />
         </div>
       </div>

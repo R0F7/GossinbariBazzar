@@ -104,16 +104,6 @@ const AuthProvider = ({ children }) => {
     );
   }, []);
 
-  //get token form server
-  const getToken = async (email) => {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_API_URL}/jwt`,
-      { email },
-      { withCredentials: true }
-    );
-    return data;
-  };
-
   //get all users
   const { data: allUsers = [], refetch: allUserRefetch } = useQuery({
     queryKey: ["all_users"],
@@ -254,6 +244,16 @@ const AuthProvider = ({ children }) => {
       cartProduct: cartMap.get(product._id),
     }));
 
+  //get token form server
+  const getToken = async (email) => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/jwt`,
+      { email },
+      { withCredentials: true }
+    );
+    return data;
+  };
+
   // const onAuthStateChange
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -307,7 +307,7 @@ const AuthProvider = ({ children }) => {
     category,
     setCategory,
     shippingDetails,
-    setShippingDetails
+    setShippingDetails,
   };
 
   return (
