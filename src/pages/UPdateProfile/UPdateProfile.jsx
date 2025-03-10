@@ -212,7 +212,7 @@ const UPdateProfile = () => {
                           }
                           placeholder="Enter your phone number"
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
-                          required={
+                          requiredL={
                             user_info_DB?.number === "N/A" ? true : false
                           }
                         />
@@ -248,7 +248,7 @@ const UPdateProfile = () => {
                           // placeholder="Enter your address"
                           placeholder={address || "Enter your address"}
                           className="border-[1.5px] w-[220px] p-1.5 rounded-md outline-none focus:ring focus:ring-[#2E8DD8] placeholder:text-sm"
-                          required={
+                          requiredL={
                             user_info_DB?.address && user_info_DB?.address
                               ? false
                               : true

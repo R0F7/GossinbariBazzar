@@ -869,7 +869,7 @@ const ProductDetails = () => {
                 name="file"
                 id="file"
                 accept="image/*"
-                required
+                requiredL
               />
             </label>
 

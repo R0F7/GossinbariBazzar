@@ -76,6 +76,10 @@ const CheckoutForm = ({ closeModal, orderInfo, setTransactionId }) => {
     if (paymentIntent.status === "succeeded") {
       setProcessing(false);
       setTransactionId(paymentIntent.id);
+      const orderInfo ={
+        ...orderInfo,
+        
+      }
       console.log(orderInfo);
       // TODO:
       // 1. create payment info obj

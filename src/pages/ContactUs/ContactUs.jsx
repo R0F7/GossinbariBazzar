@@ -98,7 +98,7 @@ const ContactUs = () => {
                 id="name"
                 className=" py-2.5 px-2 rounded-md shadow outline-none"
                 placeholder="Name*"
-                required
+                requiredL
               />
               <input
                 type="email"
@@ -106,7 +106,7 @@ const ContactUs = () => {
                 id="email"
                 className=" py-2 px-2.5 rounded-md shadow outline-none"
                 placeholder="Email*"
-                required
+                requiredL
               />
               <input
                 type="text"
@@ -114,7 +114,7 @@ const ContactUs = () => {
                 id="subject"
                 className="col-span-2 py-2.5 px-2 rounded-md shadow outline-none"
                 placeholder="Subject*"
-                required
+                requiredL
               />
               <textarea
                 name="message"

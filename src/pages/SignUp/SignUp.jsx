@@ -190,7 +190,7 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  required
+                  requiredL
                   name="name"
                   id="name"
                   placeholder="Enter your username"
@@ -206,7 +206,7 @@ const SignUp = () => {
                   Email
                 </label>
                 <input
-                  required
+                  requiredL
                   type="email"
                   name="email"
                   id="email"
@@ -220,7 +220,7 @@ const SignUp = () => {
                 <div className="font-roboto text-sm font-medium text-[#333333] opacity-95 border border-[#3992D9] shadow-md shadow-[rgba(0,0,0,.1)] py-3 mt-2 px-10 rounded">
                   <label htmlFor="file">
                     <input
-                      required
+                      requiredL
                       type="file"
                       name="file"
                       id="file"
@@ -252,7 +252,7 @@ const SignUp = () => {
                   Number
                 </label>
                 <input
-                  required
+                  requiredL
                   type="number"
                   name="number"
                   id="number"
@@ -270,7 +270,7 @@ const SignUp = () => {
                 </label>
                 <div className="relative">
                   <input
-                    required
+                    requiredL
                     type={toggle ? "text" : "password"}
                     name="password"
                     id="password"
@@ -310,7 +310,7 @@ const SignUp = () => {
 
               <div className="flex col-span-8 gap-2.5">
                 <input
-                  required
+                  requiredL
                   type="checkbox"
                   name="check"
                   id="check"

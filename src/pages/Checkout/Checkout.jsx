@@ -16,6 +16,7 @@ import { SlLocationPin } from "react-icons/sl";
 import chip from "../../assets/chip (2).png";
 import { GoArrowRight } from "react-icons/go";
 import { Link, Navigate } from "react-router-dom";
+import sslcommerz from "../../assets/sslcommerz.png";
 
 // import {loadStripe} from '@stripe/stripe-js';
 // import { Elements } from "@stripe/react-stripe-js";
@@ -24,6 +25,9 @@ import { Link, Navigate } from "react-router-dom";
 
 import CheckoutModal from "./CheckoutModal";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { isValidEmail, isValidNumber } from "../../utils/validation";
+import CustomToast from "../../components/CustomToast/CustomToast";
 
 const Checkout = () => {
   const [focusedField, setFocusedField] = useState(null);
@@ -77,13 +81,38 @@ const Checkout = () => {
 
   //   console.log(total_price);
 
+  // BUG
   const handleSubmit = (e) => {
     e.preventDefault();
+    // setContactInfo({})
 
     const form = e.target;
-    const name = form.first_name.value + " " + form.last_name.value;
+    const first_name = form.first_name.value;
+    const last_name = form.last_name.value;
+    const name = first_name + " " + last_name;
     const phone_number = form.phone_number.value;
     const email = form.email.value;
+
+    if (!first_name || !last_name) {
+      setIsOpen(false);
+      return toast("⚠️ Please enter Your full name");
+    } else if (!phone_number || !isValidNumber(phone_number)) {
+      setIsOpen(false);
+      return toast(
+        <CustomToast
+          message={"⚠️ Please enter a valid number"}
+          example={"+8801712345678 or 01712345678"}
+        ></CustomToast>
+      );
+    } else if (!email || !isValidEmail(email)) {
+      setIsOpen(false);
+      return toast(
+        <CustomToast
+          message={"⚠️ Please enter a valid email"}
+          example={"example@domain.com"}
+        ></CustomToast>
+      );
+    }
 
     setContactInfo({ name, phone_number, email });
   };
@@ -95,16 +124,17 @@ const Checkout = () => {
     total_quantity,
     order_owner_info: { name: user?.displayName, email: user?.email },
     contactInfo,
+    // TODO: IMPLEMENT Cash on Delivery & sslcommerz PAYMENT METHOD
     paymentInfo: {
-      paymentMethod: "Cash on Delivery", // or "Credit Card", "Bkash", etc.
+      paymentMethod: "Card", // or "Cash on Delivery", "Bkash", etc.
       paymentStatus: "Pending", // "Pending", "Paid", "Refunded"
-       transactionId: transactionId || null, // If online payment
+      transactionId: transactionId || null, // If online payment
     },
     shippingDetails,
     status: "Order Placed",
     createdAt: new Date(),
   };
-  // console.log(orderInfo);
+  console.log(orderInfo.paymentInfo);
 
   const handleFocus = (field) => {
     setFocusedField(field);
@@ -171,7 +201,6 @@ const Checkout = () => {
                   onFocus={() => handleFocus("first_name")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
-                  required
                 />
               </div>
             </label>
@@ -207,7 +236,6 @@ const Checkout = () => {
                   onFocus={() => handleFocus("last_name")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
-                  required
                 />
               </div>
             </label>
@@ -245,7 +273,6 @@ const Checkout = () => {
                   onFocus={() => handleFocus("phone_number")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
-                  required
                 />
               </div>
             </label>
@@ -281,7 +308,6 @@ const Checkout = () => {
                   onFocus={() => handleFocus("email")}
                   onBlur={() => handleBlur()}
                   className="outline-none text-lg bg-transparent"
-                  required
                 />
               </div>
             </label>
@@ -398,26 +424,27 @@ const Checkout = () => {
         </div>
 
         {/* Payment method */}
+        {/* TODO: IMPLEMENT Cash on Delivery & sslcommerz PAYMENT METHOD */}
         <div className="mt-5">
           <h4 className="mb-4 text-[#212B36]">3. Payment method</h4>
           <div className="flex gap-6 text-[#212B36]">
-            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
-              <i>
-                <IoLogoGoogle />
-              </i>{" "}
-              <span>Pay</span>
+            <button
+              onClick={() => toast("⏳ coming soon")}
+              className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow h-[52px]"
+            >
+              <span>💰</span> <span>Cash on Delivery</span>
             </button>
-            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
-              <i>
-                <FaApple />
-              </i>{" "}
-              <span>Pay</span>
-            </button>
-            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow">
-              <i>
+            <button className="flex items-center gap-1 border py-2.5 px-5 rounded-xl font-medium bg-[#4947FB] text-white transition duration-300 shadow h-[52px]">
+              <span>
                 <PiStripeLogoFill />
-              </i>{" "}
-              <span>Pay</span>
+              </span>{" "}
+              <span>Stripe</span>
+            </button>
+            <button
+              onClick={() => toast("⏳ coming soon")}
+              className="flex items-center gap-1 border rounded-xl font-medium hover:bg-[#4947FB] hover:text-white transition duration-300 shadow h-[52px] w-[183px]"
+            >
+              <img src={sslcommerz} alt="" />
             </button>
           </div>
         </div>
