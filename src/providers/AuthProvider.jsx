@@ -121,6 +121,7 @@ const AuthProvider = ({ children }) => {
       const { data } = await axiosCommon.get(`/user/${user?.email}`);
       return data;
     },
+    enabled: !!user?.email,
   });
 
   //save user
@@ -184,6 +185,7 @@ const AuthProvider = ({ children }) => {
     data: cartAddedProducts = [],
     refetch: cartAddedProductsRefetch,
     isLoading,
+    isFetched,
   } = useQuery({
     queryKey: ["cartAddedProducts", user?.email],
     queryFn: async () => {
@@ -192,6 +194,7 @@ const AuthProvider = ({ children }) => {
       );
       return data;
     },
+    enabled: !!user?.email,
   });
   // console.log(cartAddedProducts);
 
@@ -298,6 +301,7 @@ const AuthProvider = ({ children }) => {
     cartAddedProducts,
     cartAddedProductsRefetch,
     isLoading,
+    isFetched,
     allUsers,
     user_info_DB,
     saveUser,

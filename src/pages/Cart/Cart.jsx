@@ -13,10 +13,16 @@ import { FaCheckCircle } from "react-icons/fa";
 import { GoIssueReopened } from "react-icons/go";
 import places from "./places";
 import PropTypes from "prop-types";
+// import localStorageUtils from "../../utils/localStorageUtils";
 
 const Cart = ({ dashboard }) => {
-  const { cart_products, cartAddedProductsRefetch, isLoading, user,shippingDetails,setShippingDetails } =
-    useAuth();
+  const {
+    cart_products,
+    cartAddedProductsRefetch,
+    isLoading,
+    shippingDetails,
+    setShippingDetails,
+  } = useAuth();
   const axiosCommon = useAxiosCommon();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUnion, setSelectedUnion] = useState(
@@ -134,6 +140,17 @@ const Cart = ({ dashboard }) => {
   // console.log(selectedVillages);
   // console.log(village);
 
+  // useEffect(() => {
+  //   if (Object.keys(shippingDetails).length >= 1) {
+  //     localStorageUtils.setItem("shippingDetails", shippingDetails);
+  //   }
+
+  //   if (Object.keys(shippingDetails).length < 1) {
+  //     const shippingInfo = localStorageUtils.getItem("shippingDetails");
+  //     setShippingDetails(shippingInfo);
+  //   }
+  // }, [setShippingDetails, shippingDetails]);
+
   const handleShippingForm = (event) => {
     event.preventDefault();
 
@@ -145,12 +162,11 @@ const Cart = ({ dashboard }) => {
       union,
       village,
       locationDetails,
-      order_owner_email: user?.email,
-      order_owner_name: user?.displayName,
       timestamp: new Date(),
       // products:cart_products.map((product)=>product.cartProduct),
     };
     setShippingDetails(shippingInfo);
+    setAddressToggle(false);
   };
   // console.log(addressToggle);
   // console.log(shippingDetails);
@@ -382,6 +398,7 @@ const Cart = ({ dashboard }) => {
                       value={selectedUnion}
                       onChange={handleUnionChange}
                       className="w-full border border-gray-300 rounded-lg bg-white px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      // defaultValue={shippingDetails?.union}
                       required
                     >
                       <option value="" disabled>
@@ -401,6 +418,7 @@ const Cart = ({ dashboard }) => {
                       onChange={(e) => setVillage(e.target.value)}
                       disabled={!selectedUnion}
                       className="w-full border border-gray-300 rounded-lg bg-white px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      // defaultValue={shippingDetails?.village}
                       required
                     >
                       <option value="" disabled>
@@ -419,6 +437,7 @@ const Cart = ({ dashboard }) => {
                       placeholder="Enter detailed address or directions"
                       rows="3"
                       className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder:text-sm"
+                      // defaultValue={shippingDetails?.locationDetails}
                       required
                     />
                     <button

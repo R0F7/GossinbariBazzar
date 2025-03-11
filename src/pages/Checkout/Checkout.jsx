@@ -2,20 +2,18 @@ import { useRef, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import {
   FaAngleLeft,
-  FaApple,
   FaMotorcycle,
   FaRegUser,
   FaShippingFast,
 } from "react-icons/fa";
 import { FiPhoneCall } from "react-icons/fi";
 import { GiSnail } from "react-icons/gi";
-import { IoLogoGoogle } from "react-icons/io5";
 import { MdAlternateEmail, MdContactless } from "react-icons/md";
 import { PiStripeLogoFill } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import chip from "../../assets/chip (2).png";
 import { GoArrowRight } from "react-icons/go";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import sslcommerz from "../../assets/sslcommerz.png";
 
 // import {loadStripe} from '@stripe/stripe-js';
@@ -28,17 +26,20 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { isValidEmail, isValidNumber } from "../../utils/validation";
 import CustomToast from "../../components/CustomToast/CustomToast";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Checkout = () => {
   const [focusedField, setFocusedField] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [contactInfo, setContactInfo] = useState({});
-  const [transactionId, setTransactionId] = useState("");
   const btnRef = useRef(null);
   const {
     user_info_DB,
     user,
     cartAddedProducts,
+    cartAddedProductsRefetch,
+    isFetched,
     cart_products,
     shippingDetails,
   } = useAuth();
@@ -46,10 +47,29 @@ const Checkout = () => {
     category: "Normal",
     price: 0,
   });
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
-  if (Object.keys(shippingDetails).length < 1) {
-    return <Navigate to="/cart" />;
-  }
+  // insert order info with remove cart items
+  const { mutateAsync: postOrderInfoInDB } = useMutation({
+    mutationFn: async (info) => {
+      const { data } = await axiosSecure.post("/order-info", info);
+      return data;
+    },
+    onSuccess: () => {
+      cartAddedProductsRefetch();
+      navigate("/dashboard/my-orders/order-history");
+      toast(
+        <CustomToast
+          message={"🛍️ Order Confirmed! "}
+          para={"Get ready for something awesome! 😍📦"}
+        />
+      );
+    },
+  });
+
+ if (isFetched && cartAddedProducts.length < 1) return <Navigate to="/shop" />;
+ if (Object.keys(shippingDetails).length < 1) return <Navigate to="/cart" />;
 
   const name = user?.displayName.split(" ") || [];
 
@@ -81,7 +101,6 @@ const Checkout = () => {
 
   //   console.log(total_price);
 
-  // BUG
   const handleSubmit = (e) => {
     e.preventDefault();
     // setContactInfo({})
@@ -118,6 +137,7 @@ const Checkout = () => {
   };
 
   const orderInfo = {
+    orderID: `GBB-${Date.now()}`,
     products: cartAddedProducts,
     delivery: deliveryMethod,
     total_price,
@@ -127,14 +147,14 @@ const Checkout = () => {
     // TODO: IMPLEMENT Cash on Delivery & sslcommerz PAYMENT METHOD
     paymentInfo: {
       paymentMethod: "Card", // or "Cash on Delivery", "Bkash", etc.
-      paymentStatus: "Pending", // "Pending", "Paid", "Refunded"
-      transactionId: transactionId || null, // If online payment
+      paymentStatus: "Paid", // "Pending", "Paid", "Refunded"
+      // transactionId: transactionId // If online payment
+      transactionId: null, // Cash on Delivery
     },
     shippingDetails,
     status: "Order Placed",
     createdAt: new Date(),
   };
-  console.log(orderInfo.paymentInfo);
 
   const handleFocus = (field) => {
     setFocusedField(field);
@@ -532,7 +552,7 @@ const Checkout = () => {
             // refetch={refetch}
             closeModal={closeModal}
             orderInfo={orderInfo}
-            setTransactionId={setTransactionId}
+            postOrderInfoInDB={postOrderInfoInDB}
           />
         </div>
       </div>

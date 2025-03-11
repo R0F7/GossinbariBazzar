@@ -12,7 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-const CheckoutModal = ({ closeModal, isOpen, orderInfo,setTransactionId }) => {
+const CheckoutModal = ({ closeModal, isOpen, orderInfo, postOrderInfoInDB }) => {
   
   // if(Object.keys(orderInfo.contactInfo).length < 1) return closeModal(true)
 
@@ -87,7 +87,7 @@ const CheckoutModal = ({ closeModal, isOpen, orderInfo,setTransactionId }) => {
                 {/* <hr className="mt-8 " /> */}
                 {/* checkout form */}
                 <Elements stripe={stripePromise}>
-                  <CheckoutForm closeModal={closeModal} orderInfo={orderInfo} setTransactionId={setTransactionId}></CheckoutForm>
+                  <CheckoutForm closeModal={closeModal} orderInfo={orderInfo} postOrderInfoInDB={postOrderInfoInDB}></CheckoutForm>
                 </Elements>
               </DialogPanel>
             </TransitionChild>
@@ -102,7 +102,7 @@ CheckoutModal.propTypes = {
   orderInfo: PropTypes.object,
   closeModal: PropTypes.func,
   isOpen: PropTypes.bool,
-  setTransactionId: PropTypes.func,
+  postOrderInfoInDB: PropTypes.func,
 };
 
 export default CheckoutModal;

@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import PropTypes from "prop-types";
 
-const CheckoutForm = ({ closeModal, orderInfo, setTransactionId }) => {
+const CheckoutForm = ({
+  closeModal,
+  orderInfo,
+  postOrderInfoInDB,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   // const axiosCommon = useAxiosCommon();
@@ -75,17 +79,22 @@ const CheckoutForm = ({ closeModal, orderInfo, setTransactionId }) => {
 
     if (paymentIntent.status === "succeeded") {
       setProcessing(false);
-      setTransactionId(paymentIntent.id);
-      const orderInfo ={
-        ...orderInfo,
-        
-      }
-      console.log(orderInfo);
+      closeModal(true);
+      // console.log(orderInfo);
+
       // TODO:
       // 1. create payment info obj
       // 2. save payment info in db
       // 3. update cart
       // 4. update Product card
+      try {
+        await postOrderInfoInDB({
+          ...orderInfo,
+          paymentInfo: { ...orderInfo.paymentInfo, transactionId: paymentIntent.id },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     if (confirmError) {
@@ -144,7 +153,7 @@ const CheckoutForm = ({ closeModal, orderInfo, setTransactionId }) => {
 CheckoutForm.propTypes = {
   closeModal: PropTypes.func,
   orderInfo: PropTypes.object,
-  setTransactionId: PropTypes.func,
+  postOrderInfoInDB: PropTypes.func,
 };
 
 export default CheckoutForm;

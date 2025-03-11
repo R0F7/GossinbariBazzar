@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CustomDropdown() {
+const CustomDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Default sorting");
 
@@ -42,6 +42,6 @@ function CustomDropdown() {
       )}
     </div>
   );
-}
+};
 
 export default CustomDropdown;
