@@ -458,3 +458,55 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.status {
+  display: inline-block;
+  font-size: 13px;
+  padding: 6px 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.status-pending {
+  background-color: #E3F2FD;
+  color: #0D47A1;
+  border: 1px solid #64B5F6; 
+}
+
+.status-processing {
+  background-color: #D1ECF1;
+  color: #0C5460;
+  border: 1px solid #2196F3;
+}
+
+.status-shipped {
+  background-color: #EDE7F6;
+  color: #4A148C;
+  border: 1px solid #673AB7;
+}
+
+.status-out-for-delivery {
+  background-color: #E6F4EA;
+  color: #256029;
+  border: 1px solid #A5D6A7;
+}
+
+.status-completed {
+  background-color: #D4EDDA;
+  color: #155724;
+  border: 1px solid #4CAF50;
+}
+
+.status-canceled {
+  background-color: #F8D7DA;
+  color: #721C24;
+  border: 1px solid #F44336;
+}
+
+.status-returned {
+  background-color: #E0E0E0;
+  color: #424242;
+  border: 1px solid #9E9E9E;
+}
