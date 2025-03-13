@@ -9,6 +9,7 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 const OrderHistory = () => {
   const { user } = useAuth();
@@ -84,12 +85,14 @@ const OrderHistory = () => {
 
     columnHelper.accessor("_id", {
       cell: (id) => (
-        <button
-          onClick={() => console.log(id.getValue())}
-          className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
-        >
-          View Details
-        </button>
+        <Link to={`/dashboard/my-orders/order-details/${id.getValue()}`}>
+          <button
+            onClick={() => console.log(id.getValue())}
+            className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+          >
+            View Details
+          </button>
+        </Link>
       ),
       header: "Actions",
     }),
@@ -135,7 +138,7 @@ const OrderHistory = () => {
   });
 
   return (
-    <div className="pt-4 min-h-[100vh-350px] bg-gra-900 mb-6 lg:my-12">
+    <section className="pt-4 min-h-[100vh-350px] bg-gra-900 mb-6 lg:my-12">
       <div className="p-2 w-full lg:max-w-7xl mx-auto text-white fill-gray-400">
         <table className="w-full text-left ext-sm">
           <thead className="bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -236,7 +239,7 @@ const OrderHistory = () => {
           </select>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

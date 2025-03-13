@@ -68,8 +68,8 @@ const Checkout = () => {
     },
   });
 
- if (isFetched && cartAddedProducts.length < 1) return <Navigate to="/shop" />;
- if (Object.keys(shippingDetails).length < 1) return <Navigate to="/cart" />;
+  if (isFetched && cartAddedProducts.length < 1) return <Navigate to="/shop" />;
+  if (Object.keys(shippingDetails).length < 1) return <Navigate to="/cart" />;
 
   const name = user?.displayName.split(" ") || [];
 
@@ -100,6 +100,37 @@ const Checkout = () => {
       : subtotal_price + deliveryMethod.price;
 
   //   console.log(total_price);
+
+  // const newCart = cartAddedProducts.map((item) => {
+  //   const findProduct = cart_products.find(
+  //     (product) => item.id === product._id
+  //   );
+
+  //   return { ...item, price: findProduct.price, name: findProduct.title };
+  // });
+  // console.log(newCart);
+
+  const productMap = new Map(
+    cart_products.map((product) => [product._id, product])
+  );
+
+  const newCart = cartAddedProducts.map((item) => {
+    const findProduct = productMap.get(item.id);
+
+    return {
+      ...item,
+      // id: item.id,
+      // quantity: item.quantity,
+      unit: findProduct.unit,
+      price: findProduct.discounted_price
+        ? findProduct.discounted_price
+        : findProduct.price,
+      name: findProduct.title,
+      image: findProduct.image,
+    };
+  });
+
+  console.log(newCart);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -138,7 +169,7 @@ const Checkout = () => {
 
   const orderInfo = {
     orderID: `GBB-${Date.now()}`,
-    products: cartAddedProducts,
+    products: newCart,
     delivery: deliveryMethod,
     total_price,
     total_quantity,

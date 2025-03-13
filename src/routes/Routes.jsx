@@ -33,6 +33,7 @@ import Notifications from "../pages/Dashboard/Support/Notifications/Notification
 import HelpAndSupport from "../pages/Dashboard/Support/HelpAndSupport/HelpAndSupport";
 import SavedAddress from "../pages/Dashboard/MyAccount/SavedAddress/SavedAddress";
 import Checkout from "../pages/Checkout/Checkout";
+import OrderDetails from "../pages/Dashboard/MyOrders/OrderDetails";
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +58,8 @@ export const router = createBrowserRouter([
         element: <Cart></Cart>,
       },
       {
-        path:"/checkout",
-        element: <Checkout></Checkout>
+        path: "/checkout",
+        element: <Checkout></Checkout>,
       },
       {
         path: "/pages",
@@ -173,6 +174,10 @@ export const router = createBrowserRouter([
           {
             path: "order-history",
             element: <OrderHistory></OrderHistory>,
+          },
+          {
+            path: "order-details/:id",
+            element: <OrderDetails></OrderDetails>,
           },
           {
             path: "wishlist",
