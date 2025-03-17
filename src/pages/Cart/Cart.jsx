@@ -482,14 +482,14 @@ const Cart = ({ dashboard }) => {
             </i>
             <h6>Your cart is currently empty.</h6>
           </div>
-          <button className="mt-5 mb-10 py-2.5 px-3 rounded-md bg-[#2e8ed81f] hover:shadow-md hover:shadow-[#2e8ed81f] transition-all duration-200 active:scale-95 scale-100 font-semibold">
-            <Link to="/shop" className="text-[#2E8DD8] flex items-center gap-2">
+          <Link to="/shop">
+            <button className="text-[#2E8DD8] flex items-center gap-2 mt-5 mb-10 py-2.5 px-3 rounded-md bg-[#2e8ed81f] hover:shadow-md hover:shadow-[#2e8ed81f] transition-all duration-200 active:scale-95 scale-100 font-semibold">
               <i>
                 <TiArrowBackOutline />
               </i>
               <span>Continue Shopping</span>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       )}
     </section>

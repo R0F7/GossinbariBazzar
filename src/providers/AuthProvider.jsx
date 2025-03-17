@@ -181,6 +181,7 @@ const AuthProvider = ({ children }) => {
   // });
 
   //get cartAddedProducts
+  
   const {
     data: cartAddedProducts = [],
     refetch: cartAddedProductsRefetch,

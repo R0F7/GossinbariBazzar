@@ -62,7 +62,8 @@ const OrderDetails = () => {
       header: "Quantity",
     }),
     columnHelper.accessor((row) => row.quantity * row.price, {
-      cell: (info) => <span>${info.getValue()}</span>,
+      cell: (info) => 
+      <span>${info.getValue()}</span>,
       header: "Total",
     }),
     columnHelper.accessor("", {
@@ -89,29 +90,32 @@ const OrderDetails = () => {
             Visual tracking of the order
           </h4>
           <p className="text-gray-500">
-            <span className="">✅ Order Placed</span>
+            <span  className={`${
+                status === "Order Placed" && "text-pink-300 font-bold"
+              }`}>✅ Order Placed</span>
             <span className="text-white"> → </span>{" "}
             <span
               className={`${
-                status === "Order Placed" && "text-[] text-pink-300 font-bold"
+                status === "Processing" && "text-pink-300 font-bold"
               }`}
             >
               🕒 Processing
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "" && "text-[] font-bold"}`}>
+            <span className={`${status === "Shipped" && "text-pink-300 font-bold"}`}>
               📦 Shipped
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "" && "text-[] font-bold"}`}>
+            <span className={`${status === "Out for Delivery" && "text-pink-300 font-bold"}`}>
               🚚 Out for Delivery
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "" && "text-[] font-bold"}`}>
+            <span className={`${status === "Delivered" && "text-pink-300 font-bold"}`}>
               ✅ Delivered
             </span>
           </p>
         </div>
+        
         <div className="flex justify-center pt-10">
           <table className="w-full text-left border-collapse border-[#3b4a6b]">
             <thead className="">
