@@ -34,6 +34,7 @@ import HelpAndSupport from "../pages/Dashboard/Support/HelpAndSupport/HelpAndSup
 import SavedAddress from "../pages/Dashboard/MyAccount/SavedAddress/SavedAddress";
 import Checkout from "../pages/Checkout/Checkout";
 import OrderDetails from "../pages/Dashboard/MyOrders/OrderDetails";
+import Invoice from "../pages/Dashboard/Payment/Invoices/Invoice";
 
 export const router = createBrowserRouter([
   {
@@ -196,6 +197,10 @@ export const router = createBrowserRouter([
           {
             path: "invoices",
             element: <Invoices></Invoices>,
+          },
+          {
+            path: "invoice/:id",
+            element: <Invoice></Invoice>,
           },
         ],
       },

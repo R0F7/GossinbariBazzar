@@ -21,7 +21,7 @@ const OrderDetails = () => {
       return data;
     },
   });
-  //   console.log(orderDetails);
+    console.log(orderDetails);
 
   const {
     orderID,
