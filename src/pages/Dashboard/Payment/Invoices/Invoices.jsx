@@ -13,7 +13,19 @@ const Invoices = () => {
   const columns = [
     columnHelper.accessor("orderID", {
       cell: (info) => <span>{info.getValue()}</span>,
-      header: "order IDs",
+      header: "order ID",
+    }),
+    columnHelper.accessor((row) => row.order_owner_info.name, {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "Billing Name",
+    }),
+    columnHelper.accessor((row) => row.contactInfo.name, {
+      cell: (info) => <span>{info.getValue()}</span>,
+      header: "Shipping Name",
+    }),
+    columnHelper.accessor((row) => row.shippingDetails, {
+      cell: (info) => <span>{info.getValue().village}, {info.getValue().union}</span>,
+      header: "Address",
     }),
     columnHelper.accessor("createdAt", {
       cell: (info) => (
