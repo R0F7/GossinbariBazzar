@@ -10,6 +10,7 @@ import { FaFilePdf } from "react-icons/fa6";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useReactToPrint } from "react-to-print";
 
 const Invoice = () => {
   const { id } = useParams();
@@ -32,19 +33,26 @@ const Invoice = () => {
 
   const handleDownloadPDF = () => {
     const input = invoiceRef.current;
-    html2canvas(input).then((canvas) => {
-      const imageData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imageData, "PNG", 15, 15);
+    html2canvas(input, { scale: 3, useCORS: true }).then((canvas) => {
+      const imageData = canvas.toDataURL("image/jpeg");
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210;
+      const imgHeight = 220.99;
+      // (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+
+      pdf.addImage(imageData, "PNG", 0, 0, imgWidth, imgHeight);
       pdf.save("invoice.pdf");
     });
   };
 
-  const handlePrint = () => {};
+  const handlePrint = useReactToPrint({
+    contentRef: invoiceRef,
+  });
 
   return (
     <section className="bg-[#F9FAFF] min-h-screen relative">
-      <div ref={invoiceRef} className="p-10 w-[90%] mx-auto">
+      <div ref={invoiceRef} className="p-10 w-[90%] mx-auto ">
         <div className="flex items-center gap-1">
           <img className="w-12 rop-shadow-2xl" src={Logo} alt="" />
           <h4 className="text-logo-font-family text-[#006400] text-lg">
@@ -53,7 +61,7 @@ const Invoice = () => {
         </div>
 
         {/* details info */}
-        <div className="my-10 flex justify-between">
+        <div className="my-10 lg:flex lg:justify-between grid grid-cols-2 gap-4 lg:gap-0">
           {/* customer info*/}
           <div>
             <h1 className="uppercase text-[#2C8C81] font-semibold text-sm">
@@ -127,7 +135,7 @@ const Invoice = () => {
           </div>
 
           {/* paymentInfo */}
-          <div>
+          <div className="">
             <h1 className="uppercase text-[#2C8C81] font-semibold text-sm mb-2">
               payment Info
             </h1>
@@ -240,7 +248,7 @@ const Invoice = () => {
         </div>
 
         {/* contact info */}
-        <div className="flex items-center justify-evenly mt-20">
+        <div className="flex items-center justify-between md:justify-evenly mt-[70px]">
           <div className="flex items-center gap-3">
             <IoCallSharp className="border w-10 h-10 rounded-full p-2.5 bg-[#0095D3] text-[#E2E5ED]" />
             <div className="flex flex-col font-semibold text-[#333842]">
@@ -273,11 +281,12 @@ const Invoice = () => {
         >
           <FaFilePdf />
         </div>
-        <RiPrinterFill
-          title="Print Invoice"
-          onClick={handlePrint}
-          className="w-12 h-12 rounded-full p-3 border border-[#333842] text-[#333842] hover:bg-[#333842] hover:text-[#E2E5ED] shadow scale-100 active:scale-90 transition duration-300 mt-3.5"
-        />
+        <button onClick={handlePrint}>
+          <RiPrinterFill
+            title="Print Invoice"
+            className="w-12 h-12 rounded-full p-3 border border-[#333842] text-[#333842] hover:bg-[#333842] hover:text-[#E2E5ED] shadow scale-100 active:scale-90 transition duration-300 mt-3.5"
+          />
+        </button>
       </div>
     </section>
   );
