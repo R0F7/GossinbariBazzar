@@ -70,24 +70,28 @@ const PaymentHistory = () => {
       header: "",
     }),
 
-    columnHelper.accessor(" ", {
-      cell: () => (
-        <button className="text-blue-500 text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95">
-          View Invoice
-        </button>
+    columnHelper.accessor("_id", {
+      cell: (id) => (
+        <Link to={`/dashboard/payment/invoice/${id.getValue()}`}>
+          <button className="text-blue-500 text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95">
+            View Invoice
+          </button>
+        </Link>
       ),
-      //   header: "Order ID",
+      header: "",
     }),
   ];
 
   return (
-    <>
+    <section className="p-8">
+      <h1 className="font-semibold text-4xl mb-8">Payment History</h1>
+
       <Table
         columns={columns}
         data={orderData}
         title={"PaymentHistory"}
       ></Table>
-    </>
+    </section>
   );
 };
 

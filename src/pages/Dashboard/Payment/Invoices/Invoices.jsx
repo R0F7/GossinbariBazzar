@@ -24,7 +24,11 @@ const Invoices = () => {
       header: "Shipping Name",
     }),
     columnHelper.accessor((row) => row.shippingDetails, {
-      cell: (info) => <span>{info.getValue().village}, {info.getValue().union}</span>,
+      cell: (info) => (
+        <span>
+          {info.getValue().village}, {info.getValue().union}
+        </span>
+      ),
       header: "Address",
     }),
     columnHelper.accessor("createdAt", {
@@ -56,7 +60,9 @@ const Invoices = () => {
     }),
   ];
   return (
-    <section>
+    <section className="p-8">
+      <h1 className="font-semibold text-4xl mb-8">Invoices</h1>
+
       <Table title="Invoice List" data={orderData} columns={columns}></Table>
     </section>
   );

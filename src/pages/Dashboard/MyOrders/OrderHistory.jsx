@@ -4,11 +4,31 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import Table from "../../../components/Table/Table";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { BiCalendar } from "react-icons/bi";
 
 const OrderHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const columnHelper = createColumnHelper();
+
+  // const defaultStartDate = new Date("2024-08-01");
+  // const defaultEndDate = new Date("2024-10-01");
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+  const handleChange = ([newStartDate, newEndDate]) => {
+    setStartDate(newStartDate);
+    setEndDate(newEndDate);
+  };
+
+  // const handleChange1 = (newStartDate, newEndDate) => {
+  //   console.log(newStartDate, newEndDate);
+  // };
+
+  console.log(new Date(startDate), endDate);
 
   const { data: orderData = [] } = useQuery({
     queryKey: ["getOrderData", user?.email],
@@ -19,6 +39,19 @@ const OrderHistory = () => {
     enabled: !!user?.email,
   });
   //   console.log(orderData);
+
+  const filterOrders = (orders, statusList) => {
+    return orders.filter((order) => statusList.includes(order.status));
+  };
+
+  const pendingOrder = filterOrders(orderData, [
+    "Order Placed",
+    "Shipped",
+    "Out for Delivery",
+  ]);
+
+  const completedOrder = filterOrders(orderData, ["Delivered"]);
+  const cancelledOrder = filterOrders(orderData, ["Cancelled"]);
 
   const columns = [
     columnHelper.accessor("orderID", {
@@ -94,7 +127,77 @@ const OrderHistory = () => {
   ];
 
   return (
-    <section>
+    <section className="p-8">
+      <h1 className="font-semibold text-4xl mb-8">Order History</h1>
+
+      <div className="border-b pb-4 mb-6 flex items-center  justify-between">
+        <ul className="flex gap-16 text-lg font-semibold">
+          <li>All Order({orderData.length})</li>
+          <li>Pending({pendingOrder.length})</li>
+          <li>Completed({completedOrder.length})</li>
+          <li>Cancelled({cancelledOrder.length})</li>
+        </ul>
+
+        {/* <DatePicker
+            selected={startDate}
+            startDate={startDate}
+            endDate={endDate}
+            onChange={handleChange}
+            dateFormat="MM/yyyy"
+            placeholderText="Select a month other than the disabled months"
+            showMonthYearPicker
+            selectsRange
+            className="border"
+          /> */}
+
+        <div className="flex items-center mr-10 gap-3">
+          {/* <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            // selectsStart
+            startDate={startDate}
+            endDate={endDate}
+            placeholderText="Select Start Date"
+            dateFormat="yyyy-MM-dd"
+            className="border w-32"
+          /> */}
+
+          <div className="relative">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              placeholderText="Select Start Date"
+              dateFormat="yyyy-MM-dd"
+              className="border w-[152px] pl-9 py-1.5 rounded-full placeholder:text-sm"
+            />
+            <BiCalendar className="absolute top-[11px] left-3.5 text-gray-500" />{" "}
+          </div>
+          <span>To</span>
+          <div className="relative">
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              placeholderText="Select End Date"
+              dateFormat="yyyy-MM-dd"
+              className="border w-[150px] pl-9 py-1.5 rounded-full placeholder:text-sm"
+            />
+            <BiCalendar className="absolute top-[11px] left-3.5 text-gray-500" />{" "}
+          </div>
+
+          {/* <span>To</span>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            // selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            //  icon={<BiCalendar />}
+            placeholderText="Select End Date"
+            dateFormat="yyyy-MM-dd"
+            className="border w-32"
+          /> */}
+        </div>
+      </div>
       <Table title={"Order History"} data={orderData} columns={columns}></Table>
     </section>
   );
