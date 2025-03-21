@@ -11,14 +11,14 @@ const PaymentHistory = () => {
   const columnHelper = createColumnHelper();
 
   const { data: orderData = [] } = useQuery({
-    queryKey: ["getOrderData", user?.email],
+    queryKey: ["getOrderDataForPayment", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/order-data/${user?.email}`);
       return data;
     },
     enabled: !!user?.email,
   });
-  //   console.log(orderData);
+    console.log(orderData);
 
   const columns = [
     columnHelper.accessor("createdAt", {

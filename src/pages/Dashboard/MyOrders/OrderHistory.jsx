@@ -13,32 +13,24 @@ const OrderHistory = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const columnHelper = createColumnHelper();
-
-  // const defaultStartDate = new Date("2024-08-01");
-  // const defaultEndDate = new Date("2024-10-01");
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
-  const handleChange = ([newStartDate, newEndDate]) => {
-    setStartDate(newStartDate);
-    setEndDate(newEndDate);
-  };
-
-  // const handleChange1 = (newStartDate, newEndDate) => {
-  //   console.log(newStartDate, newEndDate);
-  // };
-
-  console.log(new Date(startDate), endDate);
+  let times = {};
+  if (startDate && endDate) times = { startDate, endDate };
 
   const { data: orderData = [] } = useQuery({
-    queryKey: ["getOrderData", user?.email],
+    queryKey: ["getOrderData", user?.email, times],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/order-data/${user?.email}`);
+      console.log();
+      const { data } = await axiosSecure.get(
+        `/order-data/${user?.email}?startDate=${times.startDate}&endDate=${times.endDate}`
+      );
       return data;
     },
     enabled: !!user?.email,
   });
-  //   console.log(orderData);
+  // console.log(orderData);
 
   const filterOrders = (orders, statusList) => {
     return orders.filter((order) => statusList.includes(order.status));
@@ -138,64 +130,31 @@ const OrderHistory = () => {
           <li>Cancelled({cancelledOrder.length})</li>
         </ul>
 
-        {/* <DatePicker
-            selected={startDate}
-            startDate={startDate}
-            endDate={endDate}
-            onChange={handleChange}
-            dateFormat="MM/yyyy"
-            placeholderText="Select a month other than the disabled months"
-            showMonthYearPicker
-            selectsRange
-            className="border"
-          /> */}
-
         <div className="flex items-center mr-10 gap-3">
-          {/* <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            // selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            placeholderText="Select Start Date"
-            dateFormat="yyyy-MM-dd"
-            className="border w-32"
-          /> */}
-
           <div className="relative">
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => setStartDate(new Date(date).toISOString())}
               placeholderText="Select Start Date"
               dateFormat="yyyy-MM-dd"
-              className="border w-[152px] pl-9 py-1.5 rounded-full placeholder:text-sm"
+              maxDate={new Date()}
+              className="border border-[#0DAFD8] text-[#0DAFD8] font-medium outline-[#0DAFD8] shadow-sm w-[152px] pl-9 py-1.5 rounded-full placeholder:text-sm placeholder:text-[#333842] placeholder:font-normal"
             />
-            <BiCalendar className="absolute top-[11px] left-3.5 text-gray-500" />{" "}
+            <BiCalendar className="absolute top-[11px] left-3.5 text-[#0DAFD8]" />{" "}
           </div>
-          <span>To</span>
+          <span className="font-semibold text-[#333842]">To</span>
           <div className="relative">
             <DatePicker
               selected={endDate}
-              onChange={(date) => setEndDate(date)}
+              onChange={(date) => setEndDate(new Date(date).toISOString())}
               placeholderText="Select End Date"
               dateFormat="yyyy-MM-dd"
-              className="border w-[150px] pl-9 py-1.5 rounded-full placeholder:text-sm"
+              minDate={startDate}
+              disabled={!startDate}
+              className="border border-[#3885F4] text-[#3885F4] font-medium disabled:border-gray-300 outline-[#3885F4] shadow-sm w-[150px] pl-9 py-1.5 rounded-full placeholder:text-sm placeholder:text-[#333842] disabled:placeholder:text-[#AAB0BA] placeholder:font-normal disabled:cursor-not-allowed"
             />
-            <BiCalendar className="absolute top-[11px] left-3.5 text-gray-500" />{" "}
+            <BiCalendar className={`absolute top-[11px] left-3.5 ${startDate ? "text-[#3885F4]" :"text-gray-500"}`} />{" "}
           </div>
-
-          {/* <span>To</span>
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            // selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            //  icon={<BiCalendar />}
-            placeholderText="Select End Date"
-            dateFormat="yyyy-MM-dd"
-            className="border w-32"
-          /> */}
         </div>
       </div>
       <Table title={"Order History"} data={orderData} columns={columns}></Table>
