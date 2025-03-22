@@ -540,3 +540,56 @@ input[type="number"]::-webkit-outer-spin-button {
 .accordion-details {
   color: #555555 !important;
 }
+
+.admin-msg .message {
+  text-align: left;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  display: inline-block;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.user-msg .message {
+  text-align: right;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.chat-container {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.messages {
+  height: 300px;
+  overflow-y: scroll;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.sent {
+  text-align: right;
+  background-color: #dcf8c6;
+}
+
+.received {
+  text-align: left;
+  background-color: #f1f1f1;
+}

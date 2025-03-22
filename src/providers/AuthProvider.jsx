@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   GoogleAuthProvider,
-  getAuth,
+  // getAuth,
   onAuthStateChanged,
   signInWithPopup,
   createUserWithEmailAndPassword,
@@ -11,14 +11,14 @@ import {
   signOut,
   updatePassword,
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config";
+import { auth } from "../firebase/firebase.config";
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
 import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
-const auth = getAuth(app);
+// const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
