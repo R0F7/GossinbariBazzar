@@ -1,0 +1,122 @@
+[
+  {
+    "_id": "1",
+    "email": "user@example.com",
+    "timestamp": "2024-03-19T14:30:00Z",
+    "category": "Order Updates",
+    "message": "Your order #ORD12345 has been shipped.",
+    "is_read": false,
+    "meta": {
+      "order_id": "ORD12345",
+      "tracking_url": "https://tracking.example.com/ORD12345"
+    }
+  },
+  {
+    "_id": "5",
+    "email": "user@example.com",
+    "timestamp": "2024-03-15T09:30:00Z",
+    "category": "Delivery Updates",
+    "message": "Your package is out for delivery. Expected arrival: March 16.",
+    "is_read": false,
+    "meta": {
+      "order_id": "ORD67890",
+      "courier": "Gossainbari Logistics"
+    }
+  },
+  {
+    "_id": "2",
+    "email": "user@example.com",
+    "timestamp": "2024-03-18T10:15:00Z",
+    "category": "Offers & Discounts",
+    "message": "Get 20% off on your next purchase! Offer valid until March 25.",
+    "is_read": true,
+    "meta": {
+      "discount_code": "SPRING20",
+      "expiry_date": "2024-03-25"
+    }
+  },
+  {
+    "_id": "3",
+    "email": "user@example.com",
+    "timestamp": "2024-03-17T08:45:00Z",
+    "category": "Security & Account Updates",
+    "message": "Your password has been updated successfully.",
+    "is_read": false,
+    "meta": {
+      "ip_address": "192.168.1.1",
+      "location": "Dhaka, Bangladesh"
+    }
+  },
+  {
+    "_id": "4",
+    "email": "user@example.com",
+    "timestamp": "2024-03-16T12:00:00Z",
+    "category": "Payment Updates",
+    "message": "Your payment of $50.00 has been successfully processed.",
+    "is_read": false,
+    "meta": {
+      "transaction_id": "TXN987654",
+      "payment_method": "Credit Card"
+    }
+  },
+  {
+    "_id": "6",
+    "email": "user@example.com",
+    "timestamp": "2024-03-14T16:20:00Z",
+    "category": "Subscription Alerts",
+    "message": "Your premium membership expires in 3 days. Renew now to continue benefits.",
+    "is_read": true,
+    "meta": {
+      "renewal_link": "https://gossainbaribazzar.com/renew",
+      "expiry_date": "2024-03-17"
+    }
+  },
+  {
+    "_id": "7",
+    "email": "user@example.com",
+    "timestamp": "2024-03-13T14:00:00Z",
+    "category": "Review Requests",
+    "message": "How was your experience with Product ABC? Share your feedback now.",
+    "is_read": false,
+    "meta": {
+      "product_id": "PRD12345",
+      "review_link": "https://gossainbaribazzar.com/review/PRD12345"
+    }
+  },
+  {
+    "_id": "8",
+    "email": "user@example.com",
+    "timestamp": "2024-03-12T11:45:00Z",
+    "category": "Support & Complaint",
+    "message": "Your support ticket #SUP98765 has been resolved. Check details.",
+    "is_read": true,
+    "meta": {
+      "ticket_id": "SUP98765",
+      "resolution_summary": "Refund issued for defective product."
+    }
+  },
+  {
+    "_id": "9",
+    "email": "user@example.com",
+    "timestamp": "2024-03-11T09:10:00Z",
+    "category": "Wishlist Alerts",
+    "message": "A product in your wishlist is now available at a discounted price!",
+    "is_read": false,
+    "meta": {
+      "product_id": "PRD67890",
+      "discount_price": "$30.00"
+    }
+  },
+  {
+    "_id": "10",
+    "email": "user@example.com",
+    "timestamp": "2024-03-10T15:25:00Z",
+    "category": "Referral Rewards",
+    "message": "You earned a $10 reward for referring a friend! Claim your reward now.",
+    "is_read": true,
+    "meta": {
+      "referral_code": "REF1234",
+      "reward_balance": "$10.00"
+    }
+  }
+]

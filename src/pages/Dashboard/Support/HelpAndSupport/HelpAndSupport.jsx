@@ -71,7 +71,7 @@ const HelpAndSupport = () => {
   // === "admin@example.com";
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-5">
+    <section className="max-w-4xl mx-auto mt-10 p-5">
       <Tabs defaultValue="faq" className="w-full">
         <TabsList className="flex justify-center mb-4 py-5">
           <TabsTrigger value="faq">FAQ</TabsTrigger>
@@ -180,7 +180,7 @@ const HelpAndSupport = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
+    </section>
   );
 };
 
