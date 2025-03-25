@@ -2,8 +2,8 @@
   {
     "_id": "1",
     "email": "user@example.com",
-    "timestamp": "2024-03-19T14:30:00Z",
-    "category": "Order Updates",
+    "timestamp": "2025-03-19T14:30:00Z",
+    "category": "📦🚚 Order Updates 🔄✅",
     "message": "Your order #ORD12345 has been shipped.",
     "is_read": false,
     "meta": {
@@ -15,7 +15,7 @@
     "_id": "5",
     "email": "user@example.com",
     "timestamp": "2024-03-15T09:30:00Z",
-    "category": "Delivery Updates",
+    "category": "🚚📍 Delivery Updates ✅📦",
     "message": "Your package is out for delivery. Expected arrival: March 16.",
     "is_read": false,
     "meta": {
@@ -27,7 +27,7 @@
     "_id": "2",
     "email": "user@example.com",
     "timestamp": "2024-03-18T10:15:00Z",
-    "category": "Offers & Discounts",
+    "category": "🔥🏷️ Offers & Discounts 🎉💰",
     "message": "Get 20% off on your next purchase! Offer valid until March 25.",
     "is_read": true,
     "meta": {
@@ -39,7 +39,7 @@
     "_id": "3",
     "email": "user@example.com",
     "timestamp": "2024-03-17T08:45:00Z",
-    "category": "Security & Account Updates",
+    "category": "🔐📢 Security & Account Updates 🔄✅",
     "message": "Your password has been updated successfully.",
     "is_read": false,
     "meta": {
@@ -51,7 +51,7 @@
     "_id": "4",
     "email": "user@example.com",
     "timestamp": "2024-03-16T12:00:00Z",
-    "category": "Payment Updates",
+    "category": "💳🔄 Payment Updates ✅📢",
     "message": "Your payment of $50.00 has been successfully processed.",
     "is_read": false,
     "meta": {
@@ -63,7 +63,7 @@
     "_id": "6",
     "email": "user@example.com",
     "timestamp": "2024-03-14T16:20:00Z",
-    "category": "Subscription Alerts",
+    "category": "🔔📅 Subscription Alerts 🔄✅",
     "message": "Your premium membership expires in 3 days. Renew now to continue benefits.",
     "is_read": true,
     "meta": {
@@ -75,7 +75,7 @@
     "_id": "7",
     "email": "user@example.com",
     "timestamp": "2024-03-13T14:00:00Z",
-    "category": "Review Requests",
+    "category": "⭐📢 Review Requests ✍️💬",
     "message": "How was your experience with Product ABC? Share your feedback now.",
     "is_read": false,
     "meta": {
@@ -87,7 +87,7 @@
     "_id": "8",
     "email": "user@example.com",
     "timestamp": "2024-03-12T11:45:00Z",
-    "category": "Support & Complaint",
+    "category": "🛠️📞 Support & Complaint ⚠️💬",
     "message": "Your support ticket #SUP98765 has been resolved. Check details.",
     "is_read": true,
     "meta": {
@@ -99,7 +99,7 @@
     "_id": "9",
     "email": "user@example.com",
     "timestamp": "2024-03-11T09:10:00Z",
-    "category": "Wishlist Alerts",
+    "category": "🔔💖 Wishlist Alerts 🛒✨",
     "message": "A product in your wishlist is now available at a discounted price!",
     "is_read": false,
     "meta": {
@@ -111,7 +111,7 @@
     "_id": "10",
     "email": "user@example.com",
     "timestamp": "2024-03-10T15:25:00Z",
-    "category": "Referral Rewards",
+    "category": "🎁👥 Referral Rewards 🏆💸",
     "message": "You earned a $10 reward for referring a friend! Claim your reward now.",
     "is_read": true,
     "meta": {
