@@ -17,9 +17,9 @@ import imageUpload from "../../api/utils";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
-import { GridLoader } from "react-spinners";
 import { format } from "date-fns";
 import { HiMiniExclamationTriangle } from "react-icons/hi2";
+import Spinier from "@/components/Spinier/Spinier";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -27,7 +27,7 @@ const ProductDetails = () => {
   const axiosCommon = useAxiosCommon();
   const [count, setCount] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { user, cartAddedProducts,addProductInCard } = useAuth();
+  const { user, cartAddedProducts, addProductInCard } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [cartToast, setCartToast] = useState(false);
   // console.log(user);
@@ -212,13 +212,7 @@ const ProductDetails = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[calc(100vh-176px)]">
-        <GridLoader color="#2E8DD8" />
-      </div>
-    );
-  }
+  if (isLoading) return <Spinier></Spinier>;
 
   return (
     <div className="container mx-auto">
@@ -254,7 +248,10 @@ const ProductDetails = () => {
                 </span>
               </h4>
             </div>
-            <Link to="/cart" className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+            <Link
+              to="/cart"
+              className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500"
+            >
               view cart
               <i>
                 <FaArrowRight />
@@ -273,7 +270,10 @@ const ProductDetails = () => {
               </span>
               has been added to your cart
             </h4>
-            <Link to="/cart" className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500">
+            <Link
+              to="/cart"
+              className="uppercase flex items-center gap-1 bg-[#2E8DD8] text-white text-xs font-bold py-3 px-4 rounded-md active:scale-95 scale-100 transition-all duration-200 hover:gap-2.5 hover:duration-500"
+            >
               view cart
               <i>
                 <FaArrowRight />
@@ -869,7 +869,7 @@ const ProductDetails = () => {
                 name="file"
                 id="file"
                 accept="image/*"
-                requiredL
+                // required
               />
             </label>
 

@@ -1,18 +1,19 @@
 import Logo from "../../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png";
 import { Link } from "react-router-dom";
 import MenuItem from "./Menu/MenuItem";
-import {
-  MdLogout,
-  MdOutlineAccountTree,
-  MdOutlinePayments,
-  MdSupportAgent,
-} from "react-icons/md";
-import { GrNotes } from "react-icons/gr";
+import { MdLogout } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import useAuth from "../../../hooks/useAuth";
+import UserMenu from "./Menu/UserMenu/UserMenu";
+import useRole from "@/hooks/useRole";
+import VendorMenu from "./Menu/VendorMenu/VendorMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
+  const [role] = useRole();
+  console.log(role);
+
+  // if (loading || isLoading) return <Spinier></Spinier>;
 
   return (
     <div className="fixed w-64 min-h-screen flex flex-col justify-between py-6 bg-[#2E8DD8]">
@@ -28,30 +29,9 @@ const Sidebar = () => {
         </Link>
 
         <nav>
-          <MenuItem
-            address={"my-account"}
-            label={"My Account"}
-            icon={MdOutlineAccountTree}
-          ></MenuItem>
-
-          <MenuItem
-            address={"my-orders"}
-            label={"My Orders"}
-            icon={GrNotes}
-          ></MenuItem>
-
-          <MenuItem
-            address={"payment"}
-            label={"Payment"}
-            icon={MdOutlinePayments}
-          ></MenuItem>
-
-          <MenuItem
-            address={"support"}
-            label={"Support"}
-            icon={MdSupportAgent}
-          ></MenuItem>
-        </nav>
+          {role === "customer" && <UserMenu />}
+          {role === "seller" && <VendorMenu />}
+          </nav>
       </div>
       <div>
         <MenuItem

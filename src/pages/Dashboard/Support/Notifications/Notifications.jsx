@@ -63,7 +63,7 @@ const Notifications = () => {
             key={notification._id}
             onMouseEnter={() => setIsExpend(idx)}
             onMouseLeave={() => setIsExpend(null)}
-            className="flex items-center bg-[#FFFFFF] my-2 px-3 py-4 gap-2 rounded-md shadow relative transition duration-1000 hover:scale-105 h-[90px]"
+            className="flex items-center bg-[#FFFFFF] my-2 px-3 py-4 gap-2 rounded-md shadow relative transition duration-1000 hover:scale-105 h-[90px] border-x border-[#F69395] hover:border-x-2"
           >
             <div>
               {/* <IoIosNotifications className="w-10 h-10 p-1.5 bg-[#F69395] text-white rounded-md " /> */}

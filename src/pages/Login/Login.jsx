@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Gossaigbari_Bazzar_logo_crop-removebg-preview.png";
 import GoogleLogo from "../../assets/google.png";
 import { useState } from "react";
@@ -8,12 +8,14 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [toggle, setToggle] = useState(false);
-  const { user, signInWithGoogle, signIn , setLoading , saveUser,address} = useAuth();
+  const { user, signInWithGoogle, signIn, setLoading, saveUser, address } =
+    useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
-  // console.log(user);
+  const from = location?.state || "/";
 
   if (user) {
-     navigate('/')
+    navigate("/");
   }
 
   const handleSubmit = async (e) => {
@@ -25,11 +27,11 @@ const Login = () => {
     console.log(email, password);
 
     try {
-        await signIn(email,password);
-        toast.success("SignIn Successfully");
-        navigate('/');        
+      await signIn(email, password);
+      toast.success("SignIn Successfully");
+      navigate(from);
     } catch (error) {
-        toast.error(error.message).split('/')[1];        
+      toast.error(error.message).split("/")[1];
     }
   };
 
@@ -73,7 +75,7 @@ const Login = () => {
       await saveUser(userInfo);
 
       toast.success("Google Login Successful");
-      navigate("/");
+      navigate(from);
     } catch (error) {
       console.error("Error during Google login:", error);
       toast.error(error.message);

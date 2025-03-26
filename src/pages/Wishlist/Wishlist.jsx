@@ -5,15 +5,17 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import emptyImg from "../../assets/empty wishlist.png";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Wishlist = () => {
-  const axiosCommon = useAxiosCommon();
+  // const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure();
   const { user, cartAddedProducts, addProductInCard } = useAuth();
 
   const { data: wishlist = [], refetch: wishlistUpdate } = useQuery({
     queryKey: ["wishlist_collection", user?.email],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/wishlist/${user?.email}`);
+      const { data } = await axiosSecure.get(`/wishlist/${user?.email}`);
       return data;
     },
   });
@@ -21,7 +23,7 @@ const Wishlist = () => {
 
   const { mutateAsync: removeItem } = useMutation({
     mutationFn: async (info) => {
-      const { data } = await axiosCommon.delete(`/wishlist`, { data: info });
+      const { data } = await axiosSecure.delete(`/wishlist`, { data: info });
       return data;
     },
     onSuccess: () => {
@@ -54,7 +56,7 @@ const Wishlist = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ["card_reviews_fetch"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/reviews");
+      const { data } = await axiosSecure.get("/reviews");
       return data;
     },
   });
@@ -93,9 +95,18 @@ const Wishlist = () => {
           <div>
             <img src={emptyImg} alt="emptyImg" />
           </div>
-          <h1 className="text-4xl font-bold text-[#E13E4F] mb-2">Your Wishlist is empty!</h1>
-          <p className="text-center text-[#5F83AE] text-2xl tracking-wider mb-6">seems like you don't have wishes here. <br /> Make a wish!</p>
-          <Link to="/shop" className="bg-[#3897EE] text-white py-3 w-[300px] text-center font-semibold rounded shadow-md scale-100 active:scale-95 transition duration-300">Start Shopping</Link>
+          <h1 className="text-4xl font-bold text-[#E13E4F] mb-2">
+            Your Wishlist is empty!
+          </h1>
+          <p className="text-center text-[#5F83AE] text-2xl tracking-wider mb-6">
+            seems like you don't have wishes here. <br /> Make a wish!
+          </p>
+          <Link
+            to="/shop"
+            className="bg-[#3897EE] text-white py-3 w-[300px] text-center font-semibold rounded shadow-md scale-100 active:scale-95 transition duration-300"
+          >
+            Start Shopping
+          </Link>
         </div>
       )}
     </section>

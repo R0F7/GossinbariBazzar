@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   GoogleAuthProvider,
@@ -16,8 +16,9 @@ import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
 import toast from "react-hot-toast";
+import { AuthContext } from "@/context/AuthContext";
 
-export const AuthContext = createContext(null);
+// export const AuthContext = createContext(null);
 // const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
