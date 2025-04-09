@@ -24,7 +24,7 @@ const Categories = () => {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, []);
-  //   console.log(data);
+    // console.log(data);
 
   const handleClick = (category) => {
     setCategory(category);

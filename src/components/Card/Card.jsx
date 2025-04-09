@@ -35,6 +35,7 @@ const Card = ({
     category,
     sub_category,
     tags,
+    vendor_info,
     discount_percent,
   } = item;
   //   const check= Math.round(rating * 2) / 2;
@@ -193,7 +194,7 @@ const Card = ({
             <span className="text-[#023e8a] font-semibold text-sm ">
               Sold by:
             </span>{" "}
-            <span className="text-[#4E148C] font-semibold">{sold_by}</span>
+            <span className="text-[#4E148C] font-semibold">{vendor_info?.name}</span>
           </h4>
           {progress_sold && (
             <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">

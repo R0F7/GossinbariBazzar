@@ -306,7 +306,7 @@ const ProductDetails = () => {
               {reviews && reviews.length > 0 ? reviews.length : 0} customer
               review{" "}
             </span>
-            <span className="text-[#637381] border-x px-3">Sold: 0 </span>
+            <span className="text-[#637381] border-x px-3">Sold: {product?.sold_product} </span>
 
             <span className="text-[#637381]">
               <span className="text-[#919eab]">Sold by:</span>{" "}
@@ -507,6 +507,7 @@ const ProductDetails = () => {
         </h4>
         <p className="w-[65%] text-[#666D74] mb-2.5">{product?.description}</p>
       </div>
+
       {/* review for product */}
       <div className="my-10">
         <div>
@@ -684,6 +685,7 @@ const ProductDetails = () => {
                       <img
                         className="w-full h-full rounded-full p-"
                         src={review?.user_image}
+                        referrerPolicy="no-referrer"
                         alt=""
                       />
                     </div>
@@ -698,7 +700,7 @@ const ProductDetails = () => {
                     </p>
                   </div>
                 </div>
-                <div className=" w-[130px] text-end">
+                <div className=" w-[140px] text-end">
                   <Rating
                     style={{ maxWidth: 180 }}
                     initialRating={review?.rating}

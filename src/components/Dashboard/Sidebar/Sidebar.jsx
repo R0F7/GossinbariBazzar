@@ -11,7 +11,7 @@ import VendorMenu from "./Menu/VendorMenu/VendorMenu";
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [role] = useRole();
-  console.log(role);
+  // console.log(role);
 
   // if (loading || isLoading) return <Spinier></Spinier>;
 

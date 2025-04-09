@@ -47,7 +47,12 @@ const Navbar = () => {
           <ul className="flex items-center gap-8">
             <li>Become A Vendor </li>
             <li>Order Tracking</li>
-            <Link to="dashboard/my-orders/wishlist" className="hover:font-semibold hover:underline">My Wishlist</Link>
+            <Link
+              to="dashboard/my-orders/wishlist"
+              className="hover:font-semibold hover:underline"
+            >
+              My Wishlist
+            </Link>
           </ul>
         </div>
 
@@ -297,7 +302,11 @@ const Navbar = () => {
               <div className="w-7 h-7">
                 <img className="w-full h-full" src={category?.icon} alt="" />
               </div>
-              <h4>{category?.categoryName}</h4>
+              <h4>
+                {category?.categoryName === "Furniture and Home Decor"
+                  ? "Furniture and Decor"
+                  : category?.categoryName}
+              </h4>
             </li>
           ))}
         </ul>
