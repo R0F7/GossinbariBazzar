@@ -3,6 +3,7 @@ import useAuth from "@/hooks/useAuth";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import * as Yup from "yup";
 
 const AddNewProducts = () => {
   const [categories, setCategories] = useState([]);
@@ -33,11 +34,9 @@ const AddNewProducts = () => {
   // rating -
   // timestamp
 
-  //   const validationSchema = {};
-
   const initialValues = {
     title: "",
-    image: null,
+    main_image: "",
     additionalImages: [],
     total_products: 0,
     brand_name: "",
@@ -51,6 +50,76 @@ const AddNewProducts = () => {
     short_description: "",
     tags: ["", "", ""],
   };
+
+  const validationSchema = Yup.object({
+    title: Yup.string().trim().required("Title is required"),
+
+    main_image: Yup.mixed()
+      .required("Main image is required")
+      .test("fileExists", "Main image is required", (value) => {
+        return value && value instanceof File;
+      }),
+
+    additionalImages: Yup.mixed()
+      .required("Additional images are required")
+      .test("fileCount", "Exactly 4 images are required", (value) => {
+        return value && value.length === 4;
+      })
+      .test("allAreFiles", "All must be valid image files", (value) => {
+        return (
+          value &&
+          Array.from(value).every(
+            (file) => file instanceof File && file.type.startsWith("image/")
+          )
+        );
+      }),
+
+    total_products: Yup.number()
+      .required("Total Product is required")
+      .positive("Value must be positive")
+      .integer("Value must be an integer"),
+
+    brand_name: Yup.string().trim().required("Brand Name is required"),
+
+    unit: Yup.string().trim().required("Unit is required"),
+
+    price: Yup.number()
+      .required("Price is required")
+      .positive("Value must be positive")
+      .integer("Value must be an integer"),
+
+    discounted_price: Yup.number()
+      .nullable()
+      .positive("Value must be positive"),
+
+    category: Yup.string()
+      .required("Category is required")
+      .notOneOf([""], "Please select a valid category"),
+
+    sub_category: Yup.string().trim().required("Sub Category is required"),
+
+    description: Yup.string()
+      .trim()
+      .required("Description is required")
+      .min(50, "Description must be at least 50 characters")
+      .max(1000, "Description can't exceed 1000 characters"),
+
+    short_description: Yup.string()
+      .trim()
+      .required("Short Description is required")
+      .min(20, "Short Description must be at least 20 characters")
+      .max(200, "Short Description can't exceed 200 characters"),
+
+    tags: Yup.array()
+      .required("Tags are required")
+      .length(3, "Exactly 3 tags are required")
+      .of(
+        Yup.string()
+          .trim()
+          .min(1, "Tag cannot be empty")
+          .required("Tag cannot be empty")
+      ),
+  });
 
   useEffect(() => {
     fetch("/categories.json")
@@ -118,7 +187,11 @@ const AddNewProducts = () => {
   return (
     <div className="max-w-5xl mx-auto bg-white p-6 my-6 rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4">Add New Product</h2>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
         {({ values, isSubmitting, setFieldValue, handleChange }) => (
           <Form className="space-y-6">
             {/* Basic Details Section */}
@@ -156,6 +229,11 @@ const AddNewProducts = () => {
                     name="brand_name"
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="brand_name"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
               </div>
             </div>
@@ -175,6 +253,11 @@ const AddNewProducts = () => {
                     name="unit"
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="unit"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 {/* Price */}
@@ -189,7 +272,8 @@ const AddNewProducts = () => {
                       const discounted_price = values.discounted_price;
 
                       if (value > 0 && discounted_price > 0) {
-                        const percent = ((value - discounted_price) / value) * 100;
+                        const percent =
+                          ((value - discounted_price) / value) * 100;
                         setFieldValue(
                           "discounted_percentage",
                           Number(percent.toFixed(2))
@@ -199,6 +283,11 @@ const AddNewProducts = () => {
                       }
                     }}
                     className="w-full p-2 border rounded"
+                  />
+                  <ErrorMessage
+                    name="price"
+                    component="p"
+                    className="text-red-500 text-sm"
                   />
                 </div>
 
@@ -215,6 +304,8 @@ const AddNewProducts = () => {
                       const value = Number(e.target.value);
                       const price = values.price;
 
+                      // if(Number(value) <1) return toast.error("minimum 1 %")
+
                       if (price > 0 && value > 0) {
                         const percent = ((price - value) / price) * 100;
                         setFieldValue(
@@ -227,6 +318,11 @@ const AddNewProducts = () => {
                     }}
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="discounted_price"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 {/* Discounted percentage */}
@@ -238,6 +334,7 @@ const AddNewProducts = () => {
                     type="number"
                     name="discounted_percentage"
                     className="w-full p-2 border rounded"
+                    readOnly
                   />
                 </div>
 
@@ -250,6 +347,11 @@ const AddNewProducts = () => {
                     type="number"
                     name="total_products"
                     className="w-full p-2 border rounded"
+                  />
+                  <ErrorMessage
+                    name="total_products"
+                    component="p"
+                    className="text-red-500 text-sm"
                   />
                 </div>
               </div>
@@ -279,6 +381,11 @@ const AddNewProducts = () => {
 
                       setMain_image_preview(previewImages);
                     }}
+                  />
+                  <ErrorMessage
+                    name="main_image"
+                    component="p"
+                    className="text-red-500 text-sm"
                   />
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {main_image_preview && (
@@ -318,6 +425,11 @@ const AddNewProducts = () => {
                       setPreviewImages(previewUrls);
                     }}
                   />
+                  <ErrorMessage
+                    name="additionalImages"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {previewImages.map((img, idx) => (
                       <img
@@ -352,6 +464,11 @@ const AddNewProducts = () => {
                       </option>
                     ))}
                   </Field>
+                  <ErrorMessage
+                    name="category"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -380,6 +497,11 @@ const AddNewProducts = () => {
                     id="sub_category"
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="sub_category"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
               </div>
             </div>
@@ -399,6 +521,11 @@ const AddNewProducts = () => {
                   name="short_description"
                   className="w-full p-2 border rounded"
                 />
+                <ErrorMessage
+                  name="short_description"
+                  component="p"
+                  className="text-red-500 text-sm"
+                />
               </div>
 
               {/* Full Description */}
@@ -412,6 +539,11 @@ const AddNewProducts = () => {
                   className="w-full p-2 border rounded"
                   rows="4"
                 />
+                <ErrorMessage
+                  name="description"
+                  component="p"
+                  className="text-red-500 text-sm"
+                />
               </div>
 
               {/* Tags */}
@@ -423,6 +555,11 @@ const AddNewProducts = () => {
                     name="tags[0]"
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="tags[0]"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold">Tag 2</label>
@@ -431,6 +568,11 @@ const AddNewProducts = () => {
                     name="tags[1]"
                     className="w-full p-2 border rounded"
                   />
+                  <ErrorMessage
+                    name="tags[1]"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold">Tag 3</label>
@@ -438,6 +580,11 @@ const AddNewProducts = () => {
                     type="text"
                     name="tags[2]"
                     className="w-full p-2 border rounded"
+                  />
+                  <ErrorMessage
+                    name="tags[2]"
+                    component="p"
+                    className="text-red-500 text-sm"
                   />
                 </div>
               </div>
