@@ -1,5 +1,7 @@
 import imageUpload from "@/api/utils";
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -10,6 +12,7 @@ const AddNewProducts = () => {
   const [previewImages, setPreviewImages] = useState([]);
   const [main_image_preview, setMain_image_preview] = useState(null);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   // console.log(user.displayName);
 
   // product input fields
@@ -34,6 +37,35 @@ const AddNewProducts = () => {
   // rating -
   // timestamp
 
+  useEffect(() => {
+    fetch("/categories.json")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+
+  // handle 4 image file to link (promise)
+  const handleImageUpload = async (files) => {
+    const uploadImages = files.map((image) => imageUpload(image));
+
+    try {
+      const imageUrls = await Promise.all(uploadImages);
+      return imageUrls;
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      return [];
+    }
+  };
+
+  const { mutateAsync: submit_product_in_DB } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosSecure.put("/product", product_info);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("product added successfully");
+    },
+  });
+
   const initialValues = {
     title: "",
     main_image: "",
@@ -52,7 +84,10 @@ const AddNewProducts = () => {
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().trim().required("Title is required"),
+    title: Yup.string()
+      .trim()
+      .required("Title is required")
+      .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
 
     main_image: Yup.mixed()
       .required("Main image is required")
@@ -79,36 +114,52 @@ const AddNewProducts = () => {
       .positive("Value must be positive")
       .integer("Value must be an integer"),
 
-    brand_name: Yup.string().trim().required("Brand Name is required"),
+    brand_name: Yup.string()
+      .trim()
+      .required("Brand Name is required")
+      .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
 
-    unit: Yup.string().trim().required("Unit is required"),
+    unit: Yup.string()
+      .trim()
+      .required("Unit is required")
+      .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
 
     price: Yup.number()
       .required("Price is required")
       .positive("Value must be positive")
       .integer("Value must be an integer"),
 
-    discounted_price: Yup.number()
-      .nullable()
-      .positive("Value must be positive"),
+    discounted_price: Yup.number().nullable().min(0, "Value must be 0 or more"),
+    // .positive("Value must be positive"),
 
     category: Yup.string()
       .required("Category is required")
       .notOneOf([""], "Please select a valid category"),
 
-    sub_category: Yup.string().trim().required("Sub Category is required"),
+    sub_category: Yup.string()
+      .trim()
+      .required("Sub Category is required")
+      .matches(/^[a-zA-Z0-9- ]+$/, "Only letters, numbers & spaces allowed."),
 
     description: Yup.string()
       .trim()
       .required("Description is required")
-      .min(50, "Description must be at least 50 characters")
+      .min(450, "Description must be at least 500 characters")
       .max(1000, "Description can't exceed 1000 characters"),
+    // .matches(
+    //   /^[a-zA-Z0-9 _-]+$/,
+    //   "Only letters, numbers, space, _ and - allowed."
+    // ),
 
     short_description: Yup.string()
       .trim()
       .required("Short Description is required")
-      .min(20, "Short Description must be at least 20 characters")
-      .max(200, "Short Description can't exceed 200 characters"),
+      .min(100, "Short Description must be at least 20 characters")
+      .max(220, "Short Description can't exceed 200 characters"),
+    // .matches(
+    //   /^[a-zA-Z0-9 _-]+$/,
+    //   "Only letters, numbers, space, _ and - allowed."
+    // ),
 
     tags: Yup.array()
       .required("Tags are required")
@@ -116,51 +167,20 @@ const AddNewProducts = () => {
       .of(
         Yup.string()
           .trim()
-          .min(1, "Tag cannot be empty")
+          .min(2, "Tag must be at least 2 characters")
+          .max(20, "Tag must be at most 20 characters")
+          .matches(
+            /^[a-zA-Z0-9_-]+$/,
+            "Only letters, numbers, _ and - allowed."
+          )
           .required("Tag cannot be empty")
       ),
   });
 
-  useEffect(() => {
-    fetch("/categories.json")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  }, []);
-
-  // Submit Function
-
-  // handle 4 image file to link (promise)
-  const handleImageUpload = async (files) => {
-    const uploadImages = files.map((image) => imageUpload(image));
-
-    try {
-      const imageUrls = await Promise.all(uploadImages);
-      return imageUrls;
-    } catch (error) {
-      console.error("Image upload failed:", error);
-      return [];
-    }
-  };
-
-  // async function handleImageUpload(files) {
-  //   const uploadPromises = files.map((file) => imageUpload(file));
-
-  //   try {
-  //     const results = await Promise.allSettled(uploadPromises);
-  //     const imageUrls = results
-  //       .filter((result) => result.status === "fulfilled")
-  //       .map((result) => result.value);
-
-  //     console.log("Successfully uploaded images:", imageUrls);
-  //     return imageUrls;
-  //   } catch (error) {
-  //     console.error("Image upload failed:", error);
-  //     return [];
-  //   }
-  // }
-
   const handleSubmit = async (values, { setSubmitting }) => {
-    const mainImageUrl = values.image ? await imageUpload(values.image) : null;
+    const mainImageUrl = values.main_image
+      ? await imageUpload(values.main_image)
+      : null;
 
     if (values.additionalImages.length !== 4) {
       toast.error("You must upload 4 additional images.");
@@ -170,7 +190,9 @@ const AddNewProducts = () => {
 
     const uploadedImageUrls = await handleImageUpload(values.additionalImages);
 
-    console.table("Form Data:", {
+    delete values.main_image;
+
+    const product_info = {
       ...values,
       sold_by: user?.displayName,
       vendor_info: { name: user?.displayName, email: user?.email },
@@ -178,8 +200,16 @@ const AddNewProducts = () => {
       additionalImages: uploadedImageUrls,
       sold_product: 0,
       rating: 0,
-      timestamp: new Date(),
-    });
+      // timestamp: new Date(),
+    };
+
+    console.table("Form Data:", product_info);
+
+    try {
+      await submit_product_in_DB(product_info);
+    } catch (error) {
+      console.log(error.message);
+    }
 
     setSubmitting(false);
   };
@@ -333,7 +363,7 @@ const AddNewProducts = () => {
                   <Field
                     type="number"
                     name="discounted_percentage"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border rounded outline-0"
                     readOnly
                   />
                 </div>
@@ -374,7 +404,7 @@ const AddNewProducts = () => {
                     accept="image/*"
                     className="w-full p-2 border rounded"
                     onChange={(event) => {
-                      setFieldValue("image", event.currentTarget.files[0]);
+                      setFieldValue("main_image", event.currentTarget.files[0]);
                       const previewImages = URL.createObjectURL(
                         event.currentTarget.files[0]
                       );
