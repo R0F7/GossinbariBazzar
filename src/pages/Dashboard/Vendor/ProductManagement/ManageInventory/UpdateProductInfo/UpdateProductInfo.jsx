@@ -135,7 +135,7 @@ const UpdateProductInfo = () => {
   if (!initialValues) return <p>Loading...</p>;
 
   return (
-    <section>
+    <section className="p-8">
       <Formik
         initialValues={initialValues || {}}
         enableReinitialize

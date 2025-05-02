@@ -52,6 +52,7 @@ import SupportTools from "@/pages/Dashboard/Vendor/SupportTools/SupportTools";
 import VendorGuidelines from "@/pages/Dashboard/Vendor/SupportTools/VendorGuidelines/VendorGuidelines";
 import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
 import UpdateProductInfo from "@/pages/Dashboard/Vendor/ProductManagement/ManageInventory/UpdateProductInfo/UpdateProductInfo";
+import ViewReviews from "@/pages/Dashboard/Vendor/ProductManagement/ViewProductReviews/ViewReviews/ViewReviews";
 
 export const router = createBrowserRouter([
   {
@@ -273,6 +274,10 @@ export const router = createBrowserRouter([
             path: "view-product-reviews",
             element: <ViewProductReviews></ViewProductReviews>,
           },
+          {
+            path:"view-reviews/:id",
+            element:<ViewReviews></ViewReviews>
+          }
         ],
       },
       {

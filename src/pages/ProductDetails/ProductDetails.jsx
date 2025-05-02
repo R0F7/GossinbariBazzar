@@ -704,7 +704,7 @@ const ProductDetails = () => {
                     </p>
                   </div>
                 </div>
-                <div className=" w-[140px] text-end">
+                <div className=" min-w-[130px] text-end">
                   <Rating
                     style={{ maxWidth: 180 }}
                     initialRating={review?.rating}
