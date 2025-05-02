@@ -51,6 +51,7 @@ import BestsellingProducts from "@/pages/Dashboard/Vendor/Analytics/BestsellingP
 import SupportTools from "@/pages/Dashboard/Vendor/SupportTools/SupportTools";
 import VendorGuidelines from "@/pages/Dashboard/Vendor/SupportTools/VendorGuidelines/VendorGuidelines";
 import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
+import UpdateProductInfo from "@/pages/Dashboard/Vendor/ProductManagement/ManageInventory/UpdateProductInfo/UpdateProductInfo";
 
 export const router = createBrowserRouter([
   {
@@ -265,6 +266,10 @@ export const router = createBrowserRouter([
             element: <ManageInventory></ManageInventory>,
           },
           {
+            path: "update-product/:id",
+            element: <UpdateProductInfo></UpdateProductInfo>,
+          },
+          {
             path: "view-product-reviews",
             element: <ViewProductReviews></ViewProductReviews>,
           },
@@ -309,20 +314,20 @@ export const router = createBrowserRouter([
       {
         path: "support-tools",
         element: <SupportTools></SupportTools>,
-        children:[
+        children: [
           {
-            path:"",
-            element:<VendorGuidelines></VendorGuidelines>
+            path: "",
+            element: <VendorGuidelines></VendorGuidelines>,
           },
           {
-            path:"help-and-support",
-            element:<HelpAndSupportX></HelpAndSupportX>
+            path: "help-and-support",
+            element: <HelpAndSupportX></HelpAndSupportX>,
           },
           {
-            path:'notifications',
-            element:<Notifications></Notifications>
-          }
-        ]
+            path: "notifications",
+            element: <Notifications></Notifications>,
+          },
+        ],
       },
     ],
   },

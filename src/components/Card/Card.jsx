@@ -88,7 +88,8 @@ const Card = ({
     (sum, review) => sum + review.rating,
     0
   );
-  const averageRating = totalRatings / reviews.length;
+
+  const averageRating = totalRatings / productReviews.length;
   // console.log(averageRating);
 
   // const handleAddToCard = async (id) => {
@@ -126,12 +127,14 @@ const Card = ({
             src={image}
             alt={title}
           />
-          {discounted_price && (
+          {discounted_price ? (
             <div className="bg-[#C40B0B] text-white w-14 h-14 rounded-full flex items-center justify-center absolute top-4 right-2">
               <h4>-{discount_percent}%</h4>
             </div>
+          ) : (
+            ""
           )}
-          <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu">
+          <div className="flex justify-around bg-[#eeeeee] bg-opacity-50 icon-menu border">
             {wishlist ? (
               <button
                 onClick={(e) => {
@@ -194,7 +197,9 @@ const Card = ({
             <span className="text-[#023e8a] font-semibold text-sm ">
               Sold by:
             </span>{" "}
-            <span className="text-[#4E148C] font-semibold">{vendor_info?.name}</span>
+            <span className="text-[#4E148C] font-semibold">
+              {vendor_info?.name}
+            </span>
           </h4>
           {progress_sold && (
             <div className="w-full bg-[#EEEEEE] h-2 relative mb-1">
@@ -234,17 +239,29 @@ const Card = ({
             />
             <h6 className="text-xs font-bold">{`(${productReviews.length})`}</h6>
           </div>
-          <div className="flex items-center gap-5 my-2.5">
-            <del className="ext-[#919EAB] text-red-600 font-bold text-lg">
-              ${Number.isInteger(price) ? `${price + ".00"}` : price}
-            </del>
-            <h6 className="ext-[#C30B0B] text-[#2E8DD8] font-bold text-lg">
-              $
-              {Number.isInteger(discounted_price)
-                ? `${discounted_price + ".00"}`
-                : discounted_price}
-            </h6>
+
+          <div>
+            {discounted_price > 0 ? (
+              <div className="flex items-center gap-5 my-2.5">
+                <del className="ext-[#919EAB] text-red-600 font-bold text-lg">
+                  ${Number.isInteger(price) ? `${price + ".00"}` : price}
+                </del>
+                <h6 className="ext-[#C30B0B] text-[#2E8DD8] font-bold text-lg">
+                  $
+                  {Number.isInteger(discounted_price)
+                    ? `${discounted_price + ".00"}`
+                    : discounted_price}
+                </h6>
+              </div>
+            ) : (
+              <div className="flex items-center gap-5 my-2.5">
+                <h6 className="ext-[#C30B0B] text-[#2E8DD8] font-bold text-lg">
+                  ${Number.isInteger(price) ? `${price + ".00"}` : price}
+                </h6>
+              </div>
+            )}
           </div>
+
           <button
             onClick={(e) => {
               e.preventDefault();

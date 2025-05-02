@@ -55,7 +55,7 @@ const ProductDetails = () => {
   // console.log(product);
 
   //post review info
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: post_review_info } = useMutation({
     mutationFn: async (review_info) => {
       const { data } = await axiosCommon.post("/review", review_info);
       return data;
@@ -188,7 +188,9 @@ const ProductDetails = () => {
     }
 
     try {
-      const image_url = await imageUpload(image);
+      let image_url = null;
+      if (image) image_url = await imageUpload(image);
+      
       const review_info = {
         product_id: id,
         name,
@@ -202,7 +204,7 @@ const ProductDetails = () => {
       // console.log(review_info);
 
       //save review in db
-      await mutateAsync(review_info);
+      await post_review_info(review_info);
 
       //clear old data
       form.reset();
@@ -306,7 +308,9 @@ const ProductDetails = () => {
               {reviews && reviews.length > 0 ? reviews.length : 0} customer
               review{" "}
             </span>
-            <span className="text-[#637381] border-x px-3">Sold: {product?.sold_product} </span>
+            <span className="text-[#637381] border-x px-3">
+              Sold: {product?.sold_product}{" "}
+            </span>
 
             <span className="text-[#637381]">
               <span className="text-[#919eab]">Sold by:</span>{" "}

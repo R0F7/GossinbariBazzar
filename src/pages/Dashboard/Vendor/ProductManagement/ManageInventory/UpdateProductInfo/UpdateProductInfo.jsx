@@ -1,42 +1,40 @@
 import imageUpload from "@/api/utils";
-import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useGetSecureData from "@/hooks/useGetSecureData";
 import validationSchema from "@/utils/productValiditionSchema";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// import * as Yup from "yup";
+import { useParams } from "react-router-dom";
 
-const AddNewProducts = () => {
+const UpdateProductInfo = () => {
+  const { id } = useParams();
+  const {
+    _id,
+    title = "",
+    image = "",
+    additionalImages = [],
+    total_product = 0,
+    brand_name = "",
+    unit = "",
+    price = 0,
+    discounted_price = 0,
+    discount_percent = 0,
+    category = "",
+    sub_category = "",
+    description = "",
+    short_description = "",
+    tags = ["", "", ""],
+    rating,
+    vendor_info,
+    sold_by,
+    sold_product,
+  } = useGetSecureData("single_product", `/product/${id}`);
   const [categories, setCategories] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-  const [main_image_preview, setMain_image_preview] = useState(null);
-  const { user } = useAuth();
+  const [main_image_preview, setMain_image_preview] = useState("");
   const axiosSecure = useAxiosSecure();
-  // console.log(user.displayName);
-
-  // product input fields
-  // title
-  // image
-  // additionalImages(4)
-  // total_product
-  // brand_name
-  // unit
-  // price
-  // discounted_price
-  // discount_percent
-  // category
-  // sub_category
-  // description
-  // short_description
-  // tags * 3
-
-  // sold_by
-  // vendor_info {name,email}
-  // sold_product
-  // rating -
-  // timestamp
 
   useEffect(() => {
     fetch("/categories.json")
@@ -44,7 +42,38 @@ const AddNewProducts = () => {
       .then((data) => setCategories(data));
   }, []);
 
-  // handle 4 image file to link (promise)
+  useEffect(() => {
+    setMain_image_preview(image);
+    setPreviewImages(additionalImages);
+  }, [image, additionalImages]);
+
+  const { mutateAsync: update_product_info } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosSecure.put("/product", product_info);
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("product update successfully");
+    },
+  });
+
+  const initialValues = {
+    title,
+    main_image: image,
+    additionalImages,
+    total_product,
+    brand_name,
+    unit,
+    price,
+    discounted_price,
+    discount_percent,
+    category,
+    sub_category,
+    description,
+    short_description,
+    tags,
+  };
+
   const handleImageUpload = async (files) => {
     const uploadImages = files.map((image) => imageUpload(image));
 
@@ -57,169 +86,59 @@ const AddNewProducts = () => {
     }
   };
 
-  const { mutateAsync: submit_product_in_DB } = useMutation({
-    mutationFn: async (product_info) => {
-      const { data } = await axiosSecure.put("/product", product_info);
-      return data;
-    },
-    onSuccess: () => {
-      toast.success("product added successfully");
-    },
-  });
-
-  const initialValues = {
-    title: "",
-    main_image: "",
-    additionalImages: [],
-    total_product: 0,
-    brand_name: "",
-    unit: "",
-    price: 0,
-    discounted_price: 0,
-    discount_percent: 0,
-    category: "",
-    sub_category: "",
-    description: "",
-    short_description: "",
-    tags: ["", "", ""],
-  };
-
-  // const validationSchema = Yup.object({
-  //   title: Yup.string()
-  //     .trim()
-  //     .required("Title is required")
-  //     .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
-
-  //   main_image: Yup.mixed()
-  //     .required("Main image is required")
-  //     .test("fileExists", "Main image is required", (value) => {
-  //       return value && value instanceof File;
-  //     }),
-
-  //   additionalImages: Yup.mixed()
-  //     .required("Additional images are required")
-  //     .test("fileCount", "Exactly 4 images are required", (value) => {
-  //       return value && value.length === 4;
-  //     })
-  //     .test("allAreFiles", "All must be valid image files", (value) => {
-  //       return (
-  //         value &&
-  //         Array.from(value).every(
-  //           (file) => file instanceof File && file.type.startsWith("image/")
-  //         )
-  //       );
-  //     }),
-
-  //   total_product: Yup.number()
-  //     .required("Total Product is required")
-  //     .positive("Value must be positive")
-  //     .integer("Value must be an integer"),
-
-  //   brand_name: Yup.string()
-  //     .trim()
-  //     .required("Brand Name is required")
-  //     .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
-
-  //   unit: Yup.string()
-  //     .trim()
-  //     .required("Unit is required")
-  //     .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
-
-  //   price: Yup.number()
-  //     .required("Price is required")
-  //     .positive("Value must be positive")
-  //     .integer("Value must be an integer"),
-
-  //   discounted_price: Yup.number().nullable().min(0, "Value must be 0 or more"),
-  //   // .positive("Value must be positive"),
-
-  //   category: Yup.string()
-  //     .required("Category is required")
-  //     .notOneOf([""], "Please select a valid category"),
-
-  //   sub_category: Yup.string()
-  //     .trim()
-  //     .required("Sub Category is required")
-  //     .matches(/^[a-zA-Z0-9- ]+$/, "Only letters, numbers & spaces allowed."),
-
-  //   description: Yup.string()
-  //     .trim()
-  //     .required("Description is required")
-  //     .min(450, "Description must be at least 450 characters")
-  //     .max(1000, "Description can't exceed 1000 characters"),
-  //   // .matches(
-  //   //   /^[a-zA-Z0-9 _-]+$/,
-  //   //   "Only letters, numbers, space, _ and - allowed."
-  //   // ),
-
-  //   short_description: Yup.string()
-  //     .trim()
-  //     .required("Short Description is required")
-  //     .min(100, "Short Description must be at least 100 characters")
-  //     .max(220, "Short Description can't exceed 220 characters"),
-  //   // .matches(
-  //   //   /^[a-zA-Z0-9 _-]+$/,
-  //   //   "Only letters, numbers, space, _ and - allowed."
-  //   // ),
-
-  //   tags: Yup.array()
-  //     .required("Tags are required")
-  //     .length(3, "Exactly 3 tags are required")
-  //     .of(
-  //       Yup.string()
-  //         .trim()
-  //         .min(2, "Tag must be at least 2 characters")
-  //         .max(20, "Tag must be at most 20 characters")
-  //         .matches(
-  //           /^[a-zA-Z0-9_-]+$/,
-  //           "Only letters, numbers, _ and - allowed."
-  //         )
-  //         .required("Tag cannot be empty")
-  //     ),
-  // });
-
   const handleSubmit = async (values, { setSubmitting }) => {
-    const mainImageUrl = values.main_image
-      ? await imageUpload(values.main_image)
-      : null;
+    let mainImageUrl = values.main_image;
 
-    if (values.additionalImages.length !== 4) {
-      toast.error("You must upload 4 additional images.");
-      setSubmitting(false);
-      return;
+    if (typeof values.main_image === "object") {
+      mainImageUrl = values.main_image
+        ? await imageUpload(values.main_image)
+        : null;
     }
 
-    const uploadedImageUrls = await handleImageUpload(values.additionalImages);
+    let uploadedImageUrls = values.additionalImages;
 
-    delete values.main_image;
+    if (
+      Array.isArray(values.additionalImages) &&
+      values.additionalImages.length &&
+      typeof values.additionalImages[0] === "object"
+    ) {
+      uploadedImageUrls = await handleImageUpload(values.additionalImages);
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    const { main_image, ...restValues } = values;
 
     const product_info = {
-      ...values,
-      sold_by: user?.displayName,
-      vendor_info: { name: user?.displayName, email: user?.email },
+      _id,
+      ...restValues,
       image: mainImageUrl,
       additionalImages: uploadedImageUrls,
-      sold_product: 0,
-      rating: 0,
-      // timestamp: new Date(),
+      sold_by,
+      vendor_info,
+      rating,
+      sold_product,
     };
 
     console.table("Form Data:", product_info);
 
     try {
-      await submit_product_in_DB(product_info);
+      await update_product_info(product_info);
+      // toast.success("Product updated successfully!");
     } catch (error) {
-      console.log(error.message);
+      toast.error("Product update failed!");
+      console.error(error.message);
     }
 
     setSubmitting(false);
   };
 
+  if (!initialValues) return <p>Loading...</p>;
+
   return (
-    <div className="max-w-5xl mx-auto bg-white p-6 my-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Add New Product</h2>
+    <section>
       <Formik
-        initialValues={initialValues}
+        initialValues={initialValues || {}}
+        enableReinitialize
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
@@ -503,18 +422,18 @@ const AddNewProducts = () => {
 
                 <div>
                   {/* <label className="block text-sm font-semibold">
-                    Sub-category
-                  </label>
-                  <Field
-                    // as="select"
-                    type="text"
-                    name="sub_category"
-                    className="w-full p-2 border rounded"
-                  >
-                    <option value="">Select Sub-category</option>
-                    <option value="mobiles">Mobiles</option>
-                    <option value="laptops">Laptops</option>
-                  </Field> */}
+                        Sub-category
+                      </label>
+                      <Field
+                        // as="select"
+                        type="text"
+                        name="sub_category"
+                        className="w-full p-2 border rounded"
+                      >
+                        <option value="">Select Sub-category</option>
+                        <option value="mobiles">Mobiles</option>
+                        <option value="laptops">Laptops</option>
+                      </Field> */}
                   <label
                     htmlFor="sub_category"
                     className="block text-sm font-semibold"
@@ -631,8 +550,8 @@ const AddNewProducts = () => {
           </Form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 };
 
-export default AddNewProducts;
+export default UpdateProductInfo;
