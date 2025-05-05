@@ -275,9 +275,9 @@ export const router = createBrowserRouter([
             element: <ViewProductReviews></ViewProductReviews>,
           },
           {
-            path:"view-reviews/:id",
-            element:<ViewReviews></ViewReviews>
-          }
+            path: "view-reviews/:id",
+            element: <ViewReviews></ViewReviews>,
+          },
         ],
       },
       {

@@ -6,8 +6,10 @@ import Image from "../../../../../../assets/empty_reviews_image.png";
 
 const ViewReviews = () => {
   const { id } = useParams();
-  const reviews = useGetSecureData("reviews", `/reviews/${id}`);
+  const { data: reviews } = useGetSecureData("reviews", `/reviews/${id}`);
   const navigate = useNavigate();
+
+  // TODO: Implement date-based sorting for reviews
 
   return (
     <section className="bg-[#EFF1F6] min-h-screen p-8">

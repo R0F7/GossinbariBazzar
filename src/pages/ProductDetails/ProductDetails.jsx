@@ -119,7 +119,7 @@ const ProductDetails = () => {
     }
   }, [find_product, quantity]);
 
-  const handleAddToCard = async (id) => {
+  const handleAddToCard = async (item) => {
     // const updateCount = count + 1;
     // setCount(updateCount);
 
@@ -131,13 +131,15 @@ const ProductDetails = () => {
     }
 
     const product_info = {
-      id,
+      id:item._id,
       order_owner_info: {
         name: user?.displayName,
         email: user?.email,
       },
+      vendor_info: item.vendor_info,
       quantity: count,
     };
+
 
     await addProductInCard(product_info);
 
@@ -373,7 +375,7 @@ const ProductDetails = () => {
           </div>
           <div className="flex flex-col space-y-2 mb-6">
             <button
-              onClick={() => handleAddToCard(product?._id)}
+              onClick={() => handleAddToCard(product)}
               className="g-[#76c893] bg-[#0077b6] text-white py-2.5 rounded-lg font-bold -[65%] shadow active:scale-95 scale-100 duration-200"
               disabled={count === product?.total_product}
             >

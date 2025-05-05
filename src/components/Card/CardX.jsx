@@ -170,7 +170,7 @@ const CardX = ({ item, handleAddToCard, handleWishlist, reviews }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            handleAddToCard(_id);
+            handleAddToCard(item);
           }}
           className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-[65%] py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200 hover:bg-yellow-500 hover:text-[#1a1a2e] hover:shadow-md hover:shadow-yellow-300 transition-all"
         >

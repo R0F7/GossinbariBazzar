@@ -127,6 +127,12 @@ const Checkout = () => {
         : findProduct.price,
       name: findProduct.title,
       image: findProduct.image,
+
+
+
+
+      // find a way add vendor_info in product
+      // vendor_info: findProduct.vendor_info,
     };
   });
 

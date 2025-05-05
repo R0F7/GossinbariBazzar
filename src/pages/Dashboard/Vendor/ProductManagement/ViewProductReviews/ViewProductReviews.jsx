@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 
 const ViewProductReviews = () => {
   const { user } = useAuth();
-  const products = useGetSecureData(
+  const { data: products } = useGetSecureData(
     "vendor_products",
     `/vendor-products/${user?.email}`
   );
-  const reviewsCollections = useGetSecureData("get reviews", `/reviews`);
+  const { data: reviewsCollections } = useGetSecureData(
+    "get reviews",
+    `/reviews`
+  );
 
   const data = products.map((product) => {
     const productReviews = reviewsCollections.filter(

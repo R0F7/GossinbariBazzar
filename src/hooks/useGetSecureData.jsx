@@ -4,7 +4,12 @@ import useAxiosSecure from "./useAxiosSecure";
 const useGetSecureData = (key, path) => {
   const axiosSecure = useAxiosSecure();
 
-  const { data = [] } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+    error,
+  } = useQuery({
     queryKey: [key, path],
     queryFn: async () => {
       const { data } = await axiosSecure.get(path);
@@ -13,7 +18,7 @@ const useGetSecureData = (key, path) => {
     enabled: !!path,
   });
 
-  return data;
+  return { data, isLoading, refetch, error };
 };
 
 export default useGetSecureData;

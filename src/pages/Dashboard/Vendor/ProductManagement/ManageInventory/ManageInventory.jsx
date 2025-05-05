@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ManageInventory = () => {
   const { user } = useAuth();
-  const data = useGetSecureData(
+  const { data } = useGetSecureData(
     "vendor_products",
     `/vendor-products/${user?.email}`
   );

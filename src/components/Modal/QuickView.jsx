@@ -44,7 +44,7 @@ const QuickView = ({
   isDialogOpen,
   closeDialog,
   item,
-  productReviews =[],
+  productReviews = [],
   averageRating,
 }) => {
   const [count, setCount] = useState(1);
@@ -67,6 +67,7 @@ const QuickView = ({
     tags,
     discount_percent,
     short_description,
+    vendor_info,
   } = item;
 
   const settings = {
@@ -89,17 +90,17 @@ const QuickView = ({
   }, [find_product, quantity]);
 
   const handleAddToCard = async () => {
-
     if (quantity === count) {
       return toast.error("if you want more! update quantity");
     }
 
     const product_info = {
-      id:_id,
+      id: _id,
       order_owner_info: {
         name: user?.displayName,
         email: user?.email,
       },
+      vendor_info,
       quantity: count,
     };
 

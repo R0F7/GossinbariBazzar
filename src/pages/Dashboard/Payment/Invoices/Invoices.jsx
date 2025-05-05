@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 
 const Invoices = () => {
   const { user } = useAuth();
-  const orderData = useGetSecureData("orderData", `/order-data/${user?.email}`);
+  const { data: orderData } = useGetSecureData(
+    "orderData",
+    `/order-data/${user?.email}`
+  );
   console.log(orderData);
   const columnHelper = createColumnHelper();
 

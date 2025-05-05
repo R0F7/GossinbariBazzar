@@ -266,7 +266,8 @@ const Card = ({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation(); // Prevent the click event from propagating to the Link
-              handleAddToCard(_id);
+              // handleAddToCard(_id);
+              handleAddToCard(item);
             }}
             className="flex items-center justify-center gap-2 bg-[#2E8DD8] text-white w-full py-2 rounded-md text-sm font-bold active:scale-95 scale-100 duration-200"
           >

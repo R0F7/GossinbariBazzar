@@ -10,6 +10,12 @@ import { useParams } from "react-router-dom";
 
 const UpdateProductInfo = () => {
   const { id } = useParams();
+  const { data } = useGetSecureData("single_product", `/product/${id}`);
+  const [categories, setCategories] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const [main_image_preview, setMain_image_preview] = useState("");
+  const axiosSecure = useAxiosSecure();
+
   const {
     _id,
     title = "",
@@ -30,11 +36,7 @@ const UpdateProductInfo = () => {
     vendor_info,
     sold_by,
     sold_product,
-  } = useGetSecureData("single_product", `/product/${id}`);
-  const [categories, setCategories] = useState([]);
-  const [previewImages, setPreviewImages] = useState([]);
-  const [main_image_preview, setMain_image_preview] = useState("");
-  const axiosSecure = useAxiosSecure();
+  } = data;
 
   useEffect(() => {
     fetch("/categories.json")

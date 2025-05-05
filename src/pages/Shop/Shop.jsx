@@ -80,16 +80,18 @@ const Shop = () => {
   // console.log(reviews);
 
   const updateQuantity = (product) => (product ? product.quantity + 1 : 1);
-  const handleAddToCard = async (id) => {
-    const find_product = cartAddedProducts.find((product) => product.id === id);
+  const handleAddToCard = async (item) => {
+    const find_product = cartAddedProducts.find((product) => product.id === item._id);
     const quantity = updateQuantity(find_product);
+    // console.log(find_product);
 
     const product_info = {
-      id,
+      id:item._id,
       order_owner_info: {
         name: user?.displayName,
         email: user?.email,
       },
+      vendor_info: item.vendor_info,
       quantity,
     };
 
