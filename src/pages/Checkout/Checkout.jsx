@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import {
   FaAngleLeft,
@@ -42,6 +42,7 @@ const Checkout = () => {
     isFetched,
     cart_products,
     shippingDetails,
+    setShippingDetails,
   } = useAuth();
   const [deliveryMethod, setDeliveryMethod] = useState({
     category: "Normal",
@@ -68,8 +69,35 @@ const Checkout = () => {
     },
   });
 
+  useEffect(() => {
+    if (!deliveryMethod?.category) return;
+
+    const today = new Date();
+    const daysToAdd =
+      deliveryMethod.category === "RapidX"
+        ? 2
+        : deliveryMethod.category === "Express"
+        ? 4
+        : 7;
+
+    const estimatedDelivery = new Date(
+      today.getTime() + daysToAdd * 24 * 60 * 60 * 1000
+    );
+
+    setShippingDetails((prev) => ({
+      ...prev,
+      shippedDate: today.toISOString(),
+      estimatedDelivery: estimatedDelivery.toISOString(),
+    }));
+  }, [deliveryMethod?.category, setShippingDetails]);
+
   if (isFetched && cartAddedProducts.length < 1) return <Navigate to="/shop" />;
   if (Object.keys(shippingDetails).length < 1) return <Navigate to="/cart" />;
+
+  // if (Object.keys(shippingDetails).length <= 1) {
+  //   setShippingDetails({});
+  //   return <Navigate to="/cart" />;
+  // }
 
   const name = user?.displayName.split(" ") || [];
 
@@ -127,16 +155,10 @@ const Checkout = () => {
         : findProduct.price,
       name: findProduct.title,
       image: findProduct.image,
-
-
-
-
-      // find a way add vendor_info in product
-      // vendor_info: findProduct.vendor_info,
     };
   });
 
-  console.log(newCart);
+  // console.log(newCart);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -192,6 +214,8 @@ const Checkout = () => {
     status: "Order Placed",
     createdAt: new Date(),
   };
+
+  console.log(shippingDetails);
 
   const handleFocus = (field) => {
     setFocusedField(field);

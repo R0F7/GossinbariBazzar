@@ -2,23 +2,32 @@ import Table from "@/components/Table/Table";
 import useAuth from "@/hooks/useAuth";
 import useGetSecureData from "@/hooks/useGetSecureData";
 import { createColumnHelper } from "@tanstack/react-table";
-import { TbFileInvoice } from "react-icons/tb";
+// import { TbFileInvoice } from "react-icons/tb";
 import ReceivedOrderDetails from "./ReceivedOrderDetails/ReceivedOrderDetails";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import { BiCalendar } from "react-icons/bi";
 
 const OrdersReceived = () => {
   const { user } = useAuth();
   const columnHelper = createColumnHelper();
   const axiosSecure = useAxiosSecure();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+  let times = {};
+  if (startDate && endDate) times = { startDate, endDate };
 
   const { data: ordersData, refetch } = useGetSecureData(
     "order_data_for_order_received",
-    `/orders-receive/${user?.email}`
+    `/orders-receive/${user?.email}?startDate=${times.startDate}&endDate=${times.endDate}`
   );
   // console.log(ordersData)
 
+  // update_vendor_status
   const { mutateAsync: update_vendor_status } = useMutation({
     mutationFn: async ({ row, vendor_status }) => {
       const { data } = await axiosSecure.patch(
@@ -32,6 +41,29 @@ const OrdersReceived = () => {
       refetch();
     },
   });
+
+  const filterOrders = (orders, statusList) => {
+    return orders.filter((order) => statusList.includes(order.status));
+  };
+
+  // const filterProcessingOrder = (order,statusList)=>{
+  //   return order.filter((order)=> )
+  // }
+
+  const pendingOrder = filterOrders(ordersData, [
+    "Order Placed",
+    "Processing",
+    "Shipped",
+    "Out for Delivery",
+  ]);
+
+  const newOrders = filterOrders(ordersData, ["Order Placed"]);
+  const completedOrder = filterOrders(ordersData, ["Delivered"]);
+  const cancelledOrder = filterOrders(ordersData, ["Cancelled"]);
+  const processingOrder =
+    ordersData?.filter((order) =>
+      order.vendor_status?.some((v) => v.status === "Processing")
+    )?.length || 0;
 
   const columns = [
     columnHelper.accessor("orderID", {
@@ -190,7 +222,10 @@ const OrdersReceived = () => {
             onChange={handleChange}
             className="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
           >
+            {/* <option value="Cancelled">Cancelled</option> */}
+            <option value="New">New</option>
             <option value="Order Placed">Order Placed</option>
+            <option value="Mark as Processing">Mark as Processing</option>
             <option value="Processing">Processing</option>
             {/* <option value="Shipped">Shipped</option>
             <option value="Out for Delivery">Out for Delivery</option>
@@ -209,18 +244,61 @@ const OrdersReceived = () => {
       },
     }),
 
-    columnHelper.accessor("", {
-      cell: () => (
-        <button>
-          <TbFileInvoice />
-        </button>
-      ),
-      header: "Invoice",
-    }),
+    // TODO:Invoice
+    // columnHelper.accessor("", {
+    //   cell: () => (
+    //     <button>
+    //       <TbFileInvoice />
+    //     </button>
+    //   ),
+    //   header: "Invoice",
+    // }),
   ];
 
   return (
     <section className="p-8">
+      <h1 className="font-semibold text-4xl mb-8">Order Received History</h1>
+
+      <div className="border-b pb-4 mb-6 flex items-center justify-between">
+        <ul className="flex gap-16 text-lg font-semibold">
+          <li>All Order({ordersData.length})</li>
+          <li>Total New Orders({newOrders.length - processingOrder})</li>
+          <li>Pending({pendingOrder.length})</li>
+          <li>Completed({completedOrder.length})</li>
+          <li>Cancelled({cancelledOrder.length})</li>
+        </ul>
+
+        <div className="flex items-center mr-10 gap-3">
+          <div className="relative">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(new Date(date).toISOString())}
+              placeholderText="Select Start Date"
+              dateFormat="yyyy-MM-dd"
+              maxDate={new Date()}
+              className="border border-[#0DAFD8] text-[#0DAFD8] font-medium outline-[#0DAFD8] shadow-sm w-[152px] pl-9 py-1.5 rounded-full placeholder:text-sm placeholder:text-[#333842] placeholder:font-normal"
+            />
+            <BiCalendar className="absolute top-[11px] left-3.5 text-[#0DAFD8]" />{" "}
+          </div>
+          <span className="font-semibold text-[#333842]">To</span>
+          <div className="relative">
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(new Date(date).toISOString())}
+              placeholderText="Select End Date"
+              dateFormat="yyyy-MM-dd"
+              minDate={startDate}
+              disabled={!startDate}
+              className="border border-[#3885F4] text-[#3885F4] font-medium disabled:border-gray-300 outline-[#3885F4] shadow-sm w-[150px] pl-9 py-1.5 rounded-full placeholder:text-sm placeholder:text-[#333842] disabled:placeholder:text-[#AAB0BA] placeholder:font-normal disabled:cursor-not-allowed"
+            />
+            <BiCalendar
+              className={`absolute top-[11px] left-3.5 ${
+                startDate ? "text-[#3885F4]" : "text-gray-500"
+              }`}
+            />{" "}
+          </div>
+        </div>
+      </div>
       <Table data={ordersData} columns={columns}></Table>
     </section>
   );

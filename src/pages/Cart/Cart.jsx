@@ -88,6 +88,12 @@ const Cart = ({ dashboard }) => {
     await deleteProduct(product.cartProduct);
   };
 
+  const generateTrackingNumber = () => {
+    const shortTime = Date.now().toString().slice(-6);
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `GBX-${shortTime}${randomDigits}`;
+  };
+
   const total_price = cart_products.reduce((total, product) => {
     //way 1
     // const priceToAdd = product.discounted_price * product.cartProduct.quantity || product.price * product.cartProduct.quantity;
@@ -158,12 +164,18 @@ const Cart = ({ dashboard }) => {
     const union = form.union.value;
     const village = form.village.value;
     const locationDetails = form.locationDetails.value;
+    const shippedDate = new Date();
+
     const shippingInfo = {
+      shipmentID: `SHIP-${Date.now()}`,
       union,
       village,
       locationDetails,
-      timestamp: new Date(),
-      // products:cart_products.map((product)=>product.cartProduct),
+      carrier: "GB Express",
+      trackingNumber: generateTrackingNumber(),
+      shippedDate: shippedDate.toISOString(),
+      // estimatedDelivery,
+      status: "In Transit", //Delivered, Delayed, Out for Delivery, Pending, Cancelled
     };
     setShippingDetails(shippingInfo);
     setAddressToggle(false);
@@ -461,7 +473,10 @@ const Cart = ({ dashboard }) => {
             <Link to="/checkout">
               <button
                 onClick={(e) => {
-                  if (Object.keys(shippingDetails).length === 0) {
+                  if (
+                    Object.keys(shippingDetails).length === 0 ||
+                    Object.keys(shippingDetails).length <= 1
+                  ) {
                     setAddressToggle(true);
                     e.preventDefault();
                     e.stopPropagation();
