@@ -59,7 +59,7 @@ import { Button } from "@/components/ui/button";
 import FAQ from "./FAQ/FAQ";
 import LiveChat from "./LiveChat/LiveChat";
 import useAuth from "@/hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const HelpAndSupport = () => {
   const { user } = useAuth();
@@ -70,9 +70,14 @@ const HelpAndSupport = () => {
   // // "admin@example.com"
   // === "admin@example.com";
 
+  const { x } = useParams();
+
   return (
     <section className="max-w-4xl mx-auto mt-10 p-5">
-      <Tabs defaultValue="faq" className="w-full">
+      <Tabs
+        defaultValue={x === "live-chat" ? "live-chat" : "faq"}
+        className="w-full"
+      >
         <TabsList className="flex justify-center mb-4 py-5">
           <TabsTrigger value="faq">FAQ</TabsTrigger>
           <TabsTrigger value="live-chat">Live Chat</TabsTrigger>

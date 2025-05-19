@@ -7,21 +7,25 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { TbFileInvoice } from "react-icons/tb";
+import { useMemo, useState } from "react";
+import ReturnInfoModal from "./ReturnInfoModal";
+// import { TbFileInvoice } from "react-icons/tb";
 
 const OrderDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const columnHelper = createColumnHelper();
+  const [isOpen, setIsOpen] = useState(false);
+  const [productSummery, setProductSummery] = useState(null);
 
-  const { data: orderDetails = {} } = useQuery({
+  const { data: orderDetails = {}, refetch } = useQuery({
     queryKey: ["orderDetails", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/order-details/${id}`);
       return data;
     },
   });
-    console.log(orderDetails);
+  // console.log(orderDetails);
 
   const {
     orderID,
@@ -62,22 +66,82 @@ const OrderDetails = () => {
       header: "Quantity",
     }),
     columnHelper.accessor((row) => row.quantity * row.price, {
-      cell: (info) => 
-      <span>${info.getValue()}</span>,
+      cell: (info) => <span>${info.getValue()}</span>,
       header: "Total",
     }),
-    columnHelper.accessor("", {
-      cell: () => (
-        <button>
-          <TbFileInvoice />
-        </button>
-      ),
-      header: "Invoice",
+
+    columnHelper.accessor("status", {
+      cell: (info) => {
+        const value = info.getValue();
+        const row = info.row.original;
+        const returns = row.returns;
+
+        const productSummary = {
+          id: row.id,
+          quantity: row.quantity,
+          price: row.price,
+          image: row.image,
+        };
+
+        if (value !== "Delivered") return null;
+
+        if (returns.length > 0) {
+          return (
+            <span className="text-green-600 text-sm font-medium bg-green-100 border border-green-300 rounded px-3 py-2 inline-block">
+              Returned
+            </span>
+          );
+        }
+
+        return (
+          <button
+            onClick={() => {
+              setIsOpen(true);
+              setProductSummery(productSummary);
+            }}
+            className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95"
+          >
+            Return Item
+          </button>
+        );
+      },
+      header: "",
     }),
+
+    // TODO:Invoice
+    // columnHelper.accessor("", {
+    //   cell: () => (
+    //     <button>
+    //       <TbFileInvoice />
+    //     </button>
+    //   ),
+    //   header: "Invoice",
+    // }),
   ];
 
+  // const enrichedProducts = useMemo(() => {
+  //   return (orderDetails.products || []).map((product) => ({
+  //     ...product,
+  //     status: orderDetails.status,
+  //   }));
+  // }, [orderDetails.products, orderDetails.status]);
+
+  const enrichedProducts = useMemo(() => {
+    return (orderDetails.products || []).map((product) => {
+      const productReturns = (orderDetails.returns || []).filter(
+        (ret) => ret.productSummery?.id === product.id
+      );
+
+      return {
+        ...product,
+        status: orderDetails.status,
+        returns: productReturns,
+      };
+    });
+  }, [orderDetails.products, orderDetails.returns, orderDetails.status]);
+
   const table = useReactTable({
-    data: orderDetails.products || [],
+    data: enrichedProducts,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -90,9 +154,13 @@ const OrderDetails = () => {
             Visual tracking of the order
           </h4>
           <p className="text-gray-500">
-            <span  className={`${
+            <span
+              className={`${
                 status === "Order Placed" && "text-pink-300 font-bold"
-              }`}>✅ Order Placed</span>
+              }`}
+            >
+              ✅ Order Placed
+            </span>
             <span className="text-white"> → </span>{" "}
             <span
               className={`${
@@ -102,20 +170,30 @@ const OrderDetails = () => {
               🕒 Processing
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "Shipped" && "text-pink-300 font-bold"}`}>
+            <span
+              className={`${status === "Shipped" && "text-pink-300 font-bold"}`}
+            >
               📦 Shipped
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "Out for Delivery" && "text-pink-300 font-bold"}`}>
+            <span
+              className={`${
+                status === "Out for Delivery" && "text-pink-300 font-bold"
+              }`}
+            >
               🚚 Out for Delivery
             </span>
             <span className="text-white"> → </span>{" "}
-            <span className={`${status === "Delivered" && "text-pink-300 font-bold"}`}>
+            <span
+              className={`${
+                status === "Delivered" && "text-pink-300 font-bold"
+              }`}
+            >
               ✅ Delivered
             </span>
           </p>
         </div>
-        
+
         <div className="flex justify-center pt-10">
           <table className="w-full text-left border-collapse border-[#3b4a6b]">
             <thead className="">
@@ -222,6 +300,13 @@ const OrderDetails = () => {
             </table>
           </div>
         </div>
+
+        <ReturnInfoModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          data={{ ...orderDetails, productSummery }}
+          refetch={refetch}
+        ></ReturnInfoModal>
       </div>
     </section>
   );

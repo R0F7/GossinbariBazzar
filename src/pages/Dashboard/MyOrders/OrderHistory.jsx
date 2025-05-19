@@ -94,7 +94,7 @@ const OrderHistory = () => {
                 ? "status-shipped"
                 : text === "Out for Deliver"
                 ? "status-out-for-delivery"
-                : text === "Completed"
+                : text === "Delivered"
                 ? "status-completed"
                 : ""
             }`}

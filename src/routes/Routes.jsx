@@ -239,6 +239,10 @@ export const router = createBrowserRouter([
             element: <HelpAndSupport></HelpAndSupport>,
           },
           {
+            path: ":x",
+            element: <HelpAndSupport></HelpAndSupport>,
+          },
+          {
             path: "notifications",
             element: <Notifications></Notifications>,
           },
