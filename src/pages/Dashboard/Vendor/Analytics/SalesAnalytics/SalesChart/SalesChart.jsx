@@ -57,6 +57,7 @@ const SalesChart = ({ orders, groupBy, dateRange, chartType }) => {
 
     const labels = Object.keys(grouped).sort((a, b) => {
       if (groupBy === "daily") return new Date(a) - new Date(b);
+      if (groupBy === "monthly") return new Date("1 " + a) - new Date("1 " + b);
       return a.localeCompare(b);
     });
 

@@ -305,9 +305,10 @@ const AddNewProducts = () => {
                       if (value > 0 && discounted_price > 0) {
                         const percent =
                           ((value - discounted_price) / value) * 100;
+                        const finalDiscount = Math.min(percent, 99.99);
                         setFieldValue(
                           "discount_percent",
-                          Number(percent.toFixed(2))
+                          Number(finalDiscount.toFixed(2))
                         );
                       } else {
                         setFieldValue("discount_percent", 0);
@@ -339,9 +340,10 @@ const AddNewProducts = () => {
 
                       if (price > 0 && value > 0) {
                         const percent = ((price - value) / price) * 100;
+                        const finalDiscount = Math.min(percent, 99.99);
                         setFieldValue(
                           "discount_percent",
-                          Number(percent.toFixed(2))
+                          Number(finalDiscount.toFixed(2))
                         );
                       } else {
                         setFieldValue("discount_percent", 0);

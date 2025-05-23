@@ -19,6 +19,8 @@ import {
 import SalesChart from "./SalesChart/SalesChart";
 import useAuth from "@/hooks/useAuth";
 import useGetSecureData from "@/hooks/useGetSecureData";
+import TopProducts from "./TopProducts/TopProducts";
+import SalesByCategoryChart from "./SalesByCategoryChart/SalesByCategoryChart";
 
 const SalesAnalytics = () => {
   const oneMonthAgo = new Date();
@@ -35,6 +37,8 @@ const SalesAnalytics = () => {
   const [groupBy, setGroupBy] = useState("monthly");
   const { user } = useAuth();
   const [chartType, setChartType] = useState("line");
+  const [categoryChartType, setCategoryChartType] = useState("pie");
+  const [topProductSortBy, setTopProductSortBy] = useState("units");
 
   const formattedRange = `${format(range[0].startDate, "MMM d")} - ${format(
     range[0].endDate,
@@ -59,6 +63,7 @@ const SalesAnalytics = () => {
 
   return (
     <section className="bg-[#FAFAFC] h-full p-4 pb-0">
+      {/* heading */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold mb-2 text-[#1C1B20]">
           Sales Analytics
@@ -86,7 +91,7 @@ const SalesAnalytics = () => {
 
           <Select value={groupBy} onValueChange={setGroupBy}>
             <SelectTrigger className="w-[120px] border-l-0 rounded-l-none focus:ring-0">
-              <SelectValue placeholder="Theme" />
+              <SelectValue placeholder="Group By" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="daily">Daily</SelectItem>
@@ -98,6 +103,7 @@ const SalesAnalytics = () => {
         </div>
       </div>
 
+      {/* Total Sales Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         {/* Total Sales Amount */}
         <div className="flex items-center gap-3.5 p-4 bg-white rounded-md shadow">
@@ -140,31 +146,87 @@ const SalesAnalytics = () => {
         </div>
       </div>
 
-      {/* Sales Over Time Chart */}
-      <div className="w-1/2">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Sales Over Time</h2>
-          <select
-            className="border p-2 rounded"
-            value={chartType}
-            onChange={(e) => setChartType(e.target.value)}
-          >
-            <option value="line">Line Chart</option>
-            <option value="bar">Bar Chart</option>
-          </select>
-        </div>
+      <div className="flex gap-6">
+        {/* Sales Trend Chart */}
+        <div className="w-1/2">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">
+              Sales Over Time
+              {/* Sales Trend Chart */}
+            </h2>
+            <Select value={chartType} onValueChange={setChartType}>
+              <SelectTrigger className="w-[130px] focus:ring-0">
+                <SelectValue placeholder="Chart" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="line">Line Chart</SelectItem>
+                <SelectItem value="bar">Bar Chart</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        {!isLoading && (
-          <SalesChart
+          {!isLoading && (
+            <SalesChart
+              orders={orders}
+              groupBy={groupBy}
+              dateRange={{
+                startDate: range[0].startDate,
+                endDate: range[0].endDate,
+              }}
+              chartType={chartType}
+            />
+          )}
+        </div>
+        
+        {/* categories pie chart */}
+        <div className="w-1/2">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">
+              Sales by Category
+              {/* Sales Trend Chart */}
+            </h2>
+            <Select
+              value={categoryChartType}
+              onValueChange={setCategoryChartType}
+            >
+              <SelectTrigger className="w-[130px] focus:ring-0">
+                <SelectValue placeholder="Chart" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="pie">Pie Chart</SelectItem>
+                <SelectItem value="bar">Bar Chart</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <SalesByCategoryChart
             orders={orders}
-            groupBy={groupBy}
+            chartType={categoryChartType}
             dateRange={{
               startDate: range[0].startDate,
               endDate: range[0].endDate,
             }}
-            chartType={chartType}
-          />
-        )}
+          ></SalesByCategoryChart>
+        </div>
+      </div>
+
+      {/* Top Performing Products */}
+      <div className="-1/2 mt-4">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">Top Performing Products</h2>
+          <Select value={topProductSortBy} onValueChange={setTopProductSortBy}>
+            <SelectTrigger className="w-[150px] focus:ring-0">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="units">Units Sold</SelectItem>
+              <SelectItem value="revenue">Total Revenue</SelectItem>
+              <SelectItem value="score">Weighted Score</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <TopProducts orders={orders} sortBy={topProductSortBy}></TopProducts>
       </div>
     </section>
   );

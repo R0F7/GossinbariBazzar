@@ -95,18 +95,13 @@ const Cart = ({ dashboard }) => {
   };
 
   const total_price = cart_products.reduce((total, product) => {
-    //way 1
-    // const priceToAdd = product.discounted_price * product.cartProduct.quantity || product.price * product.cartProduct.quantity;
-    // return total + priceToAdd;
+    const priceToAdd =
+      (product.discounted_price || product.price) *
+      product.cartProduct.quantity;
 
-    //way 2
-    const price =
-      product.discounted_price !== undefined
-        ? product.discounted_price * product.cartProduct.quantity
-        : product.price * product.cartProduct.quantity;
-    return total + price;
+    return total + priceToAdd;
   }, 0);
-  //   console.log(total_price);
+  // console.log(total_price);
 
   const percentage = ((total_price / 1000) * 100).toFixed(2);
   // console.log(percentage);
@@ -474,8 +469,8 @@ const Cart = ({ dashboard }) => {
               <button
                 onClick={(e) => {
                   if (
-                    Object.keys(shippingDetails).length === 0 ||
-                    Object.keys(shippingDetails).length <= 1
+                    shippingDetails.union === undefined ||
+                    shippingDetails.village === undefined
                   ) {
                     setAddressToggle(true);
                     e.preventDefault();

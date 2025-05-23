@@ -106,28 +106,33 @@ const Checkout = () => {
     0
   );
 
-  const subtotal_price = cart_products.reduce(
-    (total, product) => total + product.price * product.cartProduct.quantity,
-    0
-  );
+  // const discounted_price = cart_products.reduce(
+  //   (total, product) =>
+  //     total +
+  //     Number(product.discounted_price) * Number(product.cartProduct.quantity),
+  //   0
+  // );
+  // console.log(discounted_price);
 
   const discounted_price = cart_products.reduce(
     (total, product) =>
-      total + product?.discounted_price * product?.cartProduct?.quantity,
+      total +
+      (product.price - (product.discounted_price || product.price)) *
+        Number(product.cartProduct.quantity),
     0
   );
 
-  const discount_percent = (
-    ((subtotal_price - discounted_price) / subtotal_price) *
-    100
-  ).toFixed(2);
+  const subtotal_price = cart_products.reduce(
+    (total, product) =>
+      total + Number(product.price) * Number(product.cartProduct.quantity),
+    0
+  );
 
-  const total_price =
-    discounted_price > 0
-      ? discounted_price + deliveryMethod.price
-      : subtotal_price + deliveryMethod.price;
+  const discount_percent = ((discounted_price / subtotal_price) * 100).toFixed(
+    2
+  );
 
-  //   console.log(total_price);
+  const total_price = subtotal_price - discounted_price + deliveryMethod.price;
 
   // const newCart = cartAddedProducts.map((item) => {
   //   const findProduct = cart_products.find(
@@ -155,6 +160,7 @@ const Checkout = () => {
         : findProduct.price,
       name: findProduct.title,
       image: findProduct.image,
+      category: findProduct.category,
     };
   });
 
@@ -572,8 +578,8 @@ const Checkout = () => {
             <div className="flex justify-between items-center">
               <p className="text-[#A7A7A7]">Discount</p>
               <p className="text-[#212B36]">
-                - $ {subtotal_price - discounted_price} (%
-                {isNaN(discount_percent) ? 0 : discount_percent})
+                - $ {discounted_price} (
+                {isNaN(discount_percent) ? 0 : discount_percent}%)
               </p>
             </div>
             <div className="flex justify-between items-center">

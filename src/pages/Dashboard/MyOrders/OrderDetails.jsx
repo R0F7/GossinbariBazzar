@@ -25,7 +25,7 @@ const OrderDetails = () => {
       return data;
     },
   });
-  // console.log(orderDetails);
+  console.log(orderDetails.products);
 
   const {
     orderID,
@@ -34,6 +34,7 @@ const OrderDetails = () => {
     paymentInfo,
     shippingDetails,
     createdAt,
+    products = [],
   } = orderDetails;
 
   const columns = [
@@ -87,8 +88,9 @@ const OrderDetails = () => {
 
         if (returns.length > 0) {
           return (
-            <span className="text-green-600 text-sm font-medium bg-green-100 border border-green-300 rounded px-3 py-2 inline-block">
-              Returned
+            <span className="text-green-600 text-sm font-medium bg-green-100 border border-green-300 rounded w-[100px] py-1 text-center inline-block">
+              {/* Returned */}
+              {returns[0].status}
             </span>
           );
         }
@@ -145,6 +147,11 @@ const OrderDetails = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  // const sub_total = products.reduce((sum, product) => {
+  //   return sum + product.price * product.quantity;
+  // }, 0);
+
   //   flex items-center flex-row-reverse gap-5
   return (
     <section className="g-gradient-to-r rom-[#f8f9fa] o-[#e9ecef] bg-gradient-to-r from-[#141e30] to-[#243b55] h-full px-6 pb-6">

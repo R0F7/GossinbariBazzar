@@ -69,15 +69,15 @@ const OrderHistory = () => {
       header: "Items Count",
     }),
 
-    // columnHelper.accessor("total_price", {
-    //   cell: (info) => <span>${info.getValue()}</span>,
-    //   header: "Total Price",
-    // }),
-    {
-      accessorKey: "total_price",
-      header: "Total Price",
+    columnHelper.accessor("total_price", {
       cell: (info) => <span>${info.getValue()}</span>,
-    },
+      header: "Total Price",
+    }),
+    // {
+    //   accessorKey: "total_price",
+    //   header: "Total Price",
+    //   cell: (info) => <span>${info.getValue()}</span>,
+    // },
 
     columnHelper.accessor("status", {
       cell: (info) => {
