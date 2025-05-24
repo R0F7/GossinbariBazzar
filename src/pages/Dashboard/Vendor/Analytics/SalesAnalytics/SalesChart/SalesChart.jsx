@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const SalesChart = ({ orders, groupBy, dateRange, chartType }) => {
+const SalesChart = ({ orders, groupBy, dateRange, chartType, dataQty }) => {
   const { startDate, endDate } = dateRange;
 
   const chartData = useMemo(() => {
@@ -55,13 +55,25 @@ const SalesChart = ({ orders, groupBy, dateRange, chartType }) => {
       grouped[key] = (grouped[key] || 0) + order.total_price;
     });
 
-    const labels = Object.keys(grouped).sort((a, b) => {
+    let labels = Object.keys(grouped).sort((a, b) => {
       if (groupBy === "daily") return new Date(a) - new Date(b);
       if (groupBy === "monthly") return new Date("1 " + a) - new Date("1 " + b);
       return a.localeCompare(b);
     });
 
-    const data = labels.map((label) => grouped[label]);
+    let data = labels.map((label) => grouped[label]);
+
+    // fake data generator
+    // for (let index = 0; index < 100; index++) {
+    //   labels.push(`2025-05-${index <= 9 ? `0${index}` : index}`);
+    //   data.push(Math.floor(Math.random() * 10000) + 1);
+    // }
+
+    if (data.length >= dataQty) {
+      data = data.slice(-dataQty);
+      labels = labels.slice(-dataQty);
+    }
+    // console.log(data.length);
 
     return {
       labels,
@@ -76,7 +88,7 @@ const SalesChart = ({ orders, groupBy, dateRange, chartType }) => {
         },
       ],
     };
-  }, [orders, groupBy, startDate, endDate, chartType]);
+  }, [orders, dataQty, chartType, startDate, endDate, groupBy]);
 
   const ChartComponent = chartType === "bar" ? Bar : Line;
 
@@ -124,6 +136,7 @@ SalesChart.propTypes = {
   groupBy: PropTypes.string,
   dateRange: PropTypes.object,
   chartType: PropTypes.string,
+  dataQty: PropTypes.number,
 };
 
 export default SalesChart;
