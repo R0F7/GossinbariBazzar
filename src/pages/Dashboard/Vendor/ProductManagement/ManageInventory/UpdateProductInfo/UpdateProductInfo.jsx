@@ -24,6 +24,7 @@ const UpdateProductInfo = () => {
     total_product = 0,
     brand_name = "",
     unit = "",
+    cost_price = 0,
     price = 0,
     discounted_price = 0,
     discount_percent = 0,
@@ -66,6 +67,7 @@ const UpdateProductInfo = () => {
     total_product,
     brand_name,
     unit,
+    cost_price,
     price,
     discounted_price,
     discount_percent,
@@ -193,7 +195,7 @@ const UpdateProductInfo = () => {
             {/* Pricing & Stock Section */}
             <div className="bg-gray-100 p-4 rounded-lg">
               <h3 className="text-lg font-semibold mb-3">Pricing & Stock</h3>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="grid grid-cols-6 gap-4">
                 {/* Unit */}
                 <div>
                   <label className="block text-sm font-semibold">
@@ -207,6 +209,23 @@ const UpdateProductInfo = () => {
                   />
                   <ErrorMessage
                     name="unit"
+                    component="p"
+                    className="text-red-500 text-sm"
+                  />
+                </div>
+
+                {/* cost price */}
+                <div>
+                  <label className="block text-sm font-semibold">
+                    Cost Price
+                  </label>
+                  <Field
+                    type="number"
+                    name="cost_price"
+                    className="w-full p-2 border rounded"
+                  />
+                  <ErrorMessage
+                    name="cost_price"
                     component="p"
                     className="text-red-500 text-sm"
                   />

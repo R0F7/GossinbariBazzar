@@ -46,6 +46,10 @@ const validationSchema = Yup.object({
     .required("Unit is required")
     .matches(/^[a-zA-Z0-9 ]+$/, "Only letters, numbers & spaces allowed."),
 
+  cost_price: Yup.number()
+    .required("Cost Price is required")
+    .positive("Value must be positive"),
+
   price: Yup.number()
     .required("Price is required")
     .positive("Value must be positive")
@@ -58,15 +62,10 @@ const validationSchema = Yup.object({
       }
     ),
 
-  // discounted_price: Yup.number().nullable().min(0, "Value must be 0 or more"),
-  // .positive("Value must be positive"),
   discounted_price: Yup.number()
-    .required("Discounted price is required")
-    .positive("Discounted price must be positive")
-    .test("is-less-than-price", "Too high for price", function (value) {
-      const { price } = this.parent;
-      return !value || !price || value <= price;
-    }),
+  .required("Discounted price is required")
+  .min(0, "Discounted price must be 0 or more")
+  .max(Yup.ref('price'), "Discounted price cannot exceed original price"),
 
   category: Yup.string()
     .required("Category is required")

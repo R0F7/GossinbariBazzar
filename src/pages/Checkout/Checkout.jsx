@@ -155,9 +155,11 @@ const Checkout = () => {
       // id: item.id,
       // quantity: item.quantity,
       unit: findProduct.unit,
-      price: findProduct.discounted_price
-        ? findProduct.discounted_price
-        : findProduct.price,
+      // price: findProduct.discounted_price
+      //   ? findProduct.discounted_price
+      //   : findProduct.price,
+      price: findProduct.price,
+      discounted_price: findProduct.discounted_price,
       name: findProduct.title,
       image: findProduct.image,
       category: findProduct.category,

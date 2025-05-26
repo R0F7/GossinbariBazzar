@@ -30,6 +30,7 @@ import {
   FaUserPlus,
   FaUsers,
 } from "react-icons/fa";
+import StatCard from "@/components/StatCard/StatCard";
 
 const SalesAnalytics = () => {
   const oneMonthAgo = new Date();
@@ -138,44 +139,36 @@ const SalesAnalytics = () => {
       {/* Total Sales Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         {/* Total Sales Amount */}
-        <div className="flex items-center gap-3.5 p-4 bg-white rounded-md shadow">
-          <FiDollarSign className="text-green-600 w-6 h-6" />
-          <div>
-            <p className="text-sm text-gray-500 mb-0.5">Total Sales</p>
-            <p className="text-lg font-semibold">${total_sale}</p>
-          </div>
-        </div>
+        <StatCard
+          icon={FiDollarSign}
+          iconColor={"text-green-600"}
+          title="Total Sales"
+          value={`$${total_sale}`}
+        ></StatCard>
 
         {/* Total Number of Orders */}
-        <div className="flex items-center gap-3.5 p-4 bg-white rounded-md shadow">
-          <FiShoppingCart className="text-blue-600 w-6 h-6" />
-          <div>
-            <p className="text-sm text-gray-500 mb-0.5">Total Orders</p>
-            <p className="text-lg font-semibold">{orders.length}</p>
-          </div>
-        </div>
+        <StatCard
+          icon={FiShoppingCart}
+          iconColor={"text-blue-600"}
+          title="Total Orders"
+          value={orders.length}
+        ></StatCard>
 
         {/* Order Return Rate */}
-        <div className="flex items-center gap-3.5 p-4 bg-white rounded-md shadow">
-          <FiRepeat className="text-yellow-500 w-6 h-6" />
-          <div>
-            <p className="text-sm text-gray-500 mb-0.5">Return Rate</p>
-            <p className="text-lg font-semibold">
-              {return_rate ? return_rate.toFixed(2) : 0}%
-            </p>
-          </div>
-        </div>
+        <StatCard
+          icon={FiRepeat}
+          iconColor={"text-yellow-500"}
+          title={"Return Rate"}
+          value={`${return_rate ? return_rate.toFixed(2) : 0}%`}
+        ></StatCard>
 
         {/* Average Order Value */}
-        <div className="flex items-center gap-3.5 p-4 bg-white rounded-md shadow">
-          <FiBarChart2 className="text-purple-600 w-6 h-6" />
-          <div>
-            <p className="text-sm text-gray-500 mb-0.5">Avg Order Value</p>
-            <p className="text-lg font-semibold">
-              ${avg_order_value ? avg_order_value.toFixed(2) : 0}
-            </p>
-          </div>
-        </div>
+        <StatCard
+          icon={FiBarChart2}
+          iconColor={"text-purple-600"}
+          title={"Avg Order Value"}
+          value={`$${avg_order_value ? avg_order_value.toFixed(2) : 0}`}
+        ></StatCard>
       </div>
 
       <div className="flex gap-6">
