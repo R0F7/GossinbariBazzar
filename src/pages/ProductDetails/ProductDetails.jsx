@@ -68,6 +68,14 @@ const ProductDetails = () => {
     },
   });
 
+  // update rating
+  const { mutateAsync: update_product_info } = useMutation({
+    mutationFn: async (product_info) => {
+      const { data } = await axiosCommon.put("/product", product_info);
+      return data;
+    },
+  });
+
   //get specific reviews
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", product?._id],
@@ -131,7 +139,7 @@ const ProductDetails = () => {
     }
 
     const product_info = {
-      id:item._id,
+      id: item._id,
       order_owner_info: {
         name: user?.displayName,
         email: user?.email,
@@ -140,16 +148,15 @@ const ProductDetails = () => {
       quantity: count,
     };
 
-
     await addProductInCard(product_info);
 
     // console.log(product_info);
   };
 
   const totalRatings = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = totalRatings / reviews.length;
-  // const averageRating =Math.round(totalRatings / reviews.length);
+  const averageRating = parseFloat((totalRatings / reviews.length).toFixed(2));
   // console.log(averageRating);
+  // const averageRating =Math.round(totalRatings / reviews.length);
 
   const ratingCount = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   reviews.forEach((review) => {
@@ -188,11 +195,17 @@ const ProductDetails = () => {
       setLoading(false);
       return toast.error("rating is required");
     }
+    
+    const averageRating = parseFloat(
+      ((totalRatings + rating) / (reviews.length + 1)).toFixed(2)
+    );
+    console.log(averageRating);
+    
 
     try {
       let image_url = null;
       if (image) image_url = await imageUpload(image);
-      
+
       const review_info = {
         product_id: id,
         name,
@@ -206,7 +219,11 @@ const ProductDetails = () => {
       // console.log(review_info);
 
       //save review in db
-      await post_review_info(review_info);
+      const save_review = await post_review_info(review_info);
+
+      if (save_review.acknowledged) {
+        await update_product_info({ _id: id, rating: averageRating });
+      }
 
       //clear old data
       form.reset();

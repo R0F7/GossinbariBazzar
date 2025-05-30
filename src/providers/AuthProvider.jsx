@@ -29,6 +29,8 @@ const AuthProvider = ({ children }) => {
   const [category, setCategory] = useState("");
   const axiosCommon = useAxiosCommon();
   const [shippingDetails, setShippingDetails] = useState({});
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
 
   //sign in with google
   const signInWithGoogle = () => {
@@ -182,7 +184,7 @@ const AuthProvider = ({ children }) => {
   // });
 
   //get cartAddedProducts
-  
+
   const {
     data: cartAddedProducts = [],
     refetch: cartAddedProductsRefetch,
@@ -314,6 +316,10 @@ const AuthProvider = ({ children }) => {
     setCategory,
     shippingDetails,
     setShippingDetails,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
   };
 
   return (
