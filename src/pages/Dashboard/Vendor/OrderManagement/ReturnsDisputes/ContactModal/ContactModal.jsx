@@ -31,7 +31,7 @@ const ContactModal = ({ isOpen, setIsOpen, data }) => {
             >
               <ul className="flex justify-evenly">
                 <li className="flex flex-col items-center">
-                  <Link to="/dashboard/support/live-chat">
+                  <Link to="/dashboard/support-tools/help-and-support/live-chat">
                     <IoChatboxEllipsesOutline
                       title="Live Chat"
                       className="w-12 h-12 border p-2.5 rounded-full text-gray-600 hover:text-white hover:bg-blue-500 hover:border-blue-500 transition-all duration-300 ease-in-out transform hover:scale-110 cursor-pointer"

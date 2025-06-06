@@ -4,7 +4,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useGetSecureData from "@/hooks/useGetSecureData";
 import { useMutation } from "@tanstack/react-query";
 import { createColumnHelper } from "@tanstack/react-table";
-import { useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 import { BiCalendar } from "react-icons/bi";
@@ -30,11 +30,26 @@ const ShippingUpdates = () => {
   );
   // console.log(ordersData);
 
-  const { mutateAsync: update_shipping_status } = useMutation({
-    mutationFn: async ({ row, newStatus }) => {
-      const { data } = axiosSecure.patch(`/shipping-status-update/${row._id}`, {
-        newStatus,
-      });
+  // const { mutateAsync: update_shipping_status } = useMutation({
+  //   mutationFn: async ({ row, newStatus }) => {
+  //     const { data } = axiosSecure.patch(`/shipping-status-update/${row._id}`, {
+  //       newStatus,
+  //     });
+  //     return data;
+  //   },
+  //   onSuccess: () => {
+  //     toast.success("status update successfully");
+  //     refetch();
+  //   },
+  // });
+
+  // // update_order_status
+  const { mutateAsync: update_order_status } = useMutation({
+    mutationFn: async ({ row, status }) => {
+      const { data } = await axiosSecure.patch(
+        `/order-status-update/${row._id}`,
+        { status }
+      );
       return data;
     },
     onSuccess: () => {
@@ -120,35 +135,54 @@ const ShippingUpdates = () => {
       header: "Estimated Delivery",
     }),
 
-    columnHelper.accessor("shippingDetails.status", {
+    // columnHelper.accessor("shippingDetails.status", {
+    columnHelper.accessor("status", {
       header: "Status",
       cell: (info) => {
         let currentStatus = info.getValue();
         const row = info.row.original;
-        // console.log(row);
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [value, setValue] = React.useState(currentStatus);
+        // console.log(value);
 
         const handleChange = async (e) => {
-          const newStatus = e.target.value;
+          const status = e.target.value;
+          setValue(currentStatus);
 
           try {
-            await update_shipping_status({ row, newStatus });
+            // await update_shipping_status({ row, newStatus });
+            await update_order_status({ row, status });
           } catch (error) {
             console.error("Failed to update status", error);
           }
         };
+        const x = ["Shipped", "Cancelled", "Out for Delivery", "Delivered"];
+        // console.log(row);
 
         return (
           <div className="relative w-fit">
             <select
-              defaultValue={currentStatus}
+              defaultValue={value}
               onChange={handleChange}
               className="appearance-none border border-gray-300 rounded-md px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             >
-              <option value="In Transit">In Transit</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Out for Delivery">Out for Delivery</option>
-              <option value="Pending">Pending</option>
-              <option value="Cancelled">Cancelled</option>
+              {/* <option value="In Transit">In Transit</option> */}
+              {/* <option value="Pending">Pending</option> */}
+              <option value="Shipped" disabled={x.indexOf(currentStatus) >= 1}>
+                Shipped
+              </option>
+              <option value="Cancelled" disabled={x.indexOf(currentStatus) >= 2}>
+                Cancelled
+              </option>
+              <option
+                value="Out for Delivery"
+                disabled={x.indexOf(currentStatus) >= 3}
+              >
+                Out for Delivery
+              </option>
+              <option value="Delivered" disabled={x.indexOf(currentStatus) >= 4}>
+                Delivered
+              </option>
             </select>
             <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
               <MdOutlineKeyboardArrowDown />

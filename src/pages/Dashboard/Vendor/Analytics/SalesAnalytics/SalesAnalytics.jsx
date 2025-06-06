@@ -61,8 +61,9 @@ const SalesAnalytics = () => {
     `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${range[0].endDate}`
   );
 
-  const total_sale = orders.reduce((acc, order) => {
-    return acc + Number(order.total_price);
+  const products = orders.flatMap((o) => o.products);
+  const total_sale = products.reduce((acc, order) => {
+    return acc + Number(order.discounted_price || order.price) * order.quantity;
   }, 0);
 
   const returned_orders = orders.filter(

@@ -2,21 +2,21 @@
 // import FAQ from "./FAQ/FAQ";
 
 // import ChatComponent from "./LiveChat/LiveChat";
-// import SupportCenter from "./SupportCenter/SupportCenter";
+// // import SupportCenter from "./SupportCenter/SupportCenter";
 
 // const HelpAndSupport = () => {
 //   const { user } = useAuth();
-//   // const isAdmin =
-//   // user?.email
-//   // // "admin@example.com"
-//   // === "admin@example.com"; // Replace with actual admin email
+//   const isAdmin =
+//   user?.email
+//   // "admin@example.com"
+//   === "admin@example.com"; // Replace with actual admin email
 
 //   if(!user) return <h1>loading...</h1>
 
 //   return (
 //     <section className="p-6">
-//       {/* <div className="flex">
-//         <div className="w-1/2">
+//       <div className="flex">
+//         {/* <div className="w-1/2">
 //           <h1 className="text-3xl mb-6 font-semibold">
 //             FAQs{" "}
 //             <span className="text-base font-normal">
@@ -24,27 +24,29 @@
 //             </span>
 //           </h1>
 //           <FAQ></FAQ>
-//         </div>
-//         <div className="w-1/2">
-//           <div className="w-[500px] m-auto">
+//         </div> */}
+//         <div className="w-full">
+//           <div className="-[500px] m-auto">
 //             <h1 className="text-3xl mb-6 font-semibold">
 //             Live Chat{" "}
 //             <span className="text-base font-normal">
 //               (9am - 6pm, Monday to Friday)
 //             </span>
 //           </h1>
-//             <ChatComponent userType="User" email={user?.email} />
-//             {/* <hr /> */}
-//             {/* <h2>Admin Panel</h2> */}
-//              {/* <ChatComponent userType="Admin" email={'wwwrafikhan075@gmail.com'}/> */}
-//           {/* </div> */}
-//         {/* // </div> */}
-//       {/* // </div> */}
-//       {/* <div>{isAdmin ? <AdminPanel /> : <ChatRoom user={user} />}</div> */}
-
-//       <div>
-//         <SupportCenter></SupportCenter>
+//        <div className="flex">
+//        <ChatComponent userType="User" email={user?.email} />
+//             <hr />
+//             <h2>Admin Panel</h2>
+//              <ChatComponent userType="Admin" email={'wwwrafikhan075@gmail.com'}/>
+//        </div>
+//           </div>
+//          </div>
 //       </div>
+//        {/* <div>{isAdmin ? <AdminPanel /> : <ChatRoom user={user} />}</div> */}
+
+//       {/* <div>
+//         <SupportCenter></SupportCenter>
+//       </div> */}
 //     </section>
 //   );
 // };
@@ -62,15 +64,16 @@ import useAuth from "@/hooks/useAuth";
 import { Link, useParams } from "react-router-dom";
 
 const HelpAndSupport = () => {
-  const { user } = useAuth();
+  const { user,user_info_DB } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { x } = useParams();
   // const isAdmin =
   // user?.email
   // // "admin@example.com"
   // === "admin@example.com";
 
-  const { x } = useParams();
+  console.log(user_info_DB.role);
 
   return (
     <section className="max-w-4xl mx-auto mt-10 p-5">
@@ -81,13 +84,13 @@ const HelpAndSupport = () => {
         <TabsList className="flex justify-center mb-4 py-5">
           <TabsTrigger value="faq">FAQ</TabsTrigger>
           <TabsTrigger value="live-chat">Live Chat</TabsTrigger>
-          <TabsTrigger value="order-issues">Order Issues & Returns</TabsTrigger>
+          {user_info_DB.role === "customer" &&<TabsTrigger value="order-issues">Order Issues & Returns</TabsTrigger>}
           <TabsTrigger value="account-security">Account & Security</TabsTrigger>
         </TabsList>
 
         {/* FAQ */}
         <TabsContent value="faq">
-          <FAQ></FAQ>
+          <FAQ role={user_info_DB.role}></FAQ>
         </TabsContent>
 
         {/* live chat  */}
@@ -98,7 +101,9 @@ const HelpAndSupport = () => {
                 <strong>Support Hours:</strong> (9 AM - 6 PM, Monday to Friday)
               </span>
 
-              <LiveChat userType="User" email={user?.email} />
+              {/* <LiveChat userType="User" email={user?.email} />
+              <LiveChat userType="Vendor" email={user?.email} /> */}
+              <LiveChat userType={user_info_DB.role} email={user?.email} />
               {/* <div>{isAdmin ? <AdminPanel /> : <ChatRoom user={user} />}</div> */}
               {/* <hr /> */}
               {/* <h2>Admin Panel</h2> */}

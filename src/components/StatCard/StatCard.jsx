@@ -22,7 +22,7 @@ const StatCard = ({ icon: Icon, iconColor, title, value, info }) => {
             </>
           )}
         </div>
-        <p className="text-lg font-semibold">{value}</p>
+        <p className={`text-lg font-semibold ${iconColor}`}>{value}</p>
       </div>
     </div>
   );

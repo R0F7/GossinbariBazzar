@@ -49,6 +49,10 @@ const LiveChat = ({ email, userType }) => {
 
   // console.log(messages);
 
+  // const x = messages.filter(m => m.userType !== "Admin")
+  // const y = messages.filter(m => m.userType !== "Vendor")
+
+
   return (
     <div className="chat-container max-w-full h-[500px] flex flex-col border border-[#ccc] rounded-lg overflow-hidden g-[#f5f5f5]">
       <div className="chat-box flex-grow overflow-y-auto p-2.5">

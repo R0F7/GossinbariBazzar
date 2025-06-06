@@ -50,7 +50,7 @@ import RevenueReports from "@/pages/Dashboard/Vendor/Analytics/RevenueReports/Re
 import BestsellingProducts from "@/pages/Dashboard/Vendor/Analytics/BestsellingProducts/BestsellingProducts";
 import SupportTools from "@/pages/Dashboard/Vendor/SupportTools/SupportTools";
 import VendorGuidelines from "@/pages/Dashboard/Vendor/SupportTools/VendorGuidelines/VendorGuidelines";
-import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
+// import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
 import UpdateProductInfo from "@/pages/Dashboard/Vendor/ProductManagement/ManageInventory/UpdateProductInfo/UpdateProductInfo";
 import ViewReviews from "@/pages/Dashboard/Vendor/ProductManagement/ViewProductReviews/ViewReviews/ViewReviews";
 
@@ -238,10 +238,10 @@ export const router = createBrowserRouter([
             path: "",
             element: <HelpAndSupport></HelpAndSupport>,
           },
-          {
-            path: ":x",
-            element: <HelpAndSupport></HelpAndSupport>,
-          },
+          // {
+          //   path: ":x",
+          //   element: <HelpAndSupport></HelpAndSupport>,
+          // },
           {
             path: "notifications",
             element: <Notifications></Notifications>,
@@ -329,8 +329,8 @@ export const router = createBrowserRouter([
             element: <VendorGuidelines></VendorGuidelines>,
           },
           {
-            path: "help-and-support",
-            element: <HelpAndSupportX></HelpAndSupportX>,
+            path: "help-and-support/:x",
+            element: <HelpAndSupport></HelpAndSupport>,
           },
           {
             path: "notifications",

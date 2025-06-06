@@ -42,7 +42,9 @@ const RevenueReports = () => {
   const { user } = useAuth();
   const { data: orders } = useGetSecureData(
     "get-order-for-revenue",
-    `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${range[0].endDate}`
+    `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${
+      range[0].endDate
+    }&&revenueCalculation=${true}`
   );
   // console.log(orders);
 

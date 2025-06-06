@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-const MonthlyRevenueChart = ({ revenue }) => {
+const MonthlyRevenueChart = ({ revenue ={} }) => {
   const { lastRevenue, currentRevenue, growthPercentage } = revenue;
 
   const data = {
@@ -84,7 +84,7 @@ const MonthlyRevenueChart = ({ revenue }) => {
 };
 
 MonthlyRevenueChart.propTypes = {
-  revenue: PropTypes.object,
+  revenue: PropTypes.any,
 };
 
 export default MonthlyRevenueChart;

@@ -130,7 +130,7 @@ const BestsellingProducts = () => {
     )
       return;
 
-    if (oneCall.current) {
+    // if (oneCall.current) {
       setRange([
         {
           startDate: oneMonthAgo,
@@ -141,7 +141,7 @@ const BestsellingProducts = () => {
       setCategory("");
       setMinPrice(0);
       setMaxPrice(storeMaxPrice);
-    }
+    // }
   };
 
   const columns = [

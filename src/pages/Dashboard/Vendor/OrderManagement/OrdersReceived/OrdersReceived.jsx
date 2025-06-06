@@ -7,7 +7,7 @@ import ReceivedOrderDetails from "./ReceivedOrderDetails/ReceivedOrderDetails";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { BiCalendar } from "react-icons/bi";
 
@@ -25,7 +25,7 @@ const OrdersReceived = () => {
     "order_data_for_order_received",
     `/orders-receive/${user?.email}?startDate=${times.startDate}&endDate=${times.endDate}`
   );
-  // console.log(ordersData)
+  // console.log(ordersData);
 
   // update_vendor_status
   const { mutateAsync: update_vendor_status } = useMutation({
@@ -42,16 +42,44 @@ const OrdersReceived = () => {
     },
   });
 
+  // update_order_status
+  const { mutateAsync: update_order_status } = useMutation({
+    mutationFn: async ({ row, status }) => {
+      const { data } = await axiosSecure.patch(
+        `/order-status-update/${row._id}`,
+        { status }
+      );
+      return data;
+    },
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  useEffect(() => {
+    const updateStatus = async () => {
+      const x = ["Order Placed", "Processing"];
+      ordersData.forEach((row) => {
+        const vendor_status = row?.vendor_status || [];
+
+        const allSameStatus = vendor_status.every(
+          (item) => item.status === vendor_status[0].status
+        );
+
+        if (allSameStatus && x.includes(row.status)) {
+          update_order_status({ row, status: vendor_status[0]?.status });
+        }
+      });
+    };
+
+    updateStatus();
+  }, [ordersData, update_order_status]);
+
   const filterOrders = (orders, statusList) => {
     return orders.filter((order) => statusList.includes(order.status));
   };
 
-  // const filterProcessingOrder = (order,statusList)=>{
-  //   return order.filter((order)=> )
-  // }
-
   const pendingOrder = filterOrders(ordersData, [
-    "Order Placed",
     "Processing",
     "Shipped",
     "Out for Delivery",
@@ -60,10 +88,6 @@ const OrdersReceived = () => {
   const newOrders = filterOrders(ordersData, ["Order Placed"]);
   const completedOrder = filterOrders(ordersData, ["Delivered"]);
   const cancelledOrder = filterOrders(ordersData, ["Cancelled"]);
-  const processingOrder =
-    ordersData?.filter((order) =>
-      order.vendor_status?.some((v) => v.status === "Processing")
-    )?.length || 0;
 
   const columns = [
     columnHelper.accessor("orderID", {
@@ -75,69 +99,6 @@ const OrdersReceived = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Customer Name",
     }),
-
-    // products
-    // {
-    //   header: "Products",
-    //   cell: (info) => {
-    //     const products = info.row.original.products || [];
-    //     return (
-    //       <div className="space-y-2">
-    //         {products.map((p, idx) => (
-    //           <div key={idx} className="flex items-center gap-2">
-    //             <img src={p.image} alt={p.name} className="w-8 h-8 rounded" />
-    //             <span>{p.name}</span>
-    //           </div>
-    //         ))}
-    //       </div>
-    //     );
-    //   },
-    // },
-
-    // unit
-    // {
-    //   header: "Unit",
-    //   cell: (info) => {
-    //     const products = info.row.original.products || [];
-    //     return (
-    //       <div>
-    //         {products.map((p, idx) => (
-    //           <h6 key={idx}>{p.unit}</h6>
-    //         ))}
-    //       </div>
-    //     );
-    //   },
-    // },
-
-    // Quantities
-    // {
-    //   header: "Quantities",
-    //   cell: (info) => {
-    //     const products = info.row.original.products || [];
-    //     return (
-    //       <div>
-    //         {products.map((p, idx) => (
-    //           <h6 key={idx}>{p.quantity}</h6>
-    //         ))}
-    //       </div>
-    //     );
-    //   },
-    // },
-
-    // Price
-    // {
-    //   header: "Price",
-    //   cell: (info) => {
-    //     const products = info.row.original.products || [];
-    //     return (
-    //       <div>
-    //         {products.map((p, idx) => (
-    //           <h6 key={idx}>${p.price}</h6>
-    //         ))}
-    //       </div>
-    //     );
-    //   },
-    // },
 
     columnHelper.accessor("total_price", {
       cell: (info) => <span>${info.getValue()}</span>,
@@ -189,7 +150,7 @@ const OrdersReceived = () => {
       cell: (info) => {
         let currentStatus = info.getValue();
         const row = info.row.original;
-        // console.log(row);
+        const main_status = row.status;
 
         const vendorStatusArray = row.vendor_status || [];
 
@@ -210,27 +171,35 @@ const OrdersReceived = () => {
 
           try {
             await update_vendor_status({ row, vendor_status });
-            // console.log("Status updated");
           } catch (error) {
             console.error("Failed to update status", error);
           }
         };
+        const x = ["Order Placed", "Processing", "Shipped"];
 
         return (
-          <select
-            defaultValue={status}
-            onChange={handleChange}
-            className="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          >
-            {/* <option value="Cancelled">Cancelled</option> */}
-            <option value="New">New</option>
-            <option value="Order Placed">Order Placed</option>
-            <option value="Mark as Processing">Mark as Processing</option>
-            <option value="Processing">Processing</option>
-            {/* <option value="Shipped">Shipped</option>
-            <option value="Out for Delivery">Out for Delivery</option>
-            <option value="Delivered">Delivered</option> */}
-          </select>
+          <>
+            {x.includes(main_status) ? (
+              <select
+                defaultValue={status}
+                onChange={handleChange}
+                className={`border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${status === "Shipped" && "appearance-none pointer-events-none w-[127px]"}`}
+              >
+                <option value="Order Placed">Order Placed</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+              </select>
+            ) : (
+              <select
+                value={main_status}
+                className="border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm appearance-none pointer-events-none"
+              >
+                <option value="Cancelled">Cancelled</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            )}
+          </>
         );
       },
     }),
@@ -262,7 +231,7 @@ const OrdersReceived = () => {
       <div className="border-b pb-4 mb-6 flex items-center justify-between">
         <ul className="flex gap-16 text-lg font-semibold">
           <li>All Order({ordersData.length})</li>
-          <li>Total New Orders({newOrders.length - processingOrder})</li>
+          <li>New Orders({newOrders.length})</li>
           <li>Pending({pendingOrder.length})</li>
           <li>Completed({completedOrder.length})</li>
           <li>Cancelled({cancelledOrder.length})</li>
