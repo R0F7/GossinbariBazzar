@@ -7,6 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 import UserMenu from "./Menu/UserMenu/UserMenu";
 import useRole from "@/hooks/useRole";
 import VendorMenu from "./Menu/VendorMenu/VendorMenu";
+import AdminMenu from "./Menu/AdminMenu/AdminMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -31,7 +32,8 @@ const Sidebar = () => {
         <nav>
           {role === "customer" && <UserMenu />}
           {role === "seller" && <VendorMenu />}
-          </nav>
+          {role === "admin" && <AdminMenu />}
+        </nav>
       </div>
       <div>
         <MenuItem

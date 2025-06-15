@@ -53,6 +53,11 @@ import VendorGuidelines from "@/pages/Dashboard/Vendor/SupportTools/VendorGuidel
 // import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
 import UpdateProductInfo from "@/pages/Dashboard/Vendor/ProductManagement/ManageInventory/UpdateProductInfo/UpdateProductInfo";
 import ViewReviews from "@/pages/Dashboard/Vendor/ProductManagement/ViewProductReviews/ViewReviews/ViewReviews";
+import UserManagement from "@/pages/Dashboard/Admin/UserManagement/UserManagement";
+import AllUser from "@/pages/Dashboard/Admin/UserManagement/AllUser/AllUser";
+import AllVendor from "@/pages/Dashboard/Admin/UserManagement/AllVendor/AllVendor";
+import Verification from "@/pages/Dashboard/Admin/UserManagement/Verification/Verification";
+import RolesPermissions from "@/pages/Dashboard/Admin/UserManagement/RolesPermissions/RolesPermissions";
 
 export const router = createBrowserRouter([
   {
@@ -337,6 +342,30 @@ export const router = createBrowserRouter([
             element: <Notifications></Notifications>,
           },
         ],
+      },
+
+      // admin route
+      {
+        path: "user-management",
+        element: <UserManagement></UserManagement>,
+        children:[
+          {
+            path:"",
+            element:<AllUser></AllUser>
+          },
+          {
+            path:"view-all-vendor",
+            element:<AllVendor></AllVendor>
+          },
+          {
+            path:"vendor-verification",
+            element:<Verification></Verification>
+          },
+          {
+            path:"roles-permissions",
+            element:<RolesPermissions></RolesPermissions>
+          },
+        ]
       },
     ],
   },

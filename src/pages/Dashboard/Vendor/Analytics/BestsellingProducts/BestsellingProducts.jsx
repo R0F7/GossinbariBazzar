@@ -28,14 +28,44 @@ const BestsellingProducts = () => {
   const [storeMaxPrice, setStoreMaxPrice] = useState(maxPrice);
 
   const { data: orders = [] } = useGetSecureData(
-    ["best-selling-products", debouncedMinPrice, debouncedMaxPrice, category],
+    [
+      "best-selling-products",
+      debouncedMinPrice,
+      debouncedMaxPrice,
+      category,
+      range,
+    ],
     `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${range[0].endDate}&minPrice=${debouncedMinPrice}&maxPrice=${debouncedMaxPrice}&category=${category}`
+  );
+
+  const { data: getOrders = [] } = useGetSecureData(
+    "best-selling-products-price",
+    `/orders-receive/${user?.email}`
   );
 
   const { data: items = [] } = useGetSecureData(
     "vendor_products",
     `/vendor-products/${user?.email}`
   );
+
+  const prices = getOrders.flatMap((order) =>
+    order.products.map((p) => Number(p.discounted_price || p.price))
+  );
+
+  useEffect(() => {
+    if (!oneCall.current && prices.length > 0) {
+      const max_Price = prices.length ? Math.max(...prices) : 0;
+      setMaxPrice(max_Price);
+    }
+    
+    if (getOrders.length > 0) {
+      const categoriesX = getOrders.flatMap((order) =>
+        order.products.map((item) => item.category)
+      );
+      const uniqueCategories = [...new Set(categoriesX)];
+      setCategories(uniqueCategories);
+    }
+  }, [getOrders, prices, setMaxPrice]);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -92,9 +122,10 @@ const BestsellingProducts = () => {
   useEffect(() => {
     if (!oneCall.current && orders.length > 0 && items.length > 0) {
       let localMaxPrice = 0;
-      const localCategories = [];
+      // const localCategories = [];
 
       orders.forEach((order) => {
+        // console.log(order);
         order.products.forEach((product) => {
           const price = Number(product.price);
           const discounted_price = Number(product.discounted_price);
@@ -104,20 +135,19 @@ const BestsellingProducts = () => {
             localMaxPrice = effectivePrice;
           }
 
-          const category = product.category;
-          if (category && !localCategories.includes(category)) {
-            localCategories.push(category);
-          }
+          // const category = product.category;
+          // if (category && !localCategories.includes(category)) {
+          //   localCategories.push(category);
+          // }
         });
       });
 
       oneCall.current = true;
-      setMaxPrice(localMaxPrice);
+      // setMaxPrice(localMaxPrice);
+      // setCategories(localCategories);
       setStoreMaxPrice(localMaxPrice);
-      setCategories(localCategories);
     }
-  }, [categories, items.length, maxPrice, orders, setMaxPrice]);
-  // console.log(categories);
+  }, [categories, items.length, maxPrice, orders, setMaxPrice, range]);
 
   const restQuery = () => {
     const today = new Date();
@@ -131,16 +161,16 @@ const BestsellingProducts = () => {
       return;
 
     // if (oneCall.current) {
-      setRange([
-        {
-          startDate: oneMonthAgo,
-          endDate: new Date(),
-          key: "selection",
-        },
-      ]);
-      setCategory("");
-      setMinPrice(0);
-      setMaxPrice(storeMaxPrice);
+    setRange([
+      {
+        startDate: oneMonthAgo,
+        endDate: new Date(),
+        key: "selection",
+      },
+    ]);
+    setCategory("");
+    setMinPrice(0);
+    setMaxPrice(storeMaxPrice);
     // }
   };
 

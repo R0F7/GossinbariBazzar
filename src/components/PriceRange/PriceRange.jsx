@@ -1,7 +1,29 @@
 import useAuth from "@/hooks/useAuth";
+import { useRef } from "react";
 
 const PriceRangeSlider = () => {
   const { minPrice, setMinPrice, maxPrice, setMaxPrice } = useAuth();
+  // const x = useRef(false);
+  // let limitPrice
+
+  // if (!x.current) {
+  //   limitPrice = maxPrice;
+  //   x.current = true;
+  // }
+
+  const limitPriceRef = useRef(null);
+
+  // Only initialize if maxPrice is a valid number > 0
+  if (
+    limitPriceRef.current === null &&
+    typeof maxPrice === "number" &&
+    maxPrice > 0
+  ) {
+    limitPriceRef.current = maxPrice;
+  }
+  const limitPrice = limitPriceRef.current ?? 1;
+
+  // const limitPrice = 2000
 
   const handleMinChange = (e) => {
     const value = parseInt(e.target.value);
@@ -28,8 +50,8 @@ const PriceRangeSlider = () => {
         <div
           className="absolute top-1/2 transform -translate-y-1/2 h-1.5 bg-blue-500 rounded"
           style={{
-            left: `${(minPrice / 2000) * 100}%`,
-            width: `${((maxPrice - minPrice) / 2000) * 100}%`,
+            left: `${(minPrice / limitPrice) * 100}%`,
+            width: `${((maxPrice - minPrice) / limitPrice) * 100}%`,
           }}
         ></div>
 
@@ -37,7 +59,7 @@ const PriceRangeSlider = () => {
         <input
           type="range"
           min="0"
-          max="2000"
+          max={limitPrice}
           value={minPrice}
           onChange={handleMinChange}
           className="range-thumb pointer-events-auto absolute w-full z-30 bg-transparent appearance-none"
@@ -47,7 +69,7 @@ const PriceRangeSlider = () => {
         <input
           type="range"
           min="0"
-          max="2000"
+          max={limitPrice}
           value={maxPrice}
           onChange={handleMaxChange}
           className="range-thumb pointer-events-auto absolute w-full z-40 bg-transparent appearance-none"

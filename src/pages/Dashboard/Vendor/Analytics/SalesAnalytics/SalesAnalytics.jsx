@@ -60,6 +60,7 @@ const SalesAnalytics = () => {
     "get-order-for-chart",
     `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${range[0].endDate}`
   );
+console.log(orders);
 
   const products = orders.flatMap((o) => o.products);
   const total_sale = products.reduce((acc, order) => {
