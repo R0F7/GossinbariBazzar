@@ -1,8 +1,9 @@
+import React from 'react';
 
 const Verification = () => {
     return (
         <div>
-            verification
+            Verification
         </div>
     );
 };

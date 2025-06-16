@@ -53,11 +53,26 @@ import VendorGuidelines from "@/pages/Dashboard/Vendor/SupportTools/VendorGuidel
 // import HelpAndSupportX from "@/pages/Dashboard/Vendor/SupportTools/HelpAndSupport/HelpAndSupport";
 import UpdateProductInfo from "@/pages/Dashboard/Vendor/ProductManagement/ManageInventory/UpdateProductInfo/UpdateProductInfo";
 import ViewReviews from "@/pages/Dashboard/Vendor/ProductManagement/ViewProductReviews/ViewReviews/ViewReviews";
+
 import UserManagement from "@/pages/Dashboard/Admin/UserManagement/UserManagement";
 import AllUser from "@/pages/Dashboard/Admin/UserManagement/AllUser/AllUser";
 import AllVendor from "@/pages/Dashboard/Admin/UserManagement/AllVendor/AllVendor";
 import Verification from "@/pages/Dashboard/Admin/UserManagement/Verification/Verification";
 import RolesPermissions from "@/pages/Dashboard/Admin/UserManagement/RolesPermissions/RolesPermissions";
+import AllProductsOverview from "@/pages/Dashboard/Admin/ProductAndCategory/AllProductsOverview/AllProductsOverview";
+import ProductAndCategory from "@/pages/Dashboard/Admin/ProductAndCategory/ProductAndCategory";
+import ApproveNewProducts from "@/pages/Dashboard/Admin/ProductAndCategory/ApproveNewProducts/ApproveNewProducts";
+import CategoriesAndSubcategories from "@/pages/Dashboard/Admin/ProductAndCategory/CategoriesAndSubcategories/CategoriesAndSubcategories";
+import AddEditDeleteProducts from "@/pages/Dashboard/Admin/ProductAndCategory/AddEditDeleteProducts/AddEditDeleteProducts";
+import AdminOrderManagement from "@/pages/Dashboard/Admin/AdminOrderManagement/AdminOrderManagement";
+import AllOrders from "@/pages/Dashboard/Admin/AdminOrderManagement/AllOrders/AllOrders";
+import ReturnsAndRefunds from "@/pages/Dashboard/Admin/AdminOrderManagement/ReturnsAndRefunds/ReturnsAndRefunds";
+import TrackOrders from "@/pages/Dashboard/Admin/AdminOrderManagement/TrackOrders/TrackOrders";
+import TransactionAndPayment from "@/pages/Dashboard/Admin/TransactionAndPayment/TransactionAndPayment";
+import AllTransactions from "@/pages/Dashboard/Admin/TransactionAndPayment/AllTransactions/AllTransactions";
+import VendorPaymentHistory from "@/pages/Dashboard/Admin/TransactionAndPayment/VendorPaymentHistory/VendorPaymentHistory";
+import CustomerRefundLogs from "@/pages/Dashboard/Admin/TransactionAndPayment/CustomerRefundLogs/CustomerRefundLogs";
+import CommissionReports from "@/pages/Dashboard/Admin/TransactionAndPayment/CommissionReports/CommissionReports";
 
 export const router = createBrowserRouter([
   {
@@ -348,24 +363,87 @@ export const router = createBrowserRouter([
       {
         path: "user-management",
         element: <UserManagement></UserManagement>,
-        children:[
+        children: [
           {
-            path:"",
-            element:<AllUser></AllUser>
+            path: "",
+            element: <AllUser></AllUser>,
           },
           {
-            path:"view-all-vendor",
-            element:<AllVendor></AllVendor>
+            path: "view-all-vendor",
+            element: <AllVendor></AllVendor>,
           },
           {
-            path:"vendor-verification",
-            element:<Verification></Verification>
+            path: "vendor-verification",
+            element: <Verification></Verification>,
           },
           {
-            path:"roles-permissions",
-            element:<RolesPermissions></RolesPermissions>
+            path: "roles-permissions",
+            element: <RolesPermissions></RolesPermissions>,
           },
-        ]
+        ],
+      },
+
+      {
+        path: "product-and-category",
+        element: <ProductAndCategory></ProductAndCategory>,
+        children: [
+          {
+            path: "",
+            element: <AllProductsOverview></AllProductsOverview>,
+          },
+          {
+            path: "approve-new-products",
+            element: <ApproveNewProducts></ApproveNewProducts>,
+          },
+          {
+            path: "categories-and-subcategories",
+            element: <CategoriesAndSubcategories></CategoriesAndSubcategories>,
+          },
+          {
+            path: "add-edit-delete-products",
+            element: <AddEditDeleteProducts></AddEditDeleteProducts>,
+          },
+        ],
+      },
+      {
+        path: "admin-order-management",
+        element: <AdminOrderManagement></AdminOrderManagement>,
+        children: [
+          {
+            path: "",
+            element: <AllOrders></AllOrders>,
+          },
+          {
+            path: "return-and-refund",
+            element: <ReturnsAndRefunds></ReturnsAndRefunds>,
+          },
+          {
+            path: "track-orders",
+            element: <TrackOrders></TrackOrders>,
+          },
+        ],
+      },
+      {
+        path: "transaction-and-payment",
+        element: <TransactionAndPayment></TransactionAndPayment>,
+        children: [
+          {
+            path: "",
+            element: <AllTransactions></AllTransactions>,
+          },
+          {
+            path: "vendor-payment-history",
+            element: <VendorPaymentHistory></VendorPaymentHistory>,
+          },
+          {
+            path: "customer-refund-logs",
+            element: <CustomerRefundLogs></CustomerRefundLogs>,
+          },
+          {
+            path: "commission-reports",
+            element: <CommissionReports></CommissionReports>,
+          },
+        ],
       },
     ],
   },
