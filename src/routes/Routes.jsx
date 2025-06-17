@@ -73,6 +73,23 @@ import AllTransactions from "@/pages/Dashboard/Admin/TransactionAndPayment/AllTr
 import VendorPaymentHistory from "@/pages/Dashboard/Admin/TransactionAndPayment/VendorPaymentHistory/VendorPaymentHistory";
 import CustomerRefundLogs from "@/pages/Dashboard/Admin/TransactionAndPayment/CustomerRefundLogs/CustomerRefundLogs";
 import CommissionReports from "@/pages/Dashboard/Admin/TransactionAndPayment/CommissionReports/CommissionReports";
+import AnalyticsAndInsights from "@/pages/Dashboard/Admin/AnalyticsAndInsights/AnalyticsAndInsights";
+import UserAndVendorGrowthStats from "@/pages/Dashboard/Admin/AnalyticsAndInsights/UserAndVendorGrowthStats/UserAndVendorGrowthStats";
+import SalesPerformance from "@/pages/Dashboard/Admin/AnalyticsAndInsights/SalesPerformance/SalesPerformance";
+import TrafficAndEngagement from "@/pages/Dashboard/Admin/AnalyticsAndInsights/TrafficAndEngagement/TrafficAndEngagement";
+import ContentAndBlog from "@/pages/Dashboard/Admin/ContentAndBlog/ContentAndBlog";
+import AllBlogPosts from "@/pages/Dashboard/Admin/ContentAndBlog/AllBlogPosts/AllBlogPosts";
+import VendorBlogApproval from "@/pages/Dashboard/Admin/ContentAndBlog/VendorBlogApproval/VendorBlogApproval";
+import TagsAndCategories from "@/pages/Dashboard/Admin/ContentAndBlog/TagsAndCategories/TagsAndCategories";
+import CommunicationAndSupport from "@/pages/Dashboard/Admin/CommunicationAndSupport/CommunicationAndSupport";
+import ContactMessages from "@/pages/Dashboard/Admin/CommunicationAndSupport/ContactMessages/ContactMessages";
+import VendorSupportTickets from "@/pages/Dashboard/Admin/CommunicationAndSupport/VendorSupportTickets/VendorSupportTickets";
+import CustomerComplaints from "@/pages/Dashboard/Admin/CommunicationAndSupport/CustomerComplaints/CustomerComplaints";
+import SystemAndSettings from "@/pages/Dashboard/Admin/SystemAndSettings/SystemAndSettings";
+import SiteSettings from "@/pages/Dashboard/Admin/SystemAndSettings/SiteSettings/SiteSettings";
+import NotificationSettings from "@/pages/Dashboard/Admin/SystemAndSettings/NotificationSettings/NotificationSettings";
+import SEOAndMetaInfo from "@/pages/Dashboard/Admin/SystemAndSettings/SEOAndMetaInfo/SEOAndMetaInfo";
+import MaintenanceModeToggle from "@/pages/Dashboard/Admin/SystemAndSettings/MaintenanceModeToggle/MaintenanceModeToggle";
 
 export const router = createBrowserRouter([
   {
@@ -442,6 +459,82 @@ export const router = createBrowserRouter([
           {
             path: "commission-reports",
             element: <CommissionReports></CommissionReports>,
+          },
+        ],
+      },
+      {
+        path: "analytics-and-insights",
+        element: <AnalyticsAndInsights></AnalyticsAndInsights>,
+        children: [
+          {
+            path: "",
+            element: <UserAndVendorGrowthStats></UserAndVendorGrowthStats>,
+          },
+          {
+            path: "sales-performance",
+            element: <SalesPerformance></SalesPerformance>,
+          },
+          {
+            path: "traffic-and-engagement",
+            element: <TrafficAndEngagement></TrafficAndEngagement>,
+          },
+        ],
+      },
+      {
+        path: "content-and-blog",
+        element: <ContentAndBlog></ContentAndBlog>,
+        children: [
+          {
+            path: "",
+            element: <AllBlogPosts></AllBlogPosts>,
+          },
+          {
+            path: "vendor-blog-approval",
+            element: <VendorBlogApproval></VendorBlogApproval>,
+          },
+          {
+            path: "tags-categories",
+            element: <TagsAndCategories></TagsAndCategories>,
+          },
+        ],
+      },
+      {
+        path: "communication-and-support",
+        element: <CommunicationAndSupport></CommunicationAndSupport>,
+        children: [
+          {
+            path: "",
+            element: <ContactMessages></ContactMessages>,
+          },
+          {
+            path: "vendor-support-tickets",
+            element: <VendorSupportTickets></VendorSupportTickets>,
+          },
+          {
+            path: "customer-complaints",
+            element: <CustomerComplaints></CustomerComplaints>,
+          },
+        ],
+      },
+      {
+        path: "system-settings",
+        element: <SystemAndSettings></SystemAndSettings>,
+        children: [
+          {
+            path: "",
+            element: <SiteSettings></SiteSettings>,
+          },
+          {
+            path: "notification-settings",
+            element: <NotificationSettings></NotificationSettings>,
+          },
+          {
+            path: "SEO-&-meta-info",
+            element: <SEOAndMetaInfo></SEOAndMetaInfo>,
+          },
+          {
+            path: "maintenance-mode-toggle",
+            element: <MaintenanceModeToggle></MaintenanceModeToggle>,
           },
         ],
       },

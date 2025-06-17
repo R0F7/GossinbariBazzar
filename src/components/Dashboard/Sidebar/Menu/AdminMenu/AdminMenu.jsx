@@ -1,9 +1,15 @@
-import { MdOutlineAccountTree } from "react-icons/md";
+import { MdOutlineAccountTree, MdOutlineSupportAgent } from "react-icons/md";
 import MenuItem from "../MenuItem";
 import { CiMemoPad } from "react-icons/ci";
-import { TbDeviceAnalytics, TbTransactionDollar } from "react-icons/tb";
+import {
+  TbBrandGoogleAnalytics,
+  TbDeviceAnalytics,
+  TbTransactionDollar,
+} from "react-icons/tb";
 import { VscTools } from "react-icons/vsc";
 import { FaTags, FaUsersCog } from "react-icons/fa";
+import { ImBlog } from "react-icons/im";
+import { GrSystem } from "react-icons/gr";
 
 const AdminMenu = () => {
   return (
@@ -34,15 +40,32 @@ const AdminMenu = () => {
 
       <MenuItem
         address={"transaction-and-payment"}
-        label={"Transaction & Payment"}
+        label={"Txn & payment"}
         icon={TbTransactionDollar}
       ></MenuItem>
+      <MenuItem
+        address={"analytics-and-insights"}
+        label={"Analytics & Insights"}
+        icon={TbBrandGoogleAnalytics}
+      ></MenuItem>
 
-      {/* <MenuItem
-        address={"support-tools"}
-        label={"Support Tools"}
-        icon={VscTools}
-      ></MenuItem> */}
+      <MenuItem
+        address={"content-and-blog"}
+        label={"Content & Blog"}
+        icon={ImBlog}
+      ></MenuItem>
+
+      <MenuItem
+        address={"communication-and-support"}
+        label={"Help Desk"}
+        icon={MdOutlineSupportAgent}
+      ></MenuItem>
+
+      <MenuItem
+        address={"system-settings"}
+        label={"System & Settings"}
+        icon={GrSystem}
+      ></MenuItem>
     </>
   );
 };
