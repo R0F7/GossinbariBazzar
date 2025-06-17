@@ -1,7 +1,10 @@
+import EmptyState from "@/pages/EmptyState/EmptyState";
+
 const AllUser = () => {
     return (
         <div>
-            AllUser
+            {/* AllUser */}
+            <EmptyState></EmptyState>
         </div>
     );
 };

@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState("Address Not Available");
   const [category, setCategory] = useState("");
+  const [searchText, setSearchText] = useState("");
   const axiosCommon = useAxiosCommon();
   const [shippingDetails, setShippingDetails] = useState({});
   const [minPrice, setMinPrice] = useState(0);
@@ -314,6 +315,8 @@ const AuthProvider = ({ children }) => {
     cart_products,
     category,
     setCategory,
+    searchText,
+    setSearchText,
     shippingDetails,
     setShippingDetails,
     minPrice,

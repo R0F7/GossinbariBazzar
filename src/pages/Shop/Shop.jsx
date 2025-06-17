@@ -10,6 +10,7 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import useAuth from "../../hooks/useAuth";
 import { GiClick } from "react-icons/gi";
 import toast from "react-hot-toast";
+import EmptyState from "../EmptyState/EmptyState";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -17,23 +18,47 @@ const Shop = () => {
   const [grid, setGrid] = useState(true);
   const [sortOption, setSortOption] = useState("");
   const axiosCommon = useAxiosCommon();
-  const { user, cartAddedProducts, addProductInCard, category, setCategory } =
-    useAuth();
+  const {
+    user,
+    cartAddedProducts,
+    addProductInCard,
+    category,
+    setCategory,
+    searchText,
+    setSearchText,
+  } = useAuth();
   const [price, setPrice] = useState(0);
   const [displayPrice, setDisplayPrice] = useState(price);
   const [subCategory, setSubCategory] = useState("");
   const [tag, setTag] = useState("");
+  // console.log(searchText);
 
   const { data: products = [], isLoading } = useQuery({
-    queryKey: ["shopProducts", category, price, subCategory, tag],
+    queryKey: [
+      "shopProducts",
+      category,
+      price,
+      subCategory,
+      tag,
+      searchText,
+      sortOption,
+    ],
     queryFn: async () => {
       const { data } = await axiosCommon.get(
-        `/products?category=${category}&price=${price}&sub_category=${subCategory}&tag=${tag}`
+        `/products?category=${category}&price=${price}&sub_category=${subCategory}&tag=${tag}&searchText=${searchText}&sortOption=${sortOption}`
       );
       return data;
     },
   });
   // console.log(products);
+
+  const restQuery = () => {
+    setCategory("");
+    setPrice(0);
+    setSubCategory("");
+    setTag("");
+    setSearchText("");
+  };
 
   const { data: categories = [] } = useQuery({
     queryKey: ["shopCategories"],
@@ -81,12 +106,14 @@ const Shop = () => {
 
   const updateQuantity = (product) => (product ? product.quantity + 1 : 1);
   const handleAddToCard = async (item) => {
-    const find_product = cartAddedProducts.find((product) => product.id === item._id);
+    const find_product = cartAddedProducts.find(
+      (product) => product.id === item._id
+    );
     const quantity = updateQuantity(find_product);
     // console.log(find_product);
 
     const product_info = {
-      id:item._id,
+      id: item._id,
       order_owner_info: {
         name: user?.displayName,
         email: user?.email,
@@ -356,30 +383,37 @@ const Shop = () => {
               </div>
             </div>
           </div>
+
           {/* product */}
-          {grid ? (
-            <div className={`grid grid-cols-5 my-8`}>
-              {products.map((product) => (
-                <Card
-                  key={product?._id}
-                  item={product}
-                  handleAddToCard={handleAddToCard}
-                  handleWishlist={handleWishlist}
-                  reviews={reviews}
-                ></Card>
-              ))}
-            </div>
+          {products.length > 0 ? (
+            grid ? (
+              <div className={`grid grid-cols-5 my-8`}>
+                {products.map((product) => (
+                  <Card
+                    key={product?._id}
+                    item={product}
+                    handleAddToCard={handleAddToCard}
+                    handleWishlist={handleWishlist}
+                    reviews={reviews}
+                  ></Card>
+                ))}
+              </div>
+            ) : (
+              <div className={`grid grid-cols-1 my-8 `}>
+                {products.map((product) => (
+                  <CardX
+                    key={product?._id}
+                    item={product}
+                    handleAddToCard={handleAddToCard}
+                    handleWishlist={handleWishlist}
+                    reviews={reviews}
+                  ></CardX>
+                ))}
+              </div>
+            )
           ) : (
-            <div className={`grid grid-cols-1 my-8 `}>
-              {products.map((product) => (
-                <CardX
-                  key={product?._id}
-                  item={product}
-                  handleAddToCard={handleAddToCard}
-                  handleWishlist={handleWishlist}
-                  reviews={reviews}
-                ></CardX>
-              ))}
+            <div className="-mt-[160px]">
+              <EmptyState restQuery={restQuery}></EmptyState>
             </div>
           )}
         </div>

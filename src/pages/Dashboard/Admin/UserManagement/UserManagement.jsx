@@ -2,8 +2,8 @@ import NestedSidebarLayout from "@/components/Dashboard/NestedSidebar/NestedSide
 
 const UserManagement = () => {
   const menuItems = [
-    { label: "View All Customers", address: "" },
-    { label: "View All Vendors", address: "view-all-vendor" },
+    { label: "All Customers", address: "" },
+    { label: "All Vendors", address: "view-all-vendor" },
     { label: "Verify / Block Vendors", address: "vendor-verification" },
     { label: "Manage Roles & Permissions", address: "roles-permissions" },
   ];

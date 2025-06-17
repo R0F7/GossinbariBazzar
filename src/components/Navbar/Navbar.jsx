@@ -12,9 +12,17 @@ import { useQuery } from "@tanstack/react-query";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
-  const { user, logOut, cartAddedProducts, setCategory } = useAuth();
+  const {
+    user,
+    logOut,
+    cartAddedProducts,
+    setCategory,
+    searchText,
+    setSearchText,
+  } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
 
   // console.log(isOpen);
@@ -32,6 +40,13 @@ const Navbar = () => {
 
   const handleClick = (category) => {
     setCategory(category);
+    navigate("/shop");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchInput = e.target.search.value;
+    setSearchText(searchInput);
     navigate("/shop");
   };
 
@@ -94,12 +109,14 @@ const Navbar = () => {
                   <option key={idx}>{category?.categoryName}</option>
                 ))}
               </select>
-              <div className="flex ">
+              <form className="flex" onSubmit={handleSearch}>
                 <div>
                   <input
                     type="search"
                     name="search"
                     id="search"
+                    key={searchText}
+                    defaultValue={searchText}
                     className="bg-transparent py-2 px-3 placeholder:text-sm text-[#212b36] h-full w-[500px] outline-none"
                     placeholder="What are you shopping for?"
                   />
@@ -110,7 +127,7 @@ const Navbar = () => {
                 >
                   <CgSearch />
                 </button>
-              </div>
+              </form>
             </div>
           </div>
 
