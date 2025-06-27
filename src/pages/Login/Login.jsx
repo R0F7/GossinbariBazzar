@@ -5,6 +5,7 @@ import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useGetSecureData from "@/hooks/useGetSecureData";
 
 const Login = () => {
   const [toggle, setToggle] = useState(false);
@@ -14,8 +15,17 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location?.state || "/";
 
-  if (user) {
-    navigate("/");
+  const { data: all_users } = useGetSecureData(
+    "users_for_check_block_status",
+    "/users"
+  );
+
+  const isBlockUser = all_users.some(
+    (u) => u?.email === user?.email && u?.action === "block"
+  );
+  
+  if (user && !isBlockUser) {
+    navigate(from);
   }
 
   const handleSubmit = async (e) => {
@@ -24,7 +34,15 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
+
+    const isBlockUser = all_users.some(
+      (user) => user?.email === email && user?.action === "block"
+    );
+
+    if (isBlockUser) {
+      return toast.error("You are blocked");
+    }
 
     try {
       await signIn(email, password);
@@ -58,6 +76,15 @@ const Login = () => {
       const status = "Verified"; // Default status
       const isActive = true;
       const vendor_request = false;
+
+      const isBlockUser = all_users.some(
+        (user) => user?.email === email && user?.action === "block"
+      );
+      console.log(isBlockUser);
+
+      if (isBlockUser) {
+        return toast.error("You are blocked");
+      }
 
       const userInfo = {
         name,

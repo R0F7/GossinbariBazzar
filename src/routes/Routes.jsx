@@ -90,6 +90,7 @@ import SiteSettings from "@/pages/Dashboard/Admin/SystemAndSettings/SiteSettings
 import NotificationSettings from "@/pages/Dashboard/Admin/SystemAndSettings/NotificationSettings/NotificationSettings";
 import SEOAndMetaInfo from "@/pages/Dashboard/Admin/SystemAndSettings/SEOAndMetaInfo/SEOAndMetaInfo";
 import MaintenanceModeToggle from "@/pages/Dashboard/Admin/SystemAndSettings/MaintenanceModeToggle/MaintenanceModeToggle";
+import ViewVendorProducts from "@/pages/Dashboard/Admin/UserManagement/AllVendor/ViewVendorProducts/ViewVendorProducts";
 
 export const router = createBrowserRouter([
   {
@@ -388,6 +389,10 @@ export const router = createBrowserRouter([
           {
             path: "view-all-vendor",
             element: <AllVendor></AllVendor>,
+          },
+          {
+            path: "products/:email",
+            element: <ViewVendorProducts></ViewVendorProducts>,
           },
           {
             path: "vendor-verification",

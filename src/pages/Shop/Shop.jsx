@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { IoIosArrowBack } from "react-icons/io";
 import Card from "../../components/Card/Card";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import CustomDropdown from "../../components/CustomDropdown/CustomDropdown";
 import { CgMenuGridR } from "react-icons/cg";
 import { ImMenu } from "react-icons/im";
@@ -11,6 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import { GiClick } from "react-icons/gi";
 import toast from "react-hot-toast";
 import EmptyState from "../EmptyState/EmptyState";
+import PriceRangeSlider from "@/components/PriceRange/PriceRange";
 
 const Shop = () => {
   const [subCategories, setSubCategories] = useState([]);
@@ -26,12 +27,21 @@ const Shop = () => {
     setCategory,
     searchText,
     setSearchText,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
   } = useAuth();
   const [price, setPrice] = useState(0);
   const [displayPrice, setDisplayPrice] = useState(price);
   const [subCategory, setSubCategory] = useState("");
   const [tag, setTag] = useState("");
   // console.log(searchText);
+  const [debouncedMinPrice, setDebouncedMinPrice] = useState(minPrice);
+  const [debouncedMaxPrice, setDebouncedMaxPrice] = useState(maxPrice);
+  const [storeMaxPrice, setStoreMaxPrice] = useState(maxPrice);
+
+  const oneCall = useRef(false);
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: [
@@ -42,15 +52,81 @@ const Shop = () => {
       tag,
       searchText,
       sortOption,
+      debouncedMinPrice,
+      debouncedMaxPrice,
     ],
     queryFn: async () => {
       const { data } = await axiosCommon.get(
-        `/products?category=${category}&price=${price}&sub_category=${subCategory}&tag=${tag}&searchText=${searchText}&sortOption=${sortOption}`
+        // `/products?category=${category}&price=${price}&sub_category=${subCategory}&tag=${tag}&searchText=${searchText}&sortOption=${sortOption}`
+        `/products?category=${category}&minPrice=${debouncedMinPrice}&maxPrice=${debouncedMaxPrice}&sub_category=${subCategory}&tag=${tag}&searchText=${searchText}&sortOption=${sortOption}`
       );
       return data;
     },
   });
   // console.log(products);
+
+  // useEffect(() => {
+  //   if (!oneCall.current) {
+  //     const price = products.map((product) => {
+  //       return product?.discounted_price || product?.price;
+  //     });
+
+  //     if (price.length > 0) {
+  //       setMaxPrice(Math.max(...price));
+  //     }
+
+  //     oneCall.current = true;
+  //   }
+  // }, [products, setMaxPrice]);
+
+  // useEffect(() => {
+  //   if (!oneCall.current && products.length > 0) {
+  //     const price = products
+  //       .map((product) =>
+  //         product?.discounted_price > 0
+  //           ? product?.discounted_price
+  //           : product?.price
+  //       )
+  //       .filter((p) => typeof p === "number");
+
+  //     if (price.length > 0) {
+  //       setMaxPrice(Math.max(...price));
+  //       oneCall.current = true;
+  //     }
+  //   }
+  // }, [products, setMaxPrice]);
+
+  const prices = products.map(
+    (product) => product.discounted_price || product.price
+  );
+
+  // useEffect(() => {
+  //   if (!oneCall.current && prices.length > 0) {
+  //     const max_Price = prices.length ? Math.max(...prices) : 0;
+  //     setMaxPrice(max_Price);
+  //     oneCall.current = true;
+  //   }
+  // }, [prices, setMaxPrice]);
+
+  useEffect(() => {
+  if (!oneCall.current && prices.length > 0) {
+    const max_Price = Math.max(...prices);
+    setMaxPrice(max_Price);        // user filter
+    setStoreMaxPrice(max_Price);   // slider fixed limit
+    oneCall.current = true;
+  }
+}, [prices, setMaxPrice]);
+
+
+  // console.log(products.map(product => product.discounted_price || product.price));
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setDebouncedMinPrice(minPrice);
+      setDebouncedMaxPrice(maxPrice);
+    }, 500);
+    return () => clearTimeout(t);
+  }, [minPrice, maxPrice]);
 
   const restQuery = () => {
     setCategory("");
@@ -250,7 +326,8 @@ const Shop = () => {
           {/* price */}
           <form onSubmit={handlePrice}>
             <h4 className="font-semibold mb-2 text-lg">Price</h4>
-            <input
+
+            {/* <input
               type="range"
               name="range"
               id="range"
@@ -268,7 +345,10 @@ const Shop = () => {
               <h4>
                 Price : <span className="font-semibold"> $20 - $120</span>
               </h4>
-            )}
+            )} */}
+
+            <PriceRangeSlider key={storeMaxPrice}></PriceRangeSlider>
+
             <div className="flex justify-around">
               <button
                 type="submit"

@@ -3,14 +3,6 @@ import { useRef } from "react";
 
 const PriceRangeSlider = () => {
   const { minPrice, setMinPrice, maxPrice, setMaxPrice } = useAuth();
-  // const x = useRef(false);
-  // let limitPrice
-
-  // if (!x.current) {
-  //   limitPrice = maxPrice;
-  //   x.current = true;
-  // }
-
   const limitPriceRef = useRef(null);
 
   // Only initialize if maxPrice is a valid number > 0

@@ -12,9 +12,12 @@ import useAuth from "../../hooks/useAuth";
 import imageUpload from "../../api/utils";
 import toast from "react-hot-toast";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import { getAuth } from "firebase/auth";
+import useGetSecureData from "@/hooks/useGetSecureData";
 
 const SignUp = () => {
   const [toggle, setToggle] = useState(false);
+  const from = location?.state || "/";
 
   const {
     createUser,
@@ -24,7 +27,7 @@ const SignUp = () => {
     setLoading,
     user,
     saveUser,
-    address
+    address,
   } = useAuth();
   const navigate = useNavigate();
 
@@ -32,13 +35,22 @@ const SignUp = () => {
   // const [imagePreview, setImagePreview] = useState('');
   // const [imageText, setImageText] = useState('');
 
-//   const handleImage = (image) => {
-//       setImagePreview(URL.createObjectURL(image))
-//       setImageText(image.name)
-//   }
+  //   const handleImage = (image) => {
+  //       setImagePreview(URL.createObjectURL(image))
+  //       setImageText(image.name)
+  //   }
 
-  if (user) {
-    navigate("/");
+  const { data: all_users } = useGetSecureData(
+    "users_for_check_block_status",
+    "/users"
+  );
+
+  const isBlockUser = all_users.some(
+    (u) => u?.email === user?.email && u?.action === "block"
+  );
+
+  if (user && !isBlockUser) {
+    navigate(from);
   }
 
   const handleSubmit = async (e) => {
@@ -63,10 +75,17 @@ const SignUp = () => {
       status,
       isActive,
       vendor_request,
-      address
+      address,
     };
+    // console.table(userInfo);
 
-    console.table(userInfo);
+    const isBlockUser = all_users.some(
+      (user) => user?.email === email && user?.action === "block"
+    );
+
+    if (isBlockUser) {
+      return toast.error("You are blocked");
+    }
 
     try {
       setLoading(true);
@@ -77,7 +96,14 @@ const SignUp = () => {
 
       await updateUserProfile(name, image_url, number);
 
-      await saveUser(userInfo);
+      const currentUser = getAuth().currentUser;
+
+      await saveUser({
+        ...userInfo,
+        image_url,
+        createdAt: currentUser?.metadata?.creationTime,
+        lastLogin: currentUser?.metadata?.lastSignInTime,
+      });
 
       toast.success("Sign Up Successfully");
       navigate("/");
@@ -88,54 +114,70 @@ const SignUp = () => {
     }
   };
 
-//   const handleGoogleLogin = async () => {
-//     try {
-//       await signInWithGoogle();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  //   const handleGoogleLogin = async () => {
+  //     try {
+  //       await signInWithGoogle();
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    const handleGoogleLogin = async () => {
-      setLoading(true);
+  const handleGoogleLogin = async () => {
+    setLoading(true);
 
-      try {
-        const result = await signInWithGoogle();
-        const user = result.user;
+    try {
+      const result = await signInWithGoogle();
+      const user = result.user;
 
-        // Set default values
-        const name = user.displayName || "";
-        const email = user.email || "";
-        const number = user.phoneNumber || "N/A"; // Placeholder if not available
-        const role = "customer"; // Default role
-        const status = "Verified"; // Default status
-        const isActive = true;
-        const vendor_request = false;
-        
-        const userInfo = {
-          name,
-          email,
-          number,
-          role,
-          status,
-          isActive,
-          vendor_request,
-          address
-        };
-        console.table(userInfo);
+      // Set default values
+      const name = user.displayName || "";
+      const email = user.email || "";
+      const number = user.phoneNumber || "N/A"; // Placeholder if not available
+      const role = "customer"; // Default role
+      const status = "Verified"; // Default status
+      const isActive = true;
+      const vendor_request = false;
 
-        // Save user information
-        await saveUser(userInfo);
+      const isBlockUser = all_users.some(
+        (user) => user?.email === email && user?.action === "block"
+      );
 
-        toast.success("Google Login Successful");
-        navigate("/");
-      } catch (error) {
-        console.error("Error during Google login:", error);
-        toast.error(error.message);
-      } finally {
-        setLoading(false);
+      if (isBlockUser) {
+        return toast.error("You are blocked");
       }
-    };
+
+      const userInfo = {
+        name,
+        email,
+        number,
+        role,
+        status,
+        isActive,
+        vendor_request,
+        address,
+      };
+      console.table(userInfo);
+
+      // Save user information
+      // await saveUser(userInfo);
+      const currentUser = getAuth().currentUser;
+
+      await saveUser({
+        ...userInfo,
+        image_url: currentUser?.photoURL,
+        createdAt: currentUser?.metadata?.creationTime,
+        lastLogin: currentUser?.metadata?.lastSignInTime,
+      });
+
+      toast.success("Google Login Successful");
+      navigate("/");
+    } catch (error) {
+      console.error("Error during Google login:", error);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen shadow-2xl relative z-50">
