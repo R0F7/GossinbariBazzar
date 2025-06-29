@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 // import * as Yup from "yup";
 
 const AddNewProducts = () => {
@@ -14,6 +15,7 @@ const AddNewProducts = () => {
   const [main_image_preview, setMain_image_preview] = useState(null);
   const { user, user_info_DB } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   // console.log(user.displayName);
 
   // product input fields
@@ -194,7 +196,6 @@ const AddNewProducts = () => {
 
     delete values.main_image;
 
-
     const product_info = {
       ...values,
       // sold_by: user?.displayName,
@@ -204,6 +205,7 @@ const AddNewProducts = () => {
       additionalImages: uploadedImageUrls,
       sold_product: 0,
       rating: 0,
+      status: "pending"
       // timestamp: new Date(),
     };
 
@@ -211,6 +213,7 @@ const AddNewProducts = () => {
 
     try {
       await submit_product_in_DB(product_info);
+      navigate("/dashboard/product-management/manage-inventory");
     } catch (error) {
       console.log(error.message);
     }

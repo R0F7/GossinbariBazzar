@@ -15,7 +15,6 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const Verification = () => {
-  const { user } = useAuth();
   const columnHelper = createColumnHelper();
   const axiosSecure = useAxiosSecure();
   const { data: all_users, refetch } = useGetSecureData(
@@ -102,7 +101,7 @@ const Verification = () => {
 
   return (
     <section className="p-4">
-      <h1 className="font-semibold text-2xl mb-8">All Vendors</h1>
+      <h1 className="font-semibold text-2xl mb-8">Verification</h1>
 
       <Table columns={columns} data={vendor_requested_users}></Table>
     </section>

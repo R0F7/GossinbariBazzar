@@ -7,13 +7,13 @@ import toast from "react-hot-toast";
 const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
   const axiosSecure = useAxiosSecure();
   const { user_info_DB } = useAuth();
-  const all_status = [
-    "New Vendor",
-    "Good Vendor",
-    "Best Vendor",
-    "Suspended",
-    "Blocked",
-  ];
+  // const all_status = [
+  //   "New Vendor",
+  //   "Good Vendor",
+  //   "Best Vendor",
+  //   "Suspended",
+  //   "Blocked",
+  // ];
   // console.log(user_info_DB.status);
 
   const handleVendorInfoForm = async (e) => {

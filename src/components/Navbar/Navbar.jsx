@@ -20,6 +20,7 @@ const Navbar = () => {
     setCategory,
     searchText,
     setSearchText,
+    user_info_DB,
   } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,7 @@ const Navbar = () => {
           <div>
             <p>Free shipping on all orders over $99.</p>
           </div>
-          {user && (
+          {user && user_info_DB.role !== "seller" && (
             <ul className="flex items-center gap-8">
               <li
                 title="send vendor request"

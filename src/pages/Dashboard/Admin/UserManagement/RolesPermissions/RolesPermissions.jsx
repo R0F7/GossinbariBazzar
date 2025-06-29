@@ -43,20 +43,22 @@ const RolesPermissions = () => {
   const [roles, setRoles] = useState(rolesData);
   const [selectedRoleIndex, setSelectedRoleIndex] = useState(null);
 
-  const togglePermission = (permission) => {
-    setRoles((prevRoles) => {
-      const updatedRoles = [...prevRoles];
-      const role = updatedRoles[selectedRoleIndex];
+const togglePermission = (permission) => {
+  setRoles((prevRoles) => {
+    return prevRoles.map((role, index) => {
+      if (index !== selectedRoleIndex) return role;
 
-      if (role.permissions.includes(permission)) {
-        role.permissions = role.permissions.filter((p) => p !== permission);
-      } else {
-        role.permissions.push(permission);
-      }
+      const updatedPermissions = role.permissions.includes(permission)
+        ? role.permissions.filter((p) => p !== permission)
+        : [...role.permissions, permission];
 
-      return updatedRoles;
+      return {
+        ...role,
+        permissions: updatedPermissions,
+      };
     });
-  };
+  });
+};
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
