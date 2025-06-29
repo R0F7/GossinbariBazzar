@@ -9,6 +9,7 @@ import { CgMenuGridO, CgSearch } from "react-icons/cg";
 import { RxCross2 } from "react-icons/rx";
 // import { GiFruitBowl } from "react-icons/gi";
 import { useQuery } from "@tanstack/react-query";
+import VendorReqModal from "./VendorReqModal/VendorReqModal";
 // import grocery from "../../assets/grocery.png";
 
 const Navbar = () => {
@@ -22,6 +23,7 @@ const Navbar = () => {
   } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -59,16 +61,24 @@ const Navbar = () => {
           <div>
             <p>Free shipping on all orders over $99.</p>
           </div>
-          <ul className="flex items-center gap-8">
-            <li>Become A Vendor </li>
-            <li>Order Tracking</li>
-            <Link
-              to="dashboard/my-orders/wishlist"
-              className="hover:font-semibold hover:underline"
-            >
-              My Wishlist
-            </Link>
-          </ul>
+          {user && (
+            <ul className="flex items-center gap-8">
+              <li
+                title="send vendor request"
+                className="hover:font-semibold hover:underline scale-100 active:scale-90 transition duration-300"
+                onClick={() => setIsOpenModal(true)}
+              >
+                Become A Vendor
+              </li>
+              <li>Order Tracking</li>
+              <Link
+                to="dashboard/my-orders/wishlist"
+                className="hover:font-semibold hover:underline"
+              >
+                My Wishlist
+              </Link>
+            </ul>
+          )}
         </div>
 
         {/* nav body */}
@@ -283,6 +293,7 @@ const Navbar = () => {
         </div>
         {/* </div> */}
       </div>
+
       {/* nav bottom color div */}
       <div className="grid grid-cols-8">
         <div className="h-1 bg-[#00AB55]"></div>
@@ -328,6 +339,12 @@ const Navbar = () => {
           ))}
         </ul>
       </aside>
+
+      {/* become a vendor modal */}
+      <VendorReqModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      ></VendorReqModal>
     </nav>
   );
 };

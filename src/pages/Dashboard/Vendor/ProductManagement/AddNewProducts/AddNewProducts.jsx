@@ -12,7 +12,7 @@ const AddNewProducts = () => {
   const [categories, setCategories] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [main_image_preview, setMain_image_preview] = useState(null);
-  const { user } = useAuth();
+  const { user, user_info_DB } = useAuth();
   const axiosSecure = useAxiosSecure();
   // console.log(user.displayName);
 
@@ -194,9 +194,11 @@ const AddNewProducts = () => {
 
     delete values.main_image;
 
+
     const product_info = {
       ...values,
-      sold_by: user?.displayName,
+      // sold_by: user?.displayName,
+      sold_by: user_info_DB?.vendor_info?.vendor_name,
       vendor_info: { name: user?.displayName, email: user?.email },
       image: mainImageUrl,
       additionalImages: uploadedImageUrls,

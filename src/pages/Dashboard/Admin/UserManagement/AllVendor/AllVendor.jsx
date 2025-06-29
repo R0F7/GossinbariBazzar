@@ -27,8 +27,7 @@ const AllVendor = () => {
 
   const { data: all_vendor = [], refetch } = useGetSecureData(
     "all_vendor_for_admin",
-    "/users"
-    // "/users?role=seller"
+    "/users?role=seller"
   );
   //   console.log(all_vendor);
 
@@ -71,10 +70,10 @@ const AllVendor = () => {
       header: "Email",
     }),
 
-    columnHelper.accessor("", {
-      cell: (info) => <span>{"Shop Name"}</span>,
-      header: "Shop Name",
-    }),
+    // columnHelper.accessor("", {
+    //   cell: (info) => <span>{"Shop Name"}</span>,
+    //   header: "Shop Name",
+    // }),
 
     columnHelper.accessor("number", {
       cell: (info) => <span>{info.getValue()}</span>,
@@ -141,6 +140,7 @@ const AllVendor = () => {
         );
       },
     }),
+    
     columnHelper.accessor("email", {
       id: "viewProfile",
       cell: (info) => {
@@ -188,7 +188,9 @@ const AllVendor = () => {
         const email = info.getValue();
         return (
           <Link to={`/dashboard/user-management/products/${email}`}>
-            <button   className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 flex items-center gap-1.5"><FaEye /> Products</button>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 flex items-center gap-1.5">
+              <FaEye /> Products
+            </button>
           </Link>
         );
       },
@@ -198,7 +200,7 @@ const AllVendor = () => {
 
   return (
     <section className="p-6">
-      <h1 className="font-semibold text-2xl mb-8">All Users</h1>
+      <h1 className="font-semibold text-2xl mb-8">All Vendors</h1>
       <Table columns={columns} data={all_vendor}></Table>
 
       <UserProfileModal
