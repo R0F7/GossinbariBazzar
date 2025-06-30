@@ -205,7 +205,7 @@ const AddNewProducts = () => {
       additionalImages: uploadedImageUrls,
       sold_product: 0,
       rating: 0,
-      status: "pending"
+      status: "Pending"
       // timestamp: new Date(),
     };
 

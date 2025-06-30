@@ -157,7 +157,7 @@ const AllProductsOverview = () => {
 
   return (
     <section className="p-6">
-      <h1 className="text-2xl font-bold mb-4"> All Products Overview</h1>
+      <h1 className="text-2xl font-bold mb-4">🛒 All Products Overview</h1>
       <Table columns={columns} data={all_products}></Table>
 
       {product && (
