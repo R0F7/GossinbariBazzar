@@ -5,7 +5,7 @@ const ProductAndCategory = () => {
     { label: "All Products Overview", address: "" },
     { label: "Approve New Products", address: "approve-new-products" },
     { label: "Categories & Subcategories", address: "categories-and-subcategories" },
-    { label: "Add/Edit/Delete Products", address: "add-edit-delete-products" },
+    // { label: "Add/Edit/Delete Products", address: "add-edit-delete-products" },
   ];
   return <NestedSidebarLayout menuItems={menuItems} />;
 };

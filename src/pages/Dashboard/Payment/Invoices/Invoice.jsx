@@ -227,7 +227,7 @@ const Invoice = () => {
             🌿 Thank You for Shopping with Us! 🌿
           </h1>
           <p className="text-[#636267]">
-            Your trust means everything! We're dedicated to bringing the best to
+            Your trust means everything! We&apos;re dedicated to bringing the best to
             rural life with care and commitment. See you again soon! 🚜💚
           </p>
           <div className="flex gap-2 justify-center">

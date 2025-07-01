@@ -229,7 +229,7 @@ const OrdersReceived = () => {
       <h1 className="font-semibold text-4xl mb-8">Order Received History</h1>
 
       <div className="border-b pb-4 mb-6 flex items-center justify-between">
-        <ul className="flex gap-16 text-lg font-semibold">
+        <ul className="flex gap-12 text-lg font-semibold">
           <li>All Order({ordersData.length})</li>
           <li>New Orders({newOrders.length})</li>
           <li>Pending({pendingOrder.length})</li>
@@ -237,7 +237,7 @@ const OrdersReceived = () => {
           <li>Cancelled({cancelledOrder.length})</li>
         </ul>
 
-        <div className="flex items-center mr-10 gap-3">
+        <div className="flex items-center r-10 gap-3">
           <div className="relative">
             <DatePicker
               selected={startDate}

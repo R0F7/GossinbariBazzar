@@ -206,6 +206,11 @@ export const router = createBrowserRouter([
         element: <Navigate to="my-account" />, // Redirect to my-account by default
       },
       {
+        path: "invoice/:id",
+        element: <Invoice></Invoice>,
+      },
+      
+      {
         // index: true,
         path: "my-account",
         element: <MyAccount></MyAccount>,
