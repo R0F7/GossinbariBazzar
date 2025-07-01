@@ -35,7 +35,7 @@ const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
       requestedAt: new Date(),
     };
 
-    const res = await axiosSecure.patch(`user/${user_info_DB?._id}`, {
+    const res = await axiosSecure.patch(`/user/${user_info_DB?._id}`, {
       vendor_info,
     });
     console.log(res);
@@ -73,7 +73,7 @@ const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
                 </label>
 
                 <label htmlFor="number">
-                  <h4 className="text-sm font-medium">Bank Account</h4>
+                  <h4 className="text-sm font-medium">Bank Account:</h4>
                   <input
                     type="number"
                     name="number"
@@ -102,8 +102,6 @@ const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
 VendorReqModal.propTypes = {
   isOpenModal: PropTypes.bool.isRequired,
   setIsOpenModal: PropTypes.func.isRequired,
-  data: PropTypes.object,
-  isAllVendor: PropTypes.bool,
 };
 
 export default VendorReqModal;
