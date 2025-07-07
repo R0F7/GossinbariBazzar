@@ -59,12 +59,15 @@ const OrdersReceived = () => {
   useEffect(() => {
     const updateStatus = async () => {
       const x = ["Order Placed", "Processing"];
+
       ordersData.forEach((row) => {
-        const vendor_status = row?.vendor_status || [];
+        const vendor_status = row?.vendor_status;
 
         const allSameStatus = vendor_status.every(
           (item) => item.status === vendor_status[0].status
         );
+
+        console.log(allSameStatus);
 
         if (allSameStatus && x.includes(row.status)) {
           update_order_status({ row, status: vendor_status[0]?.status });
@@ -183,7 +186,10 @@ const OrdersReceived = () => {
               <select
                 defaultValue={status}
                 onChange={handleChange}
-                className={`border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${status === "Shipped" && "appearance-none pointer-events-none w-[127px]"}`}
+                className={`border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${
+                  status === "Shipped" &&
+                  "appearance-none pointer-events-none w-[127px]"
+                }`}
               >
                 <option value="Order Placed">Order Placed</option>
                 <option value="Processing">Processing</option>

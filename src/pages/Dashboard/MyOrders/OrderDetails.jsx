@@ -59,7 +59,10 @@ const OrderDetails = () => {
       header: "Unit",
     }),
     columnHelper.accessor("price", {
-      cell: (info) => <span>${info.getValue()}</span>,
+      cell: (info) => {
+        const row = info.row.original;
+        return <span>${row.discounted_price || info.getValue()}</span>;
+      },
       header: "Price",
     }),
     columnHelper.accessor("quantity", {
