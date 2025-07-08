@@ -25,7 +25,7 @@ const TrackOrders = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const { data: orders } = useGetSecureData(
     "orders-for-admin",
-    `/order-for-admin?status=${status}&&searchTerm=${searchTerm}`
+    `/order-for-admin?status=${status}&&searchTerm=${debouncedSearchTerm}`
   );
   // console.log(orders);
 
@@ -42,7 +42,6 @@ const TrackOrders = () => {
   );
 
   const order_status = findOrder?.status;
-  console.log(findOrder);
 
   const column = [
     columnHelper.accessor("orderID", {
