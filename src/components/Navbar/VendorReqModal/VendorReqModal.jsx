@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
   const axiosSecure = useAxiosSecure();
-  const { user_info_DB } = useAuth();
+  const { user_info_DB, user } = useAuth();
   // const all_status = [
   //   "New Vendor",
   //   "Good Vendor",
@@ -23,26 +23,16 @@ const VendorReqModal = ({ isOpenModal, setIsOpenModal }) => {
     const vendor_name = form.vendor_name.value;
     const bank_account = form.number.value;
 
-    // if (bank_account > ) {
-
-    // }
-
-    const vendor_info = {
+    // Backend e sob data pathao, stripe_account_id sekhanei add hobe
+    const response = await axiosSecure.post("/create-stripe-account", {
+      email: user?.email,
       vendor_name,
       bank_account,
-      // vendor_request: true,
-      status: "Requested", //"New Vendor" Verified, Good Vendor, Best Vendor, Suspended,Blocked
-      requestedAt: new Date(),
-    };
-
-    const res = await axiosSecure.patch(`/user/${user_info_DB?._id}`, {
-      vendor_info,
     });
-    console.log(res);
 
-    if (res.data.acknowledged) {
-      toast.success("Request has been successfully");
-      setIsOpenModal(false);
+    if (response?.data?.url) {
+      toast.success("Request submitted. Redirecting to Stripe...");
+      window.location.href = response.data.url;
     }
   };
 
