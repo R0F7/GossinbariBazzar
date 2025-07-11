@@ -62,8 +62,8 @@ const Navbar = () => {
           <div>
             <p>Free shipping on all orders over $99.</p>
           </div>
-          {user && user_info_DB.role !== "seller" && (
-            <ul className="flex items-center gap-8">
+          <ul className="flex items-center gap-8">
+            {user && user_info_DB.role !== "seller" && (
               <li
                 title="send vendor request"
                 className="hover:font-semibold hover:underline scale-100 active:scale-90 transition duration-300"
@@ -71,15 +71,15 @@ const Navbar = () => {
               >
                 Become A Vendor
               </li>
-              <li>Order Tracking</li>
-              <Link
-                to="dashboard/my-orders/wishlist"
-                className="hover:font-semibold hover:underline"
-              >
-                My Wishlist
-              </Link>
-            </ul>
-          )}
+            )}
+            <li>Order Tracking</li>
+            <Link
+              to="dashboard/my-orders/wishlist"
+              className="hover:font-semibold hover:underline"
+            >
+              My Wishlist
+            </Link>
+          </ul>
         </div>
 
         {/* nav body */}
