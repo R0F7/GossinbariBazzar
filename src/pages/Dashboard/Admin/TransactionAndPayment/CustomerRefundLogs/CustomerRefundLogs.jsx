@@ -1,6 +1,5 @@
 import Table from "@/components/Table/Table";
 import { Button } from "@/components/ui/button";
-import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useGetSecureData from "@/hooks/useGetSecureData";
 import ReviewInfoModal from "@/pages/Dashboard/Vendor/OrderManagement/ReturnsDisputes/ReviewInfoModal/ReviewInfoModal";
@@ -10,7 +9,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const CustomerRefundLogs = () => {
-  const { user } = useAuth();
   const columnHelper = createColumnHelper();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +16,7 @@ const CustomerRefundLogs = () => {
 
   const { data: returns, refetch } = useGetSecureData(
     "return-order",
-    `/return-orders/${user.email}`
+    `/return-orders`
   );
   //   console.log(returns);
 
