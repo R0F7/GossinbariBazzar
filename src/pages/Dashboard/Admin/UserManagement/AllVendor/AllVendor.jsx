@@ -24,6 +24,7 @@ const AllVendor = () => {
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [vendorSales, setVendorSales] = useState({});
 
   const { data: all_vendor = [], refetch } = useGetSecureData(
     "all_vendor_for_admin",
@@ -35,8 +36,6 @@ const AllVendor = () => {
     "all_product_for_admin",
     "/products"
   );
-  // AllVendor.jsx
-  const [vendorSales, setVendorSales] = useState({});
 
   useEffect(() => {
     const fetchSalesData = async () => {
@@ -98,7 +97,7 @@ const AllVendor = () => {
       cell: (info) => {
         const email = info.getValue();
         const total = vendorSales[email];
-        return <span>{total !== undefined ? total : 0}</span>;
+        return <span>${total !== undefined ? total : 0}</span>;
       },
       header: "Total Sales",
     }),
@@ -128,8 +127,8 @@ const AllVendor = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="Verified">Verified</SelectItem>
+                {/* <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="Verified">Verified</SelectItem> */}
                 <SelectItem value="unblock">Unblock</SelectItem>
                 <SelectItem value="block">
                   <span className="text-red-500 font-semibold">Blocked</span>
@@ -140,7 +139,7 @@ const AllVendor = () => {
         );
       },
     }),
-    
+
     columnHelper.accessor("email", {
       id: "viewProfile",
       cell: (info) => {

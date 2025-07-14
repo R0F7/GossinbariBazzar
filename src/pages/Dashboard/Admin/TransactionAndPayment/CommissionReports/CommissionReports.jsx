@@ -9,7 +9,7 @@ const CommissionReports = () => {
   const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([]);
 
-  const { data: vendors = [], } = useGetSecureData(
+  const { data: vendors = [] } = useGetSecureData(
     "all_vendor_for_admin",
     "/users?role=seller"
   );
@@ -21,15 +21,18 @@ const CommissionReports = () => {
 
       const result = await Promise.all(
         vendors.map(async (vendor) => {
-          const vendor_orders = await axiosSecure.get(
+          const { data: orders } = await axiosSecure(
             `/orders-receive/${vendor.email}`
           );
-          const orders = vendor_orders.data;
 
           const totalProductPrice = orders.reduce((orderTotal, order) => {
             const productTotal =
               order.products?.reduce((sum, product) => {
-                return sum + product.price * product.quantity;
+                return (
+                  sum +
+                  Number(product.discounted_price || product.price) *
+                    product.quantity
+                );
               }, 0) || 0;
 
             return orderTotal + productTotal;
@@ -42,7 +45,7 @@ const CommissionReports = () => {
         })
       );
 
-    //   console.log(result);
+      //   console.log(result);
       setData(result);
     };
 
@@ -80,7 +83,7 @@ const CommissionReports = () => {
   ];
 
   return (
-    <section className="px-8 py-5">
+    <section className="p-6">
       <h1 className="font-semibold text-2xl mb-4">Commission Reports</h1>
 
       <Table columns={columns} data={data}></Table>

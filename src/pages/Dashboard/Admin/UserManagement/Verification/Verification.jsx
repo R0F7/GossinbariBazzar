@@ -24,7 +24,7 @@ const Verification = () => {
   //   console.log(all_users);
 
   const vendor_requested_users = all_users.filter(
-    (user) => user.status === "Requested"
+    (user) => user.status !== "Verified"
   );
   console.log(vendor_requested_users);
 
@@ -63,34 +63,27 @@ const Verification = () => {
       cell: (info) => {
         const email = info.getValue();
         const row = info.row.original;
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const [action, setAction] = useState(row?.action || "");
 
         const handleAction = async (val) => {
-          setAction(val); // still update state if needed for UI
           const check = await axiosSecure.patch(`/user-role/${email}`, {
             status: val,
             role: "seller",
           });
           if (check.data.acknowledged) {
             refetch();
-            toast.success("action update successfully");
+            toast.success("status update successfully");
           }
         };
 
         return (
-          <Select value={action} onValueChange={handleAction}>
+          <Select value={row?.status} onValueChange={handleAction}>
             <SelectTrigger className="w-[110px]">
               <SelectValue placeholder="Action" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {/* <SelectItem value="pending">Pending</SelectItem> */}
+                <SelectItem value="Requested">Requested</SelectItem>
                 <SelectItem value="Verified">Verified</SelectItem>
-                <SelectItem value="unblock">Unblock</SelectItem>
-                <SelectItem value="block">
-                  <span className="text-red-500 font-semibold">Blocked</span>
-                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

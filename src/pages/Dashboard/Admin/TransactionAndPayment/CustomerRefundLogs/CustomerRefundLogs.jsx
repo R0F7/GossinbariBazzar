@@ -158,7 +158,7 @@ const CustomerRefundLogs = () => {
   };
 
   return (
-    <section className="px-8 py-5">
+    <section className="p-6">
       <h1 className="font-semibold text-2xl mb-4">Customer Refund Logs</h1>
 
       <Table columns={columns} data={returns}></Table>
