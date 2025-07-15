@@ -18,7 +18,7 @@ const RevenueProductTable = ({ orders, bestsellingProduct, items = [] }) => {
       const quantity = Number(product.quantity);
       const price = Number(product.price);
       const discounted_price = Number(product.discounted_price);
-      const cost_price = Number(product.cost_price);
+      const cost_price = Number(product.cost_price) || price * 0.90;
 
       const revenue = (discounted_price || price) * quantity;
       const profit = revenue - cost_price * quantity;

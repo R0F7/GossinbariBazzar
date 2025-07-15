@@ -38,34 +38,29 @@ const BestsellingProducts = () => {
     `/orders-receive/${user?.email}?startDate=${range[0].startDate}&endDate=${range[0].endDate}&minPrice=${debouncedMinPrice}&maxPrice=${debouncedMaxPrice}&category=${category}`
   );
 
-  const { data: getOrders = [] } = useGetSecureData(
-    "best-selling-products-price",
-    `/orders-receive/${user?.email}`
-  );
-
   const { data: items = [] } = useGetSecureData(
     "vendor_products",
     `/vendor-products/${user?.email}`
   );
 
-  const prices = getOrders.flatMap((order) =>
+  const prices = orders.flatMap((order) =>
     order.products.map((p) => Number(p.discounted_price || p.price))
   );
 
   useEffect(() => {
-    if (!oneCall.current && prices.length > 0) {
-      const max_Price = prices.length ? Math.max(...prices) : 0;
+    if (oneCall.current) return;
+
+    if (orders.length > 0 && prices.length > 0) {
+      const max_Price = Math.max(...prices);
       setMaxPrice(max_Price);
-    }
-    
-    if (getOrders.length > 0) {
-      const categoriesX = getOrders.flatMap((order) =>
+
+      const categoriesX = orders.flatMap((order) =>
         order.products.map((item) => item.category)
       );
       const uniqueCategories = [...new Set(categoriesX)];
       setCategories(uniqueCategories);
     }
-  }, [getOrders, prices, setMaxPrice]);
+  }, [orders, prices, setMaxPrice]);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -160,7 +155,6 @@ const BestsellingProducts = () => {
     )
       return;
 
-    // if (oneCall.current) {
     setRange([
       {
         startDate: oneMonthAgo,
@@ -171,7 +165,6 @@ const BestsellingProducts = () => {
     setCategory("");
     setMinPrice(0);
     setMaxPrice(storeMaxPrice);
-    // }
   };
 
   const columns = [
@@ -231,15 +224,17 @@ const BestsellingProducts = () => {
       header: "Stock status",
     }),
     columnHelper.accessor("id", {
-      cell: (id) => (
-        <Link
-          to={`/dashboard/product-management/view-reviews/${id.getValue()}`}
-        >
-          <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95">
-            View Reviews
-          </button>
-        </Link>
-      ),
+      cell: (id) => {
+        return (
+          <Link
+            to={`/dashboard/product-management/view-reviews/${id.getValue()}`}
+          >
+            <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold border border-blue-500 rounded-lg px-4 py-2 shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95">
+              View Reviews
+            </button>
+          </Link>
+        );
+      },
       header: "",
     }),
   ];

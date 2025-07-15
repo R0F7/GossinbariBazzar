@@ -77,7 +77,7 @@ const RevenueReports = () => {
       const quantity = product.quantity;
 
       const price = (product.discounted_price || product.price) * quantity;
-      const cost_price = Number(product.cost_price) * quantity;
+      const cost_price = Number(product.cost_price) || 0 * quantity;
 
       if (product.discounted_price) {
         const original_price = Number(product.price) * quantity;

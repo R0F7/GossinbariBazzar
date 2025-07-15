@@ -163,6 +163,7 @@ const Checkout = () => {
       name: findProduct.title,
       image: findProduct.image,
       category: findProduct.category,
+      cost_price: findProduct.cost_price,
     };
   });
 

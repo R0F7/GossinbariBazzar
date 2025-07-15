@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-const SalesByCategoryChart = ({ orders, chartType, dateRange }) => {
+const SalesByCategoryChart = ({ orders, chartType, dateRange = {}, admin }) => {
   const { startDate, endDate } = dateRange;
 
   const allProducts = orders?.flatMap((order) => order.products) || [];
@@ -94,7 +94,11 @@ const SalesByCategoryChart = ({ orders, chartType, dateRange }) => {
   const ChartComponent = chartType === "bar" ? Bar : Pie;
 
   return (
-    <div className="w-full flex justify-center bg-white rounded py-2.5 shadow h-[347px] max-w-2xl">
+    <div
+      className={`w-full flex justify-center bg-white rounded py-2.5 shadow ${
+        admin ? "h-[600px]" : "h-[300px]"
+      } mx-auto`}
+    >
       {labels.length > 0 ? (
         <ChartComponent data={chartData} options={chartOptions} />
       ) : (
@@ -124,6 +128,7 @@ SalesByCategoryChart.propTypes = {
   orders: PropTypes.array,
   chartType: PropTypes.oneOf(["pie", "bar"]),
   dateRange: PropTypes.object,
+  admin: PropTypes.bool,
 };
 
 export default SalesByCategoryChart;
