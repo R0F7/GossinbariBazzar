@@ -105,9 +105,6 @@ const UserAndVendorGrowthStats = () => {
 
   return (
     <section className="p-6">
-      <h2 className="text-xl font-semibold mb-2 text-[#1C1B20]">
-        User And Vendor Growth Stats
-      </h2>
       {/* Gross Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <StatCard
