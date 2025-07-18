@@ -1,20 +1,28 @@
+import { Button } from "@/components/ui/button";
+import useRole from "@/hooks/useRole";
 import { useQuery } from "@tanstack/react-query";
 import { GoSearch } from "react-icons/go";
+import { ImBlog } from "react-icons/im";
 import { IoIosArrowBack } from "react-icons/io";
 import { LiaCommentsSolid } from "react-icons/lia";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Blogs = () => {
+  const [role, isLoading] = useRole();
   const { data: blogs = [] } = useQuery({
     queryKey: ["blogs"],
     queryFn: () => fetch("./blogs.json").then((res) => res.json()),
   });
-  console.log(blogs);
+  // console.log(blogs);
 
   const recent_blogs = [...blogs]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 4);
-  console.log(recent_blogs);
+  // console.log(recent_blogs);
+
+  if (isLoading) {
+    return "loading...";
+  }
 
   return (
     <section className="container mx-auto">
@@ -35,7 +43,7 @@ const Blogs = () => {
 
       <div className="flex">
         {/* left part */}
-        <div className="w-1/4 pr-2">
+        <div className="w-1/5 pr-2 sticky top-[185px] h-screen border-r">
           <form className="flex items-center relative mb-6">
             <input
               type="text"
@@ -148,10 +156,10 @@ const Blogs = () => {
         </div>
 
         {/* right part */}
-        <div className="w-3/4 pl-4 border-gray-300 border-l ">
+        <div className="w-3/5 px-4">
           {blogs.map((blog) => (
             <div key={blog._id} className="mb-6">
-              <div className="w-[75%] h-[400px]">
+              <div className="-[75%] h-[400px]">
                 <img className="w-full h-full" src={blog.image} alt="" />
               </div>
               <div className="flex items-center gap-1 mt-5 mb-3.5">
@@ -183,10 +191,23 @@ const Blogs = () => {
                 </div>
               </div>
               <p className="w-[75%] mb-1">{blog.long_description}</p>
-              <button className="font-bold text-[#3691D9] text-sm">Continue Reading</button>
+              <button className="font-bold text-[#3691D9] text-sm">
+                Continue Reading
+              </button>
             </div>
           ))}
         </div>
+
+        {role !== "customer" && (
+          <div className="w-1/5 sticky top-[185px] h-screen">
+            <Link to="/add-blog">
+              <Button className="bg-blue-500 hover:bg-blue-600 w-full py-5 scale-100 active:scale-95 transition duration-300">
+                <ImBlog />
+                Write a Blog
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

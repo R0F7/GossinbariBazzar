@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { initGA, trackPageView } from "@/utils/ga";
 
 const Main = () => {
-
   useEffect(() => {
     initGA();
     // trackPageView(window.location.pathname);
@@ -16,7 +15,9 @@ const Main = () => {
 
   return (
     <div className="font-lato">
-      <Navbar></Navbar>
+      <div className="sticky top-0 h-[165px] z-50">
+        <Navbar></Navbar>
+      </div>
       <div className="min-h-[calc(100vh-76px)]">
         <Outlet></Outlet>
       </div>

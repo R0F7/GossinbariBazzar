@@ -2,7 +2,7 @@ import NestedSidebarLayout from "@/components/Dashboard/NestedSidebar/NestedSide
 
 const ContentAndBlog = () => {
   const menuItems = [
-    { label: "Blog Posts", address: "" },
+    { label: "All Blog Posts", address: "" },
     { label: "Vendor Blog Approval", address: "vendor-blog-approval" },
     { label: "Tags & Categories", address: "tags-categories" },
   ];

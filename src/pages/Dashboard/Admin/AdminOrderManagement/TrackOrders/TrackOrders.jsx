@@ -87,7 +87,7 @@ const TrackOrders = () => {
     }),
 
     columnHelper.accessor("shippingDetails", {
-      id: "estimated date",
+      id: "trackingNumber",
       cell: (info) => {
         const { trackingNumber } = info.getValue();
         const handleCopy = () => {
@@ -106,7 +106,7 @@ const TrackOrders = () => {
           </div>
         );
       },
-      header: "Estimated Delivery Date",
+      header: "Tracking Number",
     }),
 
     columnHelper.accessor("shippingDetails", {

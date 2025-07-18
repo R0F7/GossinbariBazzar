@@ -91,6 +91,7 @@ import NotificationSettings from "@/pages/Dashboard/Admin/SystemAndSettings/Noti
 import SEOAndMetaInfo from "@/pages/Dashboard/Admin/SystemAndSettings/SEOAndMetaInfo/SEOAndMetaInfo";
 import MaintenanceModeToggle from "@/pages/Dashboard/Admin/SystemAndSettings/MaintenanceModeToggle/MaintenanceModeToggle";
 import ViewVendorProducts from "@/pages/Dashboard/Admin/UserManagement/AllVendor/ViewVendorProducts/ViewVendorProducts";
+import AddBlog from "@/pages/AddBlog/AddBlog";
 
 export const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/add-blog",
+        element: <AddBlog></AddBlog>,
       },
       {
         path: "/flash-sales",
@@ -209,7 +214,7 @@ export const router = createBrowserRouter([
         path: "invoice/:id",
         element: <Invoice></Invoice>,
       },
-      
+
       {
         // index: true,
         path: "my-account",
