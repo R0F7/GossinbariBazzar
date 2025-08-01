@@ -34,12 +34,12 @@ const CardX = ({ item, handleAddToCard, handleWishlist, reviews }) => {
     // e.stopPropagation();
     e.preventDefault();
     setIsDialogOpen(true);
-    console.log("openDialog are clicked");
+    // console.log("openDialog are clicked");
   };
 
   const closeDialog = () => {
     setIsDialogOpen(false);
-    console.log("closeDialog clicked");
+    // console.log("closeDialog clicked");
   };
 
   const productReviews = reviews.filter((review) => review.product_id === _id);
@@ -49,7 +49,8 @@ const CardX = ({ item, handleAddToCard, handleWishlist, reviews }) => {
     (sum, review) => sum + review.rating,
     0
   );
-  const averageRating = totalRatings / reviews.length;
+  // console.log(totalRatings);
+  const averageRating = totalRatings / productReviews.length;
   // console.log(averageRating);
 
   return (

@@ -209,7 +209,7 @@ const AddNewProducts = () => {
       // timestamp: new Date(),
     };
 
-    console.table("Form Data:", product_info);
+    // console.table("Form Data:", product_info);
 
     try {
       await submit_product_in_DB(product_info);
