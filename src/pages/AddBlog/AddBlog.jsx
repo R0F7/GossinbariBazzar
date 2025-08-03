@@ -15,16 +15,18 @@ import { Textarea } from "@/components/ui/textarea";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import blogCategories from "@/share/blogCategories";
+import validationSchema from "@/utils/blogValiditionSchema";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
   const [imgPrev, setImgPrev] = useState("");
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { mutateAsync: post_blog } = useMutation({
     mutationFn: async (info) => {
@@ -33,6 +35,7 @@ const AddBlog = () => {
     },
     onSuccess: () => {
       toast.success("Blog posted successfully");
+      navigate("/blogs");
     },
   });
 
@@ -41,22 +44,10 @@ const AddBlog = () => {
     category: "",
     picture: null,
     description: "",
-    tag1: "",
-    tag2: "",
-    tag3: "",
+    tags: ["", "", ""],
   };
 
-  const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
-    category: Yup.string().required("Category is required"),
-    picture: Yup.mixed().required("Picture is required"),
-    description: Yup.string().min(10, "Min 10 characters").required(),
-    tag1: Yup.string().required("Tag 1 is required"),
-    tag2: Yup.string().required("Tag 2 is required"),
-    tag3: Yup.string().required("Tag 3 is required"),
-  });
-
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const mainImageUrl = values.picture
       ? await imageUpload(values.picture)
       : null;
@@ -81,6 +72,7 @@ const AddBlog = () => {
     }
 
     setSubmitting(false);
+    resetForm();
   };
 
   return (
@@ -209,22 +201,26 @@ const AddBlog = () => {
 
             {/* tags */}
             <div className="flex gap-4">
-              {["tag1", "tag2", "tag3"].map((tag, index) => (
-                <div className="space-y-1.5" key={tag}>
-                  <Label htmlFor={tag}>Tag</Label>
+              {[0, 1, 2].map((index) => (
+                <div className="space-y-1.5" key={index}>
+                  <Label htmlFor={`tags.${index}`}>Tag</Label>
                   <Input
-                    id={tag}
-                    name={tag}
+                    id={`tags.${index}`}
+                    name={`tags.${index}`}
                     placeholder={`Tag ${index + 1}`}
-                    value={values[tag]}
+                    value={values.tags?.[index] || ""}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     className={
-                      errors[tag] && touched[tag] ? "border-red-500" : ""
+                      errors.tags?.[index] && touched.tags?.[index]
+                        ? "border-red-500"
+                        : ""
                     }
                   />
-                  {errors[tag] && touched[tag] && (
-                    <div className="text-sm text-red-500">{errors[tag]}</div>
+                  {errors.tags?.[index] && touched.tags?.[index] && (
+                    <div className="text-sm text-red-500">
+                      {errors.tags[index]}
+                    </div>
                   )}
                 </div>
               ))}

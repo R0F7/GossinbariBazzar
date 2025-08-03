@@ -1,24 +1,30 @@
 import { Button } from "@/components/ui/button";
+import useGetData from "@/hooks/useGetData";
 import useRole from "@/hooks/useRole";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { ImBlog } from "react-icons/im";
 import { IoIosArrowBack } from "react-icons/io";
-import { LiaCommentsSolid } from "react-icons/lia";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import BlogDetailsModal from "./BlogDetailsModal";
+import blogCategories from "@/share/blogCategories";
+import emptyImg from "../../assets/empty for blog.webp";
 
 const Blogs = () => {
   const [role, isLoading] = useRole();
-  const { data: blogs = [] } = useQuery({
-    queryKey: ["blogs"],
-    queryFn: () => fetch("./blogs.json").then((res) => res.json()),
-  });
-  // console.log(blogs);
+  const [isOpen, setIsOpen] = useState(false);
+  const [data, setDate] = useState({});
+  const [category, setCategory] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const blogs = useGetData(
+    "blogs",
+    `/blogs?category=${category}&&search=${searchText}`
+  );
 
-  const recent_blogs = [...blogs]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 4);
-  // console.log(recent_blogs);
+  const recent_blogs = [...blogs].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+  // .slice(0, 4);
 
   if (isLoading) {
     return "loading...";
@@ -43,22 +49,38 @@ const Blogs = () => {
 
       <div className="flex">
         {/* left part */}
-        <div className="w-1/5 pr-2 sticky top-[185px] h-screen border-r">
-          <form className="flex items-center relative mb-6">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              className="border border-[#0000001a] w-full py-2 pl-3 shadow rounded-md bg-[#F4F6F8] outline-none"
-              placeholder="Search"
-            />
-            <button
-              type="submit"
-              className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500 font-bold text-xl"
+        <div className="w-1/5 pr-2 sticky top-[185px] h-screen border-r mr-2">
+          <div className="mb-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault(), setSearchText(e.target.search.value);
+              }}
+              className="flex items-center relative mb-2.5"
             >
-              <GoSearch />
-            </button>
-          </form>
+              <input
+                type="text"
+                name="search"
+                id="search"
+                className="border border-[#0000001a] w-full py-1.5 pl-3 pr-9 shadow rounded-md bg-[#F4F6F8] outline-none"
+                placeholder="Search"
+              />
+              <button
+                type="submit"
+                className="absolute top-1/2 -translate-y-1/2 right-3 text-gray-500 font-bold text-xl"
+              >
+                <GoSearch />
+              </button>
+            </form>
+
+            {role !== "customer" && (
+              <Link to="/add-blog">
+                <Button className="bg-blue-500 hover:bg-blue-600 w-full py-5 scale-100 active:scale-95 transition duration-300">
+                  <ImBlog />
+                  Write a Blog
+                </Button>
+              </Link>
+            )}
+          </div>
 
           {/* blogs categories */}
           <div className="">
@@ -66,149 +88,98 @@ const Blogs = () => {
               Blog Categories
             </h4>
             <ul className="flex flex-col space-y-3 mb-7">
-              <NavLink
-                to="/blogs"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm text-[#535A63]"
-                }
-              >
-                Eco Technology <span className="ml-1 text-sm">(3)</span>
-              </NavLink>
-              <NavLink
-                to="/environments"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm text-[#535A63]"
-                }
-              >
-                Environments <span className="ml-1 text-sm">(7)</span>
-              </NavLink>
-              <NavLink
-                to="/family"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm text-[#535A63]"
-                }
-              >
-                Family <span className="ml-1 text-sm">(5)</span>
-              </NavLink>
-              <NavLink
-                to="/home"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm text-[#535A63]"
-                }
-              >
-                Home <span className="ml-1 text-sm">(5)</span>
-              </NavLink>
-              <NavLink
-                to="/widelife"
-                className={({ isActive }) =>
-                  isActive
-                    ? "font-semibold text-[15px] text-[rgb(46,141,216)] "
-                    : "text-sm text-[#535A63]"
-                }
-              >
-                widlelife <span className="ml-1 text-sm">(8)</span>
-              </NavLink>
-            </ul>
+              {Object.entries(blogCategories).map(([key, value], idx) => {
+                const countBlg = blogs.filter((blog) => blog.category === key);
 
-            <div>
-              <h4 className="text-lg font-semibold text-[#535A63] mb-3">
-                Recent Posts
-              </h4>
-              <div>
-                {recent_blogs.map((recent_blog) => (
-                  <div key={recent_blog._id} className="flex gap-2 mb-4">
-                    <div className="w-14 h-10 mt-1.5">
-                      <img
-                        className="w-full h-full"
-                        src={recent_blog.image}
-                        alt=""
-                      />
-                    </div>
-                    <div className="">
-                      <h4 className="mb-1 text-[#3A434D]">
-                        {recent_blog.title.length > 40
-                          ? `${recent_blog.title.slice(0, 40) + "..."}`
-                          : recent_blog.title}
-                      </h4>
-                      <div className="flex text-sm">
-                        <h6 className="border-r pr-1.5 text-[#758390] font-mono">
-                          {recent_blog.date}
-                        </h6>
-                        <h6 className="pl-1.5 text-[#515961]">
-                          <span>By </span>
-                          {recent_blog.posted_by.name}
-                        </h6>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+                return (
+                  <li
+                    key={idx}
+                    onClick={() => setCategory(key)}
+                    className={`text-[#535A63] cursor-pointer select-none ${
+                      category === key && "font-semibold"
+                    }`}
+                  >
+                    {value} ({countBlg.length})
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
 
         {/* right part */}
-        <div className="w-3/5 px-4">
-          {blogs.map((blog) => (
-            <div key={blog._id} className="mb-6">
-              <div className="-[75%] h-[400px]">
-                <img className="w-full h-full" src={blog.image} alt="" />
-              </div>
-              <div className="flex items-center gap-1 mt-5 mb-3.5">
-                {blog.categories.map((category, idx) => (
-                  <h4
-                    key={idx}
-                    className="border rounded-full py-0.5 px-2.5 text-sm"
-                  >
-                    {category}
-                  </h4>
-                ))}
-              </div>
-              <h1 className="text-2xl font-semibold mb-1">{blog.title}</h1>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full border">
-                    <img
-                      className="w-full h-full rounded-full"
-                      src={blog.posted_by.image}
-                      alt=""
-                    />
-                  </div>
-                  <h4>{blog.posted_by.name}</h4>
+        <div className="w-4/5 grid grid-cols-3 gap-6">
+          {recent_blogs.length !== 0 ? (
+            recent_blogs.map((blog) => (
+              <div
+                key={blog?._id}
+                onClick={() => {
+                  setIsOpen(true), setDate(blog);
+                }}
+                className="rounded-lg border group overflow-hidden shadow-sm hover:shadow-md h-fit"
+              >
+                <div className="h-[220px] group-hover:scale-105 transition duration-300">
+                  <img
+                    className="w-full h-full rounded-t-lg "
+                    src={blog?.image}
+                    alt=""
+                  />
                 </div>
-                <h4 className="border-x px-2">{blog.date}</h4>
-                <div className="flex items-center gap-1.5">
-                  <LiaCommentsSolid />
-                  <span>1 comment</span>
-                </div>
-              </div>
-              <p className="w-[75%] mb-1">{blog.long_description}</p>
-              <button className="font-bold text-[#3691D9] text-sm">
-                Continue Reading
-              </button>
-            </div>
-          ))}
-        </div>
 
-        {role !== "customer" && (
-          <div className="w-1/5 sticky top-[185px] h-screen">
-            <Link to="/add-blog">
-              <Button className="bg-blue-500 hover:bg-blue-600 w-full py-5 scale-100 active:scale-95 transition duration-300">
-                <ImBlog />
-                Write a Blog
+                <div className="m-4">
+                  <h4 className="border inline-block px-3 py-0.5 text-sm font-semibold rounded-full">
+                    {blog?.category}
+                  </h4>
+                  <h2 className="text-xl font-semibold mt-1 mb-2.5">
+                    {blog?.title}
+                  </h2>
+                  <p>{blog?.description?.slice(0, 100)}...</p>
+
+                  <div className="mt-4 flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-full">
+                      <img src={blog?.posted_by?.image} alt="" />
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold">{blog?.posted_by?.name}</h4>
+                      <p className="text-sm">
+                        {blog?.date &&
+                          new Date(blog?.date).toLocaleDateString("en-US", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-3 flex flex-col items-center justify-center -mt-48">
+              <div className="w-[500px]">
+                <img className="" src={emptyImg} alt="" />
+              </div>
+
+              <Button
+                onClick={() => {
+                  setSearchText(""), setCategory("");
+                }}
+                className="bg-blue-500 hover:bg-blue-600 shadow scale-100 active:scale-95 transition duration-300"
+              >
+                Rest All Query
               </Button>
-            </Link>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* blog details modal */}
+      <BlogDetailsModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        data={data}
+      ></BlogDetailsModal>
     </section>
   );
 };
