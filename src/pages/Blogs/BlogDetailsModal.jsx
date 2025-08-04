@@ -1,3 +1,4 @@
+import blogCategories from "@/share/blogCategories";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import PropTypes from "prop-types";
 import { FaFacebookF } from "react-icons/fa";
@@ -76,7 +77,7 @@ const BlogDetailsModal = ({ isOpen, setIsOpen, data }) => {
 
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="border inline-block px-3 py-0.5 text-sm font-semibold rounded-full shadow-sm">
-                    {category}
+                    {blogCategories[category]}
                   </h4>
 
                   <div className="space-x-2.5">

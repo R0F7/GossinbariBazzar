@@ -5,7 +5,7 @@ import { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { ImBlog } from "react-icons/im";
 import { IoIosArrowBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BlogDetailsModal from "./BlogDetailsModal";
 import blogCategories from "@/share/blogCategories";
 import emptyImg from "../../assets/empty for blog.webp";
@@ -16,15 +16,11 @@ const Blogs = () => {
   const [data, setDate] = useState({});
   const [category, setCategory] = useState("");
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
   const blogs = useGetData(
     "blogs",
-    `/blogs?category=${category}&&search=${searchText}`
+    `/blogs?category=${category}&&search=${searchText}&&blogPage=${true}`
   );
-
-  const recent_blogs = [...blogs].sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-  // .slice(0, 4);
 
   if (isLoading) {
     return "loading...";
@@ -35,15 +31,19 @@ const Blogs = () => {
       {/* page location  */}
       <div className="flex items-center justify-between my-3">
         <div className="flex items-center gap-1.5">
-          <h4>Home</h4>
-          <span>/</span>
-          <h4>Eco Technology</h4>
+          <h4>Blogs</h4>
+          {category && <h4>/ {category}</h4>}
         </div>
         <div className="flex items-center gap-1">
           <i>
             <IoIosArrowBack />
           </i>
-          <h4>Previous page</h4>
+          <h4
+            onClick={() => navigate(-1)}
+            className="cursor-pointer hover:underline"
+          >
+            Previous page
+          </h4>
         </div>
       </div>
 
@@ -109,8 +109,8 @@ const Blogs = () => {
 
         {/* right part */}
         <div className="w-4/5 grid grid-cols-3 gap-6">
-          {recent_blogs.length !== 0 ? (
-            recent_blogs.map((blog) => (
+          {blogs.length !== 0 ? (
+            blogs.map((blog) => (
               <div
                 key={blog?._id}
                 onClick={() => {
@@ -128,7 +128,7 @@ const Blogs = () => {
 
                 <div className="m-4">
                   <h4 className="border inline-block px-3 py-0.5 text-sm font-semibold rounded-full">
-                    {blog?.category}
+                    {blogCategories[blog?.category]}
                   </h4>
                   <h2 className="text-xl font-semibold mt-1 mb-2.5">
                     {blog?.title}

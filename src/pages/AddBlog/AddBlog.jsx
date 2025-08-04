@@ -14,6 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useRole from "@/hooks/useRole";
 import blogCategories from "@/share/blogCategories";
 import validationSchema from "@/utils/blogValiditionSchema";
 import { useMutation } from "@tanstack/react-query";
@@ -25,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 const AddBlog = () => {
   const [imgPrev, setImgPrev] = useState("");
   const { user } = useAuth();
+  const [role, isLoading] = useRole();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -62,6 +64,7 @@ const AddBlog = () => {
         email: user.email,
       },
       image: mainImageUrl,
+      status: role === "admin" ? "Published" : "Pending",
     };
     // console.log(info);
 
@@ -74,6 +77,8 @@ const AddBlog = () => {
     setSubmitting(false);
     resetForm();
   };
+
+  if (isLoading) return "Loading...";
 
   return (
     <section>
