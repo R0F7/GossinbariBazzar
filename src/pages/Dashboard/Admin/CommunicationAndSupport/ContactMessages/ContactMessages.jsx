@@ -1,10 +1,12 @@
+import ChatWindow from "@/pages/ChatWindow/ChatWindow";
 
 const ContactMessages = () => {
-    return (
-        <div>
-            ContactMessages
-        </div>
-    );
+
+  return (
+    <>
+      <ChatWindow></ChatWindow>
+    </>
+  );
 };
 
 export default ContactMessages;

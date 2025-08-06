@@ -187,7 +187,7 @@ const AllUser = () => {
         const [action, setAction] = useState(row?.action || "");
 
         const handleAction = async (val) => {
-          setAction(val); // still update state if needed for UI
+          setAction(val);
           const check = await axiosSecure.patch(`/user/${id}`, { action: val });
           if (check.data.acknowledged) {
             refetch();
