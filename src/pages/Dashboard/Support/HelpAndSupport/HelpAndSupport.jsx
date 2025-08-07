@@ -1,58 +1,3 @@
-// import useAuth from "../../../../hooks/useAuth";
-// import FAQ from "./FAQ/FAQ";
-
-// import ChatComponent from "./LiveChat/LiveChat";
-// // import SupportCenter from "./SupportCenter/SupportCenter";
-
-// const HelpAndSupport = () => {
-//   const { user } = useAuth();
-//   const isAdmin =
-//   user?.email
-//   // "admin@example.com"
-//   === "admin@example.com"; // Replace with actual admin email
-
-//   if(!user) return <h1>loading...</h1>
-
-//   return (
-//     <section className="p-6">
-//       <div className="flex">
-//         {/* <div className="w-1/2">
-//           <h1 className="text-3xl mb-6 font-semibold">
-//             FAQs{" "}
-//             <span className="text-base font-normal">
-//               (Frequently Asked Questions)
-//             </span>
-//           </h1>
-//           <FAQ></FAQ>
-//         </div> */}
-//         <div className="w-full">
-//           <div className="-[500px] m-auto">
-//             <h1 className="text-3xl mb-6 font-semibold">
-//             Live Chat{" "}
-//             <span className="text-base font-normal">
-//               (9am - 6pm, Monday to Friday)
-//             </span>
-//           </h1>
-//        <div className="flex">
-//        <ChatComponent userType="User" email={user?.email} />
-//             <hr />
-//             <h2>Admin Panel</h2>
-//              <ChatComponent userType="Admin" email={'wwwrafikhan075@gmail.com'}/>
-//        </div>
-//           </div>
-//          </div>
-//       </div>
-//        {/* <div>{isAdmin ? <AdminPanel /> : <ChatRoom user={user} />}</div> */}
-
-//       {/* <div>
-//         <SupportCenter></SupportCenter>
-//       </div> */}
-//     </section>
-//   );
-// };
-
-// export default HelpAndSupport;
-
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -64,7 +9,7 @@ import useAuth from "@/hooks/useAuth";
 import { Link, useParams } from "react-router-dom";
 
 const HelpAndSupport = () => {
-  const { user,user_info_DB } = useAuth();
+  const { user_info_DB } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { x } = useParams();
@@ -72,8 +17,6 @@ const HelpAndSupport = () => {
   // user?.email
   // // "admin@example.com"
   // === "admin@example.com";
-
-  console.log(user_info_DB.role);
 
   return (
     <section className="max-w-4xl mx-auto mt-10 p-5">
@@ -101,9 +44,8 @@ const HelpAndSupport = () => {
                 <strong>Support Hours:</strong> (9 AM - 6 PM, Monday to Friday)
               </span>
 
-              {/* <LiveChat userType="User" email={user?.email} />
-              <LiveChat userType="Vendor" email={user?.email} /> */}
-              <LiveChat userType={user_info_DB.role} email={user?.email} />
+              <LiveChat />
+
               {/* <div>{isAdmin ? <AdminPanel /> : <ChatRoom user={user} />}</div> */}
               {/* <hr /> */}
               {/* <h2>Admin Panel</h2> */}

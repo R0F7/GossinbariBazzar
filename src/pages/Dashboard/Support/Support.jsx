@@ -3,6 +3,7 @@ import NestedSidebarLayout from "../../../components/Dashboard/NestedSidebar/Nes
 const Support = () => {
     const menuItems = [
         { label: "Help & Support", address: "" },
+        { label: "Chat Window", address: "chat-window" },
         { label: "Notifications", address: "notifications" },
       ];
     

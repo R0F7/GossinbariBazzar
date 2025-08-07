@@ -8,11 +8,14 @@ import useGetSecureData from "@/hooks/useGetSecureData";
 import Unknown from "../../assets/unknown image.jpg";
 import NoMessage from "../../assets/no-message-error.jpg";
 import UserProfileModal from "../Dashboard/Admin/UserManagement/AllUser/UserProfile/UserProfileModal";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const socket = io(import.meta.env.VITE_API_URL);
 
 const ChatWindow = () => {
   const {
+    user_info_DB: { role },
     user: { email },
   } = useAuth();
   const [toEmail, setToEmail] = useState(null);
@@ -35,6 +38,8 @@ const ChatWindow = () => {
     `/order-for-admin`
   );
   // console.log(users);
+
+  const { data: admins } = useGetSecureData("admins", `/users?role=admin`);
 
   const options = {
     day: "2-digit",
@@ -89,6 +94,7 @@ const ChatWindow = () => {
     email: matchedUser?.email || "N/A",
     phone: matchedUser?.number || "N/A",
     photo: matchedUser?.image_url || "",
+    address: matchedUser?.address || "N/A",
     shippingAddress: matchedUser?.address || "N/A",
     totalOrders: matchedOrders.length,
     lastOrderDate: matchedOrders[matchedOrders.length - 1]?.createdAt
@@ -132,62 +138,120 @@ const ChatWindow = () => {
     <section className="p-6 x-8 h-screen bg-[rgb(247,246,249)]">
       <div className="flex items-center gap-4 h-full">
         {/* chat bar */}
-        <aside className="w-1/4 h-full bg-white rounded-md shadow p-4 pl-0 overflow-y-auto">
-          {users.map((user) => (
-            <div
-              key={user._id}
-              onClick={() => setToEmail(user?.email)}
-              className="flex items-center gap-2 hover:bg-blue-100 rounded-md transition duration-300 cursor-pointer "
-            >
+        <aside className="w-1/4 h-full bg-white rounded-md shadow p-4 pl-0 overflow-y-auto flex flex-col justify-between">
+          <div className="overflow-y-auto">
+            {users.map((user) => (
               <div
-                className={`w-1 h-[50px] ${
-                  toEmail === user.email ? "bg-blue-500" : "bg-white"
-                } rounded-full`}
-              ></div>
+                key={user._id}
+                onClick={() => setToEmail(user?.email)}
+                className="flex items-center gap-2 hover:bg-blue-100 rounded-md transition duration-300 cursor-pointer "
+              >
+                <div
+                  className={`w-1 h-[50px] ${
+                    toEmail === user.email ? "bg-blue-500" : "bg-white"
+                  } rounded-full`}
+                ></div>
 
-              <div className="flex items-center gap-2 border-b py-1.5 w-full">
-                <div className="w-10 h-10 rounded-full border border-blue-500">
-                  <img
-                    className="w-full h-full rounded-full"
-                    src={user?.image_url || Unknown}
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <h4 className="font-semibold flex items-center gap-1.5 -mb-0.5">
-                    {user?.name}
-                    {user?.isActive && (
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    )}
-                  </h4>
-                  <p>
-                    {user.form === email ? (
-                      <>
-                        <strong>you: </strong>{" "}
-                        {user.lastMessage.length < 27
-                          ? user.lastMessage
-                          : user.lastMessage.slice(0, 27) + "..."}
-                      </>
-                    ) : (
-                      <>
-                        <strong>
-                          {lastName(user.name).length > 8
-                            ? lastName(user.name).slice(0, 8)
-                            : lastName(user.name)}
-                          :
-                        </strong>
-                        {user.lastMessage.length < 27
-                          ? user.lastMessage
-                          : lastName(user.name).length < 8
-                          ? user.lastMessage.slice(0, 27) + "..."
-                          : user.lastMessage.slice(0, 24) + "..."}
-                      </>
-                    )}
-                  </p>
+                <div className="flex items-center gap-2 border-b py-1.5 w-full">
+                  <div className="w-10 h-10 rounded-full border border-blue-500">
+                    <img
+                      className="w-full h-full rounded-full"
+                      src={user?.image_url || Unknown}
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold flex items-center gap-1.5 -mb-0.5">
+                      {user?.name}
+                      {user?.isActive && (
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      )}
+                    </h4>
+                    <p>
+                      {user.form === email ? (
+                        <>
+                          <strong>you: </strong>{" "}
+                          {user.lastMessage.length < 27
+                            ? user.lastMessage
+                            : user.lastMessage.slice(0, 27) + "..."}
+                        </>
+                      ) : (
+                        <>
+                          <strong>
+                            {lastName(user.name).length > 8
+                              ? lastName(user.name).slice(0, 8)
+                              : lastName(user.name)}
+                            :{" "}
+                          </strong>
+                          {user.lastMessage.length < 25
+                            ? user.lastMessage
+                            // : lastName(user.name).length < 8
+                            // ? user.lastMessage.slice(0, 25) + "..."
+                            : user.lastMessage.slice(0, 25) + "..."}
+                        </>
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {role !== "admin" && (
+            <div className="max-h-[250px] overflow-y-auto">
+              <p className="border text-center bg-blue-600 text-white py-0.5 mb-0.5 ml-4 text-sm font-semibold rounded-md">
+                Admins
+              </p>
+              {admins.map((user) => (
+                <div
+                  key={user._id}
+                  onClick={() => setToEmail(user?.email)}
+                  className="flex items-center gap-2 hover:bg-blue-100 rounded-md transition duration-300 cursor-pointer "
+                >
+                  <div
+                    className={`w-1 h-[50px] ${
+                      toEmail === user.email ? "bg-blue-500" : "bg-white"
+                    } rounded-full`}
+                  ></div>
+
+                  <div className="flex items-center gap-2 border-b py-1.5 w-full">
+                    <div className="w-10 h-10 rounded-full border border-blue-500">
+                      <img
+                        className="w-full h-full rounded-full"
+                        src={user?.image_url || Unknown}
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold flex items-center gap-1.5 -mb-0.5">
+                        {user?.name}
+                        {user?.isActive && (
+                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        )}
+                      </h4>
+                      {/* <p>
+                        {user.form === email && user.lastMessage ? (
+                          <>
+                            <strong>you: </strong>{" "}
+                            {user.lastMessage.length < 27
+                              ? user.lastMessage
+                              : user.lastMessage.slice(0, 27) + "..."}
+                          </>
+                        ) : (
+                          <>
+                            <strong>Admin: </strong>
+                            {user.lastMessage.length < 27
+                              ? user.lastMessage
+                              : user.lastMessage.slice(0, 27) + "..."}
+                          </>
+                        )}
+                      </p> */}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </aside>
 
         {/* chat box */}
@@ -233,7 +297,16 @@ const ChatWindow = () => {
                     msg.email !== email ? "opposite-msg" : "my-msg flex"
                   } mb-4`}
                 >
-                  <p className="message">{msg.text}</p>
+                  <p
+                    data-tooltip-id={msg._id}
+                    data-tooltip-content={new Date(
+                      msg.timestamp
+                    ).toLocaleString()}
+                    className="message"
+                  >
+                    {msg.text}
+                  </p>
+                  <Tooltip id={msg._id} place="top" />
                 </div>
               ))
             ) : (

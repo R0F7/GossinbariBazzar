@@ -1,14 +1,37 @@
+import useGetSecureData from "@/hooks/useGetSecureData";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
+import NoMessage from "../../../../../assets/no-message-error.jpg";
+import { Input } from "@/components/ui/input";
+import { IoMdSend } from "react-icons/io";
+import { Tooltip } from "react-tooltip";
+import useAuth from "@/hooks/useAuth";
+import PropTypes from "prop-types";
 
-// Backend URL (use .env variable or hardcode)
 const socket = io(import.meta.env.VITE_API_URL);
 
-// eslint-disable-next-line react/prop-types
-const LiveChat = ({ email, userType }) => {
+const LiveChat = ({ sendMail }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [toEmail, setToEmail] = useState(null);
   const messageEndRef = useRef(null);
+  const {
+    user: { email },
+  } = useAuth();
+  const { data: admins, isLoading } = useGetSecureData(
+    "admins",
+    `/users?role=admin`
+  );
+
+  useEffect(() => {
+    if (!admins || isLoading) return;
+
+    if (sendMail) {
+      setToEmail(sendMail);
+    } else {
+      setToEmail(admins[0].email);
+    }
+  }, [admins, isLoading, sendMail]);
 
   useEffect(() => {
     if (!email) return;
@@ -17,7 +40,7 @@ const LiveChat = ({ email, userType }) => {
     socket.emit("joinChat", email);
 
     // Load previous messages when the chat starts
-    socket.emit("loadMessages", email);
+    socket.emit("loadMessages", { email, toEmail });
 
     // Listen for incoming messages
     socket.on("previousMessages", (history) => {
@@ -37,47 +60,77 @@ const LiveChat = ({ email, userType }) => {
       socket.off("receiveMessage");
       socket.off("previousMessages");
     };
-  }, [email]);
+  }, [email, toEmail]);
 
-  const sendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const message = form.text.value;
+
     if (message.trim() !== "") {
-      const newMessage = { email, userType, text: message };
+      const newMessage = {
+        email,
+        toEmail,
+        text: message,
+      };
       socket.emit("sendMessage", newMessage);
       setMessage("");
     }
   };
 
-  // console.log(messages);
-
-  // const x = messages.filter(m => m.userType !== "Admin")
-  // const y = messages.filter(m => m.userType !== "Vendor")
-
-
   return (
-    <div className="chat-container max-w-full h-[500px] flex flex-col border border-[#ccc] rounded-lg overflow-hidden g-[#f5f5f5]">
-      <div className="chat-box flex-grow overflow-y-auto p-2.5">
-        {messages.map((msg, idx) => (
-          <div key={idx} className={`${msg.userType === "Admin" ? "admin-msg" : "user-msg flex"} mb-4`}>
-            <div className="message">
-              <strong>{msg.userType}:</strong> {msg.text}
+    <div className="chat-container max-w-full h-[500px] flex flex-col border border-[#ccc] rounded-lg overflow-hidden g-[#f5f5f5] p-4">
+      {/* chat */}
+      <div className="h-full overflow-y-auto">
+        {messages.length > 0 ? (
+          messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`${
+                msg.email !== email ? "opposite-msg" : "my-msg flex"
+              } mb-4`}
+            >
+              <p
+                data-tooltip-id={msg._id}
+                data-tooltip-content={new Date(msg.timestamp).toLocaleString()}
+                className="message"
+              >
+                {msg.text}
+              </p>
+              <Tooltip id={msg._id} place="top" />
             </div>
+          ))
+        ) : (
+          <div className="h-full flex items-center justify-center">
+            <img className="w-[270px] h-auto" src={NoMessage} alt="" />
           </div>
-        ))}
+        )}
         <div ref={messageEndRef}></div>
       </div>
 
-      <div className="chat-input flex p-2.5 border-t border-[#ccc]">
-        <input
+      {/* send message */}
+      <form className="relative" onSubmit={handleSendMessage}>
+        <Input
           type="text"
+          name="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type a message..."
-          className="flex-grow p-2 rounded-[4px] border border-[#ccc]"
-        />
-        <button onClick={sendMessage} className="py-2 px-3 ml-2 bg-[#007bff] text-white border-none rounded-[4px] cursor-pointer hover:bg-[#0056b3]">Send</button>
-      </div>
+          className="py-5"
+          placeholder="Start typing..."
+        ></Input>
+        <button
+          type="submit"
+          className="border p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white absolute top-1/2 -translate-y-1/2 right-5 scale-100 active:scale-90 transition duration-300 shadow"
+        >
+          <IoMdSend />
+        </button>
+      </form>
     </div>
   );
+};
+
+LiveChat.propTypes = {
+  sendMail: PropTypes.string,
 };
 
 export default LiveChat;

@@ -43,9 +43,9 @@ const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {
                 <p className="text-sm text-gray-600">{data.phone}</p>
               </div>
             </div>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-2">
               {/* Address Info */}
-              <div className="mb-4">
+              <div className="">
                 <h4 className="font-semibold text-gray-700">Address</h4>
                 <p className="text-sm text-gray-800">{data.address}</p>
                 {/* <p className="text-sm text-gray-800">
@@ -57,8 +57,11 @@ const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {
               </div>
 
               {/* Order & Activity Info */}
-              <div className="mb-4">
+              <div className="">
                 <h4 className="font-semibold text-gray-700">Activity</h4>
+                <p className="text-sm text-gray-800">
+                  Joined: {data.createdAt}
+                </p>
                 <p className="text-sm text-gray-800">
                   {/* Total Orders: {data.totalOrders} */}
                   {isAllVendor
@@ -68,9 +71,6 @@ const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {
                 <p className="text-sm text-gray-800">
                   {!isAllVendor && ` Last Order: ${data.lastOrderDate}`}
                 </p>
-                <p className="text-sm text-gray-800">
-                  Joined: {data.createdAt}
-                </p>
               </div>
 
               {/* Status */}
@@ -79,7 +79,7 @@ const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {
                 <p className="text-sm">
                   Status:
                   <span
-                    className={`ml-2 font-semibold ${
+                    className={`ml-1 font-semibold ${
                       data.status === "Active"
                         ? "text-green-600"
                         : data.status === "Banned"

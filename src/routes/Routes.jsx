@@ -92,6 +92,7 @@ import SEOAndMetaInfo from "@/pages/Dashboard/Admin/SystemAndSettings/SEOAndMeta
 import MaintenanceModeToggle from "@/pages/Dashboard/Admin/SystemAndSettings/MaintenanceModeToggle/MaintenanceModeToggle";
 import ViewVendorProducts from "@/pages/Dashboard/Admin/UserManagement/AllVendor/ViewVendorProducts/ViewVendorProducts";
 import AddBlog from "@/pages/AddBlog/AddBlog";
+import ChatWindow from "@/pages/ChatWindow/ChatWindow";
 
 export const router = createBrowserRouter([
   {
@@ -291,6 +292,10 @@ export const router = createBrowserRouter([
           //   element: <HelpAndSupport></HelpAndSupport>,
           // },
           {
+            path: "chat-window",
+            element: <ChatWindow></ChatWindow>,
+          },
+          {
             path: "notifications",
             element: <Notifications></Notifications>,
           },
@@ -374,6 +379,10 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
+            element: <ChatWindow></ChatWindow>,
+          },
+          {
+            path: "vendor-guidelines",
             element: <VendorGuidelines></VendorGuidelines>,
           },
           {
@@ -519,6 +528,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
+            // element: <ChatWindow></ChatWindow>,
             element: <ContactMessages></ContactMessages>,
           },
           {
