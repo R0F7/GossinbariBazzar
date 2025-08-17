@@ -3,6 +3,7 @@ import NestedSidebarLayout from "@/components/Dashboard/NestedSidebar/NestedSide
 const SupportTools = () => {
   const menuItems = [
     { label: "Chat Window", address: "" },
+    { label: "My Tickets", address: "my-tickets" },
     { label: "Vendor Guidelines", address: "vendor-guidelines" },
     { label: "Help & Support", address: `help-and-support/vendor` },
     { label: "Notifications", address: "notifications" },

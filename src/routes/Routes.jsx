@@ -93,6 +93,7 @@ import MaintenanceModeToggle from "@/pages/Dashboard/Admin/SystemAndSettings/Mai
 import ViewVendorProducts from "@/pages/Dashboard/Admin/UserManagement/AllVendor/ViewVendorProducts/ViewVendorProducts";
 import AddBlog from "@/pages/AddBlog/AddBlog";
 import ChatWindow from "@/pages/ChatWindow/ChatWindow";
+import MyTickets from "@/pages/Dashboard/Vendor/SupportTools/MyTickets/MyTickets";
 
 export const router = createBrowserRouter([
   {
@@ -380,6 +381,10 @@ export const router = createBrowserRouter([
           {
             path: "",
             element: <ChatWindow></ChatWindow>,
+          },
+          {
+            path: "my-tickets",
+            element: <MyTickets></MyTickets>,
           },
           {
             path: "vendor-guidelines",

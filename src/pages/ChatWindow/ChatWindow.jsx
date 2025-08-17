@@ -162,7 +162,7 @@ const ChatWindow = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold flex items-center gap-1.5 -mb-0.5">
-                      {user?.name}
+                      {user?.name} <span className="text-sm">({user?.role})</span>
                       {user?.isActive && (
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       )}

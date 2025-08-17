@@ -43,6 +43,7 @@ const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {
                 <p className="text-sm text-gray-600">{data.phone}</p>
               </div>
             </div>
+            
             <div className="grid grid-cols-3 gap-2">
               {/* Address Info */}
               <div className="">
