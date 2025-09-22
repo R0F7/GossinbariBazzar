@@ -22,7 +22,7 @@ import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-const CreateNewTicketModal = ({ isOpen, setIsOpen }) => {
+const CreateNewTicketModal = ({ isOpen, setIsOpen, refetch }) => {
   const { user } = useAuth();
   const [imgPrev, setImgPrev] = useState("");
   const axiosCommon = useAxiosCommon();
@@ -34,6 +34,7 @@ const CreateNewTicketModal = ({ isOpen, setIsOpen }) => {
       return data;
     },
     onSuccess: () => {
+      refetch();
       toast.success("Ticket created successfully");
     },
   });
@@ -300,6 +301,7 @@ const CreateNewTicketModal = ({ isOpen, setIsOpen }) => {
 CreateNewTicketModal.propTypes = {
   isOpen: PropTypes.bool,
   setIsOpen: PropTypes.func,
+  refetch: PropTypes.func,
 };
 
 export default CreateNewTicketModal;

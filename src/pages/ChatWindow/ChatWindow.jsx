@@ -199,14 +199,14 @@ const ChatWindow = () => {
 
           {role !== "admin" && (
             <div className="max-h-[250px] overflow-y-auto">
-              <p className="border text-center bg-blue-600 text-white py-0.5 mb-0.5 ml-4 text-sm font-semibold rounded-md">
+              <p className="border text-center bg-blue-600 text-white py-[2.5px] mb-1.5 ml-4 text-sm font-semibold rounded-md">
                 Admins
               </p>
               {admins.map((user) => (
                 <div
                   key={user._id}
                   onClick={() => setToEmail(user?.email)}
-                  className="flex items-center gap-2 hover:bg-blue-100 rounded-md transition duration-300 cursor-pointer "
+                  className="flex items-center gap-2 hover:bg-blue-100 rounded-md transition duration-300 cursor-pointer"
                 >
                   <div
                     className={`w-1 h-[50px] ${
@@ -292,7 +292,7 @@ const ChatWindow = () => {
             {messages.length > 0 ? (
               messages.map((msg) => (
                 <div
-                  key={msg.id}
+                  key={msg?._id}
                   className={`${
                     msg.email !== email ? "opposite-msg" : "my-msg flex"
                   } mb-4`}

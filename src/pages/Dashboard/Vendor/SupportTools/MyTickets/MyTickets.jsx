@@ -11,11 +11,11 @@ const MyTickets = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const columnHelper = createColumnHelper();
-  const { data: tickets } = useGetSecureData(
+  const { data: tickets, refetch } = useGetSecureData(
     "tickets",
-    `/tickets/${user.email}`
+    `/tickets?email=${user.email}`
   );
-  console.log(tickets);
+  // console.log(tickets);
 
   const getStatusTickets = (status) => {
     const findTickets = tickets.filter((ticket) => ticket.status === status);
@@ -55,6 +55,16 @@ const MyTickets = () => {
       ),
       header: "Created Date",
     }),
+
+    columnHelper.accessor("_id", {
+      cell: () => (
+        <Button className="bg-blue-500 hover:bg-blue-600 scale-100 active:scale-90 transition duration-300">
+          {/* <TiEyeOutline /> */}
+          View
+        </Button>
+      ),
+      header: "",
+    }),
   ];
 
   return (
@@ -71,17 +81,18 @@ const MyTickets = () => {
       </div>
       <ul className="flex gap-4 text-lg font-semibold my-6">
         <li>Open ({getStatusTickets("Open")})</li>
-        <li>In Progress (1)</li>
-        <li>Resolved (2)</li>
-        <li>Closed (2)</li>
-        <li>All Tickets</li>
+        <li>In Progress (0)</li>
+        <li>Resolved (0)</li>
+        <li>Closed (0)</li>
+        <li>All Tickets({tickets.length})</li>
       </ul>
-      table
-      <div>| Ticket ID | Subject | Status | Last Updated |</div>
+
       <Table columns={columns} data={tickets}></Table>
+
       <CreateNewTicketModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        refetch={refetch}
       ></CreateNewTicketModal>
     </section>
   );
