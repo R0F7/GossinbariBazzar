@@ -94,6 +94,7 @@ import ViewVendorProducts from "@/pages/Dashboard/Admin/UserManagement/AllVendor
 import AddBlog from "@/pages/AddBlog/AddBlog";
 import ChatWindow from "@/pages/ChatWindow/ChatWindow";
 import MyTickets from "@/pages/Dashboard/Vendor/SupportTools/MyTickets/MyTickets";
+import TicketConversation from "@/pages/Dashboard/Admin/CommunicationAndSupport/VendorSupportTickets/TicketConversation/TicketConversation";
 
 export const router = createBrowserRouter([
   {
@@ -387,6 +388,10 @@ export const router = createBrowserRouter([
             element: <MyTickets></MyTickets>,
           },
           {
+            path: "ticket-conversation",
+            element: <TicketConversation></TicketConversation>,
+          },
+          {
             path: "vendor-guidelines",
             element: <VendorGuidelines></VendorGuidelines>,
           },
@@ -539,6 +544,10 @@ export const router = createBrowserRouter([
           {
             path: "vendor-support-tickets",
             element: <VendorSupportTickets></VendorSupportTickets>,
+          },
+          {
+            path: "ticket-conversation",
+            element: <TicketConversation></TicketConversation>,
           },
           {
             path: "customer-complaints",

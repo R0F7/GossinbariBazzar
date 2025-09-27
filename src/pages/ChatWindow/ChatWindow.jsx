@@ -33,6 +33,7 @@ const ChatWindow = () => {
     isLoading,
     refetch,
   } = useGetSecureData("conversations", `/conversations/${email}`);
+
   const { data: orderData = [] } = useGetSecureData(
     "order-data-for-admin",
     `/order-for-admin`
@@ -86,7 +87,7 @@ const ChatWindow = () => {
 
   const matchedUser = users.find((user) => user.email === toEmail);
   const matchedOrders = orderData.filter(
-    (order) => order?.order_owner_info.email === email
+    (order) => order?.order_owner_info.email === toEmail
   );
 
   const userData = {

@@ -6,6 +6,8 @@ import useGetSecureData from "@/hooks/useGetSecureData";
 import useAuth from "@/hooks/useAuth";
 import Table from "@/components/Table/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
+import { BiConversation } from "react-icons/bi";
 
 const MyTickets = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,12 +59,26 @@ const MyTickets = () => {
     }),
 
     columnHelper.accessor("_id", {
-      cell: () => (
-        <Button className="bg-blue-500 hover:bg-blue-600 scale-100 active:scale-90 transition duration-300">
-          {/* <TiEyeOutline /> */}
-          View
-        </Button>
-      ),
+      cell: (info) => {
+        const row = info.row.original;
+
+        const ticketDetails = {
+          toEmail: row.vendorInfo.email,
+          ticket_id: row._id,
+        };
+
+        return (
+          <Link
+            to={`/dashboard/support-tools/ticket-conversation`}
+            state={ticketDetails}
+          >
+            <Button className="bg-blue-500 hover:bg-blue-600 scale-100 active:scale-90 transition duration-300">
+              {/* <TiEyeOutline /> */}
+              <BiConversation size={19} />
+            </Button>
+          </Link>
+        );
+      },
       header: "",
     }),
   ];

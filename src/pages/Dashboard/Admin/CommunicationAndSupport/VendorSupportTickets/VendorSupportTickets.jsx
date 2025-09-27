@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { BiConversation } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const VendorSupportTickets = () => {
   //     {
@@ -117,13 +118,26 @@ const VendorSupportTickets = () => {
       header: "Status",
     }),
 
-    columnHelper.accessor("_id", {
-      cell: () => (
-        <button className="border w-10 h-9 flex justify-center items-center rounded-md shadow-sm hover:bg-blue-500 hover:text-white hover:shadow-md hover:rounded-full transition duration-300 ease-in-out active:scale-90 scale-100 group">
-          <BiConversation size={19} className="" />
-          {/* <BiSolidConversation size={19} className="group-hover:visible" /> */}
-        </button>
-      ),
+    columnHelper.accessor("vendorInfo.email", {
+      cell: (info) => {
+        const row = info.row.original;
+
+        const ticketDetails = {
+          toEmail: row.vendorInfo.email,
+          ticket_id: row._id,
+        };
+
+        return (
+          <Link
+            to={`/dashboard/communication-and-support/ticket-conversation`}
+            state={ticketDetails}
+            className="border w-10 h-9 flex justify-center items-center rounded-md shadow-sm hover:bg-blue-500 hover:text-white hover:shadow-md hover:rounded-full transition duration-300 ease-in-out active:scale-90 scale-100 group"
+          >
+            <BiConversation size={19} />
+            {/* <BiSolidConversation size={19} className="group-hover:visible" /> */}
+          </Link>
+        );
+      },
       header: "",
     }),
   ];
