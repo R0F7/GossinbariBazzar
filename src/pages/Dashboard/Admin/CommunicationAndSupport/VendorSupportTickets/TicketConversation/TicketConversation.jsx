@@ -16,7 +16,7 @@ const socket = io(import.meta.env.VITE_API_URL);
 
 const TicketConversation = () => {
   const location = useLocation();
-  const { toEmail, ticket_id } = location.state || {};
+  const { toEmail, ticket_id, status } = location.state || {};
   const {
     user_info_DB: { role },
     user: { email },
@@ -51,13 +51,6 @@ const TicketConversation = () => {
           return res.data;
         },
       },
-      // {
-      //   queryKey: ["admins"],
-      //   queryFn: async () => {
-      //     const res = await axiosSecure.get(`/users?role=admin`);
-      //     return res.data;
-      //   },
-      // },
     ],
   });
 
@@ -225,13 +218,15 @@ const TicketConversation = () => {
             type="text"
             name="text"
             value={message}
+            disabled={status === "Closed"}
             onChange={(e) => setMessage(e.target.value)}
             className="py-5"
             placeholder="Start typing..."
           ></Input>
           <button
             type="submit"
-            className="border p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white absolute top-1/2 -translate-y-1/2 right-5 scale-100 active:scale-90 transition duration-300 shadow"
+            disabled={status === "Closed"}
+            className="border p-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white absolute top-1/2 -translate-y-1/2 right-5 scale-100 active:scale-90 transition duration-300 shadow disabled:cursor-not-allowed"
           >
             <IoMdSend />
           </button>

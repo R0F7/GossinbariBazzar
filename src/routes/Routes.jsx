@@ -95,6 +95,7 @@ import AddBlog from "@/pages/AddBlog/AddBlog";
 import ChatWindow from "@/pages/ChatWindow/ChatWindow";
 import MyTickets from "@/pages/Dashboard/Vendor/SupportTools/MyTickets/MyTickets";
 import TicketConversation from "@/pages/Dashboard/Admin/CommunicationAndSupport/VendorSupportTickets/TicketConversation/TicketConversation";
+import Complaints from "@/pages/Dashboard/shared/Complaints/Complaints";
 
 export const router = createBrowserRouter([
   {
@@ -296,6 +297,10 @@ export const router = createBrowserRouter([
           {
             path: "chat-window",
             element: <ChatWindow></ChatWindow>,
+          },
+          {
+            path: "Complaints",
+            element: <Complaints></Complaints>,
           },
           {
             path: "notifications",

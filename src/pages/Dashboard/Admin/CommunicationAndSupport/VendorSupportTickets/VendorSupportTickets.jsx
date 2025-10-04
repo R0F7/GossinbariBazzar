@@ -6,7 +6,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -17,27 +16,6 @@ import { BiConversation } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const VendorSupportTickets = () => {
-  //     {
-  //   "ticket": {
-  //     "id": "TCKT12345",
-  //     "subject": "Payment not received",
-  //     "status": "In Progress",
-  //     "priority": "High",
-  //     "category": "Payment",
-  //     "messages": [
-  //       {
-  //         "sender_type": "vendor",
-  //         "message": "I haven’t received payment...",
-  //         "created_at": "2025-08-08T12:34:00Z"
-  //       },
-  //       {
-  //         "sender_type": "admin",
-  //         "message": "We are looking into it...",
-  //         "created_at": "2025-08-08T13:00:00Z"
-  //       }
-  //     ]
-  //   }
-  // }
   const columnHelper = createColumnHelper();
   const axiosSecure = useAxiosSecure();
   const { data: tickets, refetch } = useGetSecureData("tickets", `/tickets`);
@@ -98,6 +76,7 @@ const VendorSupportTickets = () => {
         return (
           <Select
             value={row.status}
+            // disabled={row.status === "Closed"}
             onValueChange={(val) => handleStatus({ _id: row._id, status: val })}
           >
             <SelectTrigger className="w-[180px]">
@@ -105,7 +84,6 @@ const VendorSupportTickets = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Status</SelectLabel>
                 <SelectItem value="Open">Open</SelectItem>
                 <SelectItem value="In Progress">In Progress</SelectItem>
                 <SelectItem value="Resolved">Resolved</SelectItem>
@@ -125,6 +103,7 @@ const VendorSupportTickets = () => {
         const ticketDetails = {
           toEmail: row.vendorInfo.email,
           ticket_id: row._id,
+          status: row.status,
         };
 
         return (

@@ -65,6 +65,7 @@ const MyTickets = () => {
         const ticketDetails = {
           toEmail: row.vendorInfo.email,
           ticket_id: row._id,
+          status: row.status,
         };
 
         return (
