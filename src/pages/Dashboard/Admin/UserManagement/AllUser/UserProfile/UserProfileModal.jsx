@@ -1,6 +1,5 @@
 import { Dialog, DialogPanel } from "@headlessui/react";
 import Unknown from "../../../../../../assets/unknown Image.jpg";
-
 import PropTypes from "prop-types";
 
 const UserProfileModal = ({ isOpen, setIsOpen, data, isAllVendor }) => {

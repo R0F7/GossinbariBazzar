@@ -24,10 +24,11 @@ const Complaints = () => {
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { data: complaints = [], refetch } = useGetSecureData(
-    "complaints",
-    `/complaints/${user.email}`
-  );
+  const {
+    data: complaints = [],
+    refetch,
+    isLoading,
+  } = useGetSecureData("complaints", `/complaints?email=${user.email}`);
 
   const handleMouseLeave = (e) => {
     // Radix select portal ignore
@@ -102,13 +103,14 @@ const Complaints = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <section className="flex justify-center items-center min-h-screen">
       <div className="bg-gradient-to-br from-blue-500 to-indigo-700 p-10 w-[80%] h-[600px] rounded-2xl">
         <h1 className="text-3xl font-bold text-white mb-6">My Complaints</h1>
 
         <div className="flex h-[80%] border overflow-hidden relative">
+          {isLoading && <p className="text-white animate-pulse absolute">Loading...</p>}
           {/* cards */}
-          {complaints ? (
+          {complaints > 0 ? (
             <div className="w-[80%] grid grid-cols-2 gap-4 pr-11 p-2.5 overflow-y-scroll">
               {complaints.map((complaint) => (
                 <div
@@ -128,7 +130,7 @@ const Complaints = () => {
             </div>
           ) : (
             <div className="w-[74%] bg-white bg-opacity-75 m-2.5 rounded-md flex items-center justify-center font-semibold">
-              <p>No complain available</p>
+              <p className="text-gray-700">No complain available</p>
             </div>
           )}
 
@@ -220,7 +222,7 @@ const Complaints = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

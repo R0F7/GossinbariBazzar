@@ -235,7 +235,7 @@ const AllUser = () => {
 
   return (
     <section className="p-6">
-      <h1 className="font-semibold text-2xl mb-4">All Users</h1>
+      <h1 className="font-semibold text-2xl mb-4">All Customers</h1>
       <Table columns={columns} data={all_users}></Table>
       <UserProfileModal
         isOpen={isOpen}
