@@ -13,7 +13,7 @@ import { MdVerifiedUser } from "react-icons/md";
 import Rating from "react-rating";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-import imageUpload from "../../api/utils";
+import imageUpload from "../../utils";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { CgSpinnerTwoAlt } from "react-icons/cg";

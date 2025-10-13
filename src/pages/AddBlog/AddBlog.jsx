@@ -1,4 +1,4 @@
-import imageUpload from "@/api/utils";
+import imageUpload from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +16,7 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useRole from "@/hooks/useRole";
 import blogCategories from "@/share/blogCategories";
-import validationSchema from "@/utils/blogValiditionSchema";
+import validationSchema from "@/validationSchema/blogValidationSchema";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import { useState } from "react";

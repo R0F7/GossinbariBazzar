@@ -1,7 +1,7 @@
-import imageUpload from "@/api/utils";
+import imageUpload from "@/utils";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useGetSecureData from "@/hooks/useGetSecureData";
-import validationSchema from "@/utils/productValiditionSchema";
+import validationSchema from "@/validationSchema/productValidationSchema";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";

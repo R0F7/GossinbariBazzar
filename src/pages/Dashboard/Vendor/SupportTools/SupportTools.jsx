@@ -6,6 +6,7 @@ const SupportTools = () => {
     { label: "My Tickets", address: "my-tickets" },
     { label: "Vendor Guidelines", address: "vendor-guidelines" },
     { label: "Help & Support", address: `help-and-support/vendor` },
+    { label: "Complaints", address: `complaints` },
     { label: "Notifications", address: "notifications" },
   ];
 

@@ -9,7 +9,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
-import imageUpload from "../../api/utils";
+import imageUpload from "../../utils";
 import toast from "react-hot-toast";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { getAuth } from "firebase/auth";

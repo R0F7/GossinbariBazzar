@@ -1,7 +1,7 @@
 import { MdOutlineFileUpload, MdUpdate } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
-import imageUpload from "../../api/utils";
+import imageUpload from "../../utils";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import toast from "react-hot-toast";

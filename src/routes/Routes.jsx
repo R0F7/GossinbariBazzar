@@ -299,7 +299,7 @@ export const router = createBrowserRouter([
             element: <ChatWindow></ChatWindow>,
           },
           {
-            path: "Complaints",
+            path: "complaints",
             element: <Complaints></Complaints>,
           },
           {
@@ -403,6 +403,10 @@ export const router = createBrowserRouter([
           {
             path: "help-and-support/:x",
             element: <HelpAndSupport></HelpAndSupport>,
+          },
+          {
+            path: "complaints",
+            element: <Complaints></Complaints>,
           },
           {
             path: "notifications",

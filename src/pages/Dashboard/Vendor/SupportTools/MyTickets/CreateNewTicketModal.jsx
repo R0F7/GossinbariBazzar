@@ -1,4 +1,4 @@
-import imageUpload from "@/api/utils";
+import imageUpload from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import useAuth from "@/hooks/useAuth";
 import useAxiosCommon from "@/hooks/useAxiosCommon";
-import ticketValidationSchema from "@/utils/ticketValidationSchema";
+import ticketValidationSchema from "@/validationSchema/ticketValidationSchema";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
@@ -113,7 +113,7 @@ const CreateNewTicketModal = ({ isOpen, setIsOpen, refetch }) => {
               }) => (
                 <Form className="space-y-2">
                   <div className="w-full space-y-1.5">
-                    <Label>Subject</Label>
+                    <Label htmlFor="subject">Subject</Label>
                     <Input
                       id="subject"
                       type="text"

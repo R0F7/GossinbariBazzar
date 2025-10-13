@@ -24,7 +24,7 @@ import sslcommerz from "../../assets/sslcommerz.png";
 import CheckoutModal from "./CheckoutModal";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { isValidEmail, isValidNumber } from "../../utils/validation";
+import { isValidEmail, isValidNumber } from "../../validationSchema/validation";
 import CustomToast from "../../components/CustomToast/CustomToast";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";

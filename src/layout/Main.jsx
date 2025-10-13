@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import usePageTracking from "@/hooks/usePageTracking";
 import { useEffect } from "react";
-import { initGA, trackPageView } from "@/utils/ga";
+import { initGA, trackPageView } from "@/validationSchema/ga";
 
 const Main = () => {
   useEffect(() => {

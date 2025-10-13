@@ -41,7 +41,7 @@ const Card = ({
   } = item;
   //   const check= Math.round(rating * 2) / 2;
 
-  console.log(vendor_info);
+  // console.log(vendor_info);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   // const [quantity, setQuantity] = useState(0);

@@ -382,6 +382,37 @@ input[type="range"].range-thumb::-moz-range-thumb {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.water-bg {
+  background: rgba(173, 216, 230, 0.25);   /* light blue transparent layer */
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+}
+
+/* .water-glass-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 70, 120, 0.35);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+} */
+
+.water-glass-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 70, 120, 0.1);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
 /* settings card hover animation */
 .card-container:hover .card {
   filter: blur(5px);
@@ -513,7 +544,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #555555 !important;
 }
 
-.my-msg .message{
+.my-msg .message {
   text-align: right;
   background-color: #007bff;
   color: white;
@@ -534,6 +565,20 @@ input[type="number"]::-webkit-outer-spin-button {
   display: inline-block;
   margin-left: 0;
   margin-right: auto;
+}
+
+.btn {
+  background: #3b82f6;
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #2563eb !important;
+}
+
+.btn:active {
+  transform: scale(0.9);
 }
 
 @layer base {

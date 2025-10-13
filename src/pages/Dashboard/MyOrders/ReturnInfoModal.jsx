@@ -1,4 +1,4 @@
-import imageUpload from "@/api/utils";
+import imageUpload from "@/utils";
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { Button, Dialog, DialogPanel } from "@headlessui/react";

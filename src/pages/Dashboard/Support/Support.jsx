@@ -4,7 +4,7 @@ const Support = () => {
     const menuItems = [
         { label: "Help & Support", address: "" },
         { label: "Chat Window", address: "chat-window" },
-        { label: "Complaints", address: "Complaints" },
+        { label: "Complaints", address: "complaints" },
         { label: "Notifications", address: "notifications" },
       ];
     
